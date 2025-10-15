@@ -7,8 +7,27 @@
 
 
 
-class Entity {
+#include <SFML/Graphics.hpp>
 
+#include <string>
+
+struct coord {
+    float x, y;
+};
+
+class Entity {
+protected:
+    coord position;
+    char symbol;
+
+public:
+    Entity(float x, float y, char sym) : position{x, y}, symbol(sym) {}
+    virtual ~Entity() = default;
+
+    coord getPosition() const { return position; }
+    char getSymbol() const { return symbol; }
+
+    virtual void update(float deltaTime) {}
 };
 
 

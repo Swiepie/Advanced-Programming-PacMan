@@ -7,8 +7,26 @@
 
 
 
-class World {
+#include <string>
+#include <vector>
+#include "Entity.h"
+#include <SFML/Graphics.hpp>
 
+class World {
+private:
+    std::vector<std::unique_ptr<Entity>> entities;
+    float tileSize = 32.0f;
+    std::vector<std::string> mapData;
+    int width;
+    int height;
+
+public:
+    const std::vector<std::unique_ptr<Entity>>& getEntities() const {
+        return entities;
+    }
+    bool loadMap(const std::string& filename);
+    void printMap() const;
+    void update(float deltaTime);
 };
 
 

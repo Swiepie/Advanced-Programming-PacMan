@@ -3,29 +3,27 @@
 //
 
 #include "State.h"
+#include "World.h"
 #include "StateManager.h"
 #include <SFML/Graphics.hpp>
-
+#include "renderer/WorldView.h"
 class LevelState : public State {
 private:
-    sf::Font font;
-    sf::Text label;
-
+    World world;
+    WorldView renderer;
 public:
     LevelState() {
-        font.loadFromFile("../assets/ARIAL.TTF");
-        label.setFont(font);
-        label.setString("LEVEL 1\nPress ESC to return to menu");
-        label.setCharacterSize(40);
-        label.setFillColor(sf::Color::Cyan);
-        label.setPosition(100, 200);
+        world.loadMap("../assets/map.txt");
+        world.printMap();
     }
 
     void handleInput(StateManager& manager, sf::RenderWindow& window) override;
-    void update(StateManager& manager, float deltaTime) override {}
+    void update(StateManager& manager, float deltaTime) override {
+        world.update(deltaTime);
+    }
     void render(sf::RenderWindow& window) override {
         window.clear(sf::Color::Black);
-        window.draw(label);
+        renderer.render(world, window);
         window.display();
     }
 };
