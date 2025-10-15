@@ -1,7 +1,7 @@
-//
-// Created by Siebe Haché on 14/10/2025.
-//
+#include "Game.h"
+
 int main() {
-    // start je spel hier
+    Game game;
+    game.run();
     return 0;
 }

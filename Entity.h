@@ -7,7 +7,7 @@
 
 
 
-class entity {
+class Entity {
 
 };
 
