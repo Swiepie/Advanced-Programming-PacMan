@@ -15,19 +15,19 @@ private:
     sf::Shape* shape = nullptr;
 
 public:
-    View(const Entity& entity) {
+    explicit View(const Entity& entity) {
         char symbol = entity.getSymbol();
         auto pos = entity.getPosition();
 
         if (symbol == '#') {
-            auto* rect = new sf::RectangleShape({32, 32});
+            auto* rect = new sf::RectangleShape({50, 50});
             rect->setFillColor(sf::Color::Blue);
             rect->setPosition(pos.x, pos.y);
             shape = rect;
         } else if (symbol == '.') {
             auto* circ = new sf::CircleShape(4);
             circ->setFillColor(sf::Color::Yellow);
-            circ->setPosition(pos.x + 14, pos.y + 14);
+            circ->setPosition(pos.x + 25, pos.y + 25);
             shape = circ;
         }
     }

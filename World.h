@@ -21,12 +21,14 @@ private:
     int height;
 
 public:
-    const std::vector<std::unique_ptr<Entity>>& getEntities() const {
-        return entities;
-    }
+
     bool loadMap(const std::string& filename);
-    void printMap() const;
+    void printMap() const; //debug
     void update(float deltaTime);
+
+    const std::vector<std::unique_ptr<Entity>>& getEntities() const;
+    int getWidth() const;
+    int getHeight() const;
 };
 
 

@@ -1,0 +1,8 @@
+Zorg ervoor dat de groottes van alles aangepast wordt adhv de lengte ne breedte van het invoegbestand
+
+- Zet de rotatie van de karakters als de pauze stand wordt opgezet mee in het bestand van de map?
+- Of we behouden alle pointers en heractiveren ze terug als de menu wordt uitgezet,
+  als we zouden willen opslaan moet er wel een bestand aangemaakt worden
+- Maak gebruik van eht inladen van de sprites zodat dat ook werkt, dat we de groote daarvan ook kunnen aanpassen.
+- TLDR; logica maken voor de visualisatie van de simulatie.
+

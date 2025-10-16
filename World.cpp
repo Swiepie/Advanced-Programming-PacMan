@@ -23,6 +23,8 @@ bool World::loadMap(const std::string& filename) {
 
     int numRows = static_cast<int>(lines.size());
     int numCols = numRows > 0 ? static_cast<int>(lines[0].size()) : 0;
+    width = numCols;
+    height = numRows;
 
     if (numRows == 0 || numCols == 0) return false;
 
@@ -66,3 +68,12 @@ void World::update(float deltaTime) {
     }
 }
 
+const std::vector<std::unique_ptr<Entity>>& World::getEntities() const {
+    return entities;
+};
+int World::getWidth() const {
+    return width;
+};
+int World::getHeight() const {
+    return height;
+};
