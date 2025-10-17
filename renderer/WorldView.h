@@ -12,7 +12,7 @@
 
 class WorldView {
 public:
-    void render(const World& world, sf::RenderWindow& window);
+    static void render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight);
 };
 
 

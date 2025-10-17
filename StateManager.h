@@ -14,28 +14,14 @@ private:
     bool shouldPop = false;
 
 public:
-    void pushState(std::unique_ptr<State> state) {
-        nextState = std::move(state);
-    }
+    void pushState(std::unique_ptr<State> state);
 
-    void popState() {
-        shouldPop = true;
-    }
+    void popState();
 
-    State* currentState() {
-        return states.empty() ? nullptr : states.top().get();
-    }
+    State* currentState();
 
-    void processStateChanges() {
-        if (shouldPop && !states.empty()) {
-            states.pop();
-            shouldPop = false;
-        }
+    void processStateChanges();
 
-        if (nextState) {
-            states.push(std::move(nextState));
-        }
-    }
 };
 
 

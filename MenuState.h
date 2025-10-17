@@ -14,7 +14,7 @@ private:
 
 public:
     MenuState() {
-        font.loadFromFile("../assets/ARIAL.TTF"); // Zorg dat dit pad klopt
+        font.loadFromFile("../assets/ARIAL.TTF");
         title.setFont(font);
         title.setString("PAC-MAN PROJECT\nPress SPACE to play");
         title.setCharacterSize(40);
@@ -22,13 +22,9 @@ public:
         title.setPosition(150, 200);
     }
 
-    void handleInput(StateManager& manager, sf::RenderWindow& window) override;
+    void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;
     void update(StateManager& manager, float deltaTime) override {}
-    void render(sf::RenderWindow& window) override {
-        window.clear(sf::Color::Black);
-        window.draw(title);
-        window.display();
-    }
+    void render(sf::RenderWindow& window,unsigned int windowWidth, unsigned int windowHeight) override;
 };
 
 #endif
