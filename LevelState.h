@@ -1,0 +1,25 @@
+//
+// Created by Siebe Haché on 15/10/2025.
+//
+
+#include "State.h"
+#include "World.h"
+#include "StateManager.h"
+#include <SFML/Graphics.hpp>
+#include "renderer/WorldView.h"
+
+
+class LevelState : public State {
+private:
+    World world;
+    WorldView renderer;
+public:
+    LevelState() {
+        world.loadMap("../assets/map.txt");
+        world.printMap();
+    }
+
+    void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;
+    void update(StateManager& manager, float deltaTime) override;
+    void render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight) override;
+};

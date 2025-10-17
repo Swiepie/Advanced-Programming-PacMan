@@ -7,7 +7,7 @@
 
 
 
-class pacman {
+class Pacman {
 
 };
 

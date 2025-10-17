@@ -1,0 +1,201 @@
+Zorg ervoor dat de groottes van alles aangepast wordt adhv de lengte ne breedte van het invoegbestand
+
+- Zet de rotatie van de karakters als de pauze stand wordt opgezet mee in het bestand van de map?
+- Of we behouden alle pointers en heractiveren ze terug als de menu wordt uitgezet,
+  als we zouden willen opslaan moet er wel een bestand aangemaakt worden
+- Maak gebruik van eht inladen van de sprites zodat dat ook werkt, dat we de groote daarvan ook kunnen aanpassen.
+- TLDR; logica maken voor de visualisatie van de simulatie.
+
+
+√//
+ // Created by Siebe Haché on 15/10/2025.
+ //
+
+ #include "WorldView.h"
+
+ #include <iostream>
+
+ #include "../Wall.h"
+ #include "../Coin.h"
+
+ sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screenHeight, bool flag, float h, float w) {
+     float whitespaceH = (screenHeight-h)/2;
+     float whitespaceW = (screenWidth-w)/2;
+     if(!flag) {
+         float px = (x + 1.0f) * 0.5f * screenWidth;
+         float py = ((y + 1.0f) * 0.5f * screenHeight)+ whitespaceH;
+         return {px, py};
+     } else {
+         float px = ((x + 1.0f) * 0.5f * screenWidth) + whitespaceW;
+         float py = (y + 1.0f) * 0.5f * screenHeight;
+         return {px, py};
+     }
+     //float px = (x + 1.0f) * 0.5f * screenWidth;
+ }
+
+ void WorldView::render(const World& world, sf::RenderWindow& window) {
+
+     float windoww = window.getSize().x;
+     float windowh = window.getSize().y;
+
+     float worldw = world.getWidth();
+     float worldh = world.getHeight();
+
+     float w;
+     float h;
+
+     float rectSize;
+     bool HeighthFlag;
+     if (worldw/worldh <= windoww/windowh) { // dan is de hoogte het knelpunt
+         h = windowh;
+         w = worldw*windowh/(worldh);
+         HeighthFlag = false;
+         rectSize = windowh/worldh;
+     } else { // dan is de breedte het knelpunt
+         h = (worldh)/worldw*windoww;
+         w = windoww;
+         HeighthFlag = true;
+         rectSize = windoww/worldw;
+     };
+
+     for (auto& e : world.getEntities()) {
+         auto pos = e->getPosition();
+         auto screenPos = normalizeToScreen(pos.x, pos.y, windoww, windowh, HeighthFlag, h, w);
+         char symbol = e->getSymbol();
+         if (symbol == '#') {
+             sf::RectangleShape rect({rectSize, rectSize});
+             rect.setFillColor(sf::Color::Blue);
+             rect.setPosition(screenPos);
+             window.draw(rect);
+         } else if (symbol == '.') {
+             sf::CircleShape circle(4);
+             circle.setFillColor(sf::Color::Yellow);
+             circle.setPosition(screenPos.x+21, screenPos.y+21);
+             window.draw(circle);
+         }
+     }
+     sf::View view(sf::FloatRect(0, 0, w, h));
+     window.setView(view);
+     std::cout << "rendering frame, flag=" << std::boolalpha << HeighthFlag << std::endl;
+     std::cout << rectSize << std::endl;
+     std::cout << "calc width: " << w << "  heigth: " << h <<std::endl;
+     std::cout << "Window width: " << windoww << "  heigth: " << windowh <<std::endl;
+     std::cout << "World width: " << worldw << "  heigth: " << worldh <<std::endl;
+     std::cout << "verhoudingen: " << windoww/windowh << "  " << worldw/worldh <<std::endl;
+ }
+
+
+
+
+
+//
+// Created by Siebe Haché on 15/10/2025.
+//
+
+#include "WorldView.h"
+
+#include <iostream>
+
+#include "../Wall.h"
+#include "../Coin.h"
+
+sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screenHeight, bool flag, float h, float w) {
+    float whitespaceH = (screenHeight-h)/2;
+    float whitespaceW = (screenWidth-w)/2;
+    if(!flag) {
+        float px = (x + 1.0f) * 0.5f * w;
+        float py = ((y + 1.0f) * 0.5f * h);
+        return {px, py};
+    } else {
+        float px = ((x + 1.0f) * 0.5f * w);
+        float py = (y + 1.0f) * 0.5f * h;
+        return {px, py};
+    }
+    //float px = (x + 1.0f) * 0.5f * screenWidth;
+}
+sf::View getWorldView(const World& world, unsigned int windowWidth, unsigned int windowHeight) {
+    float worldw = static_cast<float>(world.getWidth());
+    float worldh = static_cast<float>(world.getHeight());
+
+    float windowRatio = static_cast<float>(windowWidth) / windowHeight;
+    float worldRatio = worldw / worldh;
+
+    sf::View view;
+    float w;
+    float h;
+#if 0
+    float rectSize;
+    if (worldRatio >= windowRatio) {
+        // breedte is het knelpunt
+        float viewHeight = worldw / windowRatio;
+        std::cout << " viewHeigth: " << viewHeight << std::endl;
+        view.setSize(worldw, viewHeight);
+    } else {
+        // hoogte is het knelpunt
+        float viewWidth = worldh * windowRatio;
+        std::cout << " viewWidth: " << viewWidth << std::endl;
+        view.setSize(viewWidth, worldh);
+    }
+#endif
+    if (worldw/worldh <= windowWidth/windowHeight) { // dan is de hoogte het knelpunt
+        h = windowHeight;
+        w = worldw*windowHeight/(worldh);
+    } else { // dan is de breedte het knelpunt
+        h = (worldh)/worldw*windowWidth;
+        w = windowWidth;
+
+    };
+    view.setSize(w, h);
+    std::cout << w << " " << h << " " << windowRatio << " " << worldRatio << std::endl;
+    // centreer de view
+    view.setCenter(w / 2.f, h / 2.f);
+    return view;
+}
+void WorldView::render(const World& world, sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight) {
+    // maak de view
+    sf::View view = getWorldView(world, windowWidth, windowHeight);
+    window.setView(view);
+
+    float worldw = world.getWidth();
+    float worldh = world.getHeight();
+    // bepaal tilegrootte
+    float rectSize = std::min(
+        windowWidth / static_cast<float>(world.getWidth()),
+        windowHeight / static_cast<float>(world.getHeight())
+    );
+
+    float w;
+    float h;
+    bool HeighthFlag;
+    if (worldw/worldh <= windowWidth/windowHeight) { // dan is de hoogte het knelpunt
+        h = windowHeight;
+        w = worldw*windowHeight/(worldh);
+        HeighthFlag = false;
+    } else { // dan is de breedte het knelpunt
+        h = (worldh)/worldw*windowWidth;
+        w = windowWidth;
+        HeighthFlag = true;
+
+    };
+    // render entities in world-coördinaten
+    for (auto& e : world.getEntities()) {
+        auto pos = e->getPosition(); // nu in wereldcellen
+        auto screenPos = normalizeToScreen(pos.x, pos.y, windowWidth, windowWidth, HeighthFlag, h, w);
+        char symbol = e->getSymbol();
+
+        if (symbol == '#') {
+            sf::RectangleShape rect({rectSize, rectSize});
+            rect.setFillColor(sf::Color::Blue);
+            rect.setPosition(screenPos);
+            window.draw(rect);
+        } else if (symbol == '.') {
+            sf::CircleShape circle(rectSize / 10.f);
+            circle.setFillColor(sf::Color::Yellow);
+            circle.setPosition(screenPos.x + rectSize/2 - rectSize/10, screenPos.y + rectSize/2 - rectSize/10);
+            window.draw(circle);
+        }
+    }
+    std::cout << windowWidth << " " << windowHeight << std::endl;
+    std::cout << rectSize  << std::endl;
+}
+
