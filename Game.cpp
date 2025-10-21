@@ -5,7 +5,7 @@
 #include "MenuState.h"
 
 Game::Game()
-    : window(sf::VideoMode(800, 550), "Pac-Man Project")
+    : window(sf::VideoMode(800, 550), "Pac-Man")
 {
     window.setFramerateLimit(60);
     stateManager.pushState(std::make_unique<MenuState>());

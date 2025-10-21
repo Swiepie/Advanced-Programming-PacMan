@@ -15,7 +15,7 @@ private:
     WorldView renderer;
 public:
     LevelState() {
-        world.loadMap("../assets/map.txt");
+        world.loadMap("../assets/map2.txt");
         world.printMap();
     }
 
