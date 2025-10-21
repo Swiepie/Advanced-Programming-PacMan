@@ -54,6 +54,13 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
         w = windowWidth;
         HeighthFlag = true;
     };
+    sf::Texture pacmanTexture;
+    if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
+        std::cerr << "Failed to load spritesheet" << std::endl;
+    }
+    sf::Sprite pacmanSprite;
+    pacmanSprite.setTexture(pacmanTexture);
+    pacmanSprite.setTextureRect(sf::IntRect(195, 0 , 15, 15));
     // render entities in world-coördinaten
     for (auto& e : world.getEntities()) {
         auto pos = e->getPosition(); // nu in wereldcellen
@@ -70,6 +77,11 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
             circle.setFillColor(sf::Color::Yellow);
             circle.setPosition(screenPos.x + rectSize/2 - rectSize/10, screenPos.y + rectSize/2 - rectSize/10);
             window.draw(circle);
+        } else if (symbol == 'P') {
+            pacmanSprite.setPosition(screenPos);
+            pacmanSprite.setScale(rectSize/15, rectSize/15);
+            window.draw(pacmanSprite);
+            std::cout << rectSize << std::endl;
         }
     }
 }

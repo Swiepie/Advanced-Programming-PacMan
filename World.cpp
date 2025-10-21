@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Entity.h"
 #include "Coin.h"
+#include "Pacman.h"
 #include "Wall.h"
 bool World::loadMap(const std::string& filename) {
     std::ifstream file(filename);
@@ -47,6 +48,8 @@ bool World::loadMap(const std::string& filename) {
                 case '0':
                     entities.push_back(std::make_unique<Coin>(x, y));
                 break;
+                case 'P':
+                    entities.push_back(std::make_unique<Pacman>(x, y));
                 default:
                     break;
             }

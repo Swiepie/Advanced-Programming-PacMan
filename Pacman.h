@@ -5,10 +5,11 @@
 #ifndef PACMAN_H
 #define PACMAN_H
 
+#include "Entity.h"
 
-
-class Pacman {
-
+class Pacman: public Entity {
+    public:
+    Pacman(float x, float y) : Entity(x, y, 'P') {}
 };
 
 
