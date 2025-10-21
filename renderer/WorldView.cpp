@@ -60,7 +60,7 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
     }
     sf::Sprite pacmanSprite;
     pacmanSprite.setTexture(pacmanTexture);
-    pacmanSprite.setTextureRect(sf::IntRect(195, 0 , 15, 15));
+    pacmanSprite.setTextureRect(sf::IntRect(0, 0 , 15, 15));
     // render entities in world-coördinaten
     for (auto& e : world.getEntities()) {
         auto pos = e->getPosition(); // nu in wereldcellen
