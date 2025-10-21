@@ -3,36 +3,30 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/base:2025.10  # Updated to the latest available version
+      - image: cimg/base:current  # Ubuntu-based CircleCI image
 
     steps:
       - checkout
 
-      # Install build dependencies
       - run:
           name: Install dependencies
           command: |
             sudo apt-get update
             sudo apt-get install -y cmake g++ libsfml-dev
 
-      # Create build directory
       - run:
-          name: Create build directory
-          command: mkdir -p build
+          name: Create and enter build directory
+          command: mkdir -p build && cd build
 
-      # Run CMake configuration
       - run:
           name: Configure CMake project
           command: |
-            cd build
-            cmake ..
+            cmake -S . -B build
 
-      # Build the project
       - run:
           name: Build project
           command: |
-            cd build
-            make -j$(nproc)
+            cmake --build build -- -j$(nproc)
 
 workflows:
   build-and-test:
