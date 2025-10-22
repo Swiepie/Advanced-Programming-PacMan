@@ -38,3 +38,5 @@ add_executable(Advanced_Programming_PacMan
 
 # Koppel de benodigde SFML-libraries
 target_link_libraries(Advanced_Programming_PacMan sfml-graphics sfml-window sfml-system)
+
+INSTALL(TARGETS Advanced_Programming_PacMan DESTINATION bin)
