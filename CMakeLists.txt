@@ -8,8 +8,8 @@ find_package(SFML 2.6.1 REQUIRED COMPONENTS graphics window system)
 
 
 add_executable(Advanced_Programming_PacMan
-        entity.cpp
-        entity.h
+        Entity.cpp
+        Entity.h
         pacman.cpp
         pacman.h
         main.cpp
