@@ -4,7 +4,7 @@ project(Advanced_Programming_PacMan)
 set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/sfml@2")
-find_package(SFML 2.6.2 REQUIRED COMPONENTS graphics window system)
+find_package(SFML 2.6.1 REQUIRED COMPONENTS graphics window system)
 
 
 add_executable(Advanced_Programming_PacMan
