@@ -9,6 +9,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../World.h"
+#include <memory>
 
 class WorldView {
 public:

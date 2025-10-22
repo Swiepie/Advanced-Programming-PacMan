@@ -10,6 +10,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <string>
+#include <memory>
 
 struct coord {
     float x, y;

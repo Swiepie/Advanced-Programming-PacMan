@@ -5,7 +5,7 @@
 #include "State.h"
 #include "StateManager.h"
 #include <SFML/Graphics.hpp>
-
+#include <memory>
 
 class MenuState : public State {
 private:
