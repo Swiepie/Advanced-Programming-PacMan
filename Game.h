@@ -7,7 +7,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "StateManager.h"
-
+#include <iostream>
+#include <memory>
 class Game {
 private:
     sf::RenderWindow window;
