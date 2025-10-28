@@ -7,6 +7,7 @@
 Game::Game()
     : window(sf::VideoMode(800, 550), "Pac-Man")
 {
+    Stopwatch::getInstance().start();
     window.setFramerateLimit(60);
     stateManager.pushState(std::make_unique<MenuState>());
 }
@@ -15,7 +16,7 @@ Game::Game()
 void Game::run() {
     while (window.isOpen()) {
 
-        float deltaTime = clock.restart().asSeconds();
+        float deltaTime = Stopwatch::getInstance().GetElapsedTime();
         State* current = stateManager.currentState();
 
         sf::Event event{};

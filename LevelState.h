@@ -7,6 +7,8 @@
 #include "StateManager.h"
 #include <SFML/Graphics.hpp>
 #include "renderer/WorldView.h"
+#include "Stopwatch.h"
+#include <iostream>
 
 
 class LevelState : public State {
@@ -22,4 +24,6 @@ public:
     void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;
     void update(StateManager& manager, float deltaTime) override;
     void render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight) override;
+    void onEnter() override;
+    void onExit() override;
 };

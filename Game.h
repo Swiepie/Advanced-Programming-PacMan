@@ -7,13 +7,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "StateManager.h"
+#include "Stopwatch.h"
 #include <iostream>
 #include <memory>
 class Game {
 private:
     sf::RenderWindow window;
     StateManager stateManager;
-    sf::Clock clock;
 
 public:
     Game();

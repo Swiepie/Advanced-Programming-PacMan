@@ -9,8 +9,11 @@
 void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
         if (event.type == sf::Event::Closed)
             window.close();
+
         else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
             manager.popState(); // back to menu
+
+
 }
 
 void LevelState::update(StateManager& manager, float deltaTime)  {
@@ -18,4 +21,14 @@ void LevelState::update(StateManager& manager, float deltaTime)  {
 }
 void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight)  {
     renderer.render(world, window, windowWidth, windowHeight);
+}
+
+void LevelState::onEnter() {
+    Stopwatch::getInstance().restart(); // reset + start timer when entering game
+    std::cout << "Level started! Stopwatch running...\n";
+}
+void LevelState::onExit() {
+    Stopwatch::getInstance().stop(); // stop when leaving
+    std::cout << "Level ended. Final time: "
+              << Stopwatch::getInstance().GetElapsedTime() << "s\n";
 }
