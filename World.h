@@ -10,9 +10,16 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "Entity.h"
-#include <SFML/Graphics.hpp>
 
+#include <SFML/Graphics.hpp>
+#include <fstream>
+#include <iostream>
+
+#include "entities/Entity.h"
+#include "entities/Coin.h"
+#include "entities/Pacman.h"
+#include "entities/Wall.h"
+#include "entities/Fruit.h"
 class World {
 private:
     std::vector<std::unique_ptr<Entity>> entities;
@@ -30,6 +37,8 @@ public:
     const std::vector<std::unique_ptr<Entity>>& getEntities() const;
     int getWidth() const;
     int getHeight() const;
+
+    void movePacman(int dx, int dy);
 };
 
 

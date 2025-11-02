@@ -27,7 +27,10 @@ public:
 
     coord getPosition() const { return position; }
     char getSymbol() const { return symbol; }
-
+    void setPosition(float x, float y) {
+        position.x = x;
+        position.y = y;
+    }
     virtual void update(float deltaTime) {}
 };
 

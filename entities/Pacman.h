@@ -6,7 +6,7 @@
 #define PACMAN_H
 
 #include "Entity.h"
-
+#include "../Stopwatch.h"
 class Pacman: public Entity {
     public:
     Pacman(float x, float y) : Entity(x, y, 'P') {}

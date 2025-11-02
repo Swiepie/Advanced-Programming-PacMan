@@ -6,13 +6,29 @@
 
 
 void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
-        if (event.type == sf::Event::Closed)
-            window.close();
+    if (event.type == sf::Event::Closed)
+        window.close();
 
-        else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+    else if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Escape) {
             manager.pushState(std::make_unique<PausedState>()); // back to menu
-
-
+        }
+#if 1
+        else if (event.key.code == sf::Keyboard::Up){
+            world.movePacman(0, -1);
+        }
+        else if (event.key.code == sf::Keyboard::Down){
+            world.movePacman(0, 1);
+        }
+        else if (event.key.code == sf::Keyboard::Left){
+            world.movePacman(-1, 0);
+        }
+        else if (event.key.code == sf::Keyboard::Right){
+        std::cout<< "RECHTS" <<std::endl;
+        world.movePacman(1, 0);
+        }
+#endif
+    }
 }
 
 void LevelState::update(StateManager& manager, float deltaTime)  {

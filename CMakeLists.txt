@@ -22,17 +22,16 @@ find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
 
 # --- Bronnen ---
 set(SOURCES
-        Entity.cpp
-        Pacman.cpp
+        entities/Entity.cpp
+        entities/Pacman.cpp
         main.cpp
         Game.cpp
         Stopwatch.cpp
         World.cpp
         Score.cpp
         Random.cpp
-        Wall.cpp
-        Coin.cpp
-        renderer/View.cpp
+        entities/Wall.cpp
+        entities/Coin.cpp
         renderer/WorldView.cpp
         states/State.cpp
         states/StateManager.cpp
@@ -42,12 +41,11 @@ set(SOURCES
 )
 
 set(HEADERS
-        Entity.h
-        Pacman.h
+        entities/Entity.h
+        entities/Pacman.h
         Game.h
-        Wall.h
-        Coin.h
-        renderer/View.h
+        entities/Wall.h
+        entities/Coin.h
         renderer/WorldView.h
         states/State.h
         states/StateManager.h

@@ -4,8 +4,8 @@
 
 #include "WorldView.h"
 #include <iostream>
-#include "../Wall.h"
-#include "../Coin.h"
+#include "../entities/Wall.h"
+#include "../entities/Coin.h"
 
 sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screenHeight, bool flag, float h, float w) {
     float whitespaceH = (screenHeight-h) / 2;

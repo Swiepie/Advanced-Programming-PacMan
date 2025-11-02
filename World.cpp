@@ -3,12 +3,7 @@
 //
 
 #include "World.h"
-#include <fstream>
-#include <iostream>
-#include "Entity.h"
-#include "Coin.h"
-#include "Pacman.h"
-#include "Wall.h"
+
 bool World::loadMap(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -50,6 +45,9 @@ bool World::loadMap(const std::string& filename) {
                 break;
                 case 'P':
                     entities.push_back(std::make_unique<Pacman>(x, y));
+                break;
+                case 'F':
+                    entities.push_back(std::make_unique<Fruit>(x, y));
                 default:
                     break;
             }
@@ -80,3 +78,33 @@ int World::getWidth() const {
 int World::getHeight() const {
     return height;
 };
+
+
+void World::movePacman(int dx, int dy) {
+    // Zoek pacman
+    bool found = false;
+    for (auto& e : entities) {
+        if (e->getSymbol() == 'P') {
+            found = true;
+            float stepW = 2.0f / width; // tile width
+            float stepH = 2.0f / height;
+            float newX = e->getPosition().x + dx * stepW;
+            float newY = e->getPosition().y + dy * stepH;
+            // Check voor muren (optioneel)
+            bool blocked = false;
+            for (auto& wall : entities) {
+                if (wall->getSymbol() == '#') {
+                    if (wall->getPosition().x == newX && wall->getPosition().y == newY) {
+                        blocked = true;
+                        break;
+                    }
+                }
+            }
+            if (!blocked)
+                e->setPosition(newX, newY);
+            break;
+        }
+    }
+    if (!found)
+        std::cerr << "Pacman not found in entities!" << std::endl;
+}
