@@ -28,8 +28,8 @@ void StateManager::processStateChanges() {
         shouldPop = false;
 
         // If there’s now a state underneath, it becomes active again
-        if (!states.empty())
-            states.top()->onEnter();
+        //if (!states.empty())
+        //    states.top()->onEnter();
     }
 
     if (nextState) {

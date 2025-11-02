@@ -3,10 +3,6 @@
 //
 
 #include "MenuState.h"
-#include "StateManager.h"
-#include "LevelState.h"
-#include <SFML/Window/Event.hpp>
-#include <iostream>
 
 void MenuState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {

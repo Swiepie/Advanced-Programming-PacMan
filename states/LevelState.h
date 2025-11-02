@@ -1,13 +1,16 @@
 //
 // Created by Siebe Haché on 15/10/2025.
 //
-
+#pragma once
 #include "State.h"
-#include "World.h"
+#include "PausedState.h"
+#include "../World.h"
 #include "StateManager.h"
 #include <SFML/Graphics.hpp>
-#include "renderer/WorldView.h"
-#include "Stopwatch.h"
+#include "../renderer/WorldView.h"
+#include "MenuState.h"
+#include <SFML/Window/Event.hpp>
+#include "../Stopwatch.h"
 #include <iostream>
 
 

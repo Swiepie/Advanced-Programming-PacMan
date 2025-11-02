@@ -13,19 +13,19 @@ add_executable(Advanced_Programming_PacMan
         Pacman.cpp
         Pacman.h
         main.cpp
-        StateManager.h
+        states/StateManager.h
         Game.h
-        MenuState.h
+        states/MenuState.h
         Game.cpp
-        MenuState.cpp
-        State.cpp
-        StateManager.cpp
+        states/MenuState.cpp
+        states/State.cpp
+        states/StateManager.cpp
         Stopwatch.cpp
         World.cpp
         Score.cpp
         Random.cpp
-        LevelState.h
-        LevelState.cpp
+        states/LevelState.h
+        states/LevelState.cpp
         Wall.h
         Wall.cpp
         renderer/View.cpp
@@ -34,6 +34,8 @@ add_executable(Advanced_Programming_PacMan
         Coin.cpp
         renderer/WorldView.h
         renderer/WorldView.cpp
+        states/PausedState.h
+        states/PausedState.cpp
 )
 
 # Koppel de benodigde SFML-libraries
