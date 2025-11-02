@@ -2,7 +2,7 @@
 
 
 
-#include "MenuState.h"
+#include "states/MenuState.h"
 
 Game::Game()
     : window(sf::VideoMode(800, 550), "Pac-Man")

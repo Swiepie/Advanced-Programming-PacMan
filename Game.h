@@ -6,7 +6,7 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
-#include "StateManager.h"
+#include "states/StateManager.h"
 #include "Stopwatch.h"
 #include <iostream>
 #include <memory>
