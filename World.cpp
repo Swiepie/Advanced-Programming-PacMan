@@ -80,8 +80,11 @@ int World::getHeight() const {
 };
 
 
-void World::movePacman(int dx, int dy) {
+void World::movePacman(float dx, float dy) {
     // Zoek pacman
+
+
+    //if up down, left right set direction pacman, dan upadte pacman invullen.
     bool found = false;
     for (auto& e : entities) {
         if (e->getSymbol() == 'P') {
@@ -91,28 +94,26 @@ void World::movePacman(int dx, int dy) {
             float newX = e->getPosition().x + dx * stepW;
             float newY = e->getPosition().y + dy * stepH;
 
-            float nStepW = (stepW)/2;
-            float nStepH = (stepH)/2;
 
 
             bool blocked = false;
+
             for (auto& wall : entities) {
                 if (wall->getSymbol() == '#') {
-                    float wallX = (wall->getPosition().x + 1)/2;
-                    float wallY = (wall->getPosition().y + 1)/2;
+                    float wallX = wall->getPosition().x;
+                    float wallY = wall->getPosition().y;
 
-                    bool overlapX = (newX + 1) / 2 >= wallX && (newX + 1) / 2 < wallX + nStepW;
-                    bool overlapY = (newY + 1) / 2 >= wallY && (newY + 1) / 2 < wallY + nStepH;
-                    if (overlapX &&  overlapY){
+                    // AABB overlap check (center-based coordinates)
+                    bool overlapX = std::fabs(newX - wallX)+0.00001 < stepW;
+                    bool overlapY = std::fabs(newY - wallY)+0.00001 < stepH;
 
-                        std::cout << wallX << " " << wallX + nStepH << "    " << wallY << " " << wallY + nStepW << std::endl;
-                        std::cout << (newX + 1) / 2 << "                 " << (newY + 1) / 2 << std::endl;
-                        std::cout << nStepH << " stap " << nStepW << std::endl;
+                    if (overlapX && overlapY) {
                         blocked = true;
                         break;
                     }
                 }
             }
+
             if (!blocked)
                 e->setPosition(newX, newY);
             break;

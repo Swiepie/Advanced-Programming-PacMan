@@ -39,7 +39,7 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    void movePacman(int dx, int dy);
+    void movePacman(float dx, float dy);
 };
 
 

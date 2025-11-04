@@ -15,17 +15,17 @@ void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, co
         }
 #if 1
         else if (event.key.code == sf::Keyboard::Up){
-            world.movePacman(0, -1);
+            world.movePacman(0, -0.05);
         }
         else if (event.key.code == sf::Keyboard::Down){
-            world.movePacman(0, 1);
+            world.movePacman(0, 0.05);
         }
         else if (event.key.code == sf::Keyboard::Left){
-            world.movePacman(-1, 0);
+            world.movePacman(-0.05, 0);
         }
         else if (event.key.code == sf::Keyboard::Right){
         //std::cout<< "RECHTS" <<std::endl;
-        world.movePacman(1, 0);
+        world.movePacman(0.05, 0);
         }
 #endif
     }
