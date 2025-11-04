@@ -3,7 +3,7 @@
 //
 
 #include "World.h"
-
+#include <cmath>
 bool World::loadMap(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
