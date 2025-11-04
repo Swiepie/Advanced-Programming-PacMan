@@ -28,6 +28,7 @@ private:
     int width;
     int height;
 
+
 public:
 
     bool loadMap(const std::string& filename);

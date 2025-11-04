@@ -90,11 +90,24 @@ void World::movePacman(int dx, int dy) {
             float stepH = 2.0f / height;
             float newX = e->getPosition().x + dx * stepW;
             float newY = e->getPosition().y + dy * stepH;
-            // Check voor muren (optioneel)
+
+            float nStepW = (stepW)/2;
+            float nStepH = (stepH)/2;
+
+
             bool blocked = false;
             for (auto& wall : entities) {
                 if (wall->getSymbol() == '#') {
-                    if (wall->getPosition().x == newX && wall->getPosition().y == newY) {
+                    float wallX = (wall->getPosition().x + 1)/2;
+                    float wallY = (wall->getPosition().y + 1)/2;
+
+                    bool overlapX = (newX + 1) / 2 >= wallX && (newX + 1) / 2 < wallX + nStepW;
+                    bool overlapY = (newY + 1) / 2 >= wallY && (newY + 1) / 2 < wallY + nStepH;
+                    if (overlapX &&  overlapY){
+
+                        std::cout << wallX << " " << wallX + nStepH << "    " << wallY << " " << wallY + nStepW << std::endl;
+                        std::cout << (newX + 1) / 2 << "                 " << (newY + 1) / 2 << std::endl;
+                        std::cout << nStepH << " stap " << nStepW << std::endl;
                         blocked = true;
                         break;
                     }

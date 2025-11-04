@@ -24,7 +24,7 @@ void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, co
             world.movePacman(-1, 0);
         }
         else if (event.key.code == sf::Keyboard::Right){
-        std::cout<< "RECHTS" <<std::endl;
+        //std::cout<< "RECHTS" <<std::endl;
         world.movePacman(1, 0);
         }
 #endif

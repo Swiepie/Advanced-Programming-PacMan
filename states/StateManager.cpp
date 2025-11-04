@@ -29,7 +29,7 @@ void StateManager::processStateChanges() {
 
         // If there’s now a state underneath, it becomes active again
         //if (!states.empty())
-        //    states.top()->onEnter();
+        //states.top()->onEnter();
     }
 
     if (nextState) {

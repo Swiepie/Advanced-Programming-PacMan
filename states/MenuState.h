@@ -19,7 +19,7 @@ public:
     MenuState() {
         font.loadFromFile("../assets/ARIAL.TTF");
         title.setFont(font);
-        title.setString("PAC-MAN PROJECT\nPress SPACE to play");
+        title.setString("PAC-MAN PROJECT\nPress any key to play");
         title.setCharacterSize(40);
         title.setFillColor(sf::Color::Yellow);
         title.setPosition(150, 200);
