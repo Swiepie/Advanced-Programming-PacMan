@@ -43,9 +43,12 @@ bool World::loadMap(const std::string& filename) {
                 case '0':
                     entities.push_back(std::make_unique<Coin>(x, y));
                 break;
-                case 'P':
-                    entities.push_back(std::make_unique<Pacman>(x, y));
-                break;
+                case 'P':{
+                    auto p = std::make_unique<Pacman>(x, y);
+                    pacman = p.get();
+                    entities.push_back(std::move(p));
+                    break;
+                }
                 case 'F':
                     entities.push_back(std::make_unique<Fruit>(x, y));
                 default:
@@ -67,58 +70,74 @@ void World::update(float deltaTime) {
     for (auto& e : entities) {
         e->update(deltaTime);
     }
+
+    if (!pacman) return;
+
+    pacman->addMoveTime(deltaTime); // nieuwe functie in Pacman
+    double speed = pacman->getSpeed();
+    if (pacman->readyToMove()) {
+        char buffered = pacman->getBufferdirection();
+        bool moved = false;
+        if (tryMove(pacman, buffered)) {
+            pacman->applyBufferdirection();  // maak buffered -> current
+            moved = true;
+        } else {
+            // probeer huidige richting
+            char current = pacman->getDirection();
+            if (tryMove(pacman, current)) {
+                moved = true;
+            }
+        }
+
+        if (moved)
+            pacman->resetMoveTimer();
+
+    }
 }
 
 const std::vector<std::unique_ptr<Entity>>& World::getEntities() const {
     return entities;
-};
+}
 int World::getWidth() const {
     return width;
-};
+}
 int World::getHeight() const {
     return height;
-};
+}
+Pacman* World::getPacman(){
+    return pacman;
+}
 
+bool World::tryMove(Pacman* pacman, char dir) {
+    if (!pacman) return false;
 
-void World::movePacman(float dx, float dy) {
-    // Zoek pacman
+    float dx = 0, dy = 0;
+    double speed = pacman->getSpeed();
+    switch (dir) {
+        case 'N': dy = -0.1; break;
+        case 'Z': dy = 0.1;  break;
+        case 'W': dx = -0.1; break;
+        case 'O': dx = 0.1;  break;
+        default: return false;
+    }
 
+    float stepW = 2.0f / width;
+    float stepH = 2.0f / height;
+    float newX = pacman->getPosition().x + dx * stepW;
+    float newY = pacman->getPosition().y + dy * stepH;
 
-    //if up down, left right set direction pacman, dan upadte pacman invullen.
-    bool found = false;
-    for (auto& e : entities) {
-        if (e->getSymbol() == 'P') {
-            found = true;
-            float stepW = 2.0f / width; // tile width
-            float stepH = 2.0f / height;
-            float newX = e->getPosition().x + dx * stepW;
-            float newY = e->getPosition().y + dy * stepH;
+    for (auto& wall : entities) {
+        if (wall->getSymbol() == '#') {
+            float wallX = wall->getPosition().x;
+            float wallY = wall->getPosition().y;
 
-
-
-            bool blocked = false;
-
-            for (auto& wall : entities) {
-                if (wall->getSymbol() == '#') {
-                    float wallX = wall->getPosition().x;
-                    float wallY = wall->getPosition().y;
-
-                    // AABB overlap check (center-based coordinates)
-                    bool overlapX = std::fabs(newX - wallX)+0.00001 < stepW;
-                    bool overlapY = std::fabs(newY - wallY)+0.00001 < stepH;
-
-                    if (overlapX && overlapY) {
-                        blocked = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!blocked)
-                e->setPosition(newX, newY);
-            break;
+            // AABB overlap check (center-based coordinates)
+            bool overlapX = std::fabs(newX - wallX)+0.0051 < stepW;
+            bool overlapY = std::fabs(newY - wallY)+0.0051 < stepH;
+            if (overlapX && overlapY)
+                return false; // geblokkeerd
         }
     }
-    if (!found)
-        std::cerr << "Pacman not found in entities!" << std::endl;
+    pacman->setPosition(newX, newY);
+    return true;
 }

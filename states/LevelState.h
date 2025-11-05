@@ -10,6 +10,7 @@
 #include "../renderer/WorldView.h"
 #include "MenuState.h"
 #include <SFML/Window/Event.hpp>
+#include "../entities/Pacman.h"
 #include "../Stopwatch.h"
 #include <iostream>
 

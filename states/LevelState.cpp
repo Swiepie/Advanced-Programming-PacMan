@@ -14,25 +14,25 @@ void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, co
             manager.pushState(std::make_unique<PausedState>()); // back to menu
         }
 #if 1
-        else if (event.key.code == sf::Keyboard::Up){
-            world.movePacman(0, -0.05);
-        }
-        else if (event.key.code == sf::Keyboard::Down){
-            world.movePacman(0, 0.05);
-        }
-        else if (event.key.code == sf::Keyboard::Left){
-            world.movePacman(-0.05, 0);
-        }
-        else if (event.key.code == sf::Keyboard::Right){
-        //std::cout<< "RECHTS" <<std::endl;
-        world.movePacman(0.05, 0);
+
+        auto pacman = world.getPacman();
+        if (!pacman) return;
+
+        switch (event.key.code) {
+            case sf::Keyboard::Up:    pacman->setBufferdirection('N'); break;
+            case sf::Keyboard::Down:  pacman->setBufferdirection('Z'); break;
+            case sf::Keyboard::Left:  pacman->setBufferdirection('W'); break;
+            case sf::Keyboard::Right: pacman->setBufferdirection('O'); break;
+            default: break;
         }
 #endif
+
     }
 }
 
 void LevelState::update(StateManager& manager, float deltaTime)  {
     world.update(deltaTime);
+
 }
 void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight)  {
     renderer.render(world, window, windowWidth, windowHeight);

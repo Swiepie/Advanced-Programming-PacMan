@@ -20,13 +20,15 @@
 #include "entities/Pacman.h"
 #include "entities/Wall.h"
 #include "entities/Fruit.h"
+
 class World {
 private:
     std::vector<std::unique_ptr<Entity>> entities;
+    Pacman* pacman = nullptr;
     float tileSize = 32.0f;
     std::vector<std::string> mapData;
-    int width;
-    int height;
+    int width = 0;
+    int height = 0;
 
 
 public:
@@ -39,7 +41,8 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    void movePacman(float dx, float dy);
+    bool tryMove(Pacman* pacman, char dir);
+    Pacman* getPacman();
 };
 
 
