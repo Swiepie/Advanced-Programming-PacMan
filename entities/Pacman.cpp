@@ -9,11 +9,9 @@ void Pacman::update(float deltaTime) {
 char Pacman::getDirection() const {
     return direction;
 }
-
 void Pacman::setDirection(char direct) {
     direction = direct;
 }
-
 double Pacman::getSpeed() const {
     return speed;
 }

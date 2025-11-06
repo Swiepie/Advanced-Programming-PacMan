@@ -11,7 +11,7 @@
 class PacmanView {
 private:
     bool mouthOpen = true;
-    double frameCooldown = 1.0/30;
+    double frameCooldown = 1.0/15;
     float frameTimer = 0.0f;
     double speed = 1;
     float lastFrameTime = 0.0f;
@@ -19,24 +19,12 @@ private:
     sf::Texture pacmanTexture;
     sf::Sprite pacmanSprite;
 public:
-    PacmanView() {
-        if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-            std::cerr << "Failed to load spritesheet" << std::endl;
-        }
-        pacmanSprite.setTexture(pacmanTexture);
-        pacmanSprite.setTextureRect(sf::IntRect(0, 0, 15, 15));
-    }
+    PacmanView();
 
-    void setTexture(sf::Texture texture);
+    void setTexture(const sf::Texture& texture);
     void chooseTexture(char direction);
-
-    bool readyFrame(float currentTime) const {
-        return (currentTime - lastFrameTime) >= frameCooldown;
-    }
-
-    void recordFrameTime(float currentTime) {
-        lastFrameTime = currentTime;
-    }
+    bool readyFrame(float currentTime) const;
+    void recordFrameTime(float currentTime);
     sf::Sprite getSprite();
 };
 
