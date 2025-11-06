@@ -42,7 +42,7 @@ public:
     int getHeight() const;
 
     bool tryMove(Pacman* pacman, char dir);
-    Pacman* getPacman();
+    Pacman* getPacman() const;
 };
 
 

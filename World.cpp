@@ -74,28 +74,27 @@ void World::update(float deltaTime) {
     if (!pacman) return;
 
     pacman->addMoveTime(deltaTime);
-    double speed = pacman->getSpeed();
 
-    if (pacman->readyToMove()) {
-        std::cout << pacman->getMoveTimer() << "   " << pacman->getMovecooldown() << std::endl;
+    //is het al tijd om opnieuw te bewegen?
+    if (pacman->readyToMove(deltaTime)) {
         char buffered = pacman->getBufferdirection();
         bool moved = false;
+
         if (tryMove(pacman, buffered)) {
-            pacman->applyBufferdirection();  // maak buffered -> current
+            pacman->applyBufferdirection();
             moved = true;
         } else {
-            // probeer huidige richting
             char current = pacman->getDirection();
             if (tryMove(pacman, current)) {
                 moved = true;
             }
         }
+
         if (moved) {
-
+            //slaag de tijd op van laatste movement
+            pacman->recordMoveTime(deltaTime);
         }
-
     }
-    pacman->resetMoveTimer();
 }
 
 const std::vector<std::unique_ptr<Entity>>& World::getEntities() const {
@@ -107,7 +106,7 @@ int World::getWidth() const {
 int World::getHeight() const {
     return height;
 }
-Pacman* World::getPacman(){
+Pacman* World::getPacman() const{
     return pacman;
 }
 

@@ -31,6 +31,7 @@ sf::View getWorldView(unsigned int windowWidth, unsigned int windowHeight) {
 
 void WorldView::render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight) {
     // maak de view
+    pacmanview.chooseTexture(world.getPacman()->getDirection());
     sf::View view = getWorldView(windowWidth, windowHeight);
     window.setView(view);
 
@@ -54,13 +55,8 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
         w = windowWidth;
         HeighthFlag = true;
     };
-    sf::Texture pacmanTexture;
-    if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-        std::cerr << "Failed to load spritesheet" << std::endl;
-    }
-    sf::Sprite pacmanSprite;
-    pacmanSprite.setTexture(pacmanTexture);
-    pacmanSprite.setTextureRect(sf::IntRect(0, 0 , 15, 15));
+
+    sf::Sprite pacmanSprite = pacmanview.getSprite();
     // render entities in world-coördinaten
     for (auto& e : world.getEntities()) {
         auto pos = e->getPosition(); // nu in wereldcellen

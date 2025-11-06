@@ -7,13 +7,16 @@
 
 
 
-#include <SFML/Graphics.hpp>
+
 #include "../World.h"
+#include "PacmanView.h"
 #include <memory>
 
 class WorldView {
+    private:
+    PacmanView pacmanview;
 public:
-    static void render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight);
+    void render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight);
 };
 
 

@@ -52,6 +52,8 @@ set(HEADERS
         states/MenuState.h
         states/LevelState.h
         states/PausedState.h
+        renderer/PacmanView.h
+        renderer/PacmanView.cpp
 )
 
 # --- Executable ---
