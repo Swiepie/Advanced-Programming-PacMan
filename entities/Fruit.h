@@ -6,11 +6,14 @@
 #define FRUIT_H
 
 #include "Entity.h"
-
+#include <iostream>
 
 class Fruit : public Entity {
 public:
 	Fruit(float x, float y) : Entity(x, y, 'f') {}
+
+	bool isCollectible() const override;
+	void onCollect(Pacman& pacman) override;
 };
 
 

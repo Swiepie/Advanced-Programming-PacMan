@@ -42,6 +42,7 @@ bool World::loadMap(const std::string& filename) {
                 break;
                 case '0':
                     entities.push_back(std::make_unique<Coin>(x, y));
+                    coinCount = coinCount + 1;
                 break;
                 case 'P':{
                     auto p = std::make_unique<Pacman>(x, y);
@@ -49,7 +50,8 @@ bool World::loadMap(const std::string& filename) {
                     entities.push_back(std::move(p));
                     break;
                 }
-                case 'F':
+                case 'f':
+                    std::cout << "fruitje" << std::endl;
                     entities.push_back(std::make_unique<Fruit>(x, y));
                 default:
                     break;
@@ -71,7 +73,6 @@ void World::update(float deltaTime) {
         e->update(deltaTime);
     }
 
-    if (!pacman) return;
 
     pacman->addMoveTime(deltaTime);
 
@@ -92,9 +93,11 @@ void World::update(float deltaTime) {
 
         if (moved) {
             //slaag de tijd op van laatste movement
+            checkCollisions(); // ✅ check of hij iets oppakt
             pacman->recordMoveTime(deltaTime);
         }
     }
+
 }
 
 const std::vector<std::unique_ptr<Entity>>& World::getEntities() const {
@@ -110,11 +113,10 @@ Pacman* World::getPacman() const{
     return pacman;
 }
 
-bool World::tryMove(Pacman* pacman, char dir) {
+bool World::tryMove(Pacman* pacman, char dir) const {
     if (!pacman) return false;
 
     float dx = 0, dy = 0;
-    double speed = pacman->getSpeed();
     switch (dir) {
         case 'N': dy = -0.1; break;
         case 'Z': dy = 0.1;  break;
@@ -142,4 +144,21 @@ bool World::tryMove(Pacman* pacman, char dir) {
     }
     pacman->setPosition(newX, newY);
     return true;
+}
+
+void World::checkCollisions() {
+    //std::cout<< "Entities collided: " << std::endl;
+    if (!pacman) return;
+    entities.erase(
+        std::remove_if(entities.begin(), entities.end(),
+            [&](const std::unique_ptr<Entity>& e) {
+                if (e->isCollectible() && pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f)) {
+                    e->onCollect(*pacman);
+                    std::cout << "ja" << "\n";
+                    return true; // verwijderen
+                }
+                return false;
+            }),
+        entities.end()
+    );
 }

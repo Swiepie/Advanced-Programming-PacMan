@@ -16,7 +16,6 @@ void PacmanView::setTexture(const sf::Texture& texture) {
   pacmanTexture = texture;
 }
 void PacmanView::chooseTexture(char direction){
-  std::cout << "PacmanView::chooseTexture  " << direction << std::endl;
   float deltaTime = Stopwatch::getInstance().GetElapsedTime();
 
   sf::Texture pacmanTexture;

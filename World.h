@@ -29,7 +29,7 @@ private:
     std::vector<std::string> mapData;
     int width = 0;
     int height = 0;
-
+    int coinCount = 0;
 
 public:
 
@@ -41,8 +41,10 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    bool tryMove(Pacman* pacman, char dir);
+    bool tryMove(Pacman* pacman, char dir) const;
     Pacman* getPacman() const;
+    void checkCollisions();
+
 };
 
 

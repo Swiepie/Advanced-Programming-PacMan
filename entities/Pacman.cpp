@@ -27,3 +27,20 @@ void Pacman::setBufferdirection(char direct) {
 void Pacman::applyBufferdirection() {
     direction = bufferdirection;
 }
+void Pacman::addMoveTime(float dt) {
+    moveTimer += dt;
+}
+bool Pacman::readyToMove() const {
+    return moveTimer >= moveCooldown;
+}
+void Pacman::resetMoveTimer() {
+    moveTimer -= moveCooldown;
+    std::cout << "reset" << std::endl;
+}
+bool Pacman::readyToMove(float currentTime) const {
+    return (currentTime - lastMoveTime) >= moveCooldown;
+}
+
+void Pacman::recordMoveTime(float currentTime) {
+    lastMoveTime = currentTime;
+}

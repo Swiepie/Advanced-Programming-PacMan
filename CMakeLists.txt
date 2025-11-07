@@ -54,6 +54,8 @@ set(HEADERS
         states/PausedState.h
         renderer/PacmanView.h
         renderer/PacmanView.cpp
+        entities/Ghost.h
+        entities/Fruit.cpp
 )
 
 # --- Executable ---

@@ -11,11 +11,11 @@
 
 #include <string>
 #include <memory>
-
 struct coord {
     float x, y;
 };
 
+class Pacman;
 class Entity {
 protected:
     coord position;
@@ -25,13 +25,15 @@ public:
     Entity(float x, float y, char sym) : position{x, y}, symbol(sym) {}
     virtual ~Entity() = default;
 
-    coord getPosition() const { return position; }
-    char getSymbol() const { return symbol; }
-    void setPosition(float x, float y) {
-        position.x = x;
-        position.y = y;
-    }
-    virtual void update(float deltaTime) {}
+    coord getPosition() const;
+    char getSymbol() const;
+    void setPosition(float x, float y);
+    virtual void update(float deltaTime);
+
+    bool collidesWith(const Entity& other, float stepW = 0.05f, float stepH = 0.05f) const;
+
+    virtual bool isCollectible() const;
+    virtual void onCollect(Pacman& pacman);
 };
 
 
