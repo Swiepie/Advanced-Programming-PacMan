@@ -15,8 +15,10 @@ private:
 
     // Private constructor to enforce singleton
     Random() {
-        auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-        engine.seed(static_cast<unsigned long>(seed));
+        // Gebruik een random_device om een echte willekeurige seed te verkrijgen
+        std::random_device rd;
+        std::seed_seq seedSeq{rd(), rd(), rd(), rd(), rd(), rd(), rd(), rd()};
+        engine.seed(seedSeq);
     }
 
 public:

@@ -77,6 +77,8 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
             pacmanSprite.setPosition(screenPos);
             pacmanSprite.setScale(rectSize/15, rectSize/15);
             window.draw(pacmanSprite);
+        } else if (symbol == 'f') {
+            continue;
         }
     }
 }

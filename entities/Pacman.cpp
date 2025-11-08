@@ -35,7 +35,6 @@ bool Pacman::readyToMove() const {
 }
 void Pacman::resetMoveTimer() {
     moveTimer -= moveCooldown;
-    std::cout << "reset" << std::endl;
 }
 bool Pacman::readyToMove(float currentTime) const {
     return (currentTime - lastMoveTime) >= moveCooldown;

@@ -5,10 +5,10 @@
 #include "states/MenuState.h"
 
 Game::Game()
-    : window(sf::VideoMode(800, 550), "Pac-Man")
+    : window(sf::VideoMode(1300, 800), "Pac-Man")
 {
     Stopwatch::getInstance().start();
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(120);
     stateManager.pushState(std::make_unique<MenuState>());
 }
 

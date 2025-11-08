@@ -58,7 +58,9 @@ bool World::loadMap(const std::string& filename) {
             }
         }
     }
-
+    for (auto& e : entities) {
+        std::cout << e->getPosition().x << "      " << e->getPosition().y << std::endl;
+    }
     return true;
 }
 
@@ -93,7 +95,7 @@ void World::update(float deltaTime) {
 
         if (moved) {
             //slaag de tijd op van laatste movement
-            checkCollisions(); // ✅ check of hij iets oppakt
+            checkCollisions();
             pacman->recordMoveTime(deltaTime);
         }
     }
@@ -115,13 +117,13 @@ Pacman* World::getPacman() const{
 
 bool World::tryMove(Pacman* pacman, char dir) const {
     if (!pacman) return false;
-
+    float speed = pacman->getSpeed();
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -0.1; break;
-        case 'Z': dy = 0.1;  break;
-        case 'W': dx = -0.1; break;
-        case 'O': dx = 0.1;  break;
+        case 'N': dy = -0.1*speed; break;
+        case 'Z': dy = 0.1*speed;  break;
+        case 'W': dx = -0.1*speed; break;
+        case 'O': dx = 0.1*speed;  break;
         default: return false;
     }
 
@@ -154,7 +156,6 @@ void World::checkCollisions() {
             [&](const std::unique_ptr<Entity>& e) {
                 if (e->isCollectible() && pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f)) {
                     e->onCollect(*pacman);
-                    std::cout << "ja" << "\n";
                     return true; // verwijderen
                 }
                 return false;

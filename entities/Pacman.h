@@ -13,9 +13,9 @@ class Pacman : public Entity {
 private:
     char direction;
     char bufferdirection;
-    double moveCooldown = 1.0/30;
+    double moveCooldown = 1.0/60;
     float moveTimer = 0.0f;
-    double speed = 1;
+    double speed = 2.5;
     float lastMoveTime = 0.0f;
 
 

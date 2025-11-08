@@ -4,6 +4,7 @@
 
 #include "Entity.h"
 #include <iostream>
+#include <cmath>
 coord Entity::getPosition() const {
     return position; }
 char Entity::getSymbol() const {
