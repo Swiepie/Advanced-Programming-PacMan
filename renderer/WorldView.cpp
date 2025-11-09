@@ -32,6 +32,21 @@ sf::View getWorldView(unsigned int windowWidth, unsigned int windowHeight) {
 void WorldView::render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight) {
     // maak de view
     pacmanview.chooseTexture(world.getPacman()->getDirection());
+    for (auto& e : world.getEntities()) {
+        if (e->getSymbol() == 'R') {
+            redGhostview.chooseTexture(e->getDirection());
+        }
+        if (e->getSymbol() == 'B') {
+            pinkghostview.chooseTexture(e->getDirection());
+        }
+        if (e->getSymbol() == 'G') {
+            blueghostview.chooseTexture(e->getDirection());
+        }
+    }
+
+
+
+
     sf::View view = getWorldView(windowWidth, windowHeight);
     window.setView(view);
 
@@ -57,6 +72,9 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
     };
 
     sf::Sprite pacmanSprite = pacmanview.getSprite();
+    sf::Sprite redGhostSprite = redGhostview.getSprite();
+    sf::Sprite pinkGhostSprite = pinkghostview.getSprite();
+    sf::Sprite blueGhostSprite = blueghostview.getSprite();
     // render entities in world-coördinaten
     for (auto& e : world.getEntities()) {
         auto pos = e->getPosition(); // nu in wereldcellen
@@ -78,7 +96,26 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
             pacmanSprite.setScale(rectSize/15, rectSize/15);
             window.draw(pacmanSprite);
         } else if (symbol == 'f') {
-            continue;
+            sf::CircleShape circle(rectSize / 10.f);
+            circle.setFillColor(sf::Color::Magenta);
+            circle.setPosition(screenPos.x + rectSize/2 - rectSize/10, screenPos.y + rectSize/2 - rectSize/10);
+            window.draw(circle);
+
+        } else if (symbol == 'R') {
+#if 1
+            redGhostSprite.setPosition(screenPos);
+            redGhostSprite.setScale(rectSize/16, rectSize/16);
+            window.draw(redGhostSprite);
+#endif
+        } else if (symbol == 'B') {
+            blueGhostSprite.setPosition(screenPos);
+            blueGhostSprite.setScale(rectSize/16, rectSize/16);
+            window.draw(blueGhostSprite);
+        } else if (symbol == 'G') {
+
+            pinkGhostSprite.setPosition(screenPos);
+            pinkGhostSprite.setScale(rectSize/16, rectSize/16);
+            window.draw(pinkGhostSprite);
         }
     }
 }

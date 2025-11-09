@@ -10,11 +10,16 @@
 
 #include "../World.h"
 #include "PacmanView.h"
+#include "GhostView.h"
 #include <memory>
 
 class WorldView {
     private:
     PacmanView pacmanview;
+    RedGhostView redGhostview;
+    PinkGhostView pinkghostview;
+    BlueGhostView blueghostview;
+
 public:
     void render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight);
 };

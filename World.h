@@ -20,7 +20,8 @@
 #include "entities/Pacman.h"
 #include "entities/Wall.h"
 #include "entities/Fruit.h"
-
+#include "entities/Ghost.h"
+class Ghost;
 class World {
 private:
     std::vector<std::unique_ptr<Entity>> entities;
@@ -45,6 +46,9 @@ public:
     Pacman* getPacman() const;
     void checkCollisions();
 
+    bool tryMoveGhost(Ghost* ghost, char dir) const;
+    bool canMoveInDirection(const Ghost* ghost, char dir) const;
+    bool isAtIntersection(const Ghost* ghost) const;
 };
 
 

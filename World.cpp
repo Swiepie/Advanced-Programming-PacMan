@@ -28,7 +28,7 @@ bool World::loadMap(const std::string& filename) {
     float tileHeight = 2.0f / numRows;
 
     entities.clear();
-
+    int i = 1;
     for (int row = 0; row < numRows; ++row) {
         for (int col = 0; col < numCols; ++col) {
             char c = lines[row][col];
@@ -53,13 +53,39 @@ bool World::loadMap(const std::string& filename) {
                 case 'f':
                     std::cout << "fruitje" << std::endl;
                     entities.push_back(std::make_unique<Fruit>(x, y));
+                break;
+                case 'G':{
+                    if (i == 1) {
+                        entities.push_back(std::make_unique<RedGhost>(x, y)); // start meteen
+                        i = i+1;
+                        break;
+                    }
+                    if (i==2) {
+                        entities.push_back(std::make_unique<BlueGhost>(x, y, 0.0f)); // start meteen
+                        i = i+1;
+                        break;
+                    }
+                    if (i==3) {
+                        entities.push_back(std::make_unique<BlueGhost>(x, y, 5.0f)); // start na 5s
+                        i = i+1;
+                        break;
+                    }
+                    if (i==4) {
+                        entities.push_back(std::make_unique<PinkGhost>(x, y, 10.0f)); // start na 10s
+                        std::cout << "gay" << std::endl;
+                        break;
+                    }
+
+                    break;
+
+                }
                 default:
                     break;
             }
         }
     }
     for (auto& e : entities) {
-        std::cout << e->getPosition().x << "      " << e->getPosition().y << std::endl;
+        //std::cout << e->getPosition().x << "      " << e->getPosition().y << std::endl;
     }
     return true;
 }
@@ -72,9 +98,8 @@ void World::printMap() const {
 
 void World::update(float deltaTime) {
     for (auto& e : entities) {
-        e->update(deltaTime);
+        e->update(deltaTime, *this, *pacman);
     }
-
 
     pacman->addMoveTime(deltaTime);
 
@@ -162,4 +187,75 @@ void World::checkCollisions() {
             }),
         entities.end()
     );
+}
+
+bool World::tryMoveGhost(Ghost* ghost, char dir) const {
+    if (!ghost) return false;
+    float speed = ghost->getSpeed();
+    float dx = 0, dy = 0;
+    switch (dir) {
+        case 'N': dy = -0.1 * speed; break;
+        case 'Z': dy =  0.1 * speed; break;
+        case 'W': dx = -0.1 * speed; break;
+        case 'O': dx =  0.1 * speed; break;
+        default: return false;
+    }
+
+    float stepW = 2.0f / width;
+    float stepH = 2.0f / height;
+    float newX = ghost->getPosition().x + dx * stepW;
+    float newY = ghost->getPosition().y + dy * stepH;
+
+    // Botsing met muren
+    for (auto& wall : entities) {
+        if (wall->getSymbol() == '#') {
+            float wallX = wall->getPosition().x;
+            float wallY = wall->getPosition().y;
+            bool overlapX = std::fabs(newX - wallX) + 0.0051 < stepW;
+            bool overlapY = std::fabs(newY - wallY) + 0.0051 < stepH;
+            if (overlapX && overlapY)
+                return false;
+        }
+    }
+    ghost->setPosition(newX, newY);
+    return true;
+}
+
+bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
+    if (!ghost) return false;
+    float stepW = 2.0f / width;
+    float stepH = 2.0f / height;
+    float dx = 0, dy = 0;
+    switch (dir) {
+        case 'N': dy = -stepH; break;
+        case 'Z': dy = stepH; break;
+        case 'W': dx = -stepW; break;
+        case 'O': dx = stepW; break;
+        default: return false;
+    }
+
+    float newX = ghost->getPosition().x + dx;
+    float newY = ghost->getPosition().y + dy;
+
+    for (auto& wall : entities) {
+        if (wall->getSymbol() == '#') {
+            float wallX = wall->getPosition().x;
+            float wallY = wall->getPosition().y;
+            bool overlapX = std::fabs(newX - wallX) + 0.0051 < stepW;
+            bool overlapY = std::fabs(newY - wallY) + 0.0051 < stepH;
+            if (overlapX && overlapY)
+                return false;
+        }
+    }
+    return true;
+}
+
+bool World::isAtIntersection(const Ghost* ghost) const {
+    if (!ghost) return false;
+    int moves = 0;
+    for (char d : {'N', 'Z', 'W', 'O'}) {
+        if (canMoveInDirection(ghost, d))
+            moves++;
+    }
+    return moves > 2; // meer dan 2 mogelijke richtingen = kruispunt
 }

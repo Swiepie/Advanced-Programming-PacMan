@@ -16,11 +16,12 @@ struct coord {
 };
 
 class Pacman;
+class World;
 class Entity {
 protected:
     coord position;
     char symbol;
-
+    char direction;
 public:
     Entity(float x, float y, char sym) : position{x, y}, symbol(sym) {}
     virtual ~Entity() = default;
@@ -34,6 +35,11 @@ public:
 
     virtual bool isCollectible() const;
     virtual void onCollect(Pacman& pacman);
+
+    virtual char getDirection() const { return direction; }
+
+    virtual void update(float deltaTime, World& world, const Pacman& pacman) {}
+
 };
 
 

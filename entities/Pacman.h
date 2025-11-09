@@ -15,7 +15,7 @@ private:
     char bufferdirection;
     double moveCooldown = 1.0/60;
     float moveTimer = 0.0f;
-    double speed = 2.5;
+    double speed = 1;
     float lastMoveTime = 0.0f;
 
 
@@ -34,7 +34,7 @@ public:
     char getBufferdirection() const;
     void setBufferdirection(char direct);
     void applyBufferdirection();
-    char getDirection() const;
+    char getDirection() const override;
     void setDirection(char direct);
 };
 

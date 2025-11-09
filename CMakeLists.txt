@@ -24,6 +24,7 @@ find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
 set(SOURCES
         entities/Entity.cpp
         entities/Pacman.cpp
+        entities/Ghost.cpp
         main.cpp
         Game.cpp
         Stopwatch.cpp
@@ -38,6 +39,7 @@ set(SOURCES
         states/MenuState.cpp
         states/LevelState.cpp
         states/PausedState.cpp
+        renderer/GhostView.cpp
 )
 
 set(HEADERS
@@ -56,6 +58,7 @@ set(HEADERS
         renderer/PacmanView.cpp
         entities/Ghost.h
         entities/Fruit.cpp
+        renderer/GhostView.h
 )
 
 # --- Executable ---

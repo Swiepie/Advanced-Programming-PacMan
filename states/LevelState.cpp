@@ -32,7 +32,6 @@ void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, co
 
 void LevelState::update(StateManager& manager, float deltaTime)  {
     world.update(deltaTime);
-
 }
 void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight)  {
     renderer.render(world, window, windowWidth, windowHeight);

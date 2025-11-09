@@ -18,10 +18,6 @@ void PacmanView::setTexture(const sf::Texture& texture) {
 void PacmanView::chooseTexture(char direction){
   float deltaTime = Stopwatch::getInstance().GetElapsedTime();
 
-  sf::Texture pacmanTexture;
-  if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-    std::cerr << "Failed to load spritesheet" << std::endl;
-  }
 
   setTexture(pacmanTexture);
   if (readyFrame(deltaTime)) {

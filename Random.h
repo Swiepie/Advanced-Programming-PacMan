@@ -38,6 +38,7 @@ public:
 
     // Optional: expose the engine if needed
     std::mt19937& getEngine() { return engine; }
+
 };
 
 #endif // RANDOM_H

@@ -7,11 +7,11 @@
 
 #include "Entity.h"
 #include "../Random.h"
-
+#include "../World.h"
 #include "Pacman.h"
+class World;
 class Ghost : public Entity{
 protected:
-    char direction;
     double moveCooldown = 1.0/30;
     float moveTimer = 0.0f;
     double speed = 1;
@@ -19,11 +19,12 @@ protected:
 
     bool chasing = false;
     float chaseDelay = 0.0f;
+    float timeAlive = 0.0f;
 
 public:
     Ghost(float x, float y, char sym = 'G', float delay = 0.0f)
         : Entity(x, y, sym), chaseDelay(delay) {}
-    void update(float deltaTime) override;
+    void update(float deltaTime, World& world, const Pacman& pacman) override;
     double getSpeed() const;
     void setSpeed(double spd);
     void addMoveTime(float dt);
@@ -31,7 +32,7 @@ public:
     void resetMoveTimer();
     bool readyToMove(float currentTime) const;
 
-    char getDirection() const;
+
     void setDirection(char direct);
     void recordMoveTime(float currentTime);
 
@@ -39,7 +40,7 @@ public:
     void setChasing(bool value) { chasing = value; }
     float getChaseDelay() const { return chaseDelay; }
 
-    void moveInDirection();
+    void moveInDirection(World& world);
 };
 
 
@@ -49,23 +50,23 @@ private:
     char lockedDirection;
 public:
     RedGhost(float x, float y);
-    void update(float deltaTime, const Pacman& pacman) override;
-    void chooseDirection(const Pacman& pacman) override;
+    void update(float deltaTime, World& world, const Pacman& pacman) override;
+    void chooseDirection(const Pacman& pacman);
 };
 
 // follows pacman direction X2
 class BlueGhost : public Ghost {
 public:
     BlueGhost(float x, float y, float delay);
-    void update(float deltaTime, const Pacman& pacman) override;
-    void chooseDirection(const Pacman& pacman) override;
+    void update(float deltaTime, World& world, const Pacman& pacman) override;
+    void chooseDirection(const Pacman& pacman);
 };
 
 // chasing ghost
 class PinkGhost : public Ghost {
 public:
     PinkGhost(float x, float y, float delay);
-    void update(float deltaTime, const Pacman& pacman) override;
-    void chooseDirection(const Pacman& pacman) override;
+    void update(float deltaTime, World& world, const Pacman& pacman) override;
+    void chooseDirection(const Pacman& pacman);
 };
 #endif //GHOST_H

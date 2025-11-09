@@ -1,14 +1,28 @@
 //
 // Created by Siebe Haché on 07/11/2025.
 //
-
+#include <iostream>
 #include "Ghost.h"
-void Ghost::update(float deltaTime) {
+void Ghost::update(float deltaTime, World& world, const Pacman& pacman) {
+    timeAlive += deltaTime;
 
+    // Start chasing after delay
+    if (!chasing && timeAlive >= chaseDelay) {
+        chasing = true;
+    }
+    if (!chasing) return;
+
+    moveTimer += deltaTime;
+    if (!readyToMove()) return;
+
+    moveInDirection(world);
+    resetMoveTimer();
 }
-char Ghost::getDirection() const {
-    return direction;
+
+void Ghost::moveInDirection(World& world) {
+    world.tryMoveGhost(this, direction);
 }
+
 void Ghost::setDirection(char direct) {
     direction = direct;
 }
@@ -34,29 +48,22 @@ bool Ghost::readyToMove(float currentTime) const {
 void Ghost::recordMoveTime(float currentTime) {
     lastMoveTime = currentTime;
 }
-void Ghost::moveInDirection() {
-    switch (direction) {
-        case 'U': position.y -= speed; break;
-        case 'D': position.y += speed; break;
-        case 'L': position.x -= speed; break;
-        case 'R': position.x += speed; break;
-    }
-}
+
 
 
 RedGhost::RedGhost(float x, float y)
-    : Ghost(x, y, 'L', 0.0f), lockedDirection('U') {}
+    : Ghost(x, y, 'R', 0.0f), lockedDirection('N') {
+    setDirection(Random::getInstance().getRandomDirection());
+}
 
-void RedGhost::update(float deltaTime, const Pacman& pacman) {
-    addMoveTime(deltaTime);
-    if (!readyToMove()) return;
-    moveInDirection();
-    resetMoveTimer();
+void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
+    Ghost::update(deltaTime, world, pacman);
 
-    // met kans 0.5 kies een nieuwe richting
-    if (Random::getInstance().getFloat(0.0f, 1.0f) < 0.5f) {
+    if (!isChasing()) return;
 
-        lockedDirection = Random::getInstance().getRandomDirection();
+    // Alleen kies nieuwe richting als op een kruispunt
+    if (world.isAtIntersection(this) && Random::getInstance().getInt(0, 1) == 1) {
+        setDirection(Random::getInstance().getRandomDirection());
     }
 }
 
@@ -65,13 +72,22 @@ void RedGhost::chooseDirection(const Pacman& pacman) {
 }
 
 BlueGhost::BlueGhost(float x, float y, float delay)
-    : Ghost(x, y, 'F', delay) {}
+    : Ghost(x, y, 'B', delay) {
+    setDirection(Random::getInstance().getRandomDirection());
+}
 
-void BlueGhost::update(float deltaTime, const Pacman& pacman) {
+void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
+    if (!isChasing() && timeAlive < chaseDelay) {
+        timeAlive += deltaTime;
+        return;
+    }
+    if (!isChasing()) setChasing(true);
+
     addMoveTime(deltaTime);
     if (!readyToMove()) return;
+
     chooseDirection(pacman);
-    moveInDirection();
+    moveInDirection(world);
     resetMoveTimer();
 }
 
@@ -85,23 +101,23 @@ void BlueGhost::chooseDirection(const Pacman& pacman) {
     float py = pPos.y;
 
     switch (pDir) {
-        case 'U': py -= 0.01; break;
-        case 'D': py += 0.01; break;
-        case 'L': px -= 0.01; break;
-        case 'R': px += 0.01; break;
+        case 'N': py -= 0.01; break;
+        case 'Z': py += 0.01; break;
+        case 'W': px -= 0.01; break;
+        case 'O': px += 0.01; break;
     }
 
     // Kies richting die Manhattan afstand tot (px, py) minimaliseert
-    std::vector<char> dirs = {'U', 'D', 'L', 'R'};
+    std::vector<char> dirs = {'N', 'Z', 'L', 'R'};
     float bestDist = 1e9;
     std::vector<char> bestDirs;
 
     for (char d : dirs) {
         float nx = position.x, ny = position.y;
-        if (d == 'U') ny -= 0.01;
-        if (d == 'D') ny += 0.01;
-        if (d == 'L') nx -= 0.01;
-        if (d == 'R') nx += 0.01;
+        if (d == 'N') ny -= 0.01;
+        if (d == 'Z') ny += 0.01;
+        if (d == 'W') nx -= 0.01;
+        if (d == 'O') nx += 0.01;
         float dist = std::fabs(px - nx) + std::fabs(py - ny);
         if (dist < bestDist) {
             bestDist = dist;
@@ -116,13 +132,29 @@ void BlueGhost::chooseDirection(const Pacman& pacman) {
 
 
 PinkGhost::PinkGhost(float x, float y, float delay)
-    : Ghost(x, y, 'C', delay) {}
+    : Ghost(x, y, 'G', delay) {
+    setDirection(Random::getInstance().getRandomDirection());
+}
 
-void PinkGhost::update(float deltaTime, const Pacman& pacman) {
+void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
+    Ghost::update(deltaTime, world, pacman);
+
+    if (!isChasing()) return;
+
     addMoveTime(deltaTime);
     if (!readyToMove()) return;
+
+    // bepaal target voor Pacman
+    coord target = pacman.getPosition();
+    switch (pacman.getDirection()) {
+        case 'N': target.y -= 0.01f; break;
+        case 'Z': target.y += 0.01f; break;
+        case 'W': target.x -= 0.01f; break;
+        case 'O': target.x += 0.01f; break;
+    }
+
     chooseDirection(pacman);
-    moveInDirection();
+    moveInDirection(world);
     resetMoveTimer();
 }
 
@@ -133,16 +165,16 @@ void PinkGhost::chooseDirection(const Pacman& pacman) {
     float gy = position.y;
 
     // Kies richting die Manhattan afstand minimaliseert
-    std::vector<char> dirs = {'U', 'D', 'L', 'R'};
+    std::vector<char> dirs = {'Z', 'N', 'W', 'O'};
     float bestDist = 1e9;
     std::vector<char> bestDirs;
 
     for (char d : dirs) {
         float nx = gx, ny = gy;
-        if (d == 'U') ny -= 0.01;
-        if (d == 'D') ny += 0.01;
-        if (d == 'L') nx -= 0.01;
-        if (d == 'R') nx += 0.01;
+        if (d == 'N') ny -= 0.01;
+        if (d == 'Z') ny += 0.01;
+        if (d == 'W') nx -= 0.01;
+        if (d == 'O') nx += 0.01;
         float dist = std::fabs(px - nx) + std::fabs(py - ny);
         if (dist < bestDist) {
             bestDist = dist;
