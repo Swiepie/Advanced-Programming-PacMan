@@ -163,8 +163,8 @@ bool World::tryMove(Pacman* pacman, char dir) const {
             float wallY = wall->getPosition().y;
 
             // AABB overlap check (center-based coordinates)
-            bool overlapX = std::fabs(newX - wallX)+0.0051 < stepW;
-            bool overlapY = std::fabs(newY - wallY)+0.0051 < stepH;
+            bool overlapX = std::fabs(newX - wallX) + 0.0051 < stepW;
+            bool overlapY = std::fabs(newY - wallY) + 0.0051 < stepH;
             if (overlapX && overlapY)
                 return false; // geblokkeerd
         }
@@ -225,12 +225,15 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     if (!ghost) return false;
     float stepW = 2.0f / width;
     float stepH = 2.0f / height;
+
+    // Use actual ghost speed for checking
+    float speed = ghost->getSpeed();
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -stepH; break;
-        case 'Z': dy = stepH; break;
-        case 'W': dx = -stepW; break;
-        case 'O': dx = stepW; break;
+        case 'N': dy = -0.1 * speed * stepH; break;
+        case 'Z': dy =  0.1 * speed * stepH; break;
+        case 'W': dx = -0.1 * speed * stepW; break;
+        case 'O': dx =  0.1 * speed * stepW; break;
         default: return false;
     }
 
@@ -252,10 +255,31 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
 
 bool World::isAtIntersection(const Ghost* ghost) const {
     if (!ghost) return false;
-    int moves = 0;
+
+    char currentDir = ghost->getDirection();
+    int viableMoves = 0;
+    int perpendicularMoves = 0;
+
     for (char d : {'N', 'Z', 'W', 'O'}) {
-        if (canMoveInDirection(ghost, d))
-            moves++;
+        if (canMoveInDirection(ghost, d)) {
+            viableMoves++;
+
+            // Check if this is perpendicular to current direction
+            bool perpendicular = false;
+            if ((currentDir == 'N' || currentDir == 'Z') && (d == 'W' || d == 'O')) {
+                perpendicular = true;
+            } else if ((currentDir == 'W' || currentDir == 'O') && (d == 'N' || d == 'Z')) {
+                perpendicular = true;
+            }
+
+            if (perpendicular) {
+                perpendicularMoves++;
+            }
+        }
     }
-    return moves > 2; // meer dan 2 mogelijke richtingen = kruispunt
+
+    // Intersection if:
+    // - More than 2 viable moves (T-junction or crossroads), OR
+    // - Exactly 2 viable moves with at least one perpendicular option (corner)
+    return (viableMoves > 2) || (viableMoves >= 2 && perpendicularMoves > 0);
 }
