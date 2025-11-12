@@ -24,8 +24,9 @@
 class Ghost;
 class World {
 private:
-
+    bool pacmanIsAlive = true;
     bool fearmode = false;
+    float fearmodeTimer = 6;
     std::vector<std::unique_ptr<Entity>> entities;
     Pacman* pacman = nullptr;
     float tileSize = 32.0f;
@@ -42,8 +43,10 @@ public:
     void update(float deltaTime);
 
     void setFearMode(bool fearmode);
+    bool getFearMode();
     void increaseScore(int points);
-
+    float getFearModeTimer() const;
+    void setFearModeTimer(float timer);
     const std::vector<std::unique_ptr<Entity>>& getEntities() const;
     int getWidth() const;
     int getHeight() const;

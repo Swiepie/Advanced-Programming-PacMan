@@ -16,13 +16,17 @@ class Ghost : public Entity {
 protected:
     double moveCooldown = 1.0/40;
     float moveTimer = 0.0f;
-    double speed = 1.0;
+    double speed = 1;
+    double speedSave = 1;
+    double fearSpeed = 0.8;
     float lastMoveTime = 0.0f;
 
     bool chasing = false;
     float chaseDelay = 0.0f;
     float timeAlive = 0.0f;
 
+    float fearTime = 0.0f;
+    float fearStartTime = 0.0f;
 public:
     Ghost(float x, float y, char sym = 'G', float delay = 0.0f)
         : Entity(x, y, sym), chaseDelay(delay) {}
@@ -30,19 +34,26 @@ public:
     void update(float deltaTime, World& world, const Pacman& pacman) override;
     double getSpeed() const;
     void setSpeed(double spd);
-    void addMoveTime(float dt);
-    bool readyToMove() const;
+
+
+    void recordFearTime(float currentTime);
+
     void resetMoveTimer();
+    void addMoveTime(float dt);
+    void recordMoveTime(float currentTime);
+
     bool readyToMove(float currentTime) const;
 
     void setDirection(char direct);
-    void recordMoveTime(float currentTime);
+    void moveInDirection(World& world);
+    bool readyToMove() const;
 
     bool isChasing() const { return chasing; }
     void setChasing(bool value) { chasing = value; }
     float getChaseDelay() const { return chaseDelay; }
 
-    void moveInDirection(World& world);
+    void chooseDirectionFear(World& world, const Pacman& pacman);
+
 };
 
 // RedGhost: Locked direction ghost, reconsiders at intersections

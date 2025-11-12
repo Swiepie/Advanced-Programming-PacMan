@@ -6,7 +6,6 @@
 
 void Ghost::update(float deltaTime, World& world, const Pacman& pacman) {
     timeAlive = deltaTime;
-
     // Start chasing after delay
     if (!chasing && timeAlive >= chaseDelay) {
         chasing = true;
@@ -34,6 +33,7 @@ double Ghost::getSpeed() const {
 
 void Ghost::setSpeed(double spd) {
     speed = spd;
+    speedSave = spd;
 }
 
 void Ghost::addMoveTime(float dt) {
@@ -56,6 +56,67 @@ void Ghost::recordMoveTime(float currentTime) {
     lastMoveTime = currentTime;
 }
 
+void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
+    float targetX = pacman.getPosition().x;
+    float targetY = pacman.getPosition().y;
+
+    float stepW = 2.0f / world.getWidth();
+    float stepH = 2.0f / world.getHeight();
+
+    // Vermijd directe omkering, tenzij noodzakelijk
+    char oppositeDir;
+    switch (direction) {
+        case 'N': oppositeDir = 'Z'; break;
+        case 'Z': oppositeDir = 'N'; break;
+        case 'W': oppositeDir = 'O'; break;
+        case 'O': oppositeDir = 'W'; break;
+        default:  oppositeDir = '?'; break;
+    }
+
+    // Zoek mogelijke richtingen behalve de omgekeerde
+    std::vector<char> viableDirs;
+    for (char d : {'N', 'Z', 'W', 'O'}) {
+        if (d == oppositeDir) continue;
+        if (world.canMoveInDirection(this, d)) {
+            viableDirs.push_back(d);
+        }
+    }
+
+    // Geen andere optie → omkeren toegestaan
+    if (viableDirs.empty()) {
+        viableDirs.push_back(oppositeDir);
+    }
+
+    // Zoek richting die de *grootste* Manhattan afstand heeft
+    float worstDist = -1.0f;
+    std::vector<char> bestDirs;
+
+    for (char d : viableDirs) {
+        float testX = position.x;
+        float testY = position.y;
+
+        switch (d) {
+            case 'N': testY -= stepH; break;
+            case 'Z': testY += stepH; break;
+            case 'W': testX -= stepW; break;
+            case 'O': testX += stepW; break;
+        }
+
+        float dist = std::fabs(targetX - testX) + std::fabs(targetY - testY);
+
+        if (dist > worstDist + 0.0001f) {
+            worstDist = dist;
+            bestDirs = {d};
+        } else if (std::fabs(dist - worstDist) < 0.0001f) {
+            bestDirs.push_back(d);
+        }
+    }
+
+    if (!bestDirs.empty()) {
+        int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
+        direction = bestDirs[idx];
+    }
+}
 // ============================================================================
 // RedGhost: Locks to one direction, reconsiders at intersections
 // ============================================================================
@@ -68,7 +129,22 @@ RedGhost::RedGhost(float x, float y)
 
 void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     timeAlive = deltaTime;
+    if (world.getFearMode() && readyToMove(timeAlive)) {
+        fearTime = world.getFearModeTimer();
+        chooseDirectionFear(world, pacman);
 
+
+        speed = fearSpeed;
+        std::cout << speed << std::endl;
+
+
+        recordMoveTime(timeAlive);
+        moveInDirection(world);
+        return;
+    }
+    std::cout << speed << std::endl;
+
+    speed = speedSave;
     if (!chasing && timeAlive >= chaseDelay) {
         chasing = true;
     }
@@ -168,16 +244,29 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
         case 'W': targetX -= 2 * stepW; break;
         case 'O': targetX += 2 * stepW; break;
     }
+    char oppositeDir;
+    switch (direction) {
+        case 'N': oppositeDir = 'Z'; break;
+        case 'Z': oppositeDir = 'N'; break;
+        case 'W': oppositeDir = 'O'; break;
+        case 'O': oppositeDir = 'W'; break;
+        default:  oppositeDir = '?'; break;
+    }
 
-    // Find all viable directions
+    // Vind alle mogelijke richtingen, behalve de omgekeerde
     std::vector<char> viableDirs;
     for (char d : {'N', 'Z', 'W', 'O'}) {
+        if (d == oppositeDir) continue; // vermijd onmiddellijke omkering
         if (world.canMoveInDirection(this, d)) {
             viableDirs.push_back(d);
         }
     }
 
-    if (viableDirs.empty()) return;
+    // Als we helemaal vastzitten, mogen we omkeren
+    if (viableDirs.empty()) {
+        viableDirs.push_back(oppositeDir);
+    }
+
 
     // Choose direction that minimizes Manhattan distance to target
     float bestDist = 1e9;
@@ -244,17 +333,31 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
     float stepW = 2.0f / world.getWidth();
     float stepH = 2.0f / world.getHeight();
 
-    // Find all viable directions
+    // Bepaal de omgekeerde richting (waar we vandaan kwamen)
+    char oppositeDir;
+    switch (direction) {
+        case 'N': oppositeDir = 'Z'; break;
+        case 'Z': oppositeDir = 'N'; break;
+        case 'W': oppositeDir = 'O'; break;
+        case 'O': oppositeDir = 'W'; break;
+        default:  oppositeDir = '?'; break;
+    }
+
+    // Vind alle mogelijke richtingen, behalve de omgekeerde
     std::vector<char> viableDirs;
     for (char d : {'N', 'Z', 'W', 'O'}) {
+        if (d == oppositeDir) continue; // vermijd onmiddellijke omkering
         if (world.canMoveInDirection(this, d)) {
             viableDirs.push_back(d);
         }
     }
 
-    if (viableDirs.empty()) return;
+    // Als we helemaal vastzitten, mogen we omkeren
+    if (viableDirs.empty()) {
+        viableDirs.push_back(oppositeDir);
+    }
 
-    // Choose direction that minimizes Manhattan distance to Pacman
+    // Kies richting die Manhattan-afstand minimaliseert
     float bestDist = 1e9;
     std::vector<char> bestDirs;
 
@@ -271,7 +374,7 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
 
         float dist = std::fabs(targetX - testX) + std::fabs(targetY - testY);
 
-        if (dist < bestDist) {
+        if (dist < bestDist - 0.0001f) {
             bestDist = dist;
             bestDirs = {d};
         } else if (std::fabs(dist - bestDist) < 0.0001f) {
@@ -279,6 +382,7 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
         }
     }
 
+    // Kies een willekeurige richting uit de beste opties
     if (!bestDirs.empty()) {
         int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
         direction = bestDirs[idx];

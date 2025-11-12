@@ -72,10 +72,8 @@ bool World::loadMap(const std::string& filename) {
                     }
                     if (i==4) {
                         entities.push_back(std::make_unique<PinkGhost>(x, y, 10.0f)); // start na 10s
-                        std::cout << "gay" << std::endl;
                         break;
                     }
-
                     break;
 
                 }
@@ -83,9 +81,6 @@ bool World::loadMap(const std::string& filename) {
                     break;
             }
         }
-    }
-    for (auto& e : entities) {
-        //std::cout << e->getPosition().x << "      " << e->getPosition().y << std::endl;
     }
     return true;
 }
@@ -252,8 +247,8 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-            bool overlapX = std::fabs(newX - wallX) + 0.0051 < stepW;
-            bool overlapY = std::fabs(newY - wallY) + 0.0051 < stepH;
+            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW;
+            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH;
             if (overlapX && overlapY)
                 return false;
         }
@@ -328,7 +323,15 @@ bool World::isAtDeadEnd(const Ghost* ghost) const {
 void World::setFearMode(bool fearm) {
     fearmode = fearm;
 }
-
+bool World::getFearMode() {
+    return fearmode;
+}
+float World::getFearModeTimer() const {
+    return fearmodeTimer;
+}
+void World::setFearModeTimer(float timer) {
+    fearmodeTimer = timer;
+}
 void World::increaseScore(int points) {
     score += points;
 }
