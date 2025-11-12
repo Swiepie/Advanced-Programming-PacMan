@@ -7,13 +7,14 @@
 
 #include "Entity.h"
 #include <iostream>
+#include "../World.h"
 
 class Fruit : public Entity {
 public:
 	Fruit(float x, float y) : Entity(x, y, 'f') {}
 
 	bool isCollectible() const override;
-	void onCollect(Pacman& pacman) override;
+	void onCollect(World& world) override;
 };
 
 

@@ -3,12 +3,15 @@
 //
 
 #include "Coin.h"
+
+#include "../World.h"
+
 bool Coin::isCollectible() const {
     return true;
 }
 
-void Coin::onCollect(Pacman& pacman) {
-    std::cout << "Coin collected at (" << position.x << ", " << position.y << ")\n";
+void Coin::onCollect(World& world) {
+    world.increaseScore(worth);
     // eventueel score verhogen:
     // pacman.addScore(10);
 };

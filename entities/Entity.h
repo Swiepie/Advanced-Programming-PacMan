@@ -34,7 +34,7 @@ public:
     bool collidesWith(const Entity& other, float stepW = 0.05f, float stepH = 0.05f) const;
 
     virtual bool isCollectible() const;
-    virtual void onCollect(Pacman& pacman);
+    virtual void onCollect(World& world);
 
     virtual char getDirection() const { return direction; }
 

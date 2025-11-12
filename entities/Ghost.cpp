@@ -141,10 +141,14 @@ void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
 
     if (!readyToMove(timeAlive)) return;
 
+    if (world.isAtIntersection(this) || world.isAtDeadEnd(this)) { //voeg ook toe dat die van richting veradnert als die in een doodlopende straat is.
+        chooseDirection(world, pacman);
+    }
+
     recordMoveTime(timeAlive);
-    chooseDirection(world, pacman);
     moveInDirection(world);
 }
+
 
 void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
     // Calculate position "in front of" Pacman
@@ -225,8 +229,11 @@ void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
 
     if (!readyToMove(timeAlive)) return;
 
+    if (world.isAtIntersection(this)|| world.isAtDeadEnd(this)) { //voeg ook toe dat die van richting veradnert als die in een doodlopende straat is.
+        chooseDirection(world, pacman);
+    }
+
     recordMoveTime(timeAlive);
-    chooseDirection(world, pacman);
     moveInDirection(world);
 }
 

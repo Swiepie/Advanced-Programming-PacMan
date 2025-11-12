@@ -33,6 +33,6 @@ bool Entity::isCollectible() const {
     return false;
 }
 
-void Entity::onCollect(Pacman& pacman) {
+void Entity::onCollect(World& world) {
 
 }

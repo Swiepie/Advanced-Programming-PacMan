@@ -180,9 +180,17 @@ void World::checkCollisions() {
         std::remove_if(entities.begin(), entities.end(),
             [&](const std::unique_ptr<Entity>& e) {
                 if (e->isCollectible() && pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f)) {
-                    e->onCollect(*pacman);
+                    e->onCollect(*this);
                     return true; // verwijderen
                 }
+                char eSym = e->getSymbol();
+                if (pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f) && (eSym=='G'|| eSym=='R' || eSym=='B')) {
+                    if (fearmode) {
+                        //geef respawn door OF teleporteer terug naar midden
+                        return true;
+                    } //halloooo - Marie :)
+                }
+
                 return false;
             }),
         entities.end()
@@ -282,4 +290,45 @@ bool World::isAtIntersection(const Ghost* ghost) const {
     // - More than 2 viable moves (T-junction or crossroads), OR
     // - Exactly 2 viable moves with at least one perpendicular option (corner)
     return (viableMoves > 2) || (viableMoves >= 2 && perpendicularMoves > 0);
+}
+
+
+bool World::isAtDeadEnd(const Ghost* ghost) const {
+    if (!ghost) return false;
+
+    char currentDir = ghost->getDirection();
+    int viableMoves = 0;
+    int perpendicularMoves = 0;
+
+    for (char d : {'N', 'Z', 'W', 'O'}) {
+        if (canMoveInDirection(ghost, d)) {
+            viableMoves++;
+
+            // Check if this is perpendicular to current direction
+            bool perpendicular = false;
+            if ((currentDir == 'N' || currentDir == 'Z') && (d == 'W' || d == 'O')) {
+                perpendicular = true;
+            } else if ((currentDir == 'W' || currentDir == 'O') && (d == 'N' || d == 'Z')) {
+                perpendicular = true;
+            }
+
+            if (perpendicular) {
+                perpendicularMoves++;
+            }
+        }
+    }
+
+    // Intersection if:
+    // - More than 2 viable moves (T-junction or crossroads), OR
+    // - Exactly 2 viable moves with at least one perpendicular option (corner)
+    return (viableMoves == 1);
+}
+
+
+void World::setFearMode(bool fearm) {
+    fearmode = fearm;
+}
+
+void World::increaseScore(int points) {
+    score += points;
 }

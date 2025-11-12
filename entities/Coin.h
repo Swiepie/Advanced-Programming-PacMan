@@ -8,12 +8,14 @@
 #include "Entity.h"
 #include <iostream>
 class Coin : public Entity {
+private:
+    int worth = 10;
 public:
     Coin(float x, float y) : Entity(x, y, '.') {}
 
     bool isCollectible() const override;
 
-    void onCollect(Pacman& pacman) override;
+    void onCollect(World& wprld) override;
 
 };
 

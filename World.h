@@ -24,6 +24,8 @@
 class Ghost;
 class World {
 private:
+
+    bool fearmode = false;
     std::vector<std::unique_ptr<Entity>> entities;
     Pacman* pacman = nullptr;
     float tileSize = 32.0f;
@@ -31,12 +33,16 @@ private:
     int width = 0;
     int height = 0;
     int coinCount = 0;
+    int score = 0;
 
 public:
 
     bool loadMap(const std::string& filename);
     void printMap() const; //debug
     void update(float deltaTime);
+
+    void setFearMode(bool fearmode);
+    void increaseScore(int points);
 
     const std::vector<std::unique_ptr<Entity>>& getEntities() const;
     int getWidth() const;
@@ -49,6 +55,7 @@ public:
     bool tryMoveGhost(Ghost* ghost, char dir) const;
     bool canMoveInDirection(const Ghost* ghost, char dir) const;
     bool isAtIntersection(const Ghost* ghost) const;
+    bool isAtDeadEnd(const Ghost* ghost) const;
 };
 
 

@@ -8,8 +8,9 @@ bool Fruit::isCollectible() const {
     return true;
 }
 
-void Fruit::onCollect(Pacman& pacman) {
+void Fruit::onCollect(World& world) {
     std::cout << "Fruit collected at (" << position.x << ", " << position.y << ")\n";
+    world.setFearMode(true);
     // eventueel score verhogen:
     // pacman.addScore(10);
 };
