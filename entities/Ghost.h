@@ -18,7 +18,7 @@ protected:
     float moveTimer = 0.0f;
     double speed = 1;
     double speedSave = 1;
-    double fearSpeed = 0.8;
+    double fearSpeed = 0.5;
     float lastMoveTime = 0.0f;
 
     bool chasing = false;
@@ -26,7 +26,8 @@ protected:
     float timeAlive = 0.0f;
 
     float fearTime = 0.0f;
-    float fearStartTime = 0.0f;
+    float fearStartTime = 0.0f;\
+    bool inFearMode = false;
 public:
     Ghost(float x, float y, char sym = 'G', float delay = 0.0f)
         : Entity(x, y, sym), chaseDelay(delay) {}
@@ -35,7 +36,9 @@ public:
     double getSpeed() const;
     void setSpeed(double spd);
 
-
+    void setFearState(bool state) override;
+    void resetFearState() override;
+    bool getFearState() const override;
     void recordFearTime(float currentTime);
 
     void resetMoveTimer();

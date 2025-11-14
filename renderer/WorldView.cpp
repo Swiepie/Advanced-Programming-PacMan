@@ -44,7 +44,7 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
         }
     }
 
-
+    fearghostview.chooseTexture();
 
 
     sf::View view = getWorldView(windowWidth, windowHeight);
@@ -75,6 +75,7 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
     sf::Sprite redGhostSprite = redGhostview.getSprite();
     sf::Sprite pinkGhostSprite = pinkghostview.getSprite();
     sf::Sprite blueGhostSprite = blueghostview.getSprite();
+    sf::Sprite fearGhostSprite = fearghostview.getSprite();
     // render entities in world-coördinaten
     for (auto& e : world.getEntities()) {
         auto pos = e->getPosition(); // nu in wereldcellen
@@ -101,21 +102,44 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
             circle.setPosition(screenPos.x + rectSize/2 - rectSize/10, screenPos.y + rectSize/2 - rectSize/10);
             window.draw(circle);
 
-        } else if (symbol == 'R') {
-#if 1
-            redGhostSprite.setPosition(screenPos);
-            redGhostSprite.setScale(rectSize/16, rectSize/16);
-            window.draw(redGhostSprite);
-#endif
+        }
+    }
+    for (auto& e : world.getEntities()) {
+        auto pos = e->getPosition(); // nu in wereldcellen
+        auto screenPos = normalizeToScreen(pos.x, pos.y, windowWidth, windowHeight, HeighthFlag, h, w);
+        char symbol = e->getSymbol();
+        if (symbol == 'R') {
+            if (e->getFearState()) {
+                fearGhostSprite.setPosition(screenPos);
+                fearGhostSprite.setScale(rectSize/16, rectSize/16);
+                window.draw(fearGhostSprite);
+            } else {
+                redGhostSprite.setPosition(screenPos);
+                redGhostSprite.setScale(rectSize/16, rectSize/16);
+                window.draw(redGhostSprite);
+            }
         } else if (symbol == 'B') {
-            blueGhostSprite.setPosition(screenPos);
-            blueGhostSprite.setScale(rectSize/16, rectSize/16);
-            window.draw(blueGhostSprite);
-        } else if (symbol == 'G') {
+            if (e->getFearState()) {
+                fearGhostSprite.setPosition(screenPos);
+                fearGhostSprite.setScale(rectSize/16, rectSize/16);
+                window.draw(fearGhostSprite);
+            } else {
+                blueGhostSprite.setPosition(screenPos);
+                blueGhostSprite.setScale(rectSize/16, rectSize/16);
+                window.draw(blueGhostSprite);
+            }
 
-            pinkGhostSprite.setPosition(screenPos);
-            pinkGhostSprite.setScale(rectSize/16, rectSize/16);
-            window.draw(pinkGhostSprite);
+        } else if (symbol == 'G') {
+            if (e->getFearState()) {
+                fearGhostSprite.setPosition(screenPos);
+                fearGhostSprite.setScale(rectSize/16, rectSize/16);
+                window.draw(fearGhostSprite);
+            } else {
+                pinkGhostSprite.setPosition(screenPos);
+                pinkGhostSprite.setScale(rectSize/16, rectSize/16);
+                window.draw(pinkGhostSprite);
+            }
+
         }
     }
 }

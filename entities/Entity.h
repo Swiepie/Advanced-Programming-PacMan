@@ -23,6 +23,7 @@ protected:
     char symbol;
     char direction;
 public:
+
     Entity(float x, float y, char sym) : position{x, y}, symbol(sym) {}
     virtual ~Entity() = default;
 
@@ -39,6 +40,9 @@ public:
     virtual char getDirection() const { return direction; }
 
     virtual void update(float deltaTime, World& world, const Pacman& pacman) {}
+    virtual void resetFearState() {}
+    virtual void setFearState(bool state)  {}
+    virtual bool getFearState() const { return false; }
 
 };
 

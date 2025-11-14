@@ -48,4 +48,9 @@ public:
 	void chooseTexture(char direction) override;
 
 };
+class FearGhostView : public GhostView {
+	public:
+	FearGhostView();
+	void chooseTexture();
+};
 #endif //GHOSTVIEW_H

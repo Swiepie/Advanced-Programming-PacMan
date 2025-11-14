@@ -55,23 +55,28 @@ bool World::loadMap(const std::string& filename) {
                     entities.push_back(std::make_unique<Fruit>(x, y));
                 break;
                 case 'G':{
+
                     if (i == 1) {
                         entities.push_back(std::make_unique<RedGhost>(x, y)); // start meteen
+                        ghostSpawnPositions.push_back({x, y});
                         i = i+1;
                         break;
                     }
                     if (i==2) {
                         entities.push_back(std::make_unique<BlueGhost>(x, y, 0.0f)); // start meteen
+                        ghostSpawnPositions.push_back({x, y});
                         i = i+1;
                         break;
                     }
                     if (i==3) {
                         entities.push_back(std::make_unique<BlueGhost>(x, y, 5.0f)); // start na 5s
+                        ghostSpawnPositions.push_back({x, y});
                         i = i+1;
                         break;
                     }
                     if (i==4) {
                         entities.push_back(std::make_unique<PinkGhost>(x, y, 10.0f)); // start na 10s
+                        ghostSpawnPositions.push_back({x, y});
                         break;
                     }
                     break;
@@ -95,7 +100,18 @@ void World::update(float deltaTime) {
     for (auto& e : entities) {
         e->update(deltaTime, *this, *pacman);
     }
+    if (fearmode) {
+        if (fearmodeTimer + fearmodeStart <= deltaTime) {
+            fearmode = false;
 
+            // **reset fear status for all ghosts**
+            for (auto& e : entities) {
+                e->resetFearState();
+            }
+
+            std::cout << "Fear mode ended" << std::endl;
+        }
+    }
     pacman->addMoveTime(deltaTime);
 
     //is het al tijd om opnieuw te bewegen?
@@ -180,9 +196,15 @@ void World::checkCollisions() {
                 }
                 char eSym = e->getSymbol();
                 if (pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f) && (eSym=='G'|| eSym=='R' || eSym=='B')) {
-                    if (fearmode) {
+                    if (fearmode && e->getFearState()) {
+
+                        int ghostIndex = Random::getInstance().getInt(0, 3);
+                        e->setPosition(ghostSpawnPositions[ghostIndex].x,
+                                         ghostSpawnPositions[ghostIndex].y);
+                        e->resetFearState();
+                        // Optional: Add score for eating ghost
+                        increaseScore(200);
                         //geef respawn door OF teleporteer terug naar midden
-                        return true;
                     } //halloooo - Marie :)
                 }
 
@@ -321,6 +343,9 @@ bool World::isAtDeadEnd(const Ghost* ghost) const {
 
 
 void World::setFearMode(bool fearm) {
+    for (auto& e : entities) {
+        e->setFearState(fearm);
+    }
     fearmode = fearm;
 }
 bool World::getFearMode() {
@@ -331,6 +356,9 @@ float World::getFearModeTimer() const {
 }
 void World::setFearModeTimer(float timer) {
     fearmodeTimer = timer;
+}
+void World::setFearModeStart(float timer) {
+    fearmodeStart = timer;
 }
 void World::increaseScore(int points) {
     score += points;

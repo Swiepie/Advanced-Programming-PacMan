@@ -18,7 +18,12 @@ void Ghost::update(float deltaTime, World& world, const Pacman& pacman) {
     recordMoveTime(timeAlive);
     moveInDirection(world);
 }
-
+bool Ghost::getFearState() const {
+    return inFearMode;
+}
+void Ghost::setFearState(bool state) {
+    inFearMode = state;
+}
 void Ghost::moveInDirection(World& world) {
     world.tryMoveGhost(this, direction);
 }
@@ -55,7 +60,10 @@ bool Ghost::readyToMove(float currentTime) const {
 void Ghost::recordMoveTime(float currentTime) {
     lastMoveTime = currentTime;
 }
-
+void Ghost::resetFearState() {
+    inFearMode = false;
+    speed = speedSave;
+}
 void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
     float targetX = pacman.getPosition().x;
     float targetY = pacman.getPosition().y;
@@ -63,7 +71,6 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
     float stepW = 2.0f / world.getWidth();
     float stepH = 2.0f / world.getHeight();
 
-    // Vermijd directe omkering, tenzij noodzakelijk
     char oppositeDir;
     switch (direction) {
         case 'N': oppositeDir = 'Z'; break;
@@ -73,7 +80,9 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
         default:  oppositeDir = '?'; break;
     }
 
-    // Zoek mogelijke richtingen behalve de omgekeerde
+    // ✅ REMOVED THE EARLY RETURN - Always reconsider direction in fear mode!
+
+    // 1️⃣ Find all viable directions except opposite
     std::vector<char> viableDirs;
     for (char d : {'N', 'Z', 'W', 'O'}) {
         if (d == oppositeDir) continue;
@@ -82,12 +91,12 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
         }
     }
 
-    // Geen andere optie → omkeren toegestaan
-    if (viableDirs.empty()) {
+    // 2️⃣ If stuck, allow reversing
+    if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
         viableDirs.push_back(oppositeDir);
     }
 
-    // Zoek richting die de *grootste* Manhattan afstand heeft
+    // 3️⃣ Choose direction that MAXIMIZES Manhattan distance
     float worstDist = -1.0f;
     std::vector<char> bestDirs;
 
@@ -112,6 +121,7 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
         }
     }
 
+    // 4️⃣ Choose from best candidates
     if (!bestDirs.empty()) {
         int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
         direction = bestDirs[idx];
@@ -129,20 +139,16 @@ RedGhost::RedGhost(float x, float y)
 
 void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     timeAlive = deltaTime;
-    if (world.getFearMode() && readyToMove(timeAlive)) {
+    if (world.getFearMode() && inFearMode && readyToMove(timeAlive)) {
         fearTime = world.getFearModeTimer();
         chooseDirectionFear(world, pacman);
 
-
         speed = fearSpeed;
-        std::cout << speed << std::endl;
-
 
         recordMoveTime(timeAlive);
         moveInDirection(world);
         return;
     }
-    std::cout << speed << std::endl;
 
     speed = speedSave;
     if (!chasing && timeAlive >= chaseDelay) {
@@ -172,7 +178,6 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
             }
         }
     }
-
     // Try to move in locked direction
     if (!world.tryMoveGhost(this, lockedDirection)) {
         // If blocked, pick a new viable direction immediately
@@ -209,7 +214,17 @@ BlueGhost::BlueGhost(float x, float y, float delay)
 
 void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     timeAlive = deltaTime;
+    if (world.getFearMode() && readyToMove(timeAlive) && inFearMode) {
+        fearTime = world.getFearModeTimer();
+        chooseDirectionFear(world, pacman);
 
+        speed = fearSpeed;
+
+        recordMoveTime(timeAlive);
+        moveInDirection(world);
+        return;
+    }
+    speed = speedSave;
     if (!chasing && timeAlive >= chaseDelay) {
         chasing = true;
     }
@@ -310,7 +325,19 @@ PinkGhost::PinkGhost(float x, float y, float delay)
 
 void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     timeAlive = deltaTime;
+    if (world.getFearMode() && readyToMove(timeAlive) && inFearMode) {
+        fearTime = world.getFearModeTimer();
+        chooseDirectionFear(world, pacman);
 
+
+        speed = fearSpeed;
+
+        std::cout << position.x << ", " << position.y << "\n";
+        recordMoveTime(timeAlive);
+        moveInDirection(world);
+        return;
+    }
+    speed = speedSave;
     if (!chasing && timeAlive >= chaseDelay) {
         chasing = true;
     }

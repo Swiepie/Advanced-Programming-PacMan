@@ -19,7 +19,7 @@ class WorldView {
     RedGhostView redGhostview;
     PinkGhostView pinkghostview;
     BlueGhostView blueghostview;
-
+    FearGhostView fearghostview;
 public:
     void render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight);
 };

@@ -27,6 +27,7 @@ private:
     bool pacmanIsAlive = true;
     bool fearmode = false;
     float fearmodeTimer = 6;
+    float fearmodeStart = 0;
     std::vector<std::unique_ptr<Entity>> entities;
     Pacman* pacman = nullptr;
     float tileSize = 32.0f;
@@ -35,7 +36,7 @@ private:
     int height = 0;
     int coinCount = 0;
     int score = 0;
-
+    std::vector<coord> ghostSpawnPositions;
 public:
 
     bool loadMap(const std::string& filename);
@@ -55,10 +56,12 @@ public:
     Pacman* getPacman() const;
     void checkCollisions();
 
+    void setFearModeStart(float timer);
     bool tryMoveGhost(Ghost* ghost, char dir) const;
     bool canMoveInDirection(const Ghost* ghost, char dir) const;
     bool isAtIntersection(const Ghost* ghost) const;
     bool isAtDeadEnd(const Ghost* ghost) const;
+
 };
 
 
