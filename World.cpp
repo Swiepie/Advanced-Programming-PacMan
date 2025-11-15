@@ -107,8 +107,9 @@ void World::update(float deltaTime) {
             // **reset fear status for all ghosts**
             for (auto& e : entities) {
                 e->resetFearState();
-            }
+                e->setHasBeenEaten(false); // reset eaten state when fear ends
 
+            }
             std::cout << "Fear mode ended" << std::endl;
         }
     }
@@ -185,33 +186,52 @@ bool World::tryMove(Pacman* pacman, char dir) const {
 }
 
 void World::checkCollisions() {
-    //std::cout<< "Entities collided: " << std::endl;
     if (!pacman) return;
+    bool ateGhostThisFrame = false;
+
+    // --- Collectibles Removal Loop ---
     entities.erase(
         std::remove_if(entities.begin(), entities.end(),
             [&](const std::unique_ptr<Entity>& e) {
+                // Check collision only for collectibles
                 if (e->isCollectible() && pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f)) {
                     e->onCollect(*this);
-                    return true; // verwijderen
+                    return true; // Remove collectible
                 }
-                char eSym = e->getSymbol();
-                if (pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f) && (eSym=='G'|| eSym=='R' || eSym=='B')) {
-                    if (fearmode && e->getFearState()) {
-
-                        int ghostIndex = Random::getInstance().getInt(0, 3);
-                        e->setPosition(ghostSpawnPositions[ghostIndex].x,
-                                         ghostSpawnPositions[ghostIndex].y);
-                        e->resetFearState();
-                        // Optional: Add score for eating ghost
-                        increaseScore(200);
-                        //geef respawn door OF teleporteer terug naar midden
-                    } //halloooo - Marie :)
-                }
-
+                // Don't check ghost collision here, return false for all others
                 return false;
             }),
         entities.end()
     );
+
+    // --- Ghost Collision/Eating Loop ---
+    for (auto& e : entities) {
+        char eSym = e->getSymbol();
+        // Check collision only for ghosts
+        if ((eSym == 'G' || eSym == 'R' || eSym == 'B') && pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f)) {
+
+            // Ghost Eating Logic
+            if (fearmode && e->getFearState() && !e->getHasBeenEaten() && !ateGhostThisFrame) {
+
+                int ghostIndex = Random::getInstance().getInt(0, 3);
+                e->setPosition(ghostSpawnPositions[ghostIndex].x, ghostSpawnPositions[ghostIndex].y);
+
+                // Reset state AFTER teleporting
+                e->resetFearState();
+                e->setHasBeenEaten(true);
+
+                increaseScore(200); // Score increase
+                ateGhostThisFrame = true; // Prevents eating another ghost this frame
+                // You can add logic here to ensure the score multiplier increases for subsequent ghosts if desired.
+
+            } //halloooo - Marie :)
+            // Pacman Dies Logic
+            else if (!fearmode || e->getHasBeenEaten()) {
+                pacmanlives = pacmanlives - 1;
+                std::cout << "Lives: " << pacmanlives << std::endl;
+            }
+        }
+    }
 }
 
 bool World::tryMoveGhost(Ghost* ghost, char dir) const {
@@ -236,8 +256,8 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-            bool overlapX = std::fabs(newX - wallX) + 0.0051 < stepW;
-            bool overlapY = std::fabs(newY - wallY) + 0.0051 < stepH;
+            bool overlapX = std::fabs(newX - wallX) + 0.00501 < stepW;
+            bool overlapY = std::fabs(newY - wallY) + 0.00501 < stepH;
             if (overlapX && overlapY)
                 return false;
         }
@@ -362,4 +382,10 @@ void World::setFearModeStart(float timer) {
 }
 void World::increaseScore(int points) {
     score += points;
+}
+int World::getPacmanLives() const{
+    return pacmanlives;
+}
+int World::getScore() const {
+    return score;
 }

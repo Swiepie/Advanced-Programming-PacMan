@@ -20,9 +20,7 @@ public:
         font.loadFromFile("../assets/ARIAL.TTF");
         title.setFont(font);
         title.setString("PAC-MAN PROJECT\nPress any key to play");
-        title.setCharacterSize(40);
         title.setFillColor(sf::Color::Yellow);
-        title.setPosition(150, 200);
     }
 
     void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;

@@ -56,7 +56,7 @@ public:
     float getChaseDelay() const { return chaseDelay; }
 
     void chooseDirectionFear(World& world, const Pacman& pacman);
-
+    void reverseDirection();
 };
 
 // RedGhost: Locked direction ghost, reconsiders at intersections

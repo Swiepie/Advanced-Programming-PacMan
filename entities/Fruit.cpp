@@ -12,6 +12,5 @@ void Fruit::onCollect(World& world) {
     std::cout << "Fruit collected at (" << position.x << ", " << position.y << ")\n";
     world.setFearMode(true);
     world.setFearModeStart(Stopwatch::getInstance().GetElapsedTime());
-    // eventueel score verhogen:
-    // pacman.addScore(10);
+    world.increaseScore(worth);
 };

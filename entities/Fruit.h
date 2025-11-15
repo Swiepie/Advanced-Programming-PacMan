@@ -10,6 +10,8 @@
 #include "../World.h"
 
 class Fruit : public Entity {
+private:
+	int worth;
 public:
 	Fruit(float x, float y) : Entity(x, y, 'f') {}
 

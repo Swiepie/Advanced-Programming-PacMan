@@ -61,8 +61,11 @@ void Ghost::recordMoveTime(float currentTime) {
     lastMoveTime = currentTime;
 }
 void Ghost::resetFearState() {
+
     inFearMode = false;
     speed = speedSave;
+    reverseDirection();
+
 }
 void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
     float targetX = pacman.getPosition().x;
@@ -413,5 +416,15 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
     if (!bestDirs.empty()) {
         int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
         direction = bestDirs[idx];
+    }
+}
+
+
+void Ghost::reverseDirection() {
+    switch (direction) {
+        case 'N': direction = 'Z'; break;
+        case 'Z': direction = 'N'; break;
+        case 'W': direction = 'O'; break;
+        case 'O': direction = 'W'; break;
     }
 }

@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include "../renderer/WorldView.h"
 #include "MenuState.h"
+#include "FinishState.h"
 #include <SFML/Window/Event.hpp>
 #include "../entities/Pacman.h"
 #include "../Stopwatch.h"

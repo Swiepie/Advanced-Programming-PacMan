@@ -24,9 +24,7 @@ public:
         font.loadFromFile("../assets/ARIAL.TTF");
         title.setFont(font);
         title.setString("PAUSED\nPress SPACE to start");
-        title.setCharacterSize(40);
         title.setFillColor(sf::Color::Red);
-        title.setPosition(150, 200);
     }
 
     void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;

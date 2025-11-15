@@ -28,6 +28,10 @@ void Game::run() {
             if (event.type == sf::Event::Resized) {
                 windowWidth = event.size.width;
                 windowHeight = event.size.height;
+
+                // Update de actieve view zodat deze de nieuwe pixelgrootte gebruikt
+                sf::FloatRect visibleArea(0, 0, windowWidth, windowHeight);
+                window.setView(sf::View(visibleArea));
             }
         }
 

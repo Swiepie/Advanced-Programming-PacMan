@@ -22,6 +22,7 @@ protected:
     coord position;
     char symbol;
     char direction;
+    bool hasBeenEaten = false;
 public:
 
     Entity(float x, float y, char sym) : position{x, y}, symbol(sym) {}
@@ -38,6 +39,9 @@ public:
     virtual void onCollect(World& world);
 
     virtual char getDirection() const { return direction; }
+
+    bool getHasBeenEaten() const { return hasBeenEaten; }
+    void setHasBeenEaten(bool val) { hasBeenEaten = val; }
 
     virtual void update(float deltaTime, World& world, const Pacman& pacman) {}
     virtual void resetFearState() {}

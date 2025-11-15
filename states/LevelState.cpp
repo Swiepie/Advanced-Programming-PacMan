@@ -8,7 +8,10 @@
 void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
     if (event.type == sf::Event::Closed)
         window.close();
-
+    if (world.getPacmanLives()<=-100000) {
+        int score = world.getScore(); // of LevelState->getScore()
+        manager.pushState(std::make_unique<FinishState>(score));
+    }
     else if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape) {
             manager.pushState(std::make_unique<PausedState>()); // back to menu

@@ -37,6 +37,7 @@ private:
     int coinCount = 0;
     int score = 0;
     std::vector<coord> ghostSpawnPositions;
+    int pacmanlives = 3;
 public:
 
     bool loadMap(const std::string& filename);
@@ -61,6 +62,10 @@ public:
     bool canMoveInDirection(const Ghost* ghost, char dir) const;
     bool isAtIntersection(const Ghost* ghost) const;
     bool isAtDeadEnd(const Ghost* ghost) const;
+
+    int getPacmanLives() const;
+
+    int getScore() const;
 
 };
 
