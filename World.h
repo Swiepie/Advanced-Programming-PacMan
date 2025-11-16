@@ -66,7 +66,7 @@ public:
     int getPacmanLives() const;
 
     int getScore() const;
-
+    bool isOnTileCenter(const Entity* e) const;
 };
 
 

@@ -154,7 +154,7 @@ void PinkGhostView::chooseTexture(char direction){
 	setTexture(pacmanTexture);
 	if (readyFrame(deltaTime)) {
 		mouthOpen = !mouthOpen;
-		std::cout << direction << std::endl;
+		//std::cout << direction << std::endl;
 		sf::IntRect rect;
 		switch (direction) {
 			case 'N': rect = mouthOpen ? sf::IntRect(64, 80, 16, 16)

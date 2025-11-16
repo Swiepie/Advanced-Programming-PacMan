@@ -389,3 +389,20 @@ int World::getPacmanLives() const{
 int World::getScore() const {
     return score;
 }
+
+bool World::isOnTileCenter(const Entity* e) const {
+    float stepW = 2.f / width;
+    float stepH = 2.f / height;
+
+    float x = e->getPosition().x;
+    float y = e->getPosition().y;
+
+    // afstand tot dichtsbijzijnde tilecenter
+    float centerX = std::round(x / stepW) * stepW;
+    float centerY = std::round(y / stepH) * stepH;
+
+    float dx = std::fabs(centerX - x);
+    float dy = std::fabs(centerY - y);
+
+    return (dx < 0.001f && dy < 0.001f);
+}
