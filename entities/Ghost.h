@@ -31,7 +31,7 @@ protected:
 public:
     Ghost(float x, float y, char sym = 'G', float delay = 0.0f)
         : Entity(x, y, sym), chaseDelay(delay) {}
-
+    void softSnapToTileCenter(World& world) override;
     void update(float deltaTime, World& world, const Pacman& pacman) override;
     double getSpeed() const;
     void setSpeed(double spd);

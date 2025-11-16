@@ -47,7 +47,7 @@ public:
     virtual void resetFearState() {}
     virtual void setFearState(bool state)  {}
     virtual bool getFearState() const { return false; }
-
+    virtual void softSnapToTileCenter(World& world) {}
 };
 
 

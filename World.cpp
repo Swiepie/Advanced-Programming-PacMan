@@ -107,6 +107,7 @@ void World::update(float deltaTime) {
             // **reset fear status for all ghosts**
             for (auto& e : entities) {
                 e->resetFearState();
+                e->softSnapToTileCenter(*this);
                 e->setHasBeenEaten(false); // reset eaten state when fear ends
 
             }
@@ -256,8 +257,9 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-            bool overlapX = std::fabs(newX - wallX) + 0.00501 < stepW;
-            bool overlapY = std::fabs(newY - wallY) + 0.00501 < stepH;
+            // *** HIER WAS DE FOUT ***
+            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW; // AANGEPAST van 0.00501
+            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH; // AANGEPAST van 0.00501
             if (overlapX && overlapY)
                 return false;
         }
@@ -275,22 +277,23 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     float speed = ghost->getSpeed();
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -0.1 * speed * stepH; break;
-        case 'Z': dy =  0.1 * speed * stepH; break;
-        case 'W': dx = -0.1 * speed * stepW; break;
-        case 'O': dx =  0.1 * speed * stepW; break;
+        case 'N': dy = -0.1 * speed; break; // AANGEPAST
+        case 'Z': dy =  0.1 * speed; break; // AANGEPAST
+        case 'W': dx = -0.1 * speed; break; // AANGEPAST
+        case 'O': dx =  0.1 * speed; break; // AANGEPAST
         default: return false;
     }
 
-    float newX = ghost->getPosition().x + dx;
-    float newY = ghost->getPosition().y + dy;
+    float newX = ghost->getPosition().x + dx * stepW; // AANGEPAST
+    float newY = ghost->getPosition().y + dy * stepH; // AANGEPAST
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW;
-            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH;
+            // Gebruik dezelfde botsingsmarge als tryMoveGhost
+            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW; // AANGEPAST
+            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH; // AANGEPAST
             if (overlapX && overlapY)
                 return false;
         }
@@ -404,5 +407,5 @@ bool World::isOnTileCenter(const Entity* e) const {
     float dx = std::fabs(centerX - x);
     float dy = std::fabs(centerY - y);
 
-    return (dx < 0.001f && dy < 0.001f);
+    return (dx < 0.0001f && dy < 0.0001f);
 }
