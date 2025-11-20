@@ -8,7 +8,7 @@
 void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
     if (event.type == sf::Event::Closed)
         window.close();
-    if (world.getPacmanLives()<=- 1000 ) {
+    if (world.getPacmanLives() <=- 0 ) {
         int score = world.getScore(); // of LevelState->getScore()
         manager.pushState(std::make_unique<FinishState>(score));
     }

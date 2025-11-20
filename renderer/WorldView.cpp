@@ -31,20 +31,21 @@ sf::View getWorldView(unsigned int windowWidth, unsigned int windowHeight) {
 
 void WorldView::render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight) {
     // maak de view
-    pacmanview.chooseTexture(world.getPacman()->getDirection());
+    float time = world.getTime();
+    pacmanview.chooseTexture(world.getPacman()->getDirection(), time);
     for (auto& e : world.getEntities()) {
         if (e->getSymbol() == 'R') {
-            redGhostview.chooseTexture(e->getDirection());
+            redGhostview.chooseTexture(e->getDirection(), time);
         }
         if (e->getSymbol() == 'B') {
-            pinkghostview.chooseTexture(e->getDirection());
+            pinkghostview.chooseTexture(e->getDirection(), time);
         }
         if (e->getSymbol() == 'G') {
-            blueghostview.chooseTexture(e->getDirection());
+            blueghostview.chooseTexture(e->getDirection(), time);
         }
     }
 
-    fearghostview.chooseTexture();
+    fearghostview.chooseTexture(time);
 
 
     sf::View view = getWorldView(windowWidth, windowHeight);

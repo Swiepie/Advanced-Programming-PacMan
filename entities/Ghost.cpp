@@ -5,7 +5,7 @@
 #include "Ghost.h"
 
 void Ghost::update(float deltaTime, World& world, const Pacman& pacman) {
-    timeAlive = deltaTime;
+    timeAlive = timeAlive + deltaTime;
     // Start chasing after delay
     if (!chasing && timeAlive >= chaseDelay) {
         chasing = true;
@@ -82,8 +82,6 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
         default:  oppositeDir = '?'; break;
     }
 
-    // ✅ REMOVED THE EARLY RETURN - Always reconsider direction in fear mode!
-
     // 1️⃣ Find all viable directions except opposite
     std::vector<char> viableDirs;
     for (char d : {'N', 'Z', 'W', 'O'}) {
@@ -93,7 +91,7 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
         }
     }
 
-    // 2️⃣ If stuck, allow reversing
+    // 2️⃣ If stuck (dead end), allow reversing
     if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
         viableDirs.push_back(oppositeDir);
     }
@@ -137,22 +135,20 @@ RedGhost::RedGhost(float x, float y)
     : Ghost(x, y, 'R', 0.0f), lockedDirection('N') {
     lockedDirection = Random::getInstance().getRandomDirection();
     setDirection(lockedDirection);
+    setSpeed(speed);
 }
 
 void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
-    timeAlive = deltaTime;
-    if (!readyToMove(timeAlive)) return;
-    recordMoveTime(timeAlive); // <-- **FIX DEEL 1: Reset timer ALTIJD**
-
+    timeAlive = timeAlive + deltaTime;
     if (world.getFearMode() && inFearMode) { // FEAR MODE
         fearTime = world.getFearModeTimer();
         speed = fearSpeed;
 
-        // **FIX DEEL 2: Check VOORDAT je beweegt**
-        if (world.isAtIntersection(this) || world.isAtDeadEnd(this) || !world.canMoveInDirection(this, direction)) {
+        // Only reconsider direction at intersections or when blocked
+        if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
             chooseDirectionFear(world, pacman);
         }
-        world.tryMoveGhost(this, direction); // Probeer te bewegen
+        world.tryMoveGhost(this, direction);
         return;
     }
 
@@ -163,7 +159,7 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     }
     if (!chasing) return;
 
-    // Decision logic
+    // Decision logic - only at intersections or when blocked
     if (world.isAtIntersection(this)) {
         if (Random::getInstance().getInt(0, 1) == 1) {
             std::vector<char> viableDirs;
@@ -178,15 +174,34 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
             }
         }
     }
-    // **FIX DEEL 2: Check VOORDAT je beweegt**
     else if (!world.canMoveInDirection(this, lockedDirection)) {
-        // Als we vastlopen (niet op kruispunt), vind een nieuwe richting
+        // If blocked (not at intersection), find a new direction
         std::vector<char> viableDirs;
+        std::cout << "stucc" << std::endl;
+
+        // Get opposite direction
+        char oppositeDir;
+        switch (lockedDirection) {
+            case 'N': oppositeDir = 'Z'; break;
+            case 'Z': oppositeDir = 'N'; break;
+            case 'W': oppositeDir = 'O'; break;
+            case 'O': oppositeDir = 'W'; break;
+            default:  oppositeDir = '?'; break;
+        }
+
+        // Try all directions except opposite first
         for (char d : {'N', 'Z', 'W', 'O'}) {
-            if (world.canMoveInDirection(this, d)) {
+            if (d != oppositeDir && world.canMoveInDirection(this, d)) {
                 viableDirs.push_back(d);
             }
         }
+
+        // If no options, allow reversing (dead end)
+        if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
+            std::cout << "gg" << std::endl;
+            viableDirs.push_back(oppositeDir);
+        }
+
         if (!viableDirs.empty()) {
             int idx = Random::getInstance().getInt(0, (int)viableDirs.size() - 1);
             lockedDirection = viableDirs[idx];
@@ -194,7 +209,7 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     }
 
     setDirection(lockedDirection);
-    world.tryMoveGhost(this, direction); // Probeer te bewegen
+    world.tryMoveGhost(this, direction);
 }
 
 void RedGhost::chooseDirection(const Pacman& pacman) {
@@ -208,22 +223,21 @@ void RedGhost::chooseDirection(const Pacman& pacman) {
 BlueGhost::BlueGhost(float x, float y, float delay)
     : Ghost(x, y, 'B', delay) {
     setDirection(Random::getInstance().getRandomDirection());
+    setSpeed(speed);
 }
 
 void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
-    timeAlive = deltaTime;
-    if (!readyToMove(timeAlive)) return;
-    recordMoveTime(timeAlive); // <-- **FIX DEEL 1: Reset timer ALTIJD**
+    timeAlive = timeAlive + deltaTime;
 
     if (world.getFearMode() && inFearMode) { // FEAR MODE
         fearTime = world.getFearModeTimer();
         speed = fearSpeed;
 
-        // **FIX DEEL 2: Check VOORDAT je beweegt**
-        if (world.isAtIntersection(this) || world.isAtDeadEnd(this) || !world.canMoveInDirection(this, direction)) {
+        // Only reconsider at intersections or when blocked
+        if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
             chooseDirectionFear(world, pacman);
         }
-        world.tryMoveGhost(this, direction); // Probeer te bewegen
+        world.tryMoveGhost(this, direction);
         return;
     }
 
@@ -234,13 +248,12 @@ void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     }
     if (!chasing) return;
 
-    // Decision logic
-    // **FIX DEEL 2: Check VOORDAT je beweegt**
-    if (world.isAtIntersection(this) || world.isAtDeadEnd(this) || !world.canMoveInDirection(this, direction)) {
+    // Decision logic - only at intersections or when blocked
+    if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
         chooseDirection(world, pacman);
     }
 
-    world.tryMoveGhost(this, direction); // Probeer te bewegen
+    world.tryMoveGhost(this, direction);
 }
 
 
@@ -252,7 +265,7 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
     float targetX = pPos.x;
     float targetY = pPos.y;
 
-    // Move target 4 tiles ahead in Pacman's direction
+    // Move target 2 tiles ahead in Pacman's direction
     float stepW = 2.0f / world.getWidth();
     float stepH = 2.0f / world.getHeight();
 
@@ -262,6 +275,7 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
         case 'W': targetX -= 2 * stepW; break;
         case 'O': targetX += 2 * stepW; break;
     }
+
     char oppositeDir;
     switch (direction) {
         case 'N': oppositeDir = 'Z'; break;
@@ -271,24 +285,23 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
         default:  oppositeDir = '?'; break;
     }
 
-    // Vind alle mogelijke richtingen, behalve de omgekeerde
+    // Find all possible directions, except opposite
     std::vector<char> viableDirs;
     for (char d : {'N', 'Z', 'W', 'O'}) {
-        if (d == oppositeDir) continue; // vermijd onmiddellijke omkering
+        if (d == oppositeDir) continue; // avoid immediate reversal
         if (world.canMoveInDirection(this, d)) {
             viableDirs.push_back(d);
         }
     }
 
-    // Als we helemaal vastzitten (of alleen achteruit kunnen), mogen we omkeren
+    // If completely stuck (or can only go backward), allow reversing
     if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
         viableDirs.push_back(oppositeDir);
     }
-    // Als we nog steeds niks hebben (zeer zeldzaam, 1x1 box?)
-    if (viableDirs.empty()) {
-        return; // Geef het op, we kunnen nergens heen
-    }
 
+    if (viableDirs.empty()) {
+        return; // Can't move anywhere
+    }
 
     // Choose direction that minimizes Manhattan distance to target
     float bestDist = 1e9;
@@ -310,7 +323,7 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
         if (dist < bestDist) {
             bestDist = dist;
             bestDirs = {d};
-        } else if (std::fabs(dist - bestDist) < 0.0001f) { // floating point comparison
+        } else if (std::fabs(dist - bestDist) < 0.0001f) {
             bestDirs.push_back(d);
         }
     }
@@ -328,24 +341,21 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
 PinkGhost::PinkGhost(float x, float y, float delay)
     : Ghost(x, y, 'G', delay) {
     setDirection(Random::getInstance().getRandomDirection());
+    setSpeed(speed);
 }
 
 void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
-    timeAlive = deltaTime;
-    if (!readyToMove(timeAlive)) return;
-    recordMoveTime(timeAlive); // <-- **FIX DEEL 1: Reset timer ALTIJD**
+    timeAlive = timeAlive + deltaTime;
 
     if (world.getFearMode() && inFearMode) { // FEAR MODE
         fearTime = world.getFearModeTimer();
         speed = fearSpeed;
 
-        std::cout << position.x << ", " << position.y << "\n";
-
-        // **FIX DEEL 2: Check VOORDAT je beweegt**
-        if (world.isAtIntersection(this) || world.isAtDeadEnd(this) || !world.canMoveInDirection(this, direction)) {
+        // Only reconsider at intersections or when blocked
+        if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
             chooseDirectionFear(world, pacman);
         }
-        world.tryMoveGhost(this, direction); // Probeer te bewegen
+        world.tryMoveGhost(this, direction);
         return;
     }
 
@@ -356,13 +366,12 @@ void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     }
     if (!chasing) return;
 
-    // Decision logic
-    // **FIX DEEL 2: Check VOORDAT je beweegt**
-    if (world.isAtIntersection(this)|| world.isAtDeadEnd(this) || !world.canMoveInDirection(this, direction)) {
+    // Decision logic - only at intersections or when blocked
+    if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
         chooseDirection(world, pacman);
     }
 
-    world.tryMoveGhost(this, direction); // Probeer te bewegen
+    world.tryMoveGhost(this, direction);
 }
 
 void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
@@ -372,7 +381,7 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
     float stepW = 2.0f / world.getWidth();
     float stepH = 2.0f / world.getHeight();
 
-    // Bepaal de omgekeerde richting (waar we vandaan kwamen)
+    // Determine opposite direction
     char oppositeDir;
     switch (direction) {
         case 'N': oppositeDir = 'Z'; break;
@@ -382,25 +391,25 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
         default:  oppositeDir = '?'; break;
     }
 
-    // Vind alle mogelijke richtingen, behalve de omgekeerde
+    // Find all possible directions, except opposite
     std::vector<char> viableDirs;
     for (char d : {'N', 'Z', 'W', 'O'}) {
-        if (d == oppositeDir) continue; // vermijd onmiddellijke omkering
+        if (d == oppositeDir) continue; // avoid immediate reversal
         if (world.canMoveInDirection(this, d)) {
             viableDirs.push_back(d);
         }
     }
 
-    // Als we helemaal vastzitten, mogen we omkeren
+    // If completely stuck, allow reversing
     if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
         viableDirs.push_back(oppositeDir);
     }
-    // Als we nog steeds niks hebben (zeer zeldzaam, 1x1 box?)
+
     if (viableDirs.empty()) {
-        return; // Geef het op, we kunnen nergens heen
+        return; // Can't move anywhere
     }
 
-    // Kies richting die Manhattan-afstand minimaliseert
+    // Choose direction that minimizes Manhattan distance
     float bestDist = 1e9;
     std::vector<char> bestDirs;
 
@@ -425,7 +434,7 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
         }
     }
 
-    // Kies een willekeurige richting uit de beste opties
+    // Choose random direction from best options
     if (!bestDirs.empty()) {
         int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
         direction = bestDirs[idx];
@@ -446,18 +455,18 @@ void Ghost::softSnapToTileCenter(World& world) {
     float stepW = 2.f / world.getWidth();
     float stepH = 2.f / world.getHeight();
 
-    // Bepaal tegel-index
+    // Determine tile index
     int tileX = std::floor(position.x / stepW);
     int tileY = std::floor(position.y / stepH);
 
-    // Bovenlinkse hoek van die tegel
+    // Top-left corner of that tile
     float snapX = tileX * stepW;
     float snapY = tileY * stepH;
 
-    // Drempel voor soft-snap
+    // Threshold for soft-snap
     float threshold = 0.15f * std::min(stepW, stepH);
 
-    // Alleen snappen als hij al dichtbij genoeg zit
+    // Only snap if already close enough
     if (std::fabs(position.x - snapX) < threshold &&
         std::fabs(position.y - snapY) < threshold)
     {

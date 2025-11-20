@@ -19,6 +19,7 @@ class Pacman;
 class World;
 class Entity {
 protected:
+    float moveCooldown;
     coord position;
     char symbol;
     char direction;
@@ -48,6 +49,9 @@ public:
     virtual void setFearState(bool state)  {}
     virtual bool getFearState() const { return false; }
     virtual void softSnapToTileCenter(World& world) {}
+    virtual void setMoveCooldown(float cooldown) {
+        moveCooldown = cooldown;
+    }
 };
 
 

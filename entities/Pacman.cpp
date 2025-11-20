@@ -43,3 +43,8 @@ bool Pacman::readyToMove(float currentTime) const {
 void Pacman::recordMoveTime(float currentTime) {
     lastMoveTime = currentTime;
 }
+
+float Pacman::getmoveCooldown() const {
+    return moveCooldown;
+}
+

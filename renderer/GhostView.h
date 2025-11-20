@@ -24,7 +24,7 @@ public:
 	GhostView();
 
 	void setTexture(const sf::Texture& texture);
-	virtual void chooseTexture(char direction);
+	virtual void chooseTexture(char direction, float time);
 	bool readyFrame(float currentTime) const;
 	void recordFrameTime(float currentTime);
 	sf::Sprite getSprite();
@@ -33,24 +33,24 @@ public:
 class RedGhostView : public GhostView {
 public:
 	RedGhostView();
-  	void chooseTexture(char direction) override;
+  	void chooseTexture(char direction, float time) override;
 };
 
 class BlueGhostView : public GhostView {
 public:
 	BlueGhostView();
-	void chooseTexture(char direction) override;
+	void chooseTexture(char direction, float time) override;
 };
 
 class PinkGhostView : public GhostView {
 public:
 	PinkGhostView();
-	void chooseTexture(char direction) override;
+	void chooseTexture(char direction, float time) override;
 
 };
 class FearGhostView : public GhostView {
 	public:
 	FearGhostView();
-	void chooseTexture();
+	void chooseTexture(float time);
 };
 #endif //GHOSTVIEW_H

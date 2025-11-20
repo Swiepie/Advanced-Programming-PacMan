@@ -43,10 +43,9 @@ FearGhostView::FearGhostView() {
 void GhostView::setTexture(const sf::Texture& texture) {
 	pacmanTexture = texture;
 }
-void GhostView::chooseTexture(char direction){
-	float deltaTime = Stopwatch::getInstance().GetElapsedTime();
+void GhostView::chooseTexture(char direction, float time){
 
-	if (readyFrame(deltaTime)) {
+	if (readyFrame(time)) {
 		mouthOpen = !mouthOpen;
 		sf::IntRect rect;
 		switch (direction) {
@@ -65,7 +64,7 @@ void GhostView::chooseTexture(char direction){
 		}
 
 		ghostSprite.setTextureRect(rect);
-		recordFrameTime(deltaTime);
+		recordFrameTime(time);
 	}
 }
 
@@ -81,8 +80,7 @@ void GhostView::recordFrameTime(float currentTime) {
 	lastFrameTime = currentTime;
 }
 
-void RedGhostView::chooseTexture(char direction){
-	float deltaTime = Stopwatch::getInstance().GetElapsedTime();
+void RedGhostView::chooseTexture(char direction,  float time){
 
 	sf::Texture pacmanTexture;
 	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
@@ -90,7 +88,7 @@ void RedGhostView::chooseTexture(char direction){
 	}
 
 	setTexture(pacmanTexture);
-	if (readyFrame(deltaTime)) {
+	if (readyFrame(time)) {
 		mouthOpen = !mouthOpen;
 		sf::IntRect rect;
 		switch (direction) {
@@ -109,11 +107,10 @@ void RedGhostView::chooseTexture(char direction){
 		}
 
 		ghostSprite.setTextureRect(rect);
-		recordFrameTime(deltaTime);
+		recordFrameTime(time);
 	}
 }
-void BlueGhostView::chooseTexture(char direction){
-	float deltaTime = Stopwatch::getInstance().GetElapsedTime();
+void BlueGhostView::chooseTexture(char direction,  float time){
 
 	sf::Texture pacmanTexture;
 	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
@@ -121,7 +118,7 @@ void BlueGhostView::chooseTexture(char direction){
 	}
 
 	setTexture(pacmanTexture);
-	if (readyFrame(deltaTime)) {
+	if (readyFrame(time)) {
 		mouthOpen = !mouthOpen;
 		sf::IntRect rect;
 		switch (direction) {
@@ -140,11 +137,10 @@ void BlueGhostView::chooseTexture(char direction){
 		}
 
 		ghostSprite.setTextureRect(rect);
-		recordFrameTime(deltaTime);
+		recordFrameTime(time);
 	}
 }
-void PinkGhostView::chooseTexture(char direction){
-	float deltaTime = Stopwatch::getInstance().GetElapsedTime();
+void PinkGhostView::chooseTexture(char direction,  float time){
 
 	sf::Texture pacmanTexture;
 	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
@@ -152,7 +148,7 @@ void PinkGhostView::chooseTexture(char direction){
 	}
 
 	setTexture(pacmanTexture);
-	if (readyFrame(deltaTime)) {
+	if (readyFrame(time)) {
 		mouthOpen = !mouthOpen;
 		//std::cout << direction << std::endl;
 		sf::IntRect rect;
@@ -172,12 +168,11 @@ void PinkGhostView::chooseTexture(char direction){
 		}
 
 		ghostSprite.setTextureRect(rect);
-		recordFrameTime(deltaTime);
+		recordFrameTime(time);
 	}
 }
 
-void FearGhostView::chooseTexture() {
-	float deltaTime = Stopwatch::getInstance().GetElapsedTime();
+void FearGhostView::chooseTexture(float time) {
 
 	sf::Texture pacmanTexture;
 	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
@@ -185,13 +180,13 @@ void FearGhostView::chooseTexture() {
 	}
 
 	setTexture(pacmanTexture);
-	if (readyFrame(deltaTime)) {
+	if (readyFrame(time)) {
 		mouthOpen = !mouthOpen;
 		sf::IntRect rect;
 		 rect = mouthOpen ? sf::IntRect(128, 64, 16, 16)
 									   : sf::IntRect(144, 64, 16, 16);
 
 		ghostSprite.setTextureRect(rect);
-		recordFrameTime(deltaTime);
+		recordFrameTime(time);
 	}
 }

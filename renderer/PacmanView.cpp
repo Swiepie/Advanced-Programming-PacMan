@@ -15,12 +15,12 @@ PacmanView::PacmanView() {
 void PacmanView::setTexture(const sf::Texture& texture) {
   pacmanTexture = texture;
 }
-void PacmanView::chooseTexture(char direction){
-  float deltaTime = Stopwatch::getInstance().GetElapsedTime();
+void PacmanView::chooseTexture(char direction, float time){
 
 
   setTexture(pacmanTexture);
-  if (readyFrame(deltaTime)) {
+
+  if (readyFrame(time)) {
     mouthOpen = !mouthOpen;
     sf::IntRect rect;
     switch (direction) {
@@ -39,7 +39,7 @@ void PacmanView::chooseTexture(char direction){
     }
 
     pacmanSprite.setTextureRect(rect);
-    recordFrameTime(deltaTime);
+    recordFrameTime(time);
   }
 }
 

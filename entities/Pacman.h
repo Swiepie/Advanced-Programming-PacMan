@@ -13,9 +13,8 @@ class Pacman : public Entity {
 private:
     char direction;
     char bufferdirection;
-    double moveCooldown = 1.0/60;
     float moveTimer = 0.0f;
-    double speed = 1;
+    double speed = 4;
     float lastMoveTime = 0.0f;
 
 
@@ -36,6 +35,7 @@ public:
     void applyBufferdirection();
     char getDirection() const override;
     void setDirection(char direct);
+    float getmoveCooldown() const;
 };
 
 

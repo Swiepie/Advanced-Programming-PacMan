@@ -30,14 +30,14 @@ bool World::loadMap(const std::string& filename) {
     entities.clear();
     int i = 1;
     for (int row = 0; row < numRows; ++row) {
-        for (int col = 0; col < numCols; ++col) {
+        for ( int col = 0; col < numCols; ++col) {
             char c = lines[row][col];
 
-            float x = -1.0f + col * tileWidth;
-            float y = -1.0f + row * tileHeight;
-
+            float x = -1.0f + floor(col) * tileWidth;
+            float y = -1.0f + floor(row) * tileHeight;
             switch (c) {
                 case '#':
+                    // voeg een loop toe die alle kruisunten vindt/bochten in een vector en maak dan een nieuwe functie die als een object op een kruisount komt en dicht genoeg bij het hoekpunt is er gewoon naartoe teleporten, maar enkel als er al een input buffer is ingevoerd om af de road te gaan.
                     entities.push_back(std::make_unique<Wall>(x, y));
                 break;
                 case '0':
@@ -97,11 +97,14 @@ void World::printMap() const {
 }
 
 void World::update(float deltaTime) {
+    totTime += deltaTime;
+    deltaT = deltaTime;
+
     for (auto& e : entities) {
         e->update(deltaTime, *this, *pacman);
     }
     if (fearmode) {
-        if (fearmodeTimer + fearmodeStart <= deltaTime) {
+        if (fearmodeTimer + fearmodeStart <= totTime) {
             fearmode = false;
 
             // **reset fear status for all ghosts**
@@ -114,10 +117,8 @@ void World::update(float deltaTime) {
             std::cout << "Fear mode ended" << std::endl;
         }
     }
-    pacman->addMoveTime(deltaTime);
 
     //is het al tijd om opnieuw te bewegen?
-    if (pacman->readyToMove(deltaTime)) {
         char buffered = pacman->getBufferdirection();
         bool moved = false;
 
@@ -134,9 +135,7 @@ void World::update(float deltaTime) {
         if (moved) {
             //slaag de tijd op van laatste movement
             checkCollisions();
-            pacman->recordMoveTime(deltaTime);
         }
-    }
 
 }
 
@@ -156,12 +155,13 @@ Pacman* World::getPacman() const{
 bool World::tryMove(Pacman* pacman, char dir) const {
     if (!pacman) return false;
     float speed = pacman->getSpeed();
+    float cd = deltaT;
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -0.1*speed; break;
-        case 'Z': dy = 0.1*speed;  break;
-        case 'W': dx = -0.1*speed; break;
-        case 'O': dx = 0.1*speed;  break;
+        case 'N': dy = -1*speed*cd; break;
+        case 'Z': dy = 1*speed*cd;  break;
+        case 'W': dx = -1*speed*cd; break;
+        case 'O': dx = 1*speed*cd;  break;
         default: return false;
     }
 
@@ -170,18 +170,43 @@ bool World::tryMove(Pacman* pacman, char dir) const {
     float newX = pacman->getPosition().x + dx * stepW;
     float newY = pacman->getPosition().y + dy * stepH;
 
+    // Constante collision marge
+    const float COLLISION_MARGIN = 0.965f;
+
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
 
-            // AABB overlap check (center-based coordinates)
-            bool overlapX = std::fabs(newX - wallX) + 0.0051 < stepW;
-            bool overlapY = std::fabs(newY - wallY) + 0.0051 < stepH;
+            float distX = std::fabs(newX - wallX);
+            float distY = std::fabs(newY - wallY);
+
+            bool overlapX = distX < stepW * COLLISION_MARGIN;
+            bool overlapY = distY < stepH * COLLISION_MARGIN;
+
             if (overlapX && overlapY)
                 return false; // geblokkeerd
         }
     }
+
+    const float SNAP_THRESHOLD = 0.65f;
+
+    if (std::fabs(dx) > 0.001f) { // Horizontale beweging
+        // Snap Y naar dichtstbijzijnde grid lijn
+        float gridY = std::round((newY + 1.0f) / stepH) * stepH - 1.0f;
+        if (std::fabs(newY - gridY) < stepH * SNAP_THRESHOLD) {
+            newY = gridY;
+        }
+    }
+
+    if (std::fabs(dy) > 0.001f) { // Verticale beweging
+        // Snap X naar dichtstbijzijnde grid lijn
+        float gridX = std::round((newX + 1.0f) / stepW) * stepW - 1.0f;
+        if (std::fabs(newX - gridX) < stepW * SNAP_THRESHOLD) {
+            newX = gridX;
+        }
+    }
+
     pacman->setPosition(newX, newY);
     return true;
 }
@@ -238,12 +263,13 @@ void World::checkCollisions() {
 bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     if (!ghost) return false;
     float speed = ghost->getSpeed();
+    float cd = deltaT;
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -0.1 * speed; break;
-        case 'Z': dy =  0.1 * speed; break;
-        case 'W': dx = -0.1 * speed; break;
-        case 'O': dx =  0.1 * speed; break;
+        case 'N': dy = -1 * speed * cd; break;
+        case 'Z': dy =  1 * speed * cd; break;
+        case 'W': dx = -1 * speed * cd; break;
+        case 'O': dx =  1 * speed * cd; break;
         default: return false;
     }
 
@@ -252,18 +278,42 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     float newX = ghost->getPosition().x + dx * stepW;
     float newY = ghost->getPosition().y + dy * stepH;
 
-    // Botsing met muren
+    // ✅ COLLISION DETECTION TOEVOEGEN
+    const float COLLISION_MARGIN = 0.965f; // Zelfde als Pacman
+
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-            // *** HIER WAS DE FOUT ***
-            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW; // AANGEPAST van 0.00501
-            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH; // AANGEPAST van 0.00501
+
+            float distX = std::fabs(newX - wallX);
+            float distY = std::fabs(newY - wallY);
+
+            bool overlapX = distX < stepW * COLLISION_MARGIN;
+            bool overlapY = distY < stepH * COLLISION_MARGIN;
+
             if (overlapX && overlapY)
-                return false;
+                return false; // ✅ Geblokkeerd door muur!
         }
     }
+
+    // Grid snap logica
+    const float SNAP_THRESHOLD = 0.15f;
+
+    if (std::fabs(dx) > 0.001f) { // Horizontale beweging
+        float gridY = std::round((newY + 1.0f) / stepH) * stepH - 1.0f;
+        if (std::fabs(newY - gridY) < stepH * SNAP_THRESHOLD) {
+            newY = gridY;
+        }
+    }
+
+    if (std::fabs(dy) > 0.001f) { // Verticale beweging
+        float gridX = std::round((newX + 1.0f) / stepW) * stepW - 1.0f;
+        if (std::fabs(newX - gridX) < stepW * SNAP_THRESHOLD) {
+            newX = gridX;
+        }
+    }
+
     ghost->setPosition(newX, newY);
     return true;
 }
@@ -273,27 +323,51 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     float stepW = 2.0f / width;
     float stepH = 2.0f / height;
 
-    // Use actual ghost speed for checking
-    float speed = ghost->getSpeed();
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -0.1 * speed; break; // AANGEPAST
-        case 'Z': dy =  0.1 * speed; break; // AANGEPAST
-        case 'W': dx = -0.1 * speed; break; // AANGEPAST
-        case 'O': dx =  0.1 * speed; break; // AANGEPAST
+        case 'N': dy = -0.05; break;
+        case 'Z': dy =  0.05; break;
+        case 'W': dx = -0.05; break;
+        case 'O': dx =  0.05; break;
         default: return false;
     }
 
-    float newX = ghost->getPosition().x + dx * stepW; // AANGEPAST
-    float newY = ghost->getPosition().y + dy * stepH; // AANGEPAST
+    // ✅ CORNER CUTTING: Use ghost's actual position OR snapped position for checking
+    float checkX = ghost->getPosition().x;
+    float checkY = ghost->getPosition().y;
+
+    char currentDir = ghost->getDirection();
+    bool changingDirection = (currentDir != dir);
+
+    if (changingDirection) {
+        const float CORNER_CUT_THRESHOLD = 0.05f;
+
+        // If checking horizontal move, use snapped Y
+        if (dir == 'W' || dir == 'O') {
+            float gridY = std::round((checkY + 1.0f) / stepH) * stepH - 1.0f;
+            if (std::fabs(checkY - gridY) < stepH * CORNER_CUT_THRESHOLD) {
+                checkY = gridY;
+            }
+        }
+
+        // If checking vertical move, use snapped X
+        if (dir == 'N' || dir == 'Z') {
+            float gridX = std::round((checkX + 1.0f) / stepW) * stepW - 1.0f;
+            if (std::fabs(checkX - gridX) < stepW * CORNER_CUT_THRESHOLD) {
+                checkX = gridX;
+            }
+        }
+    }
+
+    float newX = checkX + dx * stepW;
+    float newY = checkY + dy * stepH;
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-            // Gebruik dezelfde botsingsmarge als tryMoveGhost
-            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW; // AANGEPAST
-            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH; // AANGEPAST
+            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW;
+            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH;
             if (overlapX && overlapY)
                 return false;
         }
@@ -409,3 +483,14 @@ bool World::isOnTileCenter(const Entity* e) const {
 
     return (dx < 0.0001f && dy < 0.0001f);
 }
+
+void World::setFps(int fp) {
+    fps = fp;
+}
+
+float World::getTime() const {
+    return totTime;
+}
+
+//zorg ervoor dat pacm pacman een constantte stapeenhijd vindt om van tile center naar tile canter te gaan met de snelheid, dit kan adhv modulo, of nog andere dingen.
+//doe dit ook voor de ghosts; zonder det het er glithcy uitziet.

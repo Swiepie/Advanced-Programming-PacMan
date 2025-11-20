@@ -24,6 +24,10 @@
 class Ghost;
 class World {
 private:
+    float totTime = 0;
+    float deltaT = 0.0f;
+    bool movementInitialized = false;
+    int fps = 60;
     bool pacmanIsAlive = true;
     bool fearmode = false;
     float fearmodeTimer = 6;
@@ -67,6 +71,10 @@ public:
 
     int getScore() const;
     bool isOnTileCenter(const Entity* e) const;
+
+    void setFps(int fp);
+
+    float getTime() const;
 };
 
 
