@@ -11,6 +11,6 @@ bool Fruit::isCollectible() const {
 void Fruit::onCollect(World& world) {
     std::cout << "Fruit collected at (" << position.x << ", " << position.y << ")\n";
     world.setFearMode(true);
-    world.setFearModeStart(Stopwatch::getInstance().GetElapsedTime());
+    world.setFearModeStart(world.getTime());
     world.increaseScore(worth);
 };

@@ -15,9 +15,9 @@ class World;
 class Ghost : public Entity {
 protected:
     float moveTimer = 0.0f;
-    double speed = 3;
+    double speed = 2.5;
     double speedSave = 1;
-    double fearSpeed = 0.5;
+    double fearSpeed = 1.5;
     float lastMoveTime = 0.0f;
 
     bool chasing = false;

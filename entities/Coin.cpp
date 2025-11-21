@@ -12,6 +12,4 @@ bool Coin::isCollectible() const {
 
 void Coin::onCollect(World& world) {
     world.increaseScore(worth);
-    // eventueel score verhogen:
-    // pacman.addScore(10);
 };

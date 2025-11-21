@@ -375,35 +375,16 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     return true;
 }
 
-bool World::isAtIntersection(const Ghost* ghost) const {
-    if (!ghost) return false;
+bool World::isAtIntersection(const Ghost* g) const
+{
+    int viable = 0;
+    char dirs[4] = {'N','Z','W','O'};
 
-    char currentDir = ghost->getDirection();
-    int viableMoves = 0;
-    int perpendicularMoves = 0;
+    for (char d : dirs)
+        if (canMoveInDirection(g, d))
+            viable++;
 
-    for (char d : {'N', 'Z', 'W', 'O'}) {
-        if (canMoveInDirection(ghost, d)) {
-            viableMoves++;
-
-            // Check if this is perpendicular to current direction
-            bool perpendicular = false;
-            if ((currentDir == 'N' || currentDir == 'Z') && (d == 'W' || d == 'O')) {
-                perpendicular = true;
-            } else if ((currentDir == 'W' || currentDir == 'O') && (d == 'N' || d == 'Z')) {
-                perpendicular = true;
-            }
-
-            if (perpendicular) {
-                perpendicularMoves++;
-            }
-        }
-    }
-
-    // Intersection if:
-    // - More than 2 viable moves (T-junction or crossroads), OR
-    // - Exactly 2 viable moves with at least one perpendicular option (corner)
-    return (viableMoves > 2) || (viableMoves >= 2 && perpendicularMoves > 0);
+    return viable >= 3;
 }
 
 
