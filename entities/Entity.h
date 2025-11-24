@@ -24,6 +24,9 @@ protected:
     char symbol;
     char direction;
     bool hasBeenEaten = false;
+    coord spawn;
+    bool frozen = false;
+    float respawnTimer;
 public:
 
     Entity(float x, float y, char sym) : position{x, y}, symbol(sym) {}
@@ -52,6 +55,15 @@ public:
     virtual void setMoveCooldown(float cooldown) {
         moveCooldown = cooldown;
     }
+    void setSpawn(float x, float y) { spawn.x = x; spawn.y = y; }
+    void resetToSpawn() { setPosition( spawn.x, spawn.y); }
+    virtual void reset() {
+    }
+    void setFrozen(bool f) { frozen = f; }
+    bool isFrozen() const { return frozen; }
+
+    void setRespawnTimer(float t) { respawnTimer = t; setFrozen(t > 0.f); }
+    void tickRespawnTimer(float dt) { if (respawnTimer > 0.f) { respawnTimer -= dt; if (respawnTimer <= 0.f) { respawnTimer = 0.f; setFrozen(false); } } }
 };
 
 

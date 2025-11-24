@@ -9,7 +9,7 @@ PacmanView::PacmanView() {
     std::cerr << "Failed to load spritesheet" << std::endl;
   }
   pacmanSprite.setTexture(pacmanTexture);
-  pacmanSprite.setTextureRect(sf::IntRect(0, 0, 15, 15));
+  pacmanSprite.setTextureRect(sf::IntRect(30, 0, 15, 15));
 }
 
 void PacmanView::setTexture(const sf::Texture& texture) {
@@ -36,6 +36,7 @@ void PacmanView::chooseTexture(char direction, float time){
       case 'O': rect = mouthOpen ? sf::IntRect(0, 0, 15, 15)
                                  : sf::IntRect(15, 0, 15, 15);
       break;
+      case ' ': rect =  sf::IntRect(30, 0, 15, 15);
     }
 
     pacmanSprite.setTextureRect(rect);

@@ -57,6 +57,12 @@ public:
     void chooseDirectionFear(World& world, const Pacman& pacman);
     void reverseDirection();
     float getMoveCooldown() const { return moveCooldown; }
+    void reset() override{
+        hasBeenEaten = false;
+        inFearMode = false;
+        direction = 'N';     // of hun originele start-richting
+        resetToSpawn();
+    }
 };
 
 // RedGhost: Locked direction ghost, reconsiders at intersections

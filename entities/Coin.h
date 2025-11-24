@@ -17,6 +17,7 @@ public:
 
     void onCollect(World& wprld) override;
 
+
 };
 
 #endif //COIN_H

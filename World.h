@@ -24,24 +24,33 @@
 class Ghost;
 class World {
 private:
+    std::vector<coord> ghostSpawnPositions;
     float totTime = 0;
     float deltaT = 0.0f;
-    bool movementInitialized = false;
+    float fearmodeTimer = 6;
+    float fearmodeStart = 0;
+    float deathTime = 0;
+    float respawnTimer = 1;
+    bool death = false;
     int fps = 60;
     bool pacmanIsAlive = true;
     bool fearmode = false;
-    float fearmodeTimer = 6;
-    float fearmodeStart = 0;
+
     std::vector<std::unique_ptr<Entity>> entities;
     Pacman* pacman = nullptr;
     float tileSize = 32.0f;
     std::vector<std::string> mapData;
+
     int width = 0;
     int height = 0;
+
     int coinCount = 0;
     int score = 0;
-    std::vector<coord> ghostSpawnPositions;
+
     int pacmanlives = 3;
+
+
+    float bfr = 0.08f;
 public:
 
     bool loadMap(const std::string& filename);
@@ -72,9 +81,11 @@ public:
     int getScore() const;
     bool isOnTileCenter(const Entity* e) const;
 
-    void setFps(int fp);
 
     float getTime() const;
+
+    void decreaseCoins();
+    void resetAfterDeath();
 };
 
 

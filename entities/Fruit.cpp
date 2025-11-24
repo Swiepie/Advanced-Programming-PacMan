@@ -13,4 +13,5 @@ void Fruit::onCollect(World& world) {
     world.setFearMode(true);
     world.setFearModeStart(world.getTime());
     world.increaseScore(worth);
+    world.decreaseCoins();
 };

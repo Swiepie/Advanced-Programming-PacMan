@@ -19,7 +19,7 @@ private:
 
 
 public:
-    Pacman(float x, float y) : Entity(x, y, 'P'), direction('O') {}
+    Pacman(float x, float y) : Entity(x, y, 'P'), direction(' ') {}
 
 
     void update(float deltaTime) override;

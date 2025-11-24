@@ -47,37 +47,48 @@ bool World::loadMap(const std::string& filename) {
                 case 'P':{
                     auto p = std::make_unique<Pacman>(x, y);
                     pacman = p.get();
+                    p->setSpawn(x, y);
                     entities.push_back(std::move(p));
+
                     break;
                 }
                 case 'f':
-                    std::cout << "fruitje" << std::endl;
+
                     entities.push_back(std::make_unique<Fruit>(x, y));
+                    coinCount = coinCount + 1;
                 break;
                 case 'G':{
 
                     if (i == 1) {
-                        entities.push_back(std::make_unique<RedGhost>(x, y)); // start meteen
+                        auto g = std::make_unique<RedGhost>(x, y);
+                        g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
+                        entities.push_back(std::move(g));
                         i = i+1;
                         break;
                     }
                     if (i==2) {
-                        entities.push_back(std::make_unique<BlueGhost>(x, y, 0.0f)); // start meteen
+                        auto g = std::make_unique<BlueGhost>(x, y, 0.0f);
+                        g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
+                        entities.push_back(std::move(g));
                         i = i+1;
                         break;
                     }
                     if (i==3) {
-                        entities.push_back(std::make_unique<BlueGhost>(x, y, 5.0f)); // start na 5s
+                        auto g = std::make_unique<BlueGhost>(x, y, 5.0f);
+                        g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
+                        entities.push_back(std::move(g));
                         i = i+1;
                         break;
                     }
                     if (i==4) {
-                        entities.push_back(std::make_unique<PinkGhost>(x, y, 10.0f)); // start na 10s
+                        auto g = std::make_unique<PinkGhost>(x, y, 10.0f);
+                        g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
-                        break;
+                        entities.push_back(std::move(g));
+                        i = i+1;
                     }
                     break;
 
@@ -99,7 +110,12 @@ void World::printMap() const {
 void World::update(float deltaTime) {
     totTime += deltaTime;
     deltaT = deltaTime;
-
+    if (death && totTime < deathTime + respawnTimer) {
+        return;
+    }
+    if (death && totTime > deathTime + respawnTimer ) {
+        death = false;
+    }
     for (auto& e : entities) {
         e->update(deltaTime, *this, *pacman);
     }
@@ -171,7 +187,7 @@ bool World::tryMove(Pacman* pacman, char dir) const {
     float newY = pacman->getPosition().y + dy * stepH;
 
     // Constante collision marge
-    const float COLLISION_MARGIN = 0.965f;
+    const float COLLISION_MARGIN = 0.980f - deltaT;
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
@@ -254,6 +270,7 @@ void World::checkCollisions() {
             // Pacman Dies Logic
             else if (!fearmode || e->getHasBeenEaten()) {
                 pacmanlives = pacmanlives - 1;
+                resetAfterDeath();
                 std::cout << "Lives: " << pacmanlives << std::endl;
             }
         }
@@ -262,14 +279,24 @@ void World::checkCollisions() {
 
 bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     if (!ghost) return false;
+
     float speed = ghost->getSpeed();
     float cd = deltaT;
+
+    // **MIN STAP LOGICA (uit vorige fix)**
+    const float MIN_MOVE_FACTOR = 0.005f;
+    float moveFactor = speed * cd;
+
+    if (moveFactor < MIN_MOVE_FACTOR) {
+        moveFactor = MIN_MOVE_FACTOR;
+    }
+
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -1 * speed * cd; break;
-        case 'Z': dy =  1 * speed * cd; break;
-        case 'W': dx = -1 * speed * cd; break;
-        case 'O': dx =  1 * speed * cd; break;
+        case 'N': dy = -1 * moveFactor; break;
+        case 'Z': dy =  1 * moveFactor; break;
+        case 'W': dx = -1 * moveFactor; break;
+        case 'O': dx =  1 * moveFactor; break;
         default: return false;
     }
 
@@ -278,8 +305,12 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     float newX = ghost->getPosition().x + dx * stepW;
     float newY = ghost->getPosition().y + dy * stepH;
 
-    // ✅ COLLISION DETECTION TOEVOEGEN
-    const float COLLISION_MARGIN = 0.965f; // Zelfde als Pacman
+    // ✅ COLLISION DETECTION MET DYNAMISCHE MARGE
+    float COLLISION_MARGIN = 0.980f - bfr; // Vaste basis marge
+    if (ghost->getFearState() == true) {
+        COLLISION_MARGIN = 0.980f;
+    }
+
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
@@ -289,11 +320,12 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
             float distX = std::fabs(newX - wallX);
             float distY = std::fabs(newY - wallY);
 
+            // Gebruik de dynamische marge (collisionFactorX/Y)
             bool overlapX = distX < stepW * COLLISION_MARGIN;
             bool overlapY = distY < stepH * COLLISION_MARGIN;
 
             if (overlapX && overlapY)
-                return false; // ✅ Geblokkeerd door muur!
+                return false; // Geblokkeerd door muur!
         }
     }
 
@@ -309,7 +341,7 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
 
     if (std::fabs(dy) > 0.001f) { // Verticale beweging
         float gridX = std::round((newX + 1.0f) / stepW) * stepW - 1.0f;
-        if (std::fabs(newX - gridX) < stepW * SNAP_THRESHOLD) {
+        if (std::fabs(newX - gridX) < stepH * SNAP_THRESHOLD) {
             newX = gridX;
         }
     }
@@ -320,76 +352,126 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
 
 bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     if (!ghost) return false;
-    float stepW = 2.0f / width;
-    float stepH = 2.0f / height;
+
+    // Simuleer de *exacte* volgende zet die tryMoveGhost zou doen
+
+    float speed = ghost->getSpeed();
+    float cd = deltaT; // Gebruik de global deltaT
+
+    // **MIN STAP LOGICA (uit vorige fix)**
+    const float MIN_MOVE_FACTOR = 0.005f;
+    float moveFactor = speed * cd;
+
+    if (moveFactor < MIN_MOVE_FACTOR) {
+        moveFactor = MIN_MOVE_FACTOR;
+    }
 
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -0.05; break;
-        case 'Z': dy =  0.05; break;
-        case 'W': dx = -0.05; break;
-        case 'O': dx =  0.05; break;
+        case 'N': dy = -1 * moveFactor; break;
+        case 'Z': dy =  1 * moveFactor; break;
+        case 'W': dx = -1 * moveFactor; break;
+        case 'O': dx =  1 * moveFactor; break;
         default: return false;
     }
 
-    // ✅ CORNER CUTTING: Use ghost's actual position OR snapped position for checking
-    float checkX = ghost->getPosition().x;
-    float checkY = ghost->getPosition().y;
+    float stepW = 2.0f / width;
+    float stepH = 2.0f / height;
+    float newX = ghost->getPosition().x + dx * stepW;
+    float newY = ghost->getPosition().y + dy * stepH;
 
-    char currentDir = ghost->getDirection();
-    bool changingDirection = (currentDir != dir);
-
-    if (changingDirection) {
-        const float CORNER_CUT_THRESHOLD = 0.05f;
-
-        // If checking horizontal move, use snapped Y
-        if (dir == 'W' || dir == 'O') {
-            float gridY = std::round((checkY + 1.0f) / stepH) * stepH - 1.0f;
-            if (std::fabs(checkY - gridY) < stepH * CORNER_CUT_THRESHOLD) {
-                checkY = gridY;
-            }
-        }
-
-        // If checking vertical move, use snapped X
-        if (dir == 'N' || dir == 'Z') {
-            float gridX = std::round((checkX + 1.0f) / stepW) * stepW - 1.0f;
-            if (std::fabs(checkX - gridX) < stepW * CORNER_CUT_THRESHOLD) {
-                checkX = gridX;
-            }
-        }
+    // Gebruik *exact* dezelfde botsingslogica als tryMoveGhost (inclusief dynamische marge)
+    float COLLISION_MARGIN = 0.980f - bfr; // Vaste basis marge
+    if (ghost->getFearState() == true) {
+        COLLISION_MARGIN = 0.980f;
     }
-
-    float newX = checkX + dx * stepW;
-    float newY = checkY + dy * stepH;
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW;
-            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH;
+
+            float distX = std::fabs(newX - wallX);
+            float distY = std::fabs(newY - wallY);
+
+            // Gebruik de dynamische marge
+            bool overlapX = distX < stepW * COLLISION_MARGIN;
+            bool overlapY = distY < stepH * COLLISION_MARGIN;
+
             if (overlapX && overlapY)
-                return false;
+                return false; // Geblokkeerd
         }
     }
-    return true;
+    return true; // Pad is vrij
 }
 
 bool World::isAtIntersection(const Ghost* g) const
 {
-    int viable = 0;
-    char dirs[4] = {'N','Z','W','O'};
+    if (!g) return false;
 
-    for (char d : dirs)
-        if (canMoveInDirection(g, d))
-            viable++;
+    // **DE FIX:** Een spook kan alleen op een kruispunt zijn
+    // als het zich op een tegel-knooppunt (grid corner) bevindt.
+    if (!isOnTileCenter(g)) {
+        return false;
+    }
 
-    return viable >= 3;
+    char currentDir = g->getDirection();
+    int viableMoves = 0;
+    int perpendicularMoves = 0;
+
+    // Count viable moves
+    for (char d : {'N', 'Z', 'W', 'O'}) {
+        if (canMoveInDirection(g, d)) {
+            viableMoves++;
+
+
+            bool perpendicular = false;
+            if ((currentDir == 'N' || currentDir == 'Z') && (d == 'W' || d == 'O')) {
+                perpendicular = true;
+            } else if ((currentDir == 'W' || currentDir == 'O') && (d == 'N' || d == 'Z')) {
+                perpendicular = true;
+            }
+
+            if (perpendicular) {
+                perpendicularMoves++;
+            }
+        }
+    }
+    // - A T-junction: 3 viable moves
+    // - A crossroads: 4 viable moves
+    if (viableMoves >= 3) {
+        // T-junction or crossroads
+        return true;
+    }
+
+    if (viableMoves == 2 && perpendicularMoves > 0) {
+        // Corner turn - only count if we can't continue straight
+        char oppositeDir;
+        switch (currentDir) {
+            case 'N': oppositeDir = 'Z'; break;
+            case 'Z': oppositeDir = 'N'; break;
+            case 'W': oppositeDir = 'O'; break;
+            case 'O': oppositeDir = 'W'; break;
+            default: return false;
+        }
+
+        // It's a corner if we can't continue forward
+        if (!canMoveInDirection(g, currentDir)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
 bool World::isAtDeadEnd(const Ghost* ghost) const {
     if (!ghost) return false;
+
+    // **DE FIX:** Check ook hier of we op een knooppunt zijn
+    if (!isOnTileCenter(ghost)) {
+        return false;
+    }
 
     char currentDir = ghost->getDirection();
     int viableMoves = 0;
@@ -412,7 +494,6 @@ bool World::isAtDeadEnd(const Ghost* ghost) const {
             }
         }
     }
-
     // Intersection if:
     // - More than 2 viable moves (T-junction or crossroads), OR
     // - Exactly 2 viable moves with at least one perpendicular option (corner)
@@ -455,23 +536,63 @@ bool World::isOnTileCenter(const Entity* e) const {
     float x = e->getPosition().x;
     float y = e->getPosition().y;
 
-    // afstand tot dichtsbijzijnde tilecenter
-    float centerX = std::round(x / stepW) * stepW;
-    float centerY = std::round(y / stepH) * stepH;
+    // **AANGEPAST:** Bereken dichtstbijzijnde knooppunt (grid-hoek)
+    // rekening houdend met de -1.0f offset
+    float centerX = std::round((x + 1.0f) / stepW) * stepW - 1.0f;
+    float centerY = std::round((y + 1.0f) / stepH) * stepH - 1.0f;
 
     float dx = std::fabs(centerX - x);
     float dy = std::fabs(centerY - y);
 
-    return (dx < 0.0001f && dy < 0.0001f);
+    // **AANGEPAST:** Gebruik een kleine *relatieve* marge, geen harde 0.0001
+    // Dit moet kleiner zijn dan de SNAP_THRESHOLD in tryMove.
+    float snapMargin = 0.01f; // 1% van een tile
+    return (dx < stepW * snapMargin && dy < stepH * snapMargin);
 }
 
-void World::setFps(int fp) {
-    fps = fp;
-}
+
 
 float World::getTime() const {
     return totTime;
 }
 
+void World::decreaseCoins() {
+    coinCount = coinCount - 1;
+    std::cout << "coinCount: " << coinCount << std::endl;
+}
+
+void World::resetAfterDeath() {
+    if (!pacman) return;
+
+    // 1) Respawn Pacman — snap naar tile-corner / top-left
+    deathTime = totTime;
+    death = true;
+    pacman->resetToSpawn();                       // zet op spawn coords
+
+    // 2) Clear input/buffer and freeze briefly
+    pacman->setBufferdirection(' ');    // clear buffered input
+    pacman->setDirection(' ');          // geen richting
+
+
+    // 3) Reset ghosts: teleport naar spawn en reset timers / fear state
+    for (auto& e : entities) {
+        char s = e->getSymbol();
+        if (s == 'G' || s == 'R' || s == 'B') {
+            e->resetFearState();
+            e->setHasBeenEaten(false);
+            // verplaats naar eigen spawn (zorg dat elke ghost spawn bewaard is)
+            e->resetToSpawn();        // moet door Ghost/Entity ondersteund worden
+            // reset timer zodat ze opnieuw hun start delay gebruiken:
+            // als je Ghost een timeAlive of lastMoveTime heeft, zet het hier:
+            // voorkomt dat ze direct bewegen
+            // als je specifieke chaseDelay etc. gebruikt, zorg dat die teruggezet worden
+        }
+    }
+
+    // 4) Zorg dat fearmode uit staat
+    fearmode = false;
+
+    fearmodeStart = 0.f;
+}
 //zorg ervoor dat pacm pacman een constantte stapeenhijd vindt om van tile center naar tile canter te gaan met de snelheid, dit kan adhv modulo, of nog andere dingen.
 //doe dit ook voor de ghosts; zonder det het er glithcy uitziet.
