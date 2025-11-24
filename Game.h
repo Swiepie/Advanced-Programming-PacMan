@@ -14,7 +14,7 @@ class Game {
 private:
     sf::RenderWindow window;
     StateManager stateManager;
-    int framerate = 20;
+    int framerate = 60;
 public:
     Game();
     void run();

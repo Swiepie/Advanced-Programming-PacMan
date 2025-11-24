@@ -263,6 +263,7 @@ void World::checkCollisions() {
                 e->setHasBeenEaten(true);
 
                 increaseScore(200); // Score increase
+                std::cout << score << std::endl;
                 ateGhostThisFrame = true; // Prevents eating another ghost this frame
                 // You can add logic here to ensure the score multiplier increases for subsequent ghosts if desired.
 
@@ -279,24 +280,14 @@ void World::checkCollisions() {
 
 bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     if (!ghost) return false;
-
     float speed = ghost->getSpeed();
     float cd = deltaT;
-
-    // **MIN STAP LOGICA (uit vorige fix)**
-    const float MIN_MOVE_FACTOR = 0.005f;
-    float moveFactor = speed * cd;
-
-    if (moveFactor < MIN_MOVE_FACTOR) {
-        moveFactor = MIN_MOVE_FACTOR;
-    }
-
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -1 * moveFactor; break;
-        case 'Z': dy =  1 * moveFactor; break;
-        case 'W': dx = -1 * moveFactor; break;
-        case 'O': dx =  1 * moveFactor; break;
+        case 'N': dy = -1 * speed * cd; break;
+        case 'Z': dy =  1 * speed * cd; break;
+        case 'W': dx = -1 * speed * cd; break;
+        case 'O': dx =  1 * speed * cd; break;
         default: return false;
     }
 
@@ -305,12 +296,8 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     float newX = ghost->getPosition().x + dx * stepW;
     float newY = ghost->getPosition().y + dy * stepH;
 
-    // ✅ COLLISION DETECTION MET DYNAMISCHE MARGE
-    float COLLISION_MARGIN = 0.980f - bfr; // Vaste basis marge
-    if (ghost->getFearState() == true) {
-        COLLISION_MARGIN = 0.980f;
-    }
-
+    // ✅ COLLISION DETECTION TOEVOEGEN
+    const float COLLISION_MARGIN = 0.965f; // Zelfde als Pacman
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
@@ -320,12 +307,11 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
             float distX = std::fabs(newX - wallX);
             float distY = std::fabs(newY - wallY);
 
-            // Gebruik de dynamische marge (collisionFactorX/Y)
             bool overlapX = distX < stepW * COLLISION_MARGIN;
             bool overlapY = distY < stepH * COLLISION_MARGIN;
 
             if (overlapX && overlapY)
-                return false; // Geblokkeerd door muur!
+                return false; // ✅ Geblokkeerd door muur!
         }
     }
 
@@ -341,7 +327,7 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
 
     if (std::fabs(dy) > 0.001f) { // Verticale beweging
         float gridX = std::round((newX + 1.0f) / stepW) * stepW - 1.0f;
-        if (std::fabs(newX - gridX) < stepH * SNAP_THRESHOLD) {
+        if (std::fabs(newX - gridX) < stepW * SNAP_THRESHOLD) {
             newX = gridX;
         }
     }
@@ -352,79 +338,79 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
 
 bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     if (!ghost) return false;
-
-    // Simuleer de *exacte* volgende zet die tryMoveGhost zou doen
-
-    float speed = ghost->getSpeed();
-    float cd = deltaT; // Gebruik de global deltaT
-
-    // **MIN STAP LOGICA (uit vorige fix)**
-    const float MIN_MOVE_FACTOR = 0.005f;
-    float moveFactor = speed * cd;
-
-    if (moveFactor < MIN_MOVE_FACTOR) {
-        moveFactor = MIN_MOVE_FACTOR;
-    }
+    float stepW = 2.0f / width;
+    float stepH = 2.0f / height;
 
     float dx = 0, dy = 0;
     switch (dir) {
-        case 'N': dy = -1 * moveFactor; break;
-        case 'Z': dy =  1 * moveFactor; break;
-        case 'W': dx = -1 * moveFactor; break;
-        case 'O': dx =  1 * moveFactor; break;
+        case 'N': dy = -0.05; break;
+        case 'Z': dy =  0.05; break;
+        case 'W': dx = -0.05; break;
+        case 'O': dx =  0.05; break;
         default: return false;
     }
 
-    float stepW = 2.0f / width;
-    float stepH = 2.0f / height;
-    float newX = ghost->getPosition().x + dx * stepW;
-    float newY = ghost->getPosition().y + dy * stepH;
+    // ✅ CORNER CUTTING: Use ghost's actual position OR snapped position for checking
+    float checkX = ghost->getPosition().x;
+    float checkY = ghost->getPosition().y;
 
-    // Gebruik *exact* dezelfde botsingslogica als tryMoveGhost (inclusief dynamische marge)
-    float COLLISION_MARGIN = 0.980f - bfr; // Vaste basis marge
-    if (ghost->getFearState() == true) {
-        COLLISION_MARGIN = 0.980f;
+    char currentDir = ghost->getDirection();
+    bool changingDirection = (currentDir != dir);
+
+    if (changingDirection) {
+        const float CORNER_CUT_THRESHOLD = 0.05f;
+
+        // If checking horizontal move, use snapped Y
+        if (dir == 'W' || dir == 'O') {
+            float gridY = std::round((checkY + 1.0f) / stepH) * stepH - 1.0f;
+            if (std::fabs(checkY - gridY) < stepH * CORNER_CUT_THRESHOLD) {
+                checkY = gridY;
+            }
+        }
+
+        // If checking vertical move, use snapped X
+        if (dir == 'N' || dir == 'Z') {
+            float gridX = std::round((checkX + 1.0f) / stepW) * stepW - 1.0f;
+            if (std::fabs(checkX - gridX) < stepW * CORNER_CUT_THRESHOLD) {
+                checkX = gridX;
+            }
+        }
     }
+
+    float newX = checkX + dx * stepW;
+    float newY = checkY + dy * stepH;
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
             float wallX = wall->getPosition().x;
             float wallY = wall->getPosition().y;
-
-            float distX = std::fabs(newX - wallX);
-            float distY = std::fabs(newY - wallY);
-
-            // Gebruik de dynamische marge
-            bool overlapX = distX < stepW * COLLISION_MARGIN;
-            bool overlapY = distY < stepH * COLLISION_MARGIN;
-
+            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW;
+            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH;
             if (overlapX && overlapY)
-                return false; // Geblokkeerd
+                return false;
         }
     }
-    return true; // Pad is vrij
+    return true;
 }
 
-bool World::isAtIntersection(const Ghost* g) const
-{
-    if (!g) return false;
+bool World::isAtIntersection(const Ghost* ghost) const {
+    if (!ghost) return false;
+
 
     // **DE FIX:** Een spook kan alleen op een kruispunt zijn
     // als het zich op een tegel-knooppunt (grid corner) bevindt.
-    if (!isOnTileCenter(g)) {
+    if (!isOnTileCenter(ghost)) {
         return false;
     }
-
-    char currentDir = g->getDirection();
+    char currentDir = ghost->getDirection();
     int viableMoves = 0;
     int perpendicularMoves = 0;
 
-    // Count viable moves
     for (char d : {'N', 'Z', 'W', 'O'}) {
-        if (canMoveInDirection(g, d)) {
+        if (canMoveInDirection(ghost, d)) {
             viableMoves++;
 
-
+            // Check if this is perpendicular to current direction
             bool perpendicular = false;
             if ((currentDir == 'N' || currentDir == 'Z') && (d == 'W' || d == 'O')) {
                 perpendicular = true;
@@ -437,41 +423,16 @@ bool World::isAtIntersection(const Ghost* g) const
             }
         }
     }
-    // - A T-junction: 3 viable moves
-    // - A crossroads: 4 viable moves
-    if (viableMoves >= 3) {
-        // T-junction or crossroads
-        return true;
-    }
 
-    if (viableMoves == 2 && perpendicularMoves > 0) {
-        // Corner turn - only count if we can't continue straight
-        char oppositeDir;
-        switch (currentDir) {
-            case 'N': oppositeDir = 'Z'; break;
-            case 'Z': oppositeDir = 'N'; break;
-            case 'W': oppositeDir = 'O'; break;
-            case 'O': oppositeDir = 'W'; break;
-            default: return false;
-        }
-
-        // It's a corner if we can't continue forward
-        if (!canMoveInDirection(g, currentDir)) {
-            return true;
-        }
-    }
-
-    return false;
+    // Intersection if:
+    // - More than 2 viable moves (T-junction or crossroads), OR
+    // - Exactly 2 viable moves with at least one perpendicular option (corner)
+    return (viableMoves > 2) || (viableMoves >= 2 && perpendicularMoves > 0);
 }
 
 
 bool World::isAtDeadEnd(const Ghost* ghost) const {
     if (!ghost) return false;
-
-    // **DE FIX:** Check ook hier of we op een knooppunt zijn
-    if (!isOnTileCenter(ghost)) {
-        return false;
-    }
 
     char currentDir = ghost->getDirection();
     int viableMoves = 0;
@@ -494,12 +455,12 @@ bool World::isAtDeadEnd(const Ghost* ghost) const {
             }
         }
     }
+
     // Intersection if:
     // - More than 2 viable moves (T-junction or crossroads), OR
     // - Exactly 2 viable moves with at least one perpendicular option (corner)
     return (viableMoves == 1);
 }
-
 
 void World::setFearMode(bool fearm) {
     for (auto& e : entities) {
@@ -520,7 +481,7 @@ void World::setFearModeStart(float timer) {
     fearmodeStart = timer;
 }
 void World::increaseScore(int points) {
-    score += points;
+    score = score + points;
 }
 int World::getPacmanLives() const{
     return pacmanlives;

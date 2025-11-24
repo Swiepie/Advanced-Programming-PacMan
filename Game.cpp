@@ -17,7 +17,7 @@ void Game::run() {
     while (window.isOpen()) {
 
         float deltaTime = Stopwatch::getInstance().GetElapsedTime();
-        Stopwatch::getInstance().restart();
+
         State* current = stateManager.currentState();
 
         sf::Event event{};
@@ -44,7 +44,7 @@ void Game::run() {
         if (current){
             current->render(window, windowWidth, windowHeight);
         }
-
+        Stopwatch::getInstance().restart();
         window.display();
         stateManager.processStateChanges();
     }

@@ -50,7 +50,7 @@ private:
     int pacmanlives = 3;
 
 
-    float bfr = 0.08f;
+    float bfr = deltaT;
 public:
 
     bool loadMap(const std::string& filename);
