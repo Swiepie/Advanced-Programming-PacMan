@@ -12,12 +12,6 @@ char Pacman::getDirection() const {
 void Pacman::setDirection(char direct) {
     direction = direct;
 }
-double Pacman::getSpeed() const {
-    return speed;
-}
-void Pacman::setSpeed(double spd) {
-    speed = spd;
-}
 char Pacman::getBufferdirection() const {
     return bufferdirection;
 }

@@ -35,7 +35,7 @@ private:
     int fps = 60;
     bool pacmanIsAlive = true;
     bool fearmode = false;
-
+    bool reset = false;
     std::vector<std::unique_ptr<Entity>> entities;
     Pacman* pacman = nullptr;
     float tileSize = 32.0f;
@@ -49,8 +49,9 @@ private:
 
     int pacmanlives = 3;
 
-
     float bfr = deltaT;
+
+    int rounds = 0;
 public:
 
     bool loadMap(const std::string& filename);
@@ -61,7 +62,6 @@ public:
     bool getFearMode();
     void increaseScore(int points);
     float getFearModeTimer() const;
-    void setFearModeTimer(float timer);
     const std::vector<std::unique_ptr<Entity>>& getEntities() const;
     int getWidth() const;
     int getHeight() const;
@@ -74,7 +74,6 @@ public:
     bool tryMoveGhost(Ghost* ghost, char dir) const;
     bool canMoveInDirection(const Ghost* ghost, char dir) const;
     bool isAtIntersection(const Ghost* ghost) const;
-    bool isAtDeadEnd(const Ghost* ghost) const;
 
     int getPacmanLives() const;
 
@@ -86,6 +85,10 @@ public:
 
     void decreaseCoins();
     void resetAfterDeath();
+
+    int getCoinCount() const;
+
+    void resetWorld();
 };
 
 

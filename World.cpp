@@ -116,6 +116,17 @@ void World::update(float deltaTime) {
     if (death && totTime > deathTime + respawnTimer ) {
         death = false;
     }
+    if (reset) {
+        if (!(fearmodeTimer == 2)) {
+            fearmodeTimer = fearmodeTimer - 0.5f;
+        }
+        for (auto& e : entities) {
+            e->setSpeed(e->getSpeed()+0.5*rounds);
+
+        }
+        pacman->setSpeed(4);
+        reset = false;
+    }
     for (auto& e : entities) {
         e->update(deltaTime, *this, *pacman);
     }
@@ -263,7 +274,6 @@ void World::checkCollisions() {
                 e->setHasBeenEaten(true);
 
                 increaseScore(200); // Score increase
-                std::cout << score << std::endl;
                 ateGhostThisFrame = true; // Prevents eating another ghost this frame
                 // You can add logic here to ensure the score multiplier increases for subsequent ghosts if desired.
 
@@ -431,37 +441,6 @@ bool World::isAtIntersection(const Ghost* ghost) const {
 }
 
 
-bool World::isAtDeadEnd(const Ghost* ghost) const {
-    if (!ghost) return false;
-
-    char currentDir = ghost->getDirection();
-    int viableMoves = 0;
-    int perpendicularMoves = 0;
-
-    for (char d : {'N', 'Z', 'W', 'O'}) {
-        if (canMoveInDirection(ghost, d)) {
-            viableMoves++;
-
-            // Check if this is perpendicular to current direction
-            bool perpendicular = false;
-            if ((currentDir == 'N' || currentDir == 'Z') && (d == 'W' || d == 'O')) {
-                perpendicular = true;
-            } else if ((currentDir == 'W' || currentDir == 'O') && (d == 'N' || d == 'Z')) {
-                perpendicular = true;
-            }
-
-            if (perpendicular) {
-                perpendicularMoves++;
-            }
-        }
-    }
-
-    // Intersection if:
-    // - More than 2 viable moves (T-junction or crossroads), OR
-    // - Exactly 2 viable moves with at least one perpendicular option (corner)
-    return (viableMoves == 1);
-}
-
 void World::setFearMode(bool fearm) {
     for (auto& e : entities) {
         e->setFearState(fearm);
@@ -473,9 +452,6 @@ bool World::getFearMode() {
 }
 float World::getFearModeTimer() const {
     return fearmodeTimer;
-}
-void World::setFearModeTimer(float timer) {
-    fearmodeTimer = timer;
 }
 void World::setFearModeStart(float timer) {
     fearmodeStart = timer;
@@ -554,6 +530,15 @@ void World::resetAfterDeath() {
     fearmode = false;
 
     fearmodeStart = 0.f;
+}
+
+int World::getCoinCount() const{
+    return coinCount; ;
+}
+
+void World::resetWorld() {
+    rounds = rounds + 1;
+    reset = true;
 }
 //zorg ervoor dat pacm pacman een constantte stapeenhijd vindt om van tile center naar tile canter te gaan met de snelheid, dit kan adhv modulo, of nog andere dingen.
 //doe dit ook voor de ghosts; zonder det het er glithcy uitziet.

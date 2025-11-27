@@ -12,11 +12,11 @@ void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, co
         int score = world.getScore(); // of LevelState->getScore()
         manager.pushState(std::make_unique<FinishState>(score));
     }
+
     else if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape) {
             manager.pushState(std::make_unique<PausedState>()); // back to menu
         }
-#if 1
 
         auto pacman = world.getPacman();
         if (!pacman) return;
@@ -28,8 +28,6 @@ void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, co
             case sf::Keyboard::Right: pacman->setBufferdirection('O'); break;
             default: break;
         }
-#endif
-
     }
 }
 
@@ -37,11 +35,63 @@ void LevelState::update(StateManager& manager, float deltaTime)  {
     if (deltaTime > 0.5) {
         return;
     }
+    if (world.getCoinCount() == 0) {
+        world.loadMap("../assets/map.txt");
+        world.resetWorld();
+    }
     world.update(deltaTime);
 }
 void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight)  {
     renderer.render(world, window, windowWidth, windowHeight);
+
+    float verticalOffset = 40.f;
+
+    sf::Vector2f viewSize = window.getView().getSize();
+    sf::Vector2f viewCenter = window.getView().getCenter();
+
+    score.setString("   Score: " + std::to_string(world.getScore()));
+    lives.setString("   Lives: " + std::to_string(world.getPacmanLives()));
+
+    // Schaal op basis van hoogte (10% van view hoogte)
+    float preferredHeight = viewSize.y * 0.10f;
+    float textHeight = score.getLocalBounds().height;
+    float scaleY = preferredHeight / textHeight;
+
+    // Controleer breedte (max 80% van view breedte)
+    float maxWidth = viewSize.x * 0.80f;
+    float textWidth = score.getLocalBounds().width;
+    float scaleX = maxWidth / textWidth;
+
+    float scale = std::min(scaleX, scaleY);
+
+    scale /= 4.f; // jouw scaling-aanpassing
+    score.setScale(scale, scale);
+    lives.setScale(scale, scale);
+
+    // Origins linksboven
+    sf::FloatRect scoreBounds = score.getLocalBounds();
+    score.setOrigin(scoreBounds.left, scoreBounds.top);
+
+    sf::FloatRect livesBounds = lives.getLocalBounds();
+    lives.setOrigin(livesBounds.left, livesBounds.top);
+
+    // Linksonder positie
+    float leftX = viewCenter.x - viewSize.x / 2.f + 10.f;
+    float bottomY = viewCenter.y + viewSize.y / 2.f - 10.f;
+
+    // Score komt eerst
+    float scoreY = bottomY - scoreBounds.height * scale - verticalOffset;
+
+    // Lives komt eronder (dus nog een regel lager)
+    float livesY = scoreY + scoreBounds.height * scale + 5.f; // 5px spacing
+
+    score.setPosition(leftX, scoreY);
+    lives.setPosition(leftX, livesY);
+
+    window.draw(score);
+    window.draw(lives);
 }
+
 
 void LevelState::onEnter() {
     Stopwatch::getInstance().restart(); // reset + start timer when entering game

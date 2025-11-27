@@ -19,6 +19,9 @@ class Pacman;
 class World;
 class Entity {
 protected:
+    double speed = 2.5;
+    double speedSave = 1;
+    double fearSpeed = 1.5;
     float moveCooldown;
     coord position;
     char symbol;
@@ -64,6 +67,9 @@ public:
 
     void setRespawnTimer(float t) { respawnTimer = t; setFrozen(t > 0.f); }
     void tickRespawnTimer(float dt) { if (respawnTimer > 0.f) { respawnTimer -= dt; if (respawnTimer <= 0.f) { respawnTimer = 0.f; setFrozen(false); } } }
+    double getSpeed() const;
+    void setSpeed(double spd);
+
 };
 
 

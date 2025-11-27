@@ -11,7 +11,7 @@
 
 class Fruit : public Entity {
 private:
-	int worth;
+	int worth = 50;
 public:
 	Fruit(float x, float y) : Entity(x, y, 'f') {}
 

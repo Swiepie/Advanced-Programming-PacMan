@@ -15,9 +15,9 @@ class World;
 class Ghost : public Entity {
 protected:
     float moveTimer = 0.0f;
-    double speed = 2.5;
-    double speedSave = 1;
-    double fearSpeed = 1.5;
+
+
+
     float lastMoveTime = 0.0f;
 
     bool chasing = false;
@@ -29,29 +29,28 @@ protected:
     bool inFearMode = false;
 public:
     Ghost(float x, float y, char sym = 'G', float delay = 0.0f)
-        : Entity(x, y, sym), chaseDelay(delay) {}
+        : Entity(x, y, sym), chaseDelay(delay) {
+         speed = 2.5;
+         speedSave = 1;
+         fearSpeed = 1.5;
+    }
     void softSnapToTileCenter(World& world) override;
     void update(float deltaTime, World& world, const Pacman& pacman) override;
-    double getSpeed() const;
-    void setSpeed(double spd);
 
     void setFearState(bool state) override;
     void resetFearState() override;
     bool getFearState() const override;
-    void recordFearTime(float currentTime);
 
-    void resetMoveTimer();
+
+
     void addMoveTime(float dt);
-    void recordMoveTime(float currentTime);
+
 
     bool readyToMove(float currentTime) const;
 
     void setDirection(char direct);
-    void moveInDirection(World& world);
     bool readyToMove() const;
 
-    bool isChasing() const { return chasing; }
-    void setChasing(bool value) { chasing = value; }
     float getChaseDelay() const { return chaseDelay; }
 
     void chooseDirectionFear(World& world, const Pacman& pacman);

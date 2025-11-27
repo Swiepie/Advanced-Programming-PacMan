@@ -23,22 +23,11 @@ bool Ghost::getFearState() const {
 void Ghost::setFearState(bool state) {
     inFearMode = state;
 }
-void Ghost::moveInDirection(World& world) {
-    world.tryMoveGhost(this, direction);
-}
 
 void Ghost::setDirection(char direct) {
     direction = direct;
 }
 
-double Ghost::getSpeed() const {
-    return speed;
-}
-
-void Ghost::setSpeed(double spd) {
-    speed = spd;
-    speedSave = spd;
-}
 
 void Ghost::addMoveTime(float dt) {
     moveTimer += dt;
@@ -48,17 +37,10 @@ bool Ghost::readyToMove() const {
     return moveTimer >= moveCooldown;
 }
 
-void Ghost::resetMoveTimer() {
-    moveTimer -= moveCooldown;
-}
-
 bool Ghost::readyToMove(float currentTime) const {
     return (currentTime - lastMoveTime) >= moveCooldown;
 }
 
-void Ghost::recordMoveTime(float currentTime) {
-    lastMoveTime = currentTime;
-}
 void Ghost::resetFearState() {
 
     inFearMode = false;
@@ -177,7 +159,7 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     else if (!world.canMoveInDirection(this, lockedDirection)) {
         // If blocked (not at intersection), find a new direction
         std::vector<char> viableDirs;
-        std::cout << "stucc" << std::endl;
+
 
         // Get opposite direction
         char oppositeDir;
@@ -198,7 +180,6 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
 
         // If no options, allow reversing (dead end)
         if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
-            std::cout << "gg" << std::endl;
             viableDirs.push_back(oppositeDir);
         }
 

@@ -13,4 +13,5 @@ bool Coin::isCollectible() const {
 void Coin::onCollect(World& world) {
     world.increaseScore(worth);
     world.decreaseCoins();
+    std::cout << world.getScore() << std::endl;
 };

@@ -20,10 +20,23 @@ class LevelState : public State {
 private:
     World world;
     WorldView renderer;
+
+    sf::Font font;
+    sf::Text lives;
+    sf::Text score;
 public:
     LevelState() {
-        world.loadMap("../assets/map2.txt");
+        world.loadMap("../assets/map.txt");
         world.printMap();
+
+        font.loadFromFile("../assets/ARIAL.TTF");
+        score.setFont(font);
+        score.setString("score: " + std::to_string(world.getScore()));
+        score.setFillColor(sf::Color::Yellow);
+
+        lives.setFont(font);
+        lives.setString("lives: " + std::to_string(world.getPacmanLives()));
+        lives.setFillColor(sf::Color::Green);
     }
 
     void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;

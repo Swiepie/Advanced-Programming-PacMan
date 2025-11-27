@@ -36,3 +36,12 @@ bool Entity::isCollectible() const {
 void Entity::onCollect(World& world) {
 
 }
+
+double Entity::getSpeed() const {
+    return speed;
+}
+
+void Entity::setSpeed(double spd) {
+    speed = spd;
+    speedSave = spd;
+}
