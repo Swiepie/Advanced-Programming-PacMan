@@ -273,7 +273,7 @@ void World::checkCollisions() {
                 e->resetFearState();
                 e->setHasBeenEaten(true);
 
-                increaseScore(200); // Score increase
+                score.add(200); // Score increase
                 ateGhostThisFrame = true; // Prevents eating another ghost this frame
                 // You can add logic here to ensure the score multiplier increases for subsequent ghosts if desired.
 
@@ -456,15 +456,11 @@ float World::getFearModeTimer() const {
 void World::setFearModeStart(float timer) {
     fearmodeStart = timer;
 }
-void World::increaseScore(int points) {
-    score = score + points;
-}
+
 int World::getPacmanLives() const{
     return pacmanlives;
 }
-int World::getScore() const {
-    return score;
-}
+
 
 bool World::isOnTileCenter(const Entity* e) const {
     float stepW = 2.f / width;

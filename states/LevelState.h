@@ -31,7 +31,7 @@ public:
 
         font.loadFromFile("../assets/ARIAL.TTF");
         score.setFont(font);
-        score.setString("score: " + std::to_string(world.getScore()));
+        score.setString("score: " + std::to_string(world.getScore().get()));
         score.setFillColor(sf::Color::Yellow);
 
         lives.setFont(font);

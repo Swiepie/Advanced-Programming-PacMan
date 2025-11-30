@@ -16,30 +16,40 @@ void MenuState::render(sf::RenderWindow& window,unsigned int windowWidth, unsign
     sf::Vector2f viewSize = window.getView().getSize();
     sf::Vector2f viewCenter = window.getView().getCenter();
 
-    //schaal op basis van hoogte
-    float preferredHeight = viewSize.y * 0.10f;       // 10% van schermhoogte
-    float textHeight = title.getLocalBounds().height;
+    //
+    // ───── TITLE ─────────────────────────────────────────────
+    //
+    float preferredHeight = viewSize.y * 0.10f;
+    float titleHeight = title.getLocalBounds().height;
+    float scaleY = preferredHeight / titleHeight;
 
-    float scaleY = preferredHeight / textHeight;
-
-    //controleer breedte
-    float maxWidth = viewSize.x * 0.80f;  // Tekst mag 80% van breedte nemen
-    float textWidth = title.getLocalBounds().width;
-
-    float scaleX = maxWidth / textWidth;
-
-    // MIN
+    float maxWidth = viewSize.x * 0.80f;
+    float titleWidth = title.getLocalBounds().width;
+    float scaleX = maxWidth / titleWidth;
     float scale = std::min(scaleX, scaleY);
 
     title.setScale(scale, scale);
 
-    // centreer tekst
     title.setOrigin(
         title.getLocalBounds().width / 2.f,
         title.getLocalBounds().height / 2.f
     );
+    title.setPosition(viewCenter.x, viewCenter.y - viewSize.y * 0.15f);
 
-    title.setPosition(viewCenter);
     window.draw(title);
+
+    //
+    // ───── HIGHSCORES ───────────────────────────────────────
+    //
+    // Maak de tekst iets kleiner (75% van title)
+    highscores.setScale(scale * 0.75f, scale * 0.75f);
+
+    highscores.setOrigin(
+        highscores.getLocalBounds().width / 2.f,
+        highscores.getLocalBounds().height / 2.f
+    );
+    highscores.setPosition(viewCenter.x, viewCenter.y + viewSize.y * 0.1f);
+
+    window.draw(highscores);
 
 }

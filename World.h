@@ -21,6 +21,7 @@
 #include "entities/Wall.h"
 #include "entities/Fruit.h"
 #include "entities/Ghost.h"
+#include "Score.h"
 class Ghost;
 class World {
 private:
@@ -45,9 +46,8 @@ private:
     int height = 0;
 
     int coinCount = 0;
-    int score = 0;
-
-    int pacmanlives = 3;
+    Score score;
+    int pacmanlives = 1;
 
     float bfr = deltaT;
 
@@ -60,7 +60,6 @@ public:
 
     void setFearMode(bool fearmode);
     bool getFearMode();
-    void increaseScore(int points);
     float getFearModeTimer() const;
     const std::vector<std::unique_ptr<Entity>>& getEntities() const;
     int getWidth() const;
@@ -89,6 +88,8 @@ public:
     int getCoinCount() const;
 
     void resetWorld();
+    Score& getScore() { return score; }
+
 };
 
 

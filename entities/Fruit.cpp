@@ -12,6 +12,6 @@ void Fruit::onCollect(World& world) {
     std::cout << "Fruit collected at (" << position.x << ", " << position.y << ")\n";
     world.setFearMode(true);
     world.setFearModeStart(world.getTime());
-    world.increaseScore(worth);
+    world.getScore().add(worth);
     world.decreaseCoins();
 };

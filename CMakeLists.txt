@@ -41,6 +41,7 @@ set(SOURCES
         states/PausedState.cpp
         renderer/GhostView.cpp
         states/FinishState.cpp
+        Scoreboard.cpp
 )
 
 set(HEADERS
@@ -61,6 +62,7 @@ set(HEADERS
         entities/Fruit.cpp
         renderer/GhostView.h
         states/FinishState.h
+        Scoreboard.h
 )
 
 # --- Executable ---

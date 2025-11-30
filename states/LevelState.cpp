@@ -8,10 +8,7 @@
 void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
     if (event.type == sf::Event::Closed)
         window.close();
-    if (world.getPacmanLives()<= 0 ) {
-        int score = world.getScore(); // of LevelState->getScore()
-        manager.pushState(std::make_unique<FinishState>(score));
-    }
+
 
     else if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape) {
@@ -35,6 +32,12 @@ void LevelState::update(StateManager& manager, float deltaTime)  {
     if (deltaTime > 0.5) {
         return;
     }
+    if (world.getPacmanLives()<= 0 ) {
+        int score = world.getScore().get();
+        manager.pushState(std::make_unique<FinishState>(score));
+        world.getScore().submit();
+
+    }
     if (world.getCoinCount() == 0) {
         world.loadMap("../assets/map.txt");
         world.resetWorld();
@@ -49,7 +52,7 @@ void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsi
     sf::Vector2f viewSize = window.getView().getSize();
     sf::Vector2f viewCenter = window.getView().getCenter();
 
-    score.setString("   Score: " + std::to_string(world.getScore()));
+    score.setString("   Score: " + std::to_string(world.getScore().get()));
     lives.setString("   Lives: " + std::to_string(world.getPacmanLives()));
 
     // Schaal op basis van hoogte (10% van view hoogte)
