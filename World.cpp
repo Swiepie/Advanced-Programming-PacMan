@@ -110,6 +110,15 @@ void World::printMap() const {
 void World::update(float deltaTime) {
     totTime += deltaTime;
     deltaT = deltaTime;
+    if (dies && totTime < diesTime + respawnTimer) {
+        pacman->setDirection('D');
+        return;
+    }
+    if (dies && totTime > diesTime + respawnTimer) {
+        dies = false;
+        resetAfterDeath();
+    }
+
     if (death && totTime < deathTime + respawnTimer) {
         return;
     }
@@ -146,23 +155,23 @@ void World::update(float deltaTime) {
     }
 
     //is het al tijd om opnieuw te bewegen?
-        char buffered = pacman->getBufferdirection();
-        bool moved = false;
+    char buffered = pacman->getBufferdirection();
+    bool moved = false;
 
-        if (tryMove(pacman, buffered)) {
-            pacman->applyBufferdirection();
+    if (tryMove(pacman, buffered)) {
+        pacman->applyBufferdirection();
+        moved = true;
+    } else {
+        char current = pacman->getDirection();
+        if (tryMove(pacman, current)) {
             moved = true;
-        } else {
-            char current = pacman->getDirection();
-            if (tryMove(pacman, current)) {
-                moved = true;
-            }
         }
+    }
 
-        if (moved) {
-            //slaag de tijd op van laatste movement
-            checkCollisions();
-        }
+    if (moved) {
+        //slaag de tijd op van laatste movement
+        checkCollisions();
+    }
 
 }
 
@@ -198,7 +207,7 @@ bool World::tryMove(Pacman* pacman, char dir) const {
     float newY = pacman->getPosition().y + dy * stepH;
 
     // Constante collision marge
-    const float COLLISION_MARGIN = 0.980f - deltaT;
+    const float COLLISION_MARGIN = 0.97;
 
     for (auto& wall : entities) {
         if (wall->getSymbol() == '#') {
@@ -261,7 +270,7 @@ void World::checkCollisions() {
     for (auto& e : entities) {
         char eSym = e->getSymbol();
         // Check collision only for ghosts
-        if ((eSym == 'G' || eSym == 'R' || eSym == 'B') && pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f)) {
+        if ((eSym == 'G' || eSym == 'R' || eSym == 'B') && pacman->collidesWith(*e, 2.0f / width * 1.f, 2.0f / height * 1.f)) {
 
             // Ghost Eating Logic
             if (fearmode && e->getFearState() && !e->getHasBeenEaten() && !ateGhostThisFrame) {
@@ -280,10 +289,17 @@ void World::checkCollisions() {
             } //halloooo - Marie :)
             // Pacman Dies Logic
             else if (!fearmode || e->getHasBeenEaten()) {
-                pacmanlives = pacmanlives - 1;
-                resetAfterDeath();
-                std::cout << "Lives: " << pacmanlives << std::endl;
+
+                if (!dies) { // <- veiligheid: sterf maar één keer per frame
+                    pacmanlives--;
+                    dies = true;
+                    diesTime = totTime;
+                    std::cout << "Lives: " << pacmanlives << std::endl;
+                }
+
+                return; // <--- STOP de hele collision functie
             }
+
         }
     }
 }

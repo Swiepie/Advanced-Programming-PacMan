@@ -93,10 +93,6 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
             circle.setFillColor(sf::Color::Yellow);
             circle.setPosition(screenPos.x + rectSize/2 - rectSize/10, screenPos.y + rectSize/2 - rectSize/10);
             window.draw(circle);
-        } else if (symbol == 'P') {
-            pacmanSprite.setPosition(screenPos);
-            pacmanSprite.setScale(rectSize/15, rectSize/15);
-            window.draw(pacmanSprite);
         } else if (symbol == 'f') {
             sf::CircleShape circle(rectSize / 10.f);
             circle.setFillColor(sf::Color::Magenta);
@@ -141,6 +137,17 @@ void WorldView::render(const World& world, sf::RenderWindow& window, float windo
                 window.draw(pinkGhostSprite);
             }
 
+        }
+    }
+    for (auto& e : world.getEntities()) {
+        auto pos = e->getPosition(); // nu in wereldcellen
+        auto screenPos = normalizeToScreen(pos.x, pos.y, windowWidth, windowHeight, HeighthFlag, h, w);
+        char symbol = e->getSymbol();
+
+        if (symbol == 'P') {
+            pacmanSprite.setPosition(screenPos);
+            pacmanSprite.setScale(rectSize/15, rectSize/15);
+            window.draw(pacmanSprite);
         }
     }
 }

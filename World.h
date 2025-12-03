@@ -31,8 +31,10 @@ private:
     float fearmodeTimer = 6;
     float fearmodeStart = 0;
     float deathTime = 0;
-    float respawnTimer = 1;
+    float diesTime = 0;
+    float respawnTimer = 0.90;
     bool death = false;
+    bool dies = false;
     int fps = 60;
     bool pacmanIsAlive = true;
     bool fearmode = false;
@@ -47,7 +49,7 @@ private:
 
     int coinCount = 0;
     Score score;
-    int pacmanlives = 1;
+    int pacmanlives = 2;
 
     float bfr = deltaT;
 
@@ -89,6 +91,8 @@ public:
 
     void resetWorld();
     Score& getScore() { return score; }
+
+    int getDeath();
 
 };
 

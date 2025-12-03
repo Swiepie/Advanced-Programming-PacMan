@@ -17,6 +17,7 @@ private:
     double speed = 1;
     float lastFrameTime = 0.0f;
 
+    int i = 2;
     sf::Texture pacmanTexture;
     sf::Sprite pacmanSprite;
 public:

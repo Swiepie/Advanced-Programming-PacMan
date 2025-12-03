@@ -37,6 +37,14 @@ void PacmanView::chooseTexture(char direction, float time){
                                  : sf::IntRect(15, 0, 15, 15);
       break;
       case ' ': rect =  sf::IntRect(30, 0, 15, 15);
+      break;
+      case 'D': {
+        rect = sf::IntRect(15*i, 0, 15, 15);
+        i = i + 1;
+        if (i == 14) {
+          i = 2;
+        }
+      }
     }
 
     pacmanSprite.setTextureRect(rect);
