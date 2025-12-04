@@ -42,6 +42,7 @@ set(SOURCES
         renderer/GhostView.cpp
         states/FinishState.cpp
         Scoreboard.cpp
+        entities/EntityFactory.cpp
 )
 
 set(HEADERS
@@ -63,6 +64,7 @@ set(HEADERS
         renderer/GhostView.h
         states/FinishState.h
         Scoreboard.h
+        entities/EntityFactory.h
 )
 
 # --- Executable ---

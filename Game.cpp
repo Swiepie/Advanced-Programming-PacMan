@@ -9,7 +9,8 @@ Game::Game()
 {
     Stopwatch::getInstance().start();
     window.setFramerateLimit(framerate);
-    stateManager.pushState(std::make_unique<MenuState>());
+    auto factory = std::make_shared<DefaultEntityFactory>();
+    stateManager.pushState(std::make_unique<MenuState>(factory));
 }
 
 

@@ -12,7 +12,7 @@ void FinishState::handleEvent(StateManager& manager, sf::RenderWindow& window, c
 		manager.popState(); // go to the level
 		manager.popState(); // pop level
 		manager.popState(); // pop menu
-		manager.pushState(std::make_unique<MenuState>());
+		manager.pushState(std::make_unique<MenuState>(factory));
 	} else if (event.type == sf::Event::Closed) {
 		window.close();
 	}

@@ -21,40 +21,45 @@
 #include "entities/Wall.h"
 #include "entities/Fruit.h"
 #include "entities/Ghost.h"
+#include "entities/EntityFactory.h"
 #include "Score.h"
 class Ghost;
+class EntityFactory;
 class World {
 private:
-    std::vector<coord> ghostSpawnPositions;
-    float totTime = 0;
-    float deltaT = 0.0f;
-    float fearmodeTimer = 6;
-    float fearmodeStart = 0;
-    float deathTime = 0;
-    float diesTime = 0;
-    float respawnTimer = 0.90;
-    bool death = false;
-    bool dies = false;
-    int fps = 60;
-    bool pacmanIsAlive = true;
-    bool fearmode = false;
-    bool reset = false;
-    std::vector<std::unique_ptr<Entity>> entities;
-    Pacman* pacman = nullptr;
-    float tileSize = 32.0f;
-    std::vector<std::string> mapData;
-
     int width = 0;
     int height = 0;
+    std::vector<std::string> mapData;
+    std::vector<std::unique_ptr<Entity>> entities;
+    std::vector<coord> ghostSpawnPositions;
 
+    Pacman* pacman = nullptr;
     int coinCount = 0;
-    Score score;
-    int pacmanlives = 2;
+    int pacmanlives = 3;
 
-    float bfr = deltaT;
+    // Time variables
+    float totTime = 0.0f;
+    float deltaT = 0.0f;
 
+    // Death/Respawn states
+    bool dies = false;
+    float diesTime = 0.0f;
+    float respawnTimer = 2.0f;
+    bool death = false;
+    float deathTime = 0.0f;
+    bool reset = false;
     int rounds = 0;
+    Score score;
+    // Fear mode
+    bool fearmode = false;
+    float fearmodeTimer = 10.0f;
+    float fearmodeStart = 0.0f;
+
+    // FACTORY POINTER
+    std::shared_ptr<EntityFactory> factory;
 public:
+    explicit World(std::shared_ptr<EntityFactory> entityFactory)
+            : factory(std::move(entityFactory)) {}
 
     bool loadMap(const std::string& filename);
     void printMap() const; //debug

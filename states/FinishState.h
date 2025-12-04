@@ -18,6 +18,8 @@
 
 class FinishState : public State {
 private:
+	std::shared_ptr<EntityFactory> factory;   // <-- toevoegen
+
 	sf::Font font;
 	sf::Text title;
 	int finalScore = 0;
@@ -26,7 +28,7 @@ private:
 	}
 
 public:
-	explicit FinishState(int score) : finalScore(score) {
+	explicit FinishState(int score) : finalScore(score), factory(std::move(factory))  {
 		font.loadFromFile("../assets/ARIAL.TTF");
 		title.setFont(font);
 		title.setFillColor(sf::Color::Green);

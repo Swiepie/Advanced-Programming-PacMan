@@ -14,8 +14,9 @@
 #include "../entities/Pacman.h"
 #include "../Stopwatch.h"
 #include <iostream>
+#include <utility>
 
-
+class World;
 class LevelState : public State {
 private:
     World world;
@@ -25,11 +26,15 @@ private:
     sf::Text lives;
     sf::Text score;
 public:
-    LevelState() {
+    explicit LevelState(std::shared_ptr<EntityFactory> factory)
+        : world(std::move(factory))         // <- correct
+
+    {
         world.loadMap("../assets/map.txt");
         world.printMap();
 
         font.loadFromFile("../assets/ARIAL.TTF");
+
         score.setFont(font);
         score.setString("score: " + std::to_string(world.getScore().get()));
         score.setFillColor(sf::Color::Yellow);

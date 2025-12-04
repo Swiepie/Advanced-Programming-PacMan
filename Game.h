@@ -10,6 +10,7 @@
 #include "Stopwatch.h"
 #include <iostream>
 #include <memory>
+#include "entities/EntityFactory.h"
 class Game {
 private:
     sf::RenderWindow window;

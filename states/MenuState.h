@@ -9,6 +9,7 @@
 #include "../Scoreboard.h"
 #include "LevelState.h"
 #include <SFML/Window/Event.hpp>
+#include "../entities/EntityFactory.h"
 #include <iostream>
 
 class MenuState : public State {
@@ -17,9 +18,10 @@ private:
     sf::Text title;
     sf::Text highscores;
     Scoreboard sb;
-
+    std::shared_ptr<EntityFactory> factory;
 public:
-    MenuState() : sb("highscores.txt") {
+    explicit MenuState(std::shared_ptr<EntityFactory> factory)
+        : factory(std::move(factory)) {
         sb.load();
 
         font.loadFromFile("../assets/ARIAL.TTF");

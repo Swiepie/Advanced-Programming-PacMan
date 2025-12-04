@@ -5,6 +5,11 @@
 #include "World.h"
 #include <cmath>
 bool World::loadMap(const std::string& filename) {
+    if (!factory) {
+        std::cerr << "Error: No EntityFactory set in World." << std::endl;
+        return false;
+    }
+
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: could not open map file " << filename << std::endl;
@@ -28,70 +33,69 @@ bool World::loadMap(const std::string& filename) {
     float tileHeight = 2.0f / numRows;
 
     entities.clear();
-    int i = 1;
+    ghostSpawnPositions.clear();
+    coinCount = 0;
+
+    int ghostCounter = 1;
+
     for (int row = 0; row < numRows; ++row) {
-        for ( int col = 0; col < numCols; ++col) {
+        for (int col = 0; col < numCols; ++col) {
             char c = lines[row][col];
 
             float x = -1.0f + floor(col) * tileWidth;
             float y = -1.0f + floor(row) * tileHeight;
+
             switch (c) {
                 case '#':
-                    // voeg een loop toe die alle kruisunten vindt/bochten in een vector en maak dan een nieuwe functie die als een object op een kruisount komt en dicht genoeg bij het hoekpunt is er gewoon naartoe teleporten, maar enkel als er al een input buffer is ingevoerd om af de road te gaan.
-                    entities.push_back(std::make_unique<Wall>(x, y));
-                break;
+                    entities.push_back(factory->createWall(x, y));
+                    break;
+
                 case '0':
-                    entities.push_back(std::make_unique<Coin>(x, y));
-                    coinCount = coinCount + 1;
-                break;
-                case 'P':{
-                    auto p = std::make_unique<Pacman>(x, y);
+                    entities.push_back(factory->createCoin(x, y));
+                    coinCount++;
+                    break;
+
+                case 'P': {
+                    auto p = factory->createPacman(x, y);
                     pacman = p.get();
                     p->setSpawn(x, y);
                     entities.push_back(std::move(p));
-
                     break;
                 }
+
                 case 'f':
-
-                    entities.push_back(std::make_unique<Fruit>(x, y));
-                    coinCount = coinCount + 1;
-                break;
-                case 'G':{
-
-                    if (i == 1) {
-                        auto g = std::make_unique<RedGhost>(x, y);
-                        g->setSpawn(x, y);
-                        ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
-                        i = i+1;
-                        break;
-                    }
-                    if (i==2) {
-                        auto g = std::make_unique<BlueGhost>(x, y, 0.0f);
-                        g->setSpawn(x, y);
-                        ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
-                        i = i+1;
-                        break;
-                    }
-                    if (i==3) {
-                        auto g = std::make_unique<BlueGhost>(x, y, 5.0f);
-                        g->setSpawn(x, y);
-                        ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
-                        i = i+1;
-                        break;
-                    }
-                    if (i==4) {
-                        auto g = std::make_unique<PinkGhost>(x, y, 10.0f);
-                        g->setSpawn(x, y);
-                        ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
-                        i = i+1;
-                    }
+                    entities.push_back(factory->createFruit(x, y));
+                    coinCount++;
                     break;
 
+                case 'G': {
+                    // Logic to cycle through ghost types
+                    if (ghostCounter == 1) {
+                        auto g = factory->createRedGhost(x, y);
+                        g->setSpawn(x, y);
+                        ghostSpawnPositions.push_back({x, y});
+                        entities.push_back(std::move(g));
+                    }
+                    else if (ghostCounter == 2) {
+                        auto g = factory->createBlueGhost(x, y, 0.0f);
+                        g->setSpawn(x, y);
+                        ghostSpawnPositions.push_back({x, y});
+                        entities.push_back(std::move(g));
+                    }
+                    else if (ghostCounter == 3) {
+                        auto g = factory->createBlueGhost(x, y, 5.0f); // Or maybe Orange/Different Logic
+                        g->setSpawn(x, y);
+                        ghostSpawnPositions.push_back({x, y});
+                        entities.push_back(std::move(g));
+                    }
+                    else if (ghostCounter == 4) {
+                        auto g = factory->createPinkGhost(x, y, 10.0f);
+                        g->setSpawn(x, y);
+                        ghostSpawnPositions.push_back({x, y});
+                        entities.push_back(std::move(g));
+                    }
+                    ghostCounter++;
+                    break;
                 }
                 default:
                     break;
