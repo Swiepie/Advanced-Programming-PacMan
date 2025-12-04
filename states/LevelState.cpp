@@ -34,7 +34,7 @@ void LevelState::update(StateManager& manager, float deltaTime)  {
     }
     if (world.getPacmanLives()<= 0 ) {
         int score = world.getScore().get();
-        manager.pushState(std::make_unique<FinishState>(score));
+        manager.pushState(std::make_unique<FinishState>(score, factory));
         world.getScore().submit();
 
     }

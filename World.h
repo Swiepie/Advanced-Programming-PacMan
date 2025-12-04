@@ -23,6 +23,7 @@
 #include "entities/Ghost.h"
 #include "entities/EntityFactory.h"
 #include "Score.h"
+#include "Visitor.h"
 class Ghost;
 class EntityFactory;
 class World {
@@ -44,7 +45,7 @@ private:
     // Death/Respawn states
     bool dies = false;
     float diesTime = 0.0f;
-    float respawnTimer = 2.0f;
+    float respawnTimer = 0.9f;
     bool death = false;
     float deathTime = 0.0f;
     bool reset = false;
@@ -52,7 +53,7 @@ private:
     Score score;
     // Fear mode
     bool fearmode = false;
-    float fearmodeTimer = 10.0f;
+    float fearmodeTimer = 6.0f;
     float fearmodeStart = 0.0f;
 
     // FACTORY POINTER
@@ -66,7 +67,7 @@ public:
     void update(float deltaTime);
 
     void setFearMode(bool fearmode);
-    bool getFearMode();
+    bool getFearMode() const;
     float getFearModeTimer() const;
     const std::vector<std::unique_ptr<Entity>>& getEntities() const;
     int getWidth() const;

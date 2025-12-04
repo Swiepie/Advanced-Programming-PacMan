@@ -19,16 +19,17 @@
 class World;
 class LevelState : public State {
 private:
+    std::shared_ptr<EntityFactory> factory;
     World world;
     WorldView renderer;
 
     sf::Font font;
     sf::Text lives;
     sf::Text score;
+
 public:
     explicit LevelState(std::shared_ptr<EntityFactory> factory)
-        : world(std::move(factory))         // <- correct
-
+            : factory(factory), world(factory)
     {
         world.loadMap("../assets/map.txt");
         world.printMap();

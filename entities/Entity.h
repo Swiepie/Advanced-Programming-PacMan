@@ -11,10 +11,11 @@
 
 #include <string>
 #include <memory>
+
 struct coord {
     float x, y;
 };
-
+class Visitor;
 class Pacman;
 class World;
 class Entity {
@@ -35,6 +36,7 @@ public:
     Entity(float x, float y, char sym) : position{x, y}, symbol(sym) {}
     virtual ~Entity() = default;
 
+    virtual void accept(Visitor& visitor) = 0;
     coord getPosition() const;
     char getSymbol() const;
     void setPosition(float x, float y);

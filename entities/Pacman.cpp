@@ -41,4 +41,6 @@ void Pacman::recordMoveTime(float currentTime) {
 float Pacman::getmoveCooldown() const {
     return moveCooldown;
 }
-
+void Pacman::accept(Visitor& visitor) {
+    visitor.visit(*this);
+}

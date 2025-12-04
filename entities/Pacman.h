@@ -9,6 +9,7 @@
 
 #include "Entity.h"
 #include "../Stopwatch.h"
+#include "../Visitor.h"
 class Pacman : public Entity {
 private:
     char direction;
@@ -35,6 +36,7 @@ public:
     char getDirection() const override;
     void setDirection(char direct);
     float getmoveCooldown() const;
+    void accept(Visitor& visitor) override;
 };
 
 

@@ -14,3 +14,7 @@ void Coin::onCollect(World& world) {
     world.getScore().add(worth);
     world.decreaseCoins();
 };
+
+void Coin::accept(Visitor& visitor) {
+    visitor.visit(*this);
+}

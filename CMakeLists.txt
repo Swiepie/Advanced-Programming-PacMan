@@ -43,6 +43,7 @@ set(SOURCES
         states/FinishState.cpp
         Scoreboard.cpp
         entities/EntityFactory.cpp
+        Visitor.cpp
 )
 
 set(HEADERS
@@ -65,6 +66,7 @@ set(HEADERS
         states/FinishState.h
         Scoreboard.h
         entities/EntityFactory.h
+        Visitor.h
 )
 
 # --- Executable ---

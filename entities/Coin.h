@@ -7,6 +7,7 @@
 
 #include "Entity.h"
 #include <iostream>
+#include "../Visitor.h"
 class Coin : public Entity {
 private:
     int worth = 10;
@@ -15,8 +16,9 @@ public:
 
     bool isCollectible() const override;
 
-    void onCollect(World& wprld) override;
+    void onCollect(World& world) override;
 
+    void accept(Visitor& visitor) override;
 
 };
 

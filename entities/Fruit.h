@@ -6,6 +6,7 @@
 #define FRUIT_H
 
 #include "Entity.h"
+#include "../Visitor.h"
 #include <iostream>
 #include "../World.h"
 
@@ -17,6 +18,8 @@ public:
 
 	bool isCollectible() const override;
 	void onCollect(World& world) override;
+
+	void accept(Visitor& visitor) override;
 };
 
 

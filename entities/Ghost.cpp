@@ -455,3 +455,12 @@ void Ghost::softSnapToTileCenter(World& world) {
         position.y = snapY;
     }
 }
+void RedGhost::accept(Visitor& visitor)  {
+    visitor.visit(*this);
+}
+void BlueGhost::accept(Visitor& visitor)  {
+    visitor.visit(*this);
+}
+void PinkGhost::accept(Visitor& visitor)  {
+    visitor.visit(*this);
+}

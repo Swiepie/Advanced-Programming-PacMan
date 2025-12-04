@@ -25,7 +25,7 @@ protected:
     float timeAlive = 0.0f;
 
     float fearTime = 0.0f;
-    float fearStartTime = 0.0f;\
+    float fearStartTime = 0.0f;
     bool inFearMode = false;
 public:
     Ghost(float x, float y, char sym = 'G', float delay = 0.0f)
@@ -57,9 +57,11 @@ public:
     void reverseDirection();
     float getMoveCooldown() const { return moveCooldown; }
     void reset() override{
+        chasing = false;
         hasBeenEaten = false;
         inFearMode = false;
         direction = 'N';     // of hun originele start-richting
+        chaseDelay = chaseDelay + timeAlive;
         resetToSpawn();
     }
 };
@@ -73,6 +75,7 @@ public:
     RedGhost(float x, float y);
     void update(float deltaTime, World& world, const Pacman& pacman) override;
     void chooseDirection(const Pacman& pacman);
+    void accept(Visitor& visitor) override;
 };
 
 // BlueGhost: Follows position "in front of" Pacman
@@ -81,14 +84,17 @@ public:
     BlueGhost(float x, float y, float delay);
     void update(float deltaTime, World& world, const Pacman& pacman) override;
     void chooseDirection(World& world, const Pacman& pacman);
+    void accept(Visitor& visitor) override;
 };
 
 // PinkGhost: Chases Pacman directly
 class PinkGhost : public Ghost {
 public:
+
     PinkGhost(float x, float y, float delay);
     void update(float deltaTime, World& world, const Pacman& pacman) override;
     void chooseDirection(World& world, const Pacman& pacman);
+    void accept(Visitor& visitor) override;
 };
 
 #endif //GHOST_H

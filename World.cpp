@@ -83,7 +83,7 @@ bool World::loadMap(const std::string& filename) {
                         entities.push_back(std::move(g));
                     }
                     else if (ghostCounter == 3) {
-                        auto g = factory->createBlueGhost(x, y, 5.0f); // Or maybe Orange/Different Logic
+                        auto g = factory->createBlueGhost(x, y, 5.0f);
                         g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
                         entities.push_back(std::move(g));
@@ -209,23 +209,11 @@ bool World::tryMove(Pacman* pacman, char dir) const {
     float stepH = 2.0f / height;
     float newX = pacman->getPosition().x + dx * stepW;
     float newY = pacman->getPosition().y + dy * stepH;
-
-    // Constante collision marge
-    const float COLLISION_MARGIN = 0.97;
-
-    for (auto& wall : entities) {
-        if (wall->getSymbol() == '#') {
-            float wallX = wall->getPosition().x;
-            float wallY = wall->getPosition().y;
-
-            float distX = std::fabs(newX - wallX);
-            float distY = std::fabs(newY - wallY);
-
-            bool overlapX = distX < stepW * COLLISION_MARGIN;
-            bool overlapY = distY < stepH * COLLISION_MARGIN;
-
-            if (overlapX && overlapY)
-                return false; // geblokkeerd
+    CollisionDetectionVisitor collisionVisitor(newX, newY, stepW, stepH);
+    for (auto& entity : entities) {
+        entity->accept(collisionVisitor);
+        if (collisionVisitor.hasCollision()) {
+            return false; // Blocked by wall
         }
     }
 
@@ -253,58 +241,40 @@ bool World::tryMove(Pacman* pacman, char dir) const {
 
 void World::checkCollisions() {
     if (!pacman) return;
-    bool ateGhostThisFrame = false;
 
-    // --- Collectibles Removal Loop ---
+    float stepW = 2.0f / width;
+    float stepH = 2.0f / height;
+
+    // Check collectibles
+    CollectibleVisitor collectibleVisitor(pacman, this, stepW, stepH);
+    for (auto& entity : entities) {
+        entity->accept(collectibleVisitor);
+    }
+
+    // Remove collected items
+    const auto& toRemove = collectibleVisitor.getToRemove();
     entities.erase(
         std::remove_if(entities.begin(), entities.end(),
-            [&](const std::unique_ptr<Entity>& e) {
-                // Check collision only for collectibles
-                if (e->isCollectible() && pacman->collidesWith(*e, 2.0f / width * 0.5f, 2.0f / height * 0.5f)) {
-                    e->onCollect(*this);
-                    return true; // Remove collectible
-                }
-                // Don't check ghost collision here, return false for all others
-                return false;
+            [&toRemove](const std::unique_ptr<Entity>& e) {
+                return std::find(toRemove.begin(), toRemove.end(), e.get()) != toRemove.end();
             }),
         entities.end()
     );
 
-    // --- Ghost Collision/Eating Loop ---
-    for (auto& e : entities) {
-        char eSym = e->getSymbol();
-        // Check collision only for ghosts
-        if ((eSym == 'G' || eSym == 'R' || eSym == 'B') && pacman->collidesWith(*e, 2.0f / width * 1.f, 2.0f / height * 1.f)) {
+    // Check ghost collisions
+    GhostCollisionVisitor ghostVisitor(pacman, this, stepW, stepH);
+    for (auto& entity : entities) {
+        entity->accept(ghostVisitor);
+    }
 
-            // Ghost Eating Logic
-            if (fearmode && e->getFearState() && !e->getHasBeenEaten() && !ateGhostThisFrame) {
-
-                int ghostIndex = Random::getInstance().getInt(0, 3);
-                e->setPosition(ghostSpawnPositions[ghostIndex].x, ghostSpawnPositions[ghostIndex].y);
-
-                // Reset state AFTER teleporting
-                e->resetFearState();
-                e->setHasBeenEaten(true);
-
-                score.add(200); // Score increase
-                ateGhostThisFrame = true; // Prevents eating another ghost this frame
-                // You can add logic here to ensure the score multiplier increases for subsequent ghosts if desired.
-
-            } //halloooo - Marie :)
-            // Pacman Dies Logic
-            else if (!fearmode || e->getHasBeenEaten()) {
-
-                if (!dies) { // <- veiligheid: sterf maar één keer per frame
-                    pacmanlives--;
-                    dies = true;
-                    diesTime = totTime;
-                    std::cout << "Lives: " << pacmanlives << std::endl;
-                }
-
-                return; // <--- STOP de hele collision functie
-            }
-
+    if (ghostVisitor.didPacmanDie()) {
+        if (!dies) {
+            pacmanlives--;
+            dies = true;
+            diesTime = totTime;
+            std::cout << "Lives: " << pacmanlives << std::endl;
         }
+        return;
     }
 }
 
@@ -363,6 +333,14 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     }
 
     ghost->setPosition(newX, newY);
+
+
+    // ✅ Update ghost direction based on actual movement
+    if (std::fabs(dx) > 0.001f) {
+        ghost->setDirection(dx > 0 ? 'O' : 'W');
+    } else if (std::fabs(dy) > 0.001f) {
+        ghost->setDirection(dy > 0 ? 'Z' : 'N');
+    }
     return true;
 }
 
@@ -467,7 +445,7 @@ void World::setFearMode(bool fearm) {
     }
     fearmode = fearm;
 }
-bool World::getFearMode() {
+bool World::getFearMode() const {
     return fearmode;
 }
 float World::getFearModeTimer() const {
@@ -517,34 +495,23 @@ void World::decreaseCoins() {
 void World::resetAfterDeath() {
     if (!pacman) return;
 
-    // 1) Respawn Pacman — snap naar tile-corner / top-left
+    // Set death state
     deathTime = totTime;
     death = true;
-    pacman->resetToSpawn();                       // zet op spawn coords
 
-    // 2) Clear input/buffer and freeze briefly
-    pacman->setBufferdirection(' ');    // clear buffered input
-    pacman->setDirection(' ');          // geen richting
+    // Create visitor to reset all entities
+    DeathVisitor visitor(this, totTime);
 
+    // Visit Pacman
+    pacman->accept(visitor);
 
-    // 3) Reset ghosts: teleport naar spawn en reset timers / fear state
+    // Visit all ghosts
     for (auto& e : entities) {
-        char s = e->getSymbol();
-        if (s == 'G' || s == 'R' || s == 'B') {
-            e->resetFearState();
-            e->setHasBeenEaten(false);
-            // verplaats naar eigen spawn (zorg dat elke ghost spawn bewaard is)
-            e->resetToSpawn();        // moet door Ghost/Entity ondersteund worden
-            // reset timer zodat ze opnieuw hun start delay gebruiken:
-            // als je Ghost een timeAlive of lastMoveTime heeft, zet het hier:
-            // voorkomt dat ze direct bewegen
-            // als je specifieke chaseDelay etc. gebruikt, zorg dat die teruggezet worden
-        }
+        e->accept(visitor);
     }
 
-    // 4) Zorg dat fearmode uit staat
+    // Disable fear mode
     fearmode = false;
-
     fearmodeStart = 0.f;
 }
 
