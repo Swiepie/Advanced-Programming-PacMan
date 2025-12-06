@@ -21,6 +21,8 @@ protected:
 	sf::Texture pacmanTexture;
 	sf::Sprite ghostSprite;
 public:
+	virtual ~GhostView() = default;
+
 	GhostView();
 
 	void setTexture(const sf::Texture& texture);

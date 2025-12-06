@@ -23,9 +23,7 @@ private:
 	sf::Font font;
 	sf::Text title;
 	int finalScore = 0;
-	void updateText() {
-		title.setString("Score: " + std::to_string(finalScore) + "\nPress SPACE to return to menu");
-	}
+	void updateText();
 
 public:
 	explicit FinishState(int score, std::shared_ptr<EntityFactory> factory) : finalScore(score), factory(std::move(factory))  {

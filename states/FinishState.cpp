@@ -51,3 +51,7 @@ void FinishState::onEnter() {
 	Stopwatch::getInstance().reset(); // reset + start timer when entering game
 	std::cout << "reset\n";
 }
+
+void FinishState::updateText() {
+	title.setString("Score: " + std::to_string(finalScore) + "\nPress SPACE to return to menu");
+}

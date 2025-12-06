@@ -523,5 +523,7 @@ void World::resetWorld() {
     rounds = rounds + 1;
     reset = true;
 }
-//zorg ervoor dat pacm pacman een constantte stapeenhijd vindt om van tile center naar tile canter te gaan met de snelheid, dit kan adhv modulo, of nog andere dingen.
-//doe dit ook voor de ghosts; zonder det het er glithcy uitziet.
+
+Score& World::getScore() {
+    return score;
+}

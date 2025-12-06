@@ -20,3 +20,7 @@ char Random::getRandomDirection() {
     std::uniform_int_distribution<int> dist(0, 3);
     return directions[dist(engine)];
 }
+
+std::mt19937& Random::getEngine() {
+    return engine;
+}

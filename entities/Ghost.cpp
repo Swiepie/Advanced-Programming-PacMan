@@ -109,6 +109,14 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
         direction = bestDirs[idx];
     }
 }
+void Ghost::reset() {
+    chasing = false;
+    hasBeenEaten = false;
+    inFearMode = false;
+    direction = 'N';     // of hun originele start-richting
+    chaseDelay = chaseDelay + timeAlive;
+    resetToSpawn();
+}
 // ============================================================================
 // RedGhost: Locks to one direction, reconsiders at intersections
 // ============================================================================

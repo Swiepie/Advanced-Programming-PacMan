@@ -49,8 +49,11 @@ private:
     bool death = false;
     float deathTime = 0.0f;
     bool reset = false;
+
+	// Score
     int rounds = 0;
     Score score;
+
     // Fear mode
     bool fearmode = false;
     float fearmodeTimer = 6.0f;
@@ -96,7 +99,7 @@ public:
     int getCoinCount() const;
 
     void resetWorld();
-    Score& getScore() { return score; }
+    Score& getScore();
 
     int getDeath();
 

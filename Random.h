@@ -37,7 +37,7 @@ public:
     char getRandomDirection();
 
     // Optional: expose the engine if needed
-    std::mt19937& getEngine() { return engine; }
+    std::mt19937& getEngine();
 
 };
 
