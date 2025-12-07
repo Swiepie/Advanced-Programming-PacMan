@@ -6,10 +6,9 @@
 #include <iostream>
 #include <cmath>
 coord Entity::getPosition() const {
-    return position; }
-char Entity::getSymbol() const {
-    return symbol;
+    return position;
 }
+
 void Entity::setPosition(float x, float y) {
     position.x = x;
     position.y = y;

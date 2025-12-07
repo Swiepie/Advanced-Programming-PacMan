@@ -32,7 +32,10 @@ bool World::loadMap(const std::string& filename) {
     float tileWidth  = 2.0f / numCols;
     float tileHeight = 2.0f / numRows;
 
-    entities.clear();
+    // Clear all vectors
+    walls.clear();
+    collectibles.clear();
+    ghosts.clear();
     ghostSpawnPositions.clear();
     coinCount = 0;
 
@@ -47,11 +50,11 @@ bool World::loadMap(const std::string& filename) {
 
             switch (c) {
                 case '#':
-                    entities.push_back(factory->createWall(x, y));
+                    walls.push_back(factory->createWall(x, y));
                     break;
 
                 case '0':
-                    entities.push_back(factory->createCoin(x, y));
+                    collectibles.push_back(factory->createCoin(x, y));
                     coinCount++;
                     break;
 
@@ -59,40 +62,39 @@ bool World::loadMap(const std::string& filename) {
                     auto p = factory->createPacman(x, y);
                     pacman = p.get();
                     p->setSpawn(x, y);
-                    entities.push_back(std::move(p));
+                    pacmanPtr = std::move(p);
                     break;
                 }
 
                 case 'f':
-                    entities.push_back(factory->createFruit(x, y));
+                    collectibles.push_back(factory->createFruit(x, y));
                     coinCount++;
                     break;
 
                 case 'G': {
-                    // Logic to cycle through ghost types
                     if (ghostCounter == 1) {
                         auto g = factory->createRedGhost(x, y);
                         g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
+                        ghosts.push_back(std::move(g));
                     }
                     else if (ghostCounter == 2) {
                         auto g = factory->createBlueGhost(x, y, 0.0f);
                         g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
+                        ghosts.push_back(std::move(g));
                     }
                     else if (ghostCounter == 3) {
                         auto g = factory->createBlueGhost(x, y, 5.0f);
                         g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
+                        ghosts.push_back(std::move(g));
                     }
                     else if (ghostCounter == 4) {
                         auto g = factory->createPinkGhost(x, y, 10.0f);
                         g->setSpawn(x, y);
                         ghostSpawnPositions.push_back({x, y});
-                        entities.push_back(std::move(g));
+                        ghosts.push_back(std::move(g));
                     }
                     ghostCounter++;
                     break;
@@ -133,26 +135,29 @@ void World::update(float deltaTime) {
         if (!(fearmodeTimer == 2)) {
             fearmodeTimer = fearmodeTimer - 0.5f;
         }
-        for (auto& e : entities) {
-            e->setSpeed(e->getSpeed()+0.5*rounds);
-
+        for (auto& g : ghosts) {
+            g->setSpeed(g->getSpeed() + 0.5 * rounds);
         }
+
         pacman->setSpeed(4);
         reset = false;
     }
-    for (auto& e : entities) {
-        e->update(deltaTime, *this, *pacman);
+    for (auto& g : ghosts) {
+        g->update(deltaTime, *this, *pacman  );
+    }
+    if (pacmanPtr) {
+        pacmanPtr->update(deltaTime);
     }
     if (fearmode) {
         if (fearmodeTimer + fearmodeStart <= totTime) {
             fearmode = false;
 
             // **reset fear status for all ghosts**
-            for (auto& e : entities) {
-                e->resetFearState();
-                e->softSnapToTileCenter(*this);
-                e->setHasBeenEaten(false); // reset eaten state when fear ends
-
+            for (auto& g : ghosts) {
+                std::cout <<"ghost speed: " << g->getSpeed() << "\n";
+                g->resetFearState();
+                g->softSnapToTileCenter(*this);
+                g->setHasBeenEaten(false);
             }
             std::cout << "Fear mode ended" << std::endl;
         }
@@ -179,8 +184,16 @@ void World::update(float deltaTime) {
 
 }
 
-const std::vector<std::unique_ptr<Entity>>& World::getEntities() const {
-    return entities;
+const std::vector<std::unique_ptr<Wall>>& World::getWalls() const {
+    return walls;
+}
+
+const std::vector<std::unique_ptr<Entity>>& World::getCollectibles() const {
+    return collectibles;
+}
+
+const std::vector<std::unique_ptr<Ghost>>& World::getGhosts() const {
+    return ghosts;
 }
 int World::getWidth() const {
     return width;
@@ -210,10 +223,10 @@ bool World::tryMove(Pacman* pacman, char dir) const {
     float newX = pacman->getPosition().x + dx * stepW;
     float newY = pacman->getPosition().y + dy * stepH;
     CollisionDetectionVisitor collisionVisitor(newX, newY, stepW, stepH);
-    for (auto& entity : entities) {
-        entity->accept(collisionVisitor);
+    for (auto& wall : walls) {
+        wall->accept(collisionVisitor);
         if (collisionVisitor.hasCollision()) {
-            return false; // Blocked by wall
+            return false;
         }
     }
 
@@ -247,24 +260,24 @@ void World::checkCollisions() {
 
     // Check collectibles
     CollectibleVisitor collectibleVisitor(pacman, this, stepW, stepH);
-    for (auto& entity : entities) {
-        entity->accept(collectibleVisitor);
+    for (auto& collectible : collectibles) {
+        collectible->accept(collectibleVisitor);
     }
 
     // Remove collected items
     const auto& toRemove = collectibleVisitor.getToRemove();
-    entities.erase(
-        std::remove_if(entities.begin(), entities.end(),
+    collectibles.erase(
+        std::remove_if(collectibles.begin(), collectibles.end(),
             [&toRemove](const std::unique_ptr<Entity>& e) {
                 return std::find(toRemove.begin(), toRemove.end(), e.get()) != toRemove.end();
             }),
-        entities.end()
+        collectibles.end()
     );
 
     // Check ghost collisions
     GhostCollisionVisitor ghostVisitor(pacman, this, stepW, stepH);
-    for (auto& entity : entities) {
-        entity->accept(ghostVisitor);
+    for (auto& ghost : ghosts) {
+        ghost->accept(ghostVisitor);
     }
 
     if (ghostVisitor.didPacmanDie()) {
@@ -280,14 +293,16 @@ void World::checkCollisions() {
 
 bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     if (!ghost) return false;
+
     float speed = ghost->getSpeed();
     float cd = deltaT;
     float dx = 0, dy = 0;
+
     switch (dir) {
         case 'N': dy = -1 * speed * cd; break;
-        case 'Z': dy =  1 * speed * cd; break;
+        case 'Z': dy = 1 * speed * cd; break;
         case 'W': dx = -1 * speed * cd; break;
-        case 'O': dx =  1 * speed * cd; break;
+        case 'O': dx = 1 * speed * cd; break;
         default: return false;
     }
 
@@ -296,53 +311,45 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     float newX = ghost->getPosition().x + dx * stepW;
     float newY = ghost->getPosition().y + dy * stepH;
 
-    // ✅ COLLISION DETECTION TOEVOEGEN
-    const float COLLISION_MARGIN = 0.965f; // Zelfde als Pacman
+    const float COLLISION_MARGIN = 0.965f;
 
-    for (auto& wall : entities) {
-        if (wall->getSymbol() == '#') {
-            float wallX = wall->getPosition().x;
-            float wallY = wall->getPosition().y;
+    for (auto& wall : walls) {
+        float wallX = wall->getPosition().x;
+        float wallY = wall->getPosition().y;
+        float distX = std::fabs(newX - wallX);
+        float distY = std::fabs(newY - wallY);
+        bool overlapX = distX < stepW * COLLISION_MARGIN;
+        bool overlapY = distY < stepH * COLLISION_MARGIN;
 
-            float distX = std::fabs(newX - wallX);
-            float distY = std::fabs(newY - wallY);
-
-            bool overlapX = distX < stepW * COLLISION_MARGIN;
-            bool overlapY = distY < stepH * COLLISION_MARGIN;
-
-            if (overlapX && overlapY)
-                return false; // ✅ Geblokkeerd door muur!
+        if (overlapX && overlapY) {
+            // ✅ COLLISION - Don't update anything
+            return false;
         }
     }
 
-    // Grid snap logica
     const float SNAP_THRESHOLD = 0.15f;
 
-    if (std::fabs(dx) > 0.001f) { // Horizontale beweging
+    if (std::fabs(dx) > 0.001f) {
         float gridY = std::round((newY + 1.0f) / stepH) * stepH - 1.0f;
         if (std::fabs(newY - gridY) < stepH * SNAP_THRESHOLD) {
             newY = gridY;
         }
     }
 
-    if (std::fabs(dy) > 0.001f) { // Verticale beweging
+    if (std::fabs(dy) > 0.001f) {
         float gridX = std::round((newX + 1.0f) / stepW) * stepW - 1.0f;
         if (std::fabs(newX - gridX) < stepW * SNAP_THRESHOLD) {
             newX = gridX;
         }
     }
 
+    // ✅ SUCCESS - Update position AND ensure direction matches
     ghost->setPosition(newX, newY);
+    ghost->setDirection(dir);
 
-
-    // ✅ Update ghost direction based on actual movement
-    if (std::fabs(dx) > 0.001f) {
-        ghost->setDirection(dx > 0 ? 'O' : 'W');
-    } else if (std::fabs(dy) > 0.001f) {
-        ghost->setDirection(dy > 0 ? 'Z' : 'N');
-    }
     return true;
 }
+
 
 bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     if (!ghost) return false;
@@ -388,15 +395,13 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     float newX = checkX + dx * stepW;
     float newY = checkY + dy * stepH;
 
-    for (auto& wall : entities) {
-        if (wall->getSymbol() == '#') {
-            float wallX = wall->getPosition().x;
-            float wallY = wall->getPosition().y;
-            bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW;
-            bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH;
-            if (overlapX && overlapY)
-                return false;
-        }
+    for (auto& wall : walls) {
+        float wallX = wall->getPosition().x;
+        float wallY = wall->getPosition().y;
+        bool overlapX = std::fabs(newX - wallX) + 0.0001 < stepW;
+        bool overlapY = std::fabs(newY - wallY) + 0.0001 < stepH;
+        if (overlapX && overlapY)
+            return false;
     }
     return true;
 }
@@ -440,8 +445,8 @@ bool World::isAtIntersection(const Ghost* ghost) const {
 
 
 void World::setFearMode(bool fearm) {
-    for (auto& e : entities) {
-        e->setFearState(fearm);
+    for (auto& g : ghosts) {
+        g->setFearState(fearm);
     }
     fearmode = fearm;
 }
@@ -506,8 +511,8 @@ void World::resetAfterDeath() {
     pacman->accept(visitor);
 
     // Visit all ghosts
-    for (auto& e : entities) {
-        e->accept(visitor);
+    for (auto& g : ghosts) {
+        g->accept(visitor);
     }
 
     // Disable fear mode

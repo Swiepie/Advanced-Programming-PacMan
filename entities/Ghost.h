@@ -28,8 +28,8 @@ protected:
     float fearStartTime = 0.0f;
     bool inFearMode = false;
 public:
-    Ghost(float x, float y, char sym = 'G', float delay = 0.0f)
-        : Entity(x, y, sym), chaseDelay(delay) {
+    Ghost(float x, float y, float delay = 0.0f)
+        : Entity(x, y), chaseDelay(delay) {
          speed = 2.5;
          speedSave = 1;
          fearSpeed = 1.5;

@@ -19,7 +19,7 @@ private:
 
 
 public:
-    Pacman(float x, float y) : Entity(x, y, 'P'), direction(' ') {
+    Pacman(float x, float y) : Entity(x, y), direction(' ') {
         speed = 4;
     }
 

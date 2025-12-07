@@ -11,7 +11,7 @@
 #include "../Visitor.h"
 class Wall : public Entity {
 public:
-    Wall(float x, float y) : Entity(x, y, '#') {}
+    Wall(float x, float y) : Entity(x, y) {}
     void accept(Visitor& visitor) override;
 };
 

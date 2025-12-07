@@ -44,6 +44,7 @@ set(SOURCES
         Scoreboard.cpp
         entities/EntityFactory.cpp
         Visitor.cpp
+        renderer/RenderVisitor.cpp
 )
 
 set(HEADERS
@@ -67,6 +68,7 @@ set(HEADERS
         Scoreboard.h
         entities/EntityFactory.h
         Visitor.h
+        renderer/RenderVisitor.h
 )
 
 # --- Executable ---

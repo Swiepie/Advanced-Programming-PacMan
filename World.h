@@ -31,9 +31,13 @@ private:
     int width = 0;
     int height = 0;
     std::vector<std::string> mapData;
-    std::vector<std::unique_ptr<Entity>> entities;
     std::vector<coord> ghostSpawnPositions;
+	// Separate vectors for different entity types
+	std::vector<std::unique_ptr<Wall>> walls;
+	std::vector<std::unique_ptr<Entity>> collectibles; // Coins + Fruits
+	std::vector<std::unique_ptr<Ghost>> ghosts;
 
+	std::unique_ptr<Pacman> pacmanPtr;
     Pacman* pacman = nullptr;
     int coinCount = 0;
     int pacmanlives = 3;
@@ -77,6 +81,9 @@ public:
     int getHeight() const;
 
     bool tryMove(Pacman* pacman, char dir) const;
+	const std::vector<std::unique_ptr<Wall>>& getWalls() const;
+	const std::vector<std::unique_ptr<Entity>>& getCollectibles() const;
+	const std::vector<std::unique_ptr<Ghost>>& getGhosts() const;
     Pacman* getPacman() const;
     void checkCollisions();
 

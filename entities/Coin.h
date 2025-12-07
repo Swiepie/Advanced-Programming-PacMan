@@ -12,7 +12,7 @@ class Coin : public Entity {
 private:
     int worth = 10;
 public:
-    Coin(float x, float y) : Entity(x, y, '.') {}
+    Coin(float x, float y) : Entity(x, y) {}
 
     bool isCollectible() const override;
 

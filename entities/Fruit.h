@@ -14,7 +14,7 @@ class Fruit : public Entity {
 private:
 	int worth = 50;
 public:
-	Fruit(float x, float y) : Entity(x, y, 'f') {}
+	Fruit(float x, float y) : Entity(x, y) {}
 
 	bool isCollectible() const override;
 	void onCollect(World& world) override;

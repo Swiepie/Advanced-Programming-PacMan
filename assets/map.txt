@@ -5,7 +5,7 @@
 #i#i##i##ii##i##i#i#
 #iiiiii#GGGG#iiiiii#
 #i#i##i######i##i#i#
-#i#iiiiiiPi0iiiii#i#
+#i#ifiiiiPi0iiiii#i#
 #i##i#i######i#i##i#
 #iiii#iiiiiiii#iiii#
 ####################

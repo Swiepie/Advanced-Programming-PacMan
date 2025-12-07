@@ -44,7 +44,6 @@ void GhostView::setTexture(const sf::Texture& texture) {
 	pacmanTexture = texture;
 }
 void GhostView::chooseTexture(char direction, float time){
-
 	if (readyFrame(time)) {
 		mouthOpen = !mouthOpen;
 		sf::IntRect rect;
@@ -62,7 +61,6 @@ void GhostView::chooseTexture(char direction, float time){
 									   : sf::IntRect(15, 0, 15, 15);
 			break;
 		}
-
 		ghostSprite.setTextureRect(rect);
 		recordFrameTime(time);
 	}
@@ -80,14 +78,7 @@ void GhostView::recordFrameTime(float currentTime) {
 	lastFrameTime = currentTime;
 }
 
-void RedGhostView::chooseTexture(char direction,  float time){
-
-	sf::Texture pacmanTexture;
-	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-		std::cerr << "Failed to load spritesheet" << std::endl;
-	}
-
-	setTexture(pacmanTexture);
+void RedGhostView::chooseTexture(char direction, float time){
 	if (readyFrame(time)) {
 		mouthOpen = !mouthOpen;
 		sf::IntRect rect;
@@ -110,83 +101,64 @@ void RedGhostView::chooseTexture(char direction,  float time){
 		recordFrameTime(time);
 	}
 }
-void BlueGhostView::chooseTexture(char direction,  float time){
+void BlueGhostView::chooseTexture(char direction, float time){
+    if (readyFrame(time)) {
+        mouthOpen = !mouthOpen;
+        sf::IntRect rect;
+        switch (direction) {
+            case 'N': rect = mouthOpen ? sf::IntRect(64, 96, 16, 16)
+                                       : sf::IntRect(80, 96, 16, 16);
+                break;
+            case 'Z': rect = mouthOpen ? sf::IntRect(96, 96, 16, 16)
+                                       : sf::IntRect(112, 96, 16, 16);
+                break;
+            case 'W': rect = mouthOpen ? sf::IntRect(32, 96, 16, 16)
+                                       : sf::IntRect(48, 96, 16, 16);
+                break;
+            case 'O': rect = mouthOpen ? sf::IntRect(0, 96, 16, 16)
+                                       : sf::IntRect(16, 96, 16, 16);
+                break;
+        }
 
-	sf::Texture pacmanTexture;
-	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-		std::cerr << "Failed to load spritesheet" << std::endl;
-	}
-
-	setTexture(pacmanTexture);
-	if (readyFrame(time)) {
-		mouthOpen = !mouthOpen;
-		sf::IntRect rect;
-		switch (direction) {
-			case 'N': rect = mouthOpen ? sf::IntRect(64, 96, 16, 16)
-									   : sf::IntRect(80, 96, 16, 16);
-			break;
-			case 'Z': rect = mouthOpen ? sf::IntRect(96, 96, 16, 16)
-									   : sf::IntRect(112, 96, 16, 16);
-			break;
-			case 'W': rect = mouthOpen ? sf::IntRect(32, 96, 16, 16)
-									   : sf::IntRect(48, 96, 16, 16);
-			break;
-			case 'O': rect = mouthOpen ? sf::IntRect(0, 96, 16, 16)
-									   : sf::IntRect(16, 96, 16, 16);
-			break;
-		}
-
-		ghostSprite.setTextureRect(rect);
-		recordFrameTime(time);
-	}
+        ghostSprite.setTextureRect(rect);
+        recordFrameTime(time);
+    }
 }
-void PinkGhostView::chooseTexture(char direction,  float time){
 
-	sf::Texture pacmanTexture;
-	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-		std::cerr << "Failed to load spritesheet" << std::endl;
-	}
+void PinkGhostView::chooseTexture(char direction, float time){
 
-	setTexture(pacmanTexture);
-	if (readyFrame(time)) {
-		mouthOpen = !mouthOpen;
-		//std::cout << direction << std::endl;
-		sf::IntRect rect;
-		switch (direction) {
-			case 'N': rect = mouthOpen ? sf::IntRect(64, 80, 16, 16)
-									   : sf::IntRect(80, 80, 16, 16);
-			break;
-			case 'Z': rect = mouthOpen ? sf::IntRect(96, 80, 16, 16)
-									   : sf::IntRect(112, 80, 16, 16);
-			break;
-			case 'W': rect = mouthOpen ? sf::IntRect(32, 80, 16, 16)
-									   : sf::IntRect(48, 80, 16, 16);
-			break;
-			case 'O': rect = mouthOpen ? sf::IntRect(0, 80, 16, 16)
-									   : sf::IntRect(16, 80, 16, 16);
-			break;
-		}
+    if (readyFrame(time)) {
+        mouthOpen = !mouthOpen;
+        sf::IntRect rect;
+        switch (direction) {
+            case 'N': rect = mouthOpen ? sf::IntRect(64, 80, 16, 16)
+                                       : sf::IntRect(80, 80, 16, 16);
+                break;
+            case 'Z': rect = mouthOpen ? sf::IntRect(96, 80, 16, 16)
+                                       : sf::IntRect(112, 80, 16, 16);
+                break;
+            case 'W': rect = mouthOpen ? sf::IntRect(32, 80, 16, 16)
+                                       : sf::IntRect(48, 80, 16, 16);
+                break;
+            case 'O': rect = mouthOpen ? sf::IntRect(0, 80, 16, 16)
+                                       : sf::IntRect(16, 80, 16, 16);
+                break;
+        }
 
-		ghostSprite.setTextureRect(rect);
-		recordFrameTime(time);
-	}
+        ghostSprite.setTextureRect(rect);
+        recordFrameTime(time);
+    }
 }
 
 void FearGhostView::chooseTexture(float time) {
 
-	sf::Texture pacmanTexture;
-	if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-		std::cerr << "Failed to load spritesheet" << std::endl;
-	}
+    if (readyFrame(time)) {
+        mouthOpen = !mouthOpen;
+        sf::IntRect rect;
+        rect = mouthOpen ? sf::IntRect(128, 64, 16, 16)
+                         : sf::IntRect(144, 64, 16, 16);
 
-	setTexture(pacmanTexture);
-	if (readyFrame(time)) {
-		mouthOpen = !mouthOpen;
-		sf::IntRect rect;
-		 rect = mouthOpen ? sf::IntRect(128, 64, 16, 16)
-									   : sf::IntRect(144, 64, 16, 16);
-
-		ghostSprite.setTextureRect(rect);
-		recordFrameTime(time);
-	}
+        ghostSprite.setTextureRect(rect);
+        recordFrameTime(time);
+    }
 }

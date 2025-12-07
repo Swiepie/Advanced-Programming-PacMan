@@ -122,7 +122,7 @@ void Ghost::reset() {
 // ============================================================================
 
 RedGhost::RedGhost(float x, float y)
-    : Ghost(x, y, 'R', 0.0f), lockedDirection('N') {
+    : Ghost(x, y, 0.0f), lockedDirection('N') {
     lockedDirection = Random::getInstance().getRandomDirection();
     setDirection(lockedDirection);
     setSpeed(speed);
@@ -210,8 +210,8 @@ void RedGhost::chooseDirection(const Pacman& pacman) {
 // ============================================================================
 
 BlueGhost::BlueGhost(float x, float y, float delay)
-    : Ghost(x, y, 'B', delay) {
-    setDirection(Random::getInstance().getRandomDirection());
+    : Ghost(x, y, delay) {
+    setDirection('O');
     setSpeed(speed);
 }
 
@@ -226,6 +226,8 @@ void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
         if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
             chooseDirectionFear(world, pacman);
         }
+
+        // ✅ Use the direction that was just chosen
         world.tryMoveGhost(this, direction);
         return;
     }
@@ -237,11 +239,12 @@ void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     }
     if (!chasing) return;
 
-    // Decision logic - only at intersections or when blocked
-    if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
+    // ✅ FIX: Reconsider direction when blocked OR at intersection
+    if (!world.canMoveInDirection(this, direction) || world.isAtIntersection(this)) {
         chooseDirection(world, pacman);
     }
 
+    // ✅ Move with the CURRENT direction (after potential update)
     world.tryMoveGhost(this, direction);
 }
 
@@ -320,6 +323,7 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
     if (!bestDirs.empty()) {
         int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
         direction = bestDirs[idx];
+
     }
 }
 
@@ -328,7 +332,7 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
 // ============================================================================
 
 PinkGhost::PinkGhost(float x, float y, float delay)
-    : Ghost(x, y, 'G', delay) {
+    : Ghost(x, y, delay) {
     setDirection(Random::getInstance().getRandomDirection());
     setSpeed(speed);
 }
@@ -422,7 +426,6 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
             bestDirs.push_back(d);
         }
     }
-
     // Choose random direction from best options
     if (!bestDirs.empty()) {
         int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
