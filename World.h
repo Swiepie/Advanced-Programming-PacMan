@@ -110,6 +110,8 @@ public:
 
     int getDeath();
 
+	int getRounds() const;
+
 };
 
 

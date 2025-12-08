@@ -18,7 +18,6 @@ void Entity::update(float deltaTime) {
 }
 
 bool Entity::collidesWith(const Entity& other, float stepW, float stepH) const {
-
     return (std::fabs(position.x - other.getPosition().x) < stepW && std::fabs(position.y - other.getPosition().y) < stepH);
 }
 
@@ -28,7 +27,6 @@ bool Entity::isCollectible() const {
 }
 
 void Entity::onCollect(World& world) {
-
 }
 
 double Entity::getSpeed() const {
@@ -38,4 +36,10 @@ double Entity::getSpeed() const {
 void Entity::setSpeed(double spd) {
     speed = spd;
     speedSave = spd;
+}
+void Entity::setSpawn(float x, float y) {
+    spawn.x = x; spawn.y = y;
+}
+void Entity::resetToSpawn() {
+    setPosition( spawn.x, spawn.y);
 }

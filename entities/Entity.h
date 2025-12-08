@@ -45,20 +45,10 @@ public:
     virtual bool isCollectible() const;
     virtual void onCollect(World& world);
 
-    virtual char getDirection() const { return direction; }
-
-    bool getHasBeenEaten() const { return hasBeenEaten; }
-    void setHasBeenEaten(bool val) { hasBeenEaten = val; }
-
     virtual void update(float deltaTime, World& world, const Pacman& pacman) {}
-    virtual void resetFearState() {}
-    virtual void setFearState(bool state)  {}
-    virtual bool getFearState() const { return false; }
-    virtual void softSnapToTileCenter(World& world) {}
 
-    void setSpawn(float x, float y) { spawn.x = x; spawn.y = y; }
-    void resetToSpawn() { setPosition( spawn.x, spawn.y); }
-    virtual void reset(){};
+    void setSpawn(float x, float y);
+    void resetToSpawn();
 
     double getSpeed() const;
     void setSpeed(double spd);

@@ -532,3 +532,8 @@ void World::resetWorld() {
 Score& World::getScore() {
     return score;
 }
+
+int World::getRounds() const {
+    return rounds;
+}
+

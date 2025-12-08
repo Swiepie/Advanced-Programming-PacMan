@@ -49,71 +49,12 @@ void Ghost::resetFearState() {
 
 }
 void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
-    float targetX = pacman.getPosition().x;
-    float targetY = pacman.getPosition().y;
-
-    float stepW = 2.0f / world.getWidth();
-    float stepH = 2.0f / world.getHeight();
-
-    char oppositeDir;
-    switch (direction) {
-        case 'N': oppositeDir = 'Z'; break;
-        case 'Z': oppositeDir = 'N'; break;
-        case 'W': oppositeDir = 'O'; break;
-        case 'O': oppositeDir = 'W'; break;
-        default:  oppositeDir = '?'; break;
-    }
-
-    // 1️⃣ Find all viable directions except opposite
-    std::vector<char> viableDirs;
-    for (char d : {'N', 'Z', 'W', 'O'}) {
-        if (d == oppositeDir) continue;
-        if (world.canMoveInDirection(this, d)) {
-            viableDirs.push_back(d);
-        }
-    }
-
-    // 2️⃣ If stuck (dead end), allow reversing
-    if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
-        viableDirs.push_back(oppositeDir);
-    }
-
-    // 3️⃣ Choose direction that MAXIMIZES Manhattan distance
-    float worstDist = -1.0f;
-    std::vector<char> bestDirs;
-
-    for (char d : viableDirs) {
-        float testX = position.x;
-        float testY = position.y;
-
-        switch (d) {
-            case 'N': testY -= stepH; break;
-            case 'Z': testY += stepH; break;
-            case 'W': testX -= stepW; break;
-            case 'O': testX += stepW; break;
-        }
-
-        float dist = std::fabs(targetX - testX) + std::fabs(targetY - testY);
-
-        if (dist > worstDist + 0.0001f) {
-            worstDist = dist;
-            bestDirs = {d};
-        } else if (std::fabs(dist - worstDist) < 0.0001f) {
-            bestDirs.push_back(d);
-        }
-    }
-
-    // 4️⃣ Choose from best candidates
-    if (!bestDirs.empty()) {
-        int idx = Random::getInstance().getInt(0, (int)bestDirs.size() - 1);
-        direction = bestDirs[idx];
-    }
 }
 void Ghost::reset() {
     chasing = false;
     hasBeenEaten = false;
     inFearMode = false;
-    direction = 'N';     // of hun originele start-richting
+    direction = '0';     // of hun originele start-richting
     chaseDelay = chaseDelay + timeAlive;
     resetToSpawn();
 }
@@ -333,7 +274,7 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
 
 PinkGhost::PinkGhost(float x, float y, float delay)
     : Ghost(x, y, delay) {
-    setDirection(Random::getInstance().getRandomDirection());
+    setDirection('O');
     setSpeed(speed);
 }
 

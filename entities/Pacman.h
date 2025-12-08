@@ -33,7 +33,7 @@ public:
     char getBufferdirection() const;
     void setBufferdirection(char direct);
     void applyBufferdirection();
-    char getDirection() const override;
+    char getDirection() const;
     void setDirection(char direct);
     float getmoveCooldown() const;
     void accept(Visitor& visitor) override;

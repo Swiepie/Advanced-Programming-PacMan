@@ -15,9 +15,6 @@ class World;
 class Ghost : public Entity {
 protected:
     float moveTimer = 0.0f;
-
-
-
     float lastMoveTime = 0.0f;
 
     bool chasing = false;
@@ -34,17 +31,20 @@ public:
          speedSave = 1;
          fearSpeed = 1.5;
     }
-    void softSnapToTileCenter(World& world) override;
+    void softSnapToTileCenter(World& world);
     void update(float deltaTime, World& world, const Pacman& pacman) override;
 
-    void setFearState(bool state) override;
-    void resetFearState() override;
-    bool getFearState() const override;
-
+    void setFearState(bool state);
+    void resetFearState();
+    bool getFearState() const;
 
 
     void addMoveTime(float dt);
 
+    virtual char getDirection() const { return direction; }
+
+    bool getHasBeenEaten() const { return hasBeenEaten; }
+    void setHasBeenEaten(bool val) { hasBeenEaten = val; }
 
     bool readyToMove(float currentTime) const;
 
@@ -56,7 +56,7 @@ public:
     void chooseDirectionFear(World& world, const Pacman& pacman);
     void reverseDirection();
     float getMoveCooldown() const { return moveCooldown; }
-    void reset() override;
+    void reset();
 };
 
 // RedGhost: Locked direction ghost, reconsiders at intersections
@@ -69,6 +69,7 @@ public:
     void update(float deltaTime, World& world, const Pacman& pacman) override;
     void chooseDirection(const Pacman& pacman);
     void accept(Visitor& visitor) override;
+
 };
 
 // BlueGhost: Follows position "in front of" Pacman
