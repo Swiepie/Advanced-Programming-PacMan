@@ -12,9 +12,6 @@
 class RenderVisitor : public Visitor {
 private:
 	sf::RenderWindow& window;
-	sf::Sprite& redSprite;
-	sf::Sprite& blueSprite;
-	sf::Sprite& pinkSprite;
 	sf::Sprite& fearSprite;
 	sf::Sprite& pacmanSprite;
 	float rectSize;
@@ -23,10 +20,9 @@ private:
 	float h, w;
 
 public:
-	RenderVisitor (sf::RenderWindow& win, sf::Sprite& red, sf::Sprite& blue,
-					   sf::Sprite& pink, sf::Sprite& fear, sf::Sprite& pacman,float size,
+	RenderVisitor (sf::RenderWindow& win, sf::Sprite& fear, sf::Sprite& pacman,float size,
 					   float winW, float winH, bool hFlag, float height, float width)
-		: window(win), redSprite(red), blueSprite(blue), pinkSprite(pink), pacmanSprite(pacman),
+		: window(win),  pacmanSprite(pacman),
 		  fearSprite(fear), rectSize(size), windowWidth(winW), windowHeight(winH),
 		  heightFlag(hFlag), h(height), w(width) {}
 
@@ -67,6 +63,17 @@ public:
 
 };
 
+class ViewCreatorVisitor : public Visitor {
+public:
+	std::unique_ptr<GhostView> view;
 
+	void visit(RedGhost& g) override { view = std::make_unique<RedGhostView>(); }
+	void visit(BlueGhost& g) override { view = std::make_unique<BlueGhostView>(); }
+	void visit(PinkGhost& g) override { view = std::make_unique<PinkGhostView>(); }
+	void visit(Wall& w) override {}
+	void visit(Coin& c) override {}
+	void visit(Fruit& f) override {}
+	void visit(Pacman& p) override {}
+};
 
 #endif //RENDERVISITOR_H

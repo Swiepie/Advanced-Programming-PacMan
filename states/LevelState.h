@@ -31,7 +31,7 @@ public:
     explicit LevelState(std::shared_ptr<EntityFactory> factory)
             : factory(factory), world(factory)
     {
-        world.loadMap("../assets/map.txt");
+        world.loadMap("../assets/map2.txt");
         world.printMap();
 
         font.loadFromFile("../assets/ARIAL.TTF");

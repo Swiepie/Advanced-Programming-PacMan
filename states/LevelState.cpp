@@ -39,7 +39,7 @@ void LevelState::update(StateManager& manager, float deltaTime)  {
 
     }
     if (world.getCoinCount() == 0) {
-        world.loadMap("../assets/map.txt");
+        world.loadMap("../assets/map2.txt");
         world.resetWorld();
     }
     world.update(deltaTime);

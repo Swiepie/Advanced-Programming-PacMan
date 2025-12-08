@@ -21,7 +21,6 @@ class PacMan;
 class EntityFactory {
 public:
 	virtual ~EntityFactory() = default;
-
 	virtual std::unique_ptr<Wall> createWall(float x, float y) = 0;
 	virtual std::unique_ptr<Coin> createCoin(float x, float y) = 0;
 	virtual std::unique_ptr<Fruit> createFruit(float x, float y) = 0;

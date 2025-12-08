@@ -27,13 +27,13 @@ void RenderVisitor::renderGhost(Ghost& ghost, sf::Sprite& sprite) {
 	window.draw(sprite);
 }
 void RenderVisitor::visit(RedGhost& ghost){
-	renderGhost(ghost, ghost.getFearState() ? fearSprite : redSprite);
+
 }
 void RenderVisitor::visit(BlueGhost& ghost){
-	renderGhost(ghost, ghost.getFearState() ? fearSprite : blueSprite);
+
 }
 void RenderVisitor::visit(PinkGhost& ghost){
-	renderGhost(ghost, ghost.getFearState() ? fearSprite : pinkSprite);
+
 }
 void RenderVisitor::visit(Wall& wall) {
 	auto pos = wall.getPosition();

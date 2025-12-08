@@ -54,7 +54,7 @@ void Ghost::reset() {
     chasing = false;
     hasBeenEaten = false;
     inFearMode = false;
-    direction = '0';     // of hun originele start-richting
+    direction = 'O';     // of hun originele start-richting
     chaseDelay = chaseDelay + timeAlive;
     resetToSpawn();
 }

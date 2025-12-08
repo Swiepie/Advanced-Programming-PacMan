@@ -30,6 +30,7 @@ public:
 	bool readyFrame(float currentTime) const;
 	void recordFrameTime(float currentTime);
 	sf::Sprite getSprite();
+
 };
 
 class RedGhostView : public GhostView {
