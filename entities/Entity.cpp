@@ -18,7 +18,21 @@ void Entity::update(float deltaTime) {
 }
 
 bool Entity::collidesWith(const Entity& other, float stepW, float stepH) const {
-    return (std::fabs(position.x - other.getPosition().x) < stepW && std::fabs(position.y - other.getPosition().y) < stepH);
+    float w = stepW;
+    float h = stepH;
+
+    float x1 = position.x;
+    float y1 = position.y;
+    float x2 = other.getPosition().x;
+    float y2 = other.getPosition().y;
+
+    bool separated =
+        x1 + w <= x2 ||   // pacman rechts niet voorbij andere links
+        x2 + w <= x1 ||   // andere rechts niet voorbij pacman links
+        y1 + h <= y2 ||   // pacman onderkant niet voorbij andere bovenkant
+        y2 + h <= y1;     // andere onderkant niet voorbij pacman bovenkant
+
+    return !separated;
 }
 
 

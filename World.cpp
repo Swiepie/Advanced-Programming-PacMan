@@ -178,11 +178,7 @@ void World::update(float deltaTime) {
             moved = true;
         }
     }
-
-    if (moved) {
-        //slaag de tijd op van laatste movement
         checkCollisions();
-    }
 
 }
 
@@ -277,7 +273,7 @@ void World::checkCollisions() {
     );
 
     // Check ghost collisions
-    GhostCollisionVisitor ghostVisitor(pacman, this, stepW, stepH);
+    GhostCollisionVisitor ghostVisitor(pacman, this, stepW*0.9f, stepH*0.9f);
     for (auto& ghost : ghosts) {
         ghost->accept(ghostVisitor);
     }

@@ -62,7 +62,6 @@ void GhostCollisionVisitor::visit(PinkGhost& ghost) {
 
 void GhostCollisionVisitor::handleGhostCollision(Ghost& ghost) {
 	if (!pacman || ghostEaten) return;
-
 	if (pacman->collidesWith(ghost, stepW * 1.0f, stepH * 1.0f)) {
 		if (world->getFearMode() && ghost.getFearState() && !ghost.getHasBeenEaten()) {
 			ghost.resetToSpawn();
