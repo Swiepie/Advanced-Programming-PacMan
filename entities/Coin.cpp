@@ -11,7 +11,7 @@ bool Coin::isCollectible() const {
 }
 
 void Coin::onCollect(World& world) {
-    world.getScore().add(worth);
+    world.getScore().addCoin(world.getTime());
     world.decreaseCoins();
 };
 

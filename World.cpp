@@ -142,6 +142,7 @@ void World::update(float deltaTime) {
         pacman->setSpeed(4);
         reset = false;
     }
+    score.update(totTime);
     for (auto& g : ghosts) {
         g->update(deltaTime, *this, *pacman  );
     }
@@ -159,6 +160,7 @@ void World::update(float deltaTime) {
                 g->softSnapToTileCenter(*this);
                 g->setHasBeenEaten(false);
             }
+            score.resetGhostCombo();
             std::cout << "Fear mode ended" << std::endl;
         }
     }

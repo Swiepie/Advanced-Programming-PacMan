@@ -30,4 +30,4 @@ std::unique_ptr<BlueGhost> DefaultEntityFactory::createBlueGhost(float x, float 
 std::unique_ptr<PinkGhost> DefaultEntityFactory::createPinkGhost(float x, float y, float delay)  {
 	return std::make_unique<PinkGhost>(x, y, delay);
 }
-// observer toevoegen en logic linken aan visuals
+// observer toevoegen en logic linken aan visualsa

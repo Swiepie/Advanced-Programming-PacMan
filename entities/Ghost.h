@@ -19,14 +19,17 @@ protected:
 
     bool chasing = false;
     float chaseDelay = 0.0f;
+    float ogChaseDelay = 0.0f;
+
     float timeAlive = 0.0f;
 
     float fearTime = 0.0f;
     float fearStartTime = 0.0f;
     bool inFearMode = false;
+
 public:
     Ghost(float x, float y, float delay = 0.0f)
-        : Entity(x, y), chaseDelay(delay) {
+        : Entity(x, y), chaseDelay(delay), ogChaseDelay(delay) {
          speed = 2.5;
          speedSave = 1;
          fearSpeed = 1.5;

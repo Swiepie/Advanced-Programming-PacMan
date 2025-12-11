@@ -68,7 +68,7 @@ void GhostCollisionVisitor::handleGhostCollision(Ghost& ghost) {
 			ghost.resetToSpawn();
 			ghost.resetFearState();
 			ghost.setHasBeenEaten(true);
-			world->getScore().add(200);
+			world->getScore().addGhost(200);
 			ghostEaten = true;
 		} else if (!world->getFearMode() || ghost.getHasBeenEaten()) {
 			pacmanDied = true;
