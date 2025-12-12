@@ -30,115 +30,119 @@ sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screen
 }
 
 
-void WorldView::render(const World& world, sf::RenderWindow& window, float windowWidth, float windowHeight) {
-    int currentRound = world.getRounds();
-    int currentLives = world.getPacmanLives();
-
-    // Clear cache if round changed OR if Pacman died (lives decreased)
-    if (currentRound != round || currentLives != lastLives) {
-        ghostViews.clear();
-        round = currentRound;
-        lastLives = currentLives;
-        std::cout << "Cache cleared. Round: " << currentRound << ", Lives: " << currentLives << std::endl;
-    }
-
-    float time = world.getTime();
-    Pacman* pacman = world.getPacman();
-
-    // ✅ Create a unique view for EACH ghost (not one per color!)
-    for (const auto& ghost : world.getGhosts()) {
-        if (ghostViews.find(ghost.get()) == ghostViews.end()) {
-            ViewCreatorVisitor creator;
-            ghost->accept(creator);
-            ghostViews[ghost.get()] = std::move(creator.view);
-
-            std::cout << "Created new view for ghost at " << ghost.get() << std::endl;
-        }
-    }
-
-    // Update Pacman texture
-    pacmanview.chooseTexture(pacman->getDirection(), time);
-
-    // Update fear ghost texture
-    fearghostview.chooseTexture(time);
-
-    // ✅ Update textures for each ghost using their individual view
-    for (const auto& ghost : world.getGhosts()) {
-        if (ghostViews.find(ghost.get()) != ghostViews.end()) {
-            ghostViews[ghost.get()]->chooseTexture(ghost->getDirection(), time);
-        }
-    }
+void WorldView::render(const World& world, sf::RenderWindow& window,
+                      float windowWidth, float windowHeight) {
 
     sf::View view = getWorldView(windowWidth, windowHeight);
     window.setView(view);
 
+    float time = world.getTime();
     float worldw = world.getWidth();
     float worldh = world.getHeight();
 
+    // Bereken pixelgrootte van een cel
     float rectSize = std::min(
-        windowWidth / static_cast<float>(world.getWidth()),
-        windowHeight / static_cast<float>(world.getHeight())
+        windowWidth / static_cast<float>(worldw),
+        windowHeight / static_cast<float>(worldh)
     );
 
     float w, h;
-    bool HeighthFlag;
-    if (worldw/worldh <= windowWidth/windowHeight) {
+    bool heightFlag;
+
+    // EXACT dezelfde aspect-ratio check als versie 1
+    if (worldw / worldh <= windowWidth / windowHeight) {
         h = windowHeight;
-        w = worldw*windowHeight/(worldh);
-        HeighthFlag = false;
+        w = worldw * windowHeight / worldh;
+        heightFlag = false;
     } else {
-        h = (worldh)/worldw*windowWidth;
+        h = (worldh / worldw) * windowWidth;
         w = windowWidth;
-        HeighthFlag = true;
+        heightFlag = true;
     }
 
-    // Get sprites
-    sf::Sprite pacmanSprite = pacmanview.getSprite();
-    sf::Sprite fearGhostSprite = fearghostview.getSprite();
-
-    // ✅ Simplified RenderVisitor - only needs fear sprite and pacman sprite
-    RenderVisitor renderVisitor(
-        window,
-        fearGhostSprite,
-        pacmanSprite,
-        rectSize,
-        windowWidth,
-        windowHeight,
-        HeighthFlag,
-        h,
-        w
-    );
-
+    // =============================
     // Render walls
+    // =============================
     for (auto& wall : world.getWalls()) {
-        wall->accept(renderVisitor);
+        auto pos = wall->getPosition();
+        auto screenPos = normalizeToScreen(pos.x, pos.y,
+                                           windowWidth, windowHeight,
+                                           heightFlag, h, w);
+
+        sf::RectangleShape rect({rectSize, rectSize});
+        rect.setFillColor(sf::Color::Blue);
+        rect.setPosition(screenPos);
+        window.draw(rect);
     }
 
-    // Render collectibles
+    // =============================
+    // Render collectibles (coins)
+    // =============================
     for (auto& collectible : world.getCollectibles()) {
-        collectible->accept(renderVisitor);
+        auto pos = collectible->getPosition();
+        auto screenPos = normalizeToScreen(pos.x, pos.y,
+                                           windowWidth, windowHeight,
+                                           heightFlag, h, w);
+
+        sf::CircleShape circle(rectSize / 10.f);
+        circle.setFillColor(sf::Color::Yellow);
+
+        // EXACT CENTREREN zoals visitor
+        circle.setPosition(screenPos.x + rectSize/2 - rectSize/10,
+                           screenPos.y + rectSize/2 - rectSize/10);
+
+        window.draw(circle);
     }
 
-    // Render each ghost using its individual view from ghostViews
-    for (const auto& ghost : world.getGhosts()) {
-        auto pos = ghost->getPosition();
-        auto screenPos = normalizeToScreen(pos.x, pos.y, windowWidth, windowHeight, HeighthFlag, h, w);
+    // =============================
+    // PACMAN (update + render)
+    // =============================
+    Pacman* pacman = world.getPacman();
+    if (pacman && pacman->getObserver()) {
 
-        sf::Sprite ghostSprite;
-        if (ghost->getFearState()) {
-            ghostSprite = fearghostview.getSprite();
-        } else if (ghostViews.find(ghost.get()) != ghostViews.end()) {
-            ghostSprite = ghostViews[ghost.get()]->getSprite();
-        } else {
-            std::cerr << "WARNING: No view found for ghost!" << std::endl;
-            continue;
+        EntityView* view = static_cast<EntityView*>(pacman->getObserver());
+
+        // Texture update identiek aan visitor
+        view->updateTexture(time);
+
+        auto pos = pacman->getPosition();
+        auto screenPos = normalizeToScreen(pos.x, pos.y,
+                                           windowWidth, windowHeight,
+                                           heightFlag, h, w);
+
+        sf::Sprite& sprite = view->getSprite();
+        sprite.setPosition(screenPos);
+
+        // SCALE exact als visitor
+        sprite.setScale(rectSize / 15.f, rectSize / 15.f);
+
+        window.draw(sprite);
+    }
+
+    // =============================
+    // GHOSTS (update + render)
+    // =============================
+    for (auto& ghost : world.getGhosts()) {
+        if (ghost->getObserver()) {
+
+            EntityView* view = static_cast<EntityView*>(ghost->getObserver());
+
+            // Texture update identiek aan visitor
+            view->updateTexture(time);
+
+            auto pos = ghost->getPosition();
+            auto screenPos = normalizeToScreen(pos.x, pos.y,
+                                               windowWidth, windowHeight,
+                                               heightFlag, h, w);
+
+            sf::Sprite& sprite = view->getSprite();
+            sprite.setPosition(screenPos);
+
+            // SCALE exact als visitor
+            sprite.setScale(rectSize / 16.f, rectSize / 16.f);
+
+            window.draw(sprite);
         }
-
-        ghostSprite.setPosition(screenPos);
-        ghostSprite.setScale(rectSize/16, rectSize/16);
-        window.draw(ghostSprite);
     }
-
-    // Render Pacman
-    pacman->accept(renderVisitor);
 }
+

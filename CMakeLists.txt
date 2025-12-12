@@ -45,6 +45,9 @@ set(SOURCES
         entities/EntityFactory.cpp
         Visitor.cpp
         renderer/RenderVisitor.cpp
+        entities/Subject.cpp
+        renderer/Observer.cpp
+        renderer/EntityView.cpp
 )
 
 set(HEADERS
@@ -69,6 +72,9 @@ set(HEADERS
         entities/EntityFactory.h
         Visitor.h
         renderer/RenderVisitor.h
+        entities/Subject.h
+        renderer/Observer.h
+        renderer/EntityView.h
 )
 
 # --- Executable ---

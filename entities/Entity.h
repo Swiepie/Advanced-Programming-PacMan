@@ -11,14 +11,14 @@
 
 #include <string>
 #include <memory>
-
+#include "Subject.h"
 struct coord {
     float x, y;
 };
 class Visitor;
 class Pacman;
 class World;
-class Entity {
+class Entity : public Subject{
 protected:
     double speed = 2.5;
     double speedSave = 1;
@@ -31,9 +31,9 @@ protected:
     bool frozen = false;
     float respawnTimer;
 public:
-
-    Entity(float x, float y) : position{x, y} {}
     virtual ~Entity() = default;
+    Entity(float x, float y) : position{x, y} {}
+
 
     virtual void accept(Visitor& visitor) = 0;
     coord getPosition() const;

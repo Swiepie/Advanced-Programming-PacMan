@@ -9,47 +9,34 @@
 #include <SFML/Graphics.hpp>
 #include "..//Stopwatch.h"
 #include <iostream>
+#include "EntityView.h"
+#include "../entities/Ghost.h"
 
-class GhostView {
-protected:
-	bool mouthOpen = true;
-	double frameCooldown = 1.0/15;
-	float frameTimer = 0.0f;
-	double speed = 1;
-	float lastFrameTime = 0.0f;
-
-	sf::Texture pacmanTexture;
-	sf::Sprite ghostSprite;
+class GhostView : public EntityView {
 public:
-	virtual ~GhostView() = default;
+	explicit GhostView(Ghost* ghost);
 
-	GhostView();
-
-	void setTexture(const sf::Texture& texture);
+	void update() override;
+	void updateTexture(float time) override;
 	virtual void chooseTexture(char direction, float time);
-	bool readyFrame(float currentTime) const;
-	void recordFrameTime(float currentTime);
-	sf::Sprite getSprite();
-
 };
 
 class RedGhostView : public GhostView {
 public:
-	RedGhostView();
-  	void chooseTexture(char direction, float time) override;
+	explicit RedGhostView(Ghost* ghost);
+	void chooseTexture(char direction, float time) override;
 };
 
 class BlueGhostView : public GhostView {
 public:
-	BlueGhostView();
+	explicit BlueGhostView(Ghost* ghost);
 	void chooseTexture(char direction, float time) override;
 };
 
 class PinkGhostView : public GhostView {
 public:
-	PinkGhostView();
+	explicit PinkGhostView(Ghost* ghost);
 	void chooseTexture(char direction, float time) override;
-
 };
 class FearGhostView : public GhostView {
 	public:

@@ -67,9 +67,9 @@ class ViewCreatorVisitor : public Visitor {
 public:
 	std::unique_ptr<GhostView> view;
 
-	void visit(RedGhost& g) override { view = std::make_unique<RedGhostView>(); }
-	void visit(BlueGhost& g) override { view = std::make_unique<BlueGhostView>(); }
-	void visit(PinkGhost& g) override { view = std::make_unique<PinkGhostView>(); }
+	void visit(RedGhost& g) override { view = std::make_unique<RedGhostView>(&g); }
+	void visit(BlueGhost& g) override { view = std::make_unique<BlueGhostView>(&g); }
+	void visit(PinkGhost& g) override { view = std::make_unique<PinkGhostView>(&g); }
 	void visit(Wall& w) override {}
 	void visit(Coin& c) override {}
 	void visit(Fruit& f) override {}

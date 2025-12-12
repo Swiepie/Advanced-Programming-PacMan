@@ -7,8 +7,11 @@
 
 #include <SFML/Graphics.hpp>
 #include "..//Stopwatch.h"
+#include "../entities/Pacman.h"
 #include <iostream>
-class PacmanView {
+#include "EntityView.h"
+#include "Camera.h"
+class PacmanView : public EntityView {
 private:
     float totalTime = 0.0;
     bool mouthOpen = true;
@@ -21,13 +24,11 @@ private:
     sf::Texture pacmanTexture;
     sf::Sprite pacmanSprite;
 public:
-    PacmanView();
+    explicit PacmanView(Pacman* pacman);
 
-    void setTexture(const sf::Texture& texture);
-    void chooseTexture(char direction , float time);
-    bool readyFrame(float currentTime) const;
-    void recordFrameTime(float currentTime);
-    sf::Sprite getSprite();
+    void update() override; // Observer pattern
+    void updateTexture(float time) override;
+    void chooseTexture(char direction, float time);
 };
 
 

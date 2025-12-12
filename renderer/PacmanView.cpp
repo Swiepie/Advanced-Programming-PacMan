@@ -4,62 +4,56 @@
 
 #include "PacmanView.h"
 #include <iostream>
-PacmanView::PacmanView() {
-  if (!pacmanTexture.loadFromFile("../sprites/pacman.png")) {
-    std::cerr << "Failed to load spritesheet" << std::endl;
+PacmanView::PacmanView(Pacman* pacman) : EntityView(pacman) {
+  if (!texture.loadFromFile("../sprites/pacman.png")) {
+    std::cerr << "Failed to load pacman spritesheet" << std::endl;
   }
-  pacmanSprite.setTexture(pacmanTexture);
-  pacmanSprite.setTextureRect(sf::IntRect(30, 0, 15, 15));
+  sprite.setTexture(texture);
+  sprite.setTextureRect(sf::IntRect(30, 0, 15, 15));
 }
 
-void PacmanView::setTexture(const sf::Texture& texture) {
-  pacmanTexture = texture;
+void PacmanView::update() {
+  // Called automatically when entity notifies
+  // Can be used for immediate reactions to state changes
 }
-void PacmanView::chooseTexture(char direction, float time){
 
+void PacmanView::updateTexture(float time) {
+  auto pacman = dynamic_cast<Pacman*>(entity);
+  chooseTexture(pacman->getDirection(), time);
+}
 
-  setTexture(pacmanTexture);
-
+void PacmanView::chooseTexture(char direction, float time) {
   if (readyFrame(time)) {
     mouthOpen = !mouthOpen;
     sf::IntRect rect;
+
     switch (direction) {
       case 'N': rect = mouthOpen ? sf::IntRect(0, 30, 15, 15)
-                                 : sf::IntRect(15, 30, 15, 15);
+                                : sf::IntRect(15, 30, 15, 15);
       break;
       case 'Z': rect = mouthOpen ? sf::IntRect(0, 45, 15, 15)
-                                 : sf::IntRect(15, 45, 15, 15);
+                                : sf::IntRect(15, 45, 15, 15);
       break;
       case 'W': rect = mouthOpen ? sf::IntRect(0, 15, 15, 15)
-                                 : sf::IntRect(15, 15, 15, 15);
+                                : sf::IntRect(15, 15, 15, 15);
       break;
       case 'O': rect = mouthOpen ? sf::IntRect(0, 0, 15, 15)
-                                 : sf::IntRect(15, 0, 15, 15);
+                                : sf::IntRect(15, 0, 15, 15);
       break;
-      case ' ': rect =  sf::IntRect(30, 0, 15, 15);
+      case ' ': rect = sf::IntRect(30, 0, 15, 15);
       break;
       case 'D': {
-        rect = sf::IntRect(15*i, 0, 15, 15);
-        i = i + 1;
+        rect = sf::IntRect(15 * i, 0, 15, 15);
+        i++;
         if (i == 14) {
           i = 2;
         }
+        break;
       }
     }
 
-    pacmanSprite.setTextureRect(rect);
+    sprite.setTextureRect(rect);
     recordFrameTime(time);
   }
 }
 
-sf::Sprite PacmanView::getSprite() {
-  return pacmanSprite;
-}
-
-bool PacmanView::readyFrame(float currentTime) const {
-  return (currentTime - lastFrameTime) >= frameCooldown;
-}
-
-void PacmanView::recordFrameTime(float currentTime) {
-  lastFrameTime = currentTime;
-}

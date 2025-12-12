@@ -12,9 +12,10 @@ coord Entity::getPosition() const {
 void Entity::setPosition(float x, float y) {
     position.x = x;
     position.y = y;
+    notify();
 }
 void Entity::update(float deltaTime) {
-
+    notify();
 }
 
 bool Entity::collidesWith(const Entity& other, float stepW, float stepH) const {
