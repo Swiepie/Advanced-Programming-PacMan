@@ -49,7 +49,7 @@ private:
     // Death/Respawn states
     bool dies = false;
     float diesTime = 0.0f;
-    float respawnTimer = 0.9f;
+    float respawnTimer = 0.98f;
     bool death = false;
     float deathTime = 0.0f;
     bool reset = false;
@@ -91,7 +91,7 @@ public:
     bool tryMoveGhost(Ghost* ghost, char dir) const;
     bool canMoveInDirection(const Ghost* ghost, char dir) const;
     bool isAtIntersection(const Ghost* ghost) const;
-
+	bool willCrossTileCenter(const Ghost* ghost, char dir) const;
     int getPacmanLives() const;
 
     int getScore() const;

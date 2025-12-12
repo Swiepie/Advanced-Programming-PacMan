@@ -220,6 +220,7 @@ bool World::tryMove(Pacman* pacman, char dir) const {
     float stepH = 2.0f / height;
     float newX = pacman->getPosition().x + dx * stepW;
     float newY = pacman->getPosition().y + dy * stepH;
+    std::cout << 1.f/deltaT << std::endl;
     CollisionDetectionVisitor collisionVisitor(newX, newY, stepW, stepH);
     for (auto& wall : walls) {
         wall->accept(collisionVisitor);
@@ -228,9 +229,9 @@ bool World::tryMove(Pacman* pacman, char dir) const {
         }
     }
 
-    const float SNAP_THRESHOLD = 0.65f;
+    const float SNAP_THRESHOLD = 0.60f;
 
-    if (std::fabs(dx) > 0.001f) { // Horizontale beweging
+    if (std::fabs(dx) > 0.05f) { // Horizontale beweging
         // Snap Y naar dichtstbijzijnde grid lijn
         float gridY = std::round((newY + 1.0f) / stepH) * stepH - 1.0f;
         if (std::fabs(newY - gridY) < stepH * SNAP_THRESHOLD) {
@@ -238,7 +239,7 @@ bool World::tryMove(Pacman* pacman, char dir) const {
         }
     }
 
-    if (std::fabs(dy) > 0.001f) { // Verticale beweging
+    if (std::fabs(dy) > 0.05f) { // Verticale beweging
         // Snap X naar dichtstbijzijnde grid lijn
         float gridX = std::round((newX + 1.0f) / stepW) * stepW - 1.0f;
         if (std::fabs(newX - gridX) < stepW * SNAP_THRESHOLD) {
@@ -288,7 +289,6 @@ void World::checkCollisions() {
         return;
     }
 }
-
 bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     if (!ghost) return false;
 
@@ -306,11 +306,14 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
 
     float stepW = 2.0f / width;
     float stepH = 2.0f / height;
-    float newX = ghost->getPosition().x + dx * stepW;
-    float newY = ghost->getPosition().y + dy * stepH;
+    float currentX = ghost->getPosition().x;
+    float currentY = ghost->getPosition().y;
+    float newX = currentX + dx * stepW;
+    float newY = currentY + dy * stepH;
 
     const float COLLISION_MARGIN = 0.965f;
 
+    // Check wall collisions
     for (auto& wall : walls) {
         float wallX = wall->getPosition().x;
         float wallY = wall->getPosition().y;
@@ -320,28 +323,28 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
         bool overlapY = distY < stepH * COLLISION_MARGIN;
 
         if (overlapX && overlapY) {
-            // ✅ COLLISION - Don't update anything
             return false;
         }
     }
 
-    const float SNAP_THRESHOLD = 0.15f;
+    // ✅ GENTLE SNAP: Only snap perpendicular axis when moving, no forced intersection snapping
+    const float SNAP_THRESHOLD = 0.05f; // Only snap if within 8% of grid line
 
-    if (std::fabs(dx) > 0.001f) {
+    if (std::fabs(dx) > 0.001f) { // Horizontal movement
         float gridY = std::round((newY + 1.0f) / stepH) * stepH - 1.0f;
         if (std::fabs(newY - gridY) < stepH * SNAP_THRESHOLD) {
             newY = gridY;
         }
     }
 
-    if (std::fabs(dy) > 0.001f) {
+    if (std::fabs(dy) > 0.001f) { // Vertical movement
         float gridX = std::round((newX + 1.0f) / stepW) * stepW - 1.0f;
         if (std::fabs(newX - gridX) < stepW * SNAP_THRESHOLD) {
             newX = gridX;
         }
     }
 
-    // ✅ SUCCESS - Update position AND ensure direction matches
+    // Update position and direction
     ghost->setPosition(newX, newY);
     ghost->setDirection(dir);
 
@@ -363,7 +366,6 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
         default: return false;
     }
 
-    // ✅ CORNER CUTTING: Use ghost's actual position OR snapped position for checking
     float checkX = ghost->getPosition().x;
     float checkY = ghost->getPosition().y;
 
@@ -373,7 +375,6 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     if (changingDirection) {
         const float CORNER_CUT_THRESHOLD = 0.05f;
 
-        // If checking horizontal move, use snapped Y
         if (dir == 'W' || dir == 'O') {
             float gridY = std::round((checkY + 1.0f) / stepH) * stepH - 1.0f;
             if (std::fabs(checkY - gridY) < stepH * CORNER_CUT_THRESHOLD) {
@@ -381,7 +382,6 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
             }
         }
 
-        // If checking vertical move, use snapped X
         if (dir == 'N' || dir == 'Z') {
             float gridX = std::round((checkX + 1.0f) / stepW) * stepW - 1.0f;
             if (std::fabs(checkX - gridX) < stepW * CORNER_CUT_THRESHOLD) {
@@ -407,12 +407,26 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
 bool World::isAtIntersection(const Ghost* ghost) const {
     if (!ghost) return false;
 
+    float stepW = 2.0f / width;
+    float stepH = 2.0f / height;
 
-    // **DE FIX:** Een spook kan alleen op een kruispunt zijn
-    // als het zich op een tegel-knooppunt (grid corner) bevindt.
-    if (!isOnTileCenter(ghost)) {
+    float x = ghost->getPosition().x;
+    float y = ghost->getPosition().y;
+
+    float centerX = std::round((x + 1.0f) / stepW) * stepW - 1.0f;
+    float centerY = std::round((y + 1.0f) / stepH) * stepH - 1.0f;
+
+    float dx = std::fabs(centerX - x);
+    float dy = std::fabs(centerY - y);
+
+    // ✅ Ghost must be within 20% of tile center to check for intersection
+    float snapMargin = 0.02f;
+    bool nearCenter = (dx < stepW * snapMargin && dy < stepH * snapMargin);
+
+    if (!nearCenter) {
         return false;
     }
+
     char currentDir = ghost->getDirection();
     int viableMoves = 0;
     int perpendicularMoves = 0;
@@ -421,7 +435,6 @@ bool World::isAtIntersection(const Ghost* ghost) const {
         if (canMoveInDirection(ghost, d)) {
             viableMoves++;
 
-            // Check if this is perpendicular to current direction
             bool perpendicular = false;
             if ((currentDir == 'N' || currentDir == 'Z') && (d == 'W' || d == 'O')) {
                 perpendicular = true;
@@ -435,10 +448,24 @@ bool World::isAtIntersection(const Ghost* ghost) const {
         }
     }
 
-    // Intersection if:
-    // - More than 2 viable moves (T-junction or crossroads), OR
-    // - Exactly 2 viable moves with at least one perpendicular option (corner)
     return (viableMoves > 2) || (viableMoves >= 2 && perpendicularMoves > 0);
+}
+
+bool World::isOnTileCenter(const Entity* e) const {
+    float stepW = 2.f / width;
+    float stepH = 2.f / height;
+
+    float x = e->getPosition().x;
+    float y = e->getPosition().y;
+
+    float centerX = std::round((x + 1.0f) / stepW) * stepW - 1.0f;
+    float centerY = std::round((y + 1.0f) / stepH) * stepH - 1.0f;
+
+    float dx = std::fabs(centerX - x);
+    float dy = std::fabs(centerY - y);
+
+    float snapMargin = 0.03f; // 8% of a tile
+    return (dx < stepW * snapMargin && dy < stepH * snapMargin);
 }
 
 
@@ -461,29 +488,6 @@ void World::setFearModeStart(float timer) {
 int World::getPacmanLives() const{
     return pacmanlives;
 }
-
-
-bool World::isOnTileCenter(const Entity* e) const {
-    float stepW = 2.f / width;
-    float stepH = 2.f / height;
-
-    float x = e->getPosition().x;
-    float y = e->getPosition().y;
-
-    // **AANGEPAST:** Bereken dichtstbijzijnde knooppunt (grid-hoek)
-    // rekening houdend met de -1.0f offset
-    float centerX = std::round((x + 1.0f) / stepW) * stepW - 1.0f;
-    float centerY = std::round((y + 1.0f) / stepH) * stepH - 1.0f;
-
-    float dx = std::fabs(centerX - x);
-    float dy = std::fabs(centerY - y);
-
-    // **AANGEPAST:** Gebruik een kleine *relatieve* marge, geen harde 0.0001
-    // Dit moet kleiner zijn dan de SNAP_THRESHOLD in tryMove.
-    float snapMargin = 0.01f; // 1% van een tile
-    return (dx < stepW * snapMargin && dy < stepH * snapMargin);
-}
-
 
 
 float World::getTime() const {
