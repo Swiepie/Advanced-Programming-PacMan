@@ -47,8 +47,8 @@ public:
         lives.setFillColor(sf::Color::Green);
     }
 
-    void handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) override;
-    void update(StateManager& manager, float deltaTime) override;
+    void handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) override;
+    void update(std::shared_ptr<StateManager> stateManager, float deltaTime) override;
     void render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) override;
     void onEnter() override;
     void onExit() override;

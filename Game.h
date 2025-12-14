@@ -19,7 +19,7 @@ struct FileDimensions {
 class Game {
 private:
     std::shared_ptr<sf::RenderWindow> window;
-    StateManager stateManager;
+    std::shared_ptr<StateManager> stateManager;
     int framerate = 60;
 public:
     static FileDimensions getFileDimensions(const std::string& filename);

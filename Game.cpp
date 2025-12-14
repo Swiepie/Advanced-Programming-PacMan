@@ -10,7 +10,7 @@ Game::Game()
         sf::VideoMode(1300, 800),
         "Pac-Man"
     );
-
+    stateManager = std::make_shared<StateManager>();
     Stopwatch::getInstance().start();
     window->setFramerateLimit(framerate);
 
@@ -22,7 +22,7 @@ Game::Game()
         static_cast<int>(dimensions.width)
     );
 
-    stateManager.pushState(std::make_unique<MenuState>(factory));
+    stateManager->pushState(std::make_unique<MenuState>(factory));
 }
 
 
@@ -31,7 +31,7 @@ void Game::run() {
 
         float deltaTime = Stopwatch::getInstance().GetElapsedTime();
 
-        State* current = stateManager.currentState();
+        State* current = stateManager->currentState();
 
         sf::Event event{};
         unsigned int windowWidth = window->getSize().x;
@@ -59,7 +59,7 @@ void Game::run() {
         }
         Stopwatch::getInstance().restart();
         window->display();
-        stateManager.processStateChanges();
+        stateManager->processStateChanges();
     }
 }
 

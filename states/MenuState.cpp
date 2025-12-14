@@ -4,9 +4,9 @@
 
 #include "MenuState.h"
 
-void MenuState::handleEvent(StateManager& manager,std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
+void MenuState::handleEvent(std::shared_ptr<StateManager> stateManager,std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
-        manager.pushState(std::make_unique<LevelState>(factory)); // go to the level
+        stateManager->pushState(std::make_unique<LevelState>(factory)); // go to the level
     } else if (event.type == sf::Event::Closed) {
         window->close();
     }

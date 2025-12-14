@@ -5,14 +5,14 @@
 #include "LevelState.h"
 
 
-void LevelState::handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
+void LevelState::handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
     if (event.type == sf::Event::Closed)
         window->close();
 
 
     else if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape) {
-            manager.pushState(std::make_unique<PausedState>()); // back to menu
+            stateManager->pushState(std::make_unique<PausedState>()); // back to menu
         }
 
         auto pacman = world.getPacman();
@@ -28,13 +28,13 @@ void LevelState::handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWi
     }
 }
 
-void LevelState::update(StateManager& manager, float deltaTime)  {
+void LevelState::update(std::shared_ptr<StateManager> stateManager, float deltaTime)  {
     if (deltaTime > 0.5) {
         return;
     }
     if (world.getPacmanLives()<= 0 ) {
         int score = world.getScore().get();
-        manager.pushState(std::make_unique<FinishState>(score, factory));
+        stateManager->pushState(std::make_unique<FinishState>(score, factory));
         world.getScore().submit();
 
     }
@@ -46,7 +46,7 @@ void LevelState::update(StateManager& manager, float deltaTime)  {
 }
 void LevelState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight)  {
 
-    renderer.render(world, window, windowWidth, windowHeight);
+    WorldView::render(world, window, windowWidth, windowHeight);
 
     float verticalOffset = 40.f;
 
