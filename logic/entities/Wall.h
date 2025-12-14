@@ -5,15 +5,12 @@
 #ifndef WALL_H
 #define WALL_H
 
-
-
-#include "Entity.h"
 #include "../Visitor.h"
+#include "Entity.h"
 class Wall : public Entity {
 public:
-    Wall(float x, float y) : Entity(x, y) {}
-    void accept(Visitor& visitor) override;
+  Wall(float x, float y) : Entity(x, y) {}
+  void accept(Visitor &visitor) override;
 };
 
-
-#endif //WALL_H
+#endif // WALL_H

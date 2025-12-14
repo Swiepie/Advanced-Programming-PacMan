@@ -6,15 +6,11 @@
 
 #include "../World.h"
 
-bool Coin::isCollectible() const {
-    return true;
-}
+bool Coin::isCollectible() const { return true; }
 
-void Coin::onCollect(World& world) {
-    world.getScore().addCoin(world.getTime());
-    world.decreaseCoins();
+void Coin::onCollect(World &world) {
+  world.getScore().addCoin(world.getTime());
+  world.decreaseCoins();
 };
 
-void Coin::accept(Visitor& visitor) {
-    visitor.visit(*this);
-}
+void Coin::accept(Visitor &visitor) { visitor.visit(*this); }

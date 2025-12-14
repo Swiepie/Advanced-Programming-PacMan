@@ -5,21 +5,21 @@
 #ifndef COIN_H
 #define COIN_H
 
+#include "../Visitor.h"
 #include "Entity.h"
 #include <iostream>
-#include "../Visitor.h"
 class Coin : public Entity {
 private:
-    int worth = 10;
+  int worth = 10;
+
 public:
-    Coin(float x, float y) : Entity(x, y) {}
+  Coin(float x, float y) : Entity(x, y) {}
 
-    bool isCollectible() const override;
+  bool isCollectible() const override;
 
-    void onCollect(World& world) override;
+  void onCollect(World &world) override;
 
-    void accept(Visitor& visitor) override;
-
+  void accept(Visitor &visitor) override;
 };
 
-#endif //COIN_H
+#endif // COIN_H

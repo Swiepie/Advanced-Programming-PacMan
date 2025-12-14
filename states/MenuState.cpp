@@ -4,52 +4,51 @@
 
 #include "MenuState.h"
 
-void MenuState::handleEvent(std::shared_ptr<StateManager> stateManager,std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
-    if (event.type == sf::Event::KeyPressed) {
-        stateManager->pushState(std::make_unique<LevelState>(factory)); // go to the level
-    } else if (event.type == sf::Event::Closed) {
-        window->close();
-    }
+void MenuState::handleEvent(std::shared_ptr<StateManager> stateManager,
+                            std::shared_ptr<sf::RenderWindow> window,
+                            const sf::Event &event) {
+  if (event.type == sf::Event::KeyPressed) {
+    stateManager->pushState(
+        std::make_unique<LevelState>(factory)); // go to the level
+  } else if (event.type == sf::Event::Closed) {
+    window->close();
+  }
 }
-void MenuState::render(std::shared_ptr<sf::RenderWindow> window,unsigned int windowWidth, unsigned int windowHeight) {
+void MenuState::render(std::shared_ptr<sf::RenderWindow> window,
+                       unsigned int windowWidth, unsigned int windowHeight) {
 
-    sf::Vector2f viewSize = window->getView().getSize();
-    sf::Vector2f viewCenter = window->getView().getCenter();
+  sf::Vector2f viewSize = window->getView().getSize();
+  sf::Vector2f viewCenter = window->getView().getCenter();
 
-    //
-    // ───── TITLE ─────────────────────────────────────────────
-    //
-    float preferredHeight = viewSize.y * 0.10f;
-    float titleHeight = title.getLocalBounds().height;
-    float scaleY = preferredHeight / titleHeight;
+  //
+  // ───── TITLE ─────────────────────────────────────────────
+  //
+  float preferredHeight = viewSize.y * 0.10f;
+  float titleHeight = title.getLocalBounds().height;
+  float scaleY = preferredHeight / titleHeight;
 
-    float maxWidth = viewSize.x * 0.80f;
-    float titleWidth = title.getLocalBounds().width;
-    float scaleX = maxWidth / titleWidth;
-    float scale = std::min(scaleX, scaleY);
+  float maxWidth = viewSize.x * 0.80f;
+  float titleWidth = title.getLocalBounds().width;
+  float scaleX = maxWidth / titleWidth;
+  float scale = std::min(scaleX, scaleY);
 
-    title.setScale(scale, scale);
+  title.setScale(scale, scale);
 
-    title.setOrigin(
-        title.getLocalBounds().width / 2.f,
-        title.getLocalBounds().height / 2.f
-    );
-    title.setPosition(viewCenter.x, viewCenter.y - viewSize.y * 0.15f);
+  title.setOrigin(title.getLocalBounds().width / 2.f,
+                  title.getLocalBounds().height / 2.f);
+  title.setPosition(viewCenter.x, viewCenter.y - viewSize.y * 0.15f);
 
-    window->draw(title);
+  window->draw(title);
 
-    //
-    // ───── HIGHSCORES ───────────────────────────────────────
-    //
-    // Maak de tekst iets kleiner (75% van title)
-    highscores.setScale(scale * 0.75f, scale * 0.75f);
+  //
+  // ───── HIGHSCORES ───────────────────────────────────────
+  //
+  // Maak de tekst iets kleiner (75% van title)
+  highscores.setScale(scale * 0.75f, scale * 0.75f);
 
-    highscores.setOrigin(
-        highscores.getLocalBounds().width / 2.f,
-        highscores.getLocalBounds().height / 2.f
-    );
-    highscores.setPosition(viewCenter.x, viewCenter.y + viewSize.y * 0.1f);
+  highscores.setOrigin(highscores.getLocalBounds().width / 2.f,
+                       highscores.getLocalBounds().height / 2.f);
+  highscores.setPosition(viewCenter.x, viewCenter.y + viewSize.y * 0.1f);
 
-    window->draw(highscores);
-
+  window->draw(highscores);
 }

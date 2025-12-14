@@ -5,7 +5,8 @@
 #include "PacmanView.h"
 #include <iostream>
 #include <utility>
-PacmanView::PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window, int height, int width)
+PacmanView::PacmanView(Pacman *pacman, std::shared_ptr<sf::RenderWindow> window,
+                       int height, int width)
     : EntityView(pacman, std::move(window), height, width), pacman(pacman) {
   if (!texture.loadFromFile("../sprites/pacman.png")) {
     std::cerr << "Failed to load pacman spritesheet" << std::endl;
@@ -21,7 +22,6 @@ void PacmanView::update() {
 
 void PacmanView::updateTexture(float time) {
   chooseTexture(pacman->getDirection(), time);
-
 }
 
 void PacmanView::chooseTexture(char direction, float time) {
@@ -30,28 +30,32 @@ void PacmanView::chooseTexture(char direction, float time) {
     sf::IntRect rect;
 
     switch (direction) {
-      case 'N': rect = mouthOpen ? sf::IntRect(0, 30, 15, 15)
-                                : sf::IntRect(15, 30, 15, 15);
+    case 'N':
+      rect =
+          mouthOpen ? sf::IntRect(0, 30, 15, 15) : sf::IntRect(15, 30, 15, 15);
       break;
-      case 'Z': rect = mouthOpen ? sf::IntRect(0, 45, 15, 15)
-                                : sf::IntRect(15, 45, 15, 15);
+    case 'Z':
+      rect =
+          mouthOpen ? sf::IntRect(0, 45, 15, 15) : sf::IntRect(15, 45, 15, 15);
       break;
-      case 'W': rect = mouthOpen ? sf::IntRect(0, 15, 15, 15)
-                                : sf::IntRect(15, 15, 15, 15);
+    case 'W':
+      rect =
+          mouthOpen ? sf::IntRect(0, 15, 15, 15) : sf::IntRect(15, 15, 15, 15);
       break;
-      case 'O': rect = mouthOpen ? sf::IntRect(0, 0, 15, 15)
-                                : sf::IntRect(15, 0, 15, 15);
+    case 'O':
+      rect = mouthOpen ? sf::IntRect(0, 0, 15, 15) : sf::IntRect(15, 0, 15, 15);
       break;
-      case ' ': rect = sf::IntRect(30, 0, 15, 15);
+    case ' ':
+      rect = sf::IntRect(30, 0, 15, 15);
       break;
-      case 'D': {
-        rect = sf::IntRect(15 * i, 0, 15, 15);
-        i++;
-        if (i == 14) {
-          i = 2;
-        }
-        break;
+    case 'D': {
+      rect = sf::IntRect(15 * i, 0, 15, 15);
+      i++;
+      if (i == 14) {
+        i = 2;
       }
+      break;
+    }
     }
     sprite.setTextureRect(rect);
     recordFrameTime(time);
@@ -64,10 +68,7 @@ void PacmanView::render() {
   float windowWidth = static_cast<float>(window->getSize().x);
   float windowHeight = static_cast<float>(window->getSize().y);
 
-  float rectSize = std::min(
-    windowWidth / width,
-    windowHeight / height
-  );
+  float rectSize = std::min(windowWidth / width, windowHeight / height);
 
   float w, h;
   bool heightFlag;
@@ -81,7 +82,8 @@ void PacmanView::render() {
     w = windowWidth;
     heightFlag = true;
   }
-  auto screenPos = camera.normalizeToScreen(pos.x, pos.y, windowWidth, windowHeight, heightFlag, h, w);
+  auto screenPos = camera.normalizeToScreen(pos.x, pos.y, windowWidth,
+                                            windowHeight, heightFlag, h, w);
 
   sprite.setPosition(screenPos);
   sprite.setScale(rectSize / 15.f, rectSize / 15.f);

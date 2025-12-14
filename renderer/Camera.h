@@ -9,24 +9,24 @@
 
 class Camera {
 private:
-	// world meegeven aan camera
+  // world meegeven aan camera
 public:
-	sf::Vector2f normalizeToScreen(float x, float y,float screenWidth,float screenHeight,bool flag,float h,float w) const {
-		float whitespaceH = (screenHeight - h) / 2.0f;
-		float whitespaceW = (screenWidth  - w) / 2.0f;
+  sf::Vector2f normalizeToScreen(float x, float y, float screenWidth,
+                                 float screenHeight, bool flag, float h,
+                                 float w) const {
+    float whitespaceH = (screenHeight - h) / 2.0f;
+    float whitespaceW = (screenWidth - w) / 2.0f;
 
-		if (!flag) {
-			float px = (x + 1.0f) * 0.5f * w + whitespaceW;
-			float py = (y + 1.0f) * 0.5f * h;
-			return { px, py };
-		} else {
-			float px = (x + 1.0f) * 0.5f * w;
-			float py = (y + 1.0f) * 0.5f * h + whitespaceH;
-			return { px, py };
-		}
-	}
+    if (!flag) {
+      float px = (x + 1.0f) * 0.5f * w + whitespaceW;
+      float py = (y + 1.0f) * 0.5f * h;
+      return {px, py};
+    } else {
+      float px = (x + 1.0f) * 0.5f * w;
+      float py = (y + 1.0f) * 0.5f * h + whitespaceH;
+      return {px, py};
+    }
+  }
 };
 
-
-
-#endif //CAMERA_H
+#endif // CAMERA_H

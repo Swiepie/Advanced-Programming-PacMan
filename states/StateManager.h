@@ -4,26 +4,23 @@
 
 #ifndef STATEMANAGER_H
 #define STATEMANAGER_H
-#include <stack>
 #include "State.h"
+#include <stack>
 
 class StateManager {
 private:
-    std::stack<std::unique_ptr<State>> states;
-    std::unique_ptr<State> nextState = nullptr;
-    bool shouldPop = false;
+  std::stack<std::unique_ptr<State>> states;
+  std::unique_ptr<State> nextState = nullptr;
+  bool shouldPop = false;
 
 public:
-    void pushState(std::unique_ptr<State> state);
+  void pushState(std::unique_ptr<State> state);
 
-    void popState();
+  void popState();
 
-    State* currentState();
+  State *currentState();
 
-    void processStateChanges();
-
+  void processStateChanges();
 };
 
-
-
-#endif //STATEMANAGER_H
+#endif // STATEMANAGER_H

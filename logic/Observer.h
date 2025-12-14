@@ -5,18 +5,11 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
-
-
 class Observer {
 public:
-	virtual void update() = 0;  // Bestaande methode
-	virtual ~Observer() = default;
-	virtual void update(float time) = 0;
+  virtual void update() = 0; // Bestaande methode
+  virtual ~Observer() = default;
+  virtual void update(float time) = 0;
 };
 
-
-
 #endif // OBSERVER_H
-
-
-
