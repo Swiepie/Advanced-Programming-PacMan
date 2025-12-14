@@ -61,12 +61,15 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_SOURCE_DIR}
 )
 
+if(WIN32)
+    set(SFML_LIBS sfml-graphics sfml-window sfml-system sfml-main)
+else()
+    set(SFML_LIBS sfml-graphics sfml-window sfml-system)
+endif()
+
 target_link_libraries(${PROJECT_NAME}
         Logic
-        sfml-graphics
-        sfml-window
-        sfml-system
-        sfml-main
+        ${SFML_LIBS}
 )
 
 if(WIN32)
