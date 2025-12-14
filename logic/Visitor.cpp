@@ -9,8 +9,10 @@
 #include "World.h"
 #include "Visitor.h"
 
-CollectibleVisitor::CollectibleVisitor(Pacman* p, World* w, float tileWidth, float tileHeight)
-	: pacman(p), world(w), stepW(tileWidth), stepH(tileHeight) {}
+#include <utility>
+
+CollectibleVisitor::CollectibleVisitor(std::shared_ptr<Pacman> pacman, World* w, float tileWidth, float tileHeight)
+	: pacman(std::move(pacman)), world(w), stepW(tileWidth), stepH(tileHeight) {}
 
 void CollectibleVisitor::visit(Wall& wall) {
 	// Walls are not collectible
@@ -41,8 +43,8 @@ const std::vector<Entity*>& CollectibleVisitor::getToRemove() const {
 }
 
 
-GhostCollisionVisitor::GhostCollisionVisitor(Pacman* p, World* w, float tileWidth, float tileHeight)
-	: pacman(p), world(w), stepW(tileWidth), stepH(tileHeight),
+GhostCollisionVisitor::GhostCollisionVisitor(std::shared_ptr<Pacman> pacman, World* w, float tileWidth, float tileHeight)
+	: pacman(std::move(pacman)), world(w), stepW(tileWidth), stepH(tileHeight),
 	  pacmanDied(false), ghostEaten(false) {}
 
 void GhostCollisionVisitor::visit(Wall& wall) {}

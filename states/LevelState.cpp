@@ -15,7 +15,7 @@ void LevelState::handleEvent(std::shared_ptr<StateManager> stateManager, std::sh
             stateManager->pushState(std::make_unique<PausedState>()); // back to menu
         }
 
-        auto pacman = world.getPacman();
+        auto pacman = world->getPacman();
         if (!pacman) return;
 
         switch (event.key.code) {
@@ -32,17 +32,17 @@ void LevelState::update(std::shared_ptr<StateManager> stateManager, float deltaT
     if (deltaTime > 0.5) {
         return;
     }
-    if (world.getPacmanLives()<= 0 ) {
-        int score = world.getScore().get();
+    if (world->getPacmanLives()<= 0 ) {
+        int score = world->getScore().get();
         stateManager->pushState(std::make_unique<FinishState>(score, factory));
-        world.getScore().submit();
+        world->getScore().submit();
 
     }
-    if (world.getCoinCount() == 0) {
-        world.loadMap("../assets/map2.txt");
-        world.resetWorld();
+    if (world->getCoinCount() == 0) {
+        world->loadMap("../assets/map2.txt");
+        world->resetWorld();
     }
-    world.update(deltaTime);
+    world->update(deltaTime);
 }
 void LevelState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight)  {
 
@@ -53,8 +53,8 @@ void LevelState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int w
     sf::Vector2f viewSize = window->getView().getSize();
     sf::Vector2f viewCenter = window->getView().getCenter();
 
-    score.setString("   Score: " + std::to_string(world.getScore().get()));
-    lives.setString("   Lives: " + std::to_string(world.getPacmanLives()));
+    score.setString("   Score: " + std::to_string(world->getScore().get()));
+    lives.setString("   Lives: " + std::to_string(world->getPacmanLives()));
 
     // Schaal op basis van hoogte (10% van view hoogte)
     float preferredHeight = viewSize.y * 0.10f;

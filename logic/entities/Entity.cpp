@@ -44,7 +44,7 @@ bool Entity::isCollectible() const {
 void Entity::onCollect(World& world) {
 }
 
-double Entity::getSpeed() const {
+float Entity::getSpeed() const {
     return speed;
 }
 

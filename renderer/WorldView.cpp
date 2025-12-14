@@ -31,29 +31,29 @@ sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screen
 }
 
 
-void WorldView::render(const World& world, std::shared_ptr<sf::RenderWindow> window,
+void WorldView::render(std::shared_ptr<World> world, std::shared_ptr<sf::RenderWindow> window,
                       float windowWidth, float windowHeight) {
 
     sf::View view = getWorldView(windowWidth, windowHeight);
     window->setView(view);
 
-    float time = world.getTime();
+    float time = world->getTime();
 
-    for (auto& wall : world.getWalls()) {
+    for (auto& wall : world->getWalls()) {
         Observer* observer = wall->getObserver();
         if (observer) {
             observer->update(time);
         }
     }
 
-    for (auto& collectible : world.getCollectibles()) {
+    for (auto& collectible : world->getCollectibles()) {
         Observer* observer = collectible->getObserver();
         if (observer) {
             observer->update(time);
         }
     }
 
-    Pacman* pacman = world.getPacman();
+    std::shared_ptr<Pacman> pacman = world->getPacman();
     if (pacman) {
         Observer* observer = pacman->getObserver();
         if (observer) {
@@ -61,7 +61,7 @@ void WorldView::render(const World& world, std::shared_ptr<sf::RenderWindow> win
         }
     }
 
-    for (auto& ghost : world.getGhosts()) {
+    for (auto& ghost : world->getGhosts()) {
         Observer* observer = ghost->getObserver();
         if (observer) {
             observer->update(time);

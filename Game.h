@@ -24,7 +24,7 @@ private:
 public:
     static FileDimensions getFileDimensions(const std::string& filename);
     Game();
-    void run();
+    void run() const;
 };
 
 

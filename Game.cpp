@@ -26,7 +26,7 @@ Game::Game()
 }
 
 
-void Game::run() {
+void Game::run() const {
     while (window->isOpen()) {
 
         float deltaTime = Stopwatch::getInstance().GetElapsedTime();

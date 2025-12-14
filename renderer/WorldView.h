@@ -22,7 +22,7 @@ class WorldView {
     int round = 0;
 
 public:
-    static void render(const World& world, std::shared_ptr<sf::RenderWindow> window, float windowWidth, float windowHeight);
+    static void render(std::shared_ptr<World> world, std::shared_ptr<sf::RenderWindow> window, float windowWidth, float windowHeight);
 };
 
 

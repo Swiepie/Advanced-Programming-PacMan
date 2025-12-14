@@ -34,13 +34,13 @@ public:
 
 class CollectibleVisitor : public Visitor {
 private:
-	Pacman* pacman;
+	std::shared_ptr<Pacman> pacman;
 	World* world;
 	float stepW, stepH;
 	std::vector<Entity*> toRemove;
 
 public:
-	CollectibleVisitor(Pacman* p, World* w, float tileWidth, float tileHeight);
+	CollectibleVisitor(std::shared_ptr<Pacman> pacman, World* w, float tileWidth, float tileHeight);
 
 	void visit(Wall& wall) override;
 	void visit(Coin& coin) override;
@@ -55,7 +55,7 @@ public:
 
 class GhostCollisionVisitor : public Visitor {
 private:
-	Pacman* pacman;
+	std::shared_ptr<Pacman> pacman;
 	World* world;
 	float stepW, stepH;
 	bool pacmanDied;
@@ -64,7 +64,7 @@ private:
 	void handleGhostCollision(Ghost& ghost);
 
 public:
-	GhostCollisionVisitor(Pacman* p, World* w, float tileWidth, float tileHeight);
+	GhostCollisionVisitor(std::shared_ptr<Pacman> pacman, World* w, float tileWidth, float tileHeight);
 
 	void visit(Wall& wall) override;
 	void visit(Coin& coin) override;

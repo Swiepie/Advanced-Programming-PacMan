@@ -49,7 +49,7 @@ public:
     void setSpawn(float x, float y);
     void resetToSpawn();
 
-    double getSpeed() const;
+    float getSpeed() const;
     void setSpeed(double spd);
 
 };

@@ -59,10 +59,8 @@ bool World::loadMap(const std::string& filename) {
                     break;
 
                 case 'P': {
-                    auto p = factory->createPacman(x, y);
-                    pacman = p.get();
-                    p->setSpawn(x, y);
-                    pacmanPtr = std::move(p);
+                    pacman = factory->createPacman(x, y);
+                    pacman->setSpawn(x, y);
                     break;
                 }
 
@@ -146,9 +144,6 @@ void World::update(float deltaTime) {
     for (auto& g : ghosts) {
         g->update(deltaTime, *this, *pacman  );
     }
-    if (pacmanPtr) {
-        pacmanPtr->update(deltaTime);
-    }
     if (fearmode) {
         if (fearmodeTimer + fearmodeStart <= totTime) {
             fearmode = false;
@@ -166,6 +161,8 @@ void World::update(float deltaTime) {
 
     //is het al tijd om opnieuw te bewegen?
     char buffered = pacman->getBufferdirection();
+
+
     bool moved = false;
 
     if (tryMove(pacman, buffered)) {
@@ -177,7 +174,8 @@ void World::update(float deltaTime) {
             moved = true;
         }
     }
-        checkCollisions();
+
+    checkCollisions();
 
 }
 
@@ -198,12 +196,14 @@ int World::getWidth() const {
 int World::getHeight() const {
     return height;
 }
-Pacman* World::getPacman() const{
+
+std::shared_ptr<Pacman> World::getPacman() const{
     return pacman;
 }
 
-bool World::tryMove(Pacman* pacman, char dir) const {
+bool World::tryMove(const std::shared_ptr<Pacman> &pacman, char dir) const {
     if (!pacman) return false;
+
     float speed = pacman->getSpeed();
     float cd = deltaT;
     float dx = 0, dy = 0;

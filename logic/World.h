@@ -36,8 +36,8 @@ private:
 	std::vector<std::unique_ptr<Entity>> collectibles; // Coins + Fruits
 	std::vector<std::unique_ptr<Ghost>> ghosts;
 
-	std::unique_ptr<Pacman> pacmanPtr;
-    Pacman* pacman = nullptr;
+	std::shared_ptr<Pacman> pacman;
+
     int coinCount = 0;
     int pacmanlives = 3;
 
@@ -48,7 +48,7 @@ private:
     // Death/Respawn states
     bool dies = false;
     float diesTime = 0.0f;
-    float respawnTimer = 0.98f;
+    float respawnTimer = 1.3f;
     bool death = false;
     float deathTime = 0.0f;
     bool reset = false;
@@ -79,11 +79,11 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    bool tryMove(Pacman* pacman, char dir) const;
+    bool tryMove(const std::shared_ptr<Pacman> &pacman, char dir) const;
 	const std::vector<std::unique_ptr<Wall>>& getWalls() const;
 	const std::vector<std::unique_ptr<Entity>>& getCollectibles() const;
 	const std::vector<std::unique_ptr<Ghost>>& getGhosts() const;
-    Pacman* getPacman() const;
+    std::shared_ptr<Pacman> getPacman() const;
     void checkCollisions();
 
     void setFearModeStart(float timer);

@@ -22,7 +22,7 @@ class LevelState : public State {
 private:
     std::shared_ptr<EntityFactory> factory;
     std::shared_ptr<Camera> camera;
-    World world;
+    std::shared_ptr<World> world;
     WorldView renderer;
 
     sf::Font font;
@@ -31,18 +31,18 @@ private:
 
 public:
     explicit LevelState(const std::shared_ptr<EntityFactory> &factory)
-            : factory(factory), world(factory)
+            : factory(factory), world(std::make_shared<World>(factory))
     {
-        world.loadMap("../assets/map2.txt");
-        world.printMap();
+        world->loadMap("../assets/map2.txt");
+        world->printMap();
         font.loadFromFile("../assets/ARIAL.TTF");
 
         score.setFont(font);
-        score.setString("score: " + std::to_string(world.getScore().get()));
+        score.setString("score: " + std::to_string(world->getScore().get()));
         score.setFillColor(sf::Color::Yellow);
 
         lives.setFont(font);
-        lives.setString("lives: " + std::to_string(world.getPacmanLives()));
+        lives.setString("lives: " + std::to_string(world->getPacmanLives()));
 
         lives.setFillColor(sf::Color::Green);
     }
