@@ -163,15 +163,15 @@ void World::update(float deltaTime) {
     char buffered = pacman->getBufferdirection();
 
 
-    bool moved = false;
+
 
     if (tryMove(pacman, buffered)) {
         pacman->applyBufferdirection();
-        moved = true;
+
     } else {
         char current = pacman->getDirection();
         if (tryMove(pacman, current)) {
-            moved = true;
+
         }
     }
 
