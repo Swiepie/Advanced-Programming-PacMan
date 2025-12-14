@@ -7,40 +7,44 @@
 
 
 #include <SFML/Graphics.hpp>
-#include "..//Stopwatch.h"
+#include "../logic/Stopwatch.h"
 #include <iostream>
 #include "EntityView.h"
-#include "../entities/Ghost.h"
-
+#include "../logic/entities/Ghost.h"
+#include "Camera.h"
 class GhostView : public EntityView {
-public:
-	explicit GhostView(Ghost* ghost);
+protected:
+	Ghost* ghost;
 
-	void update() override;
+public:
+	explicit GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
+
+	void render() override;
+	void update(float time) override;
 	void updateTexture(float time) override;
 	virtual void chooseTexture(char direction, float time);
+	void chooseFearTexture(float time);
 };
 
 class RedGhostView : public GhostView {
 public:
-	explicit RedGhostView(Ghost* ghost);
+	explicit RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
 	void chooseTexture(char direction, float time) override;
+
 };
 
 class BlueGhostView : public GhostView {
 public:
-	explicit BlueGhostView(Ghost* ghost);
+	explicit BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
 	void chooseTexture(char direction, float time) override;
+
 };
 
 class PinkGhostView : public GhostView {
 public:
-	explicit PinkGhostView(Ghost* ghost);
+	explicit PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
 	void chooseTexture(char direction, float time) override;
+
 };
-class FearGhostView : public GhostView {
-	public:
-	FearGhostView();
-	void chooseTexture(float time);
-};
+
 #endif //GHOSTVIEW_H

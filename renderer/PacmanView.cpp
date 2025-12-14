@@ -4,7 +4,9 @@
 
 #include "PacmanView.h"
 #include <iostream>
-PacmanView::PacmanView(Pacman* pacman) : EntityView(pacman) {
+#include <utility>
+PacmanView::PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window, int height, int width)
+    : EntityView(pacman, std::move(window), height, width), pacman(pacman) {
   if (!texture.loadFromFile("../sprites/pacman.png")) {
     std::cerr << "Failed to load pacman spritesheet" << std::endl;
   }
@@ -18,8 +20,8 @@ void PacmanView::update() {
 }
 
 void PacmanView::updateTexture(float time) {
-  auto pacman = dynamic_cast<Pacman*>(entity);
   chooseTexture(pacman->getDirection(), time);
+
 }
 
 void PacmanView::chooseTexture(char direction, float time) {
@@ -51,9 +53,44 @@ void PacmanView::chooseTexture(char direction, float time) {
         break;
       }
     }
-
     sprite.setTextureRect(rect);
     recordFrameTime(time);
   }
 }
 
+void PacmanView::render() {
+  auto pos = pacman->getPosition();
+  Camera camera;
+  float windowWidth = static_cast<float>(window->getSize().x);
+  float windowHeight = static_cast<float>(window->getSize().y);
+
+  float rectSize = std::min(
+    windowWidth / width,
+    windowHeight / height
+  );
+
+  float w, h;
+  bool heightFlag;
+
+  if (width / height <= windowWidth / windowHeight) {
+    h = windowHeight;
+    w = width * windowHeight / height;
+    heightFlag = false;
+  } else {
+    h = (height / width) * windowWidth;
+    w = windowWidth;
+    heightFlag = true;
+  }
+  auto screenPos = camera.normalizeToScreen(pos.x, pos.y, windowWidth, windowHeight, heightFlag, h, w);
+
+  sprite.setPosition(screenPos);
+  sprite.setScale(rectSize / 15.f, rectSize / 15.f);
+
+  window->draw(sprite);
+}
+
+void PacmanView::update(float time) {
+
+  updateTexture(time);
+  render();
+}

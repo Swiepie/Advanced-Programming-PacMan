@@ -10,16 +10,16 @@
 
 
 
-void PausedState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
+void PausedState::handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
         manager.popState(); // go to the level
     } else if (event.type == sf::Event::Closed) {
-        window.close();
+        window->close();
     }
 }
-void PausedState::render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight) {
-    sf::Vector2f viewSize = window.getView().getSize();
-    sf::Vector2f viewCenter = window.getView().getCenter();
+void PausedState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) {
+    sf::Vector2f viewSize = window->getView().getSize();
+    sf::Vector2f viewCenter = window->getView().getCenter();
 
     //schaal op basis van hoogte
     float preferredHeight = viewSize.y * 0.10f;       // 10% van schermhoogte
@@ -45,7 +45,7 @@ void PausedState::render(sf::RenderWindow& window, unsigned int windowWidth, uns
     );
 
     title.setPosition(viewCenter);
-    window.draw(title);
+    window->draw(title);
 }
 
 void PausedState::onEnter() {

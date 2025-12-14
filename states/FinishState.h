@@ -13,7 +13,7 @@
 #include "StateManager.h"
 #include "LevelState.h"
 #include <SFML/Window/Event.hpp>
-#include "../World.h"
+#include "../logic/World.h"
 #include <iostream>
 
 class FinishState : public State {
@@ -33,9 +33,9 @@ public:
 		updateText();
 	}
 
-	void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;
+	void handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) override;
 	void update(StateManager& manager, float deltaTime) override {}
-	void render(sf::RenderWindow& window,unsigned int windowWidth, unsigned int windowHeight) override;
+	void render(std::shared_ptr<sf::RenderWindow> window,unsigned int windowWidth, unsigned int windowHeight) override;
 	void onEnter() override;
 };
 

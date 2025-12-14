@@ -8,7 +8,9 @@
 #include <SFML/Graphics.hpp>
 
 class Camera {
-	public:
+private:
+	// world meegeven aan camera
+public:
 	sf::Vector2f normalizeToScreen(float x, float y,float screenWidth,float screenHeight,bool flag,float h,float w) const {
 		float whitespaceH = (screenHeight - h) / 2.0f;
 		float whitespaceW = (screenWidth  - w) / 2.0f;

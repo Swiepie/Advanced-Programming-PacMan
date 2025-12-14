@@ -6,10 +6,10 @@
 #include "StateManager.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "../Scoreboard.h"
+#include "../logic/Scoreboard.h"
 #include "LevelState.h"
 #include <SFML/Window/Event.hpp>
-#include "../entities/EntityFactory.h"
+#include "../logic/entities/EntityFactory.h"
 #include <iostream>
 
 class MenuState : public State {
@@ -44,9 +44,9 @@ public:
     }
 
 
-    void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;
+    void handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) override;
     void update(StateManager& manager, float deltaTime) override {}
-    void render(sf::RenderWindow& window,unsigned int windowWidth, unsigned int windowHeight) override;
+    void render(std::shared_ptr<sf::RenderWindow> window,unsigned int windowWidth, unsigned int windowHeight) override;
 };
 
 #endif

@@ -5,9 +5,9 @@
 #include "LevelState.h"
 
 
-void LevelState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
+void LevelState::handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
     if (event.type == sf::Event::Closed)
-        window.close();
+        window->close();
 
 
     else if (event.type == sf::Event::KeyPressed) {
@@ -44,13 +44,14 @@ void LevelState::update(StateManager& manager, float deltaTime)  {
     }
     world.update(deltaTime);
 }
-void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight)  {
+void LevelState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight)  {
+
     renderer.render(world, window, windowWidth, windowHeight);
 
     float verticalOffset = 40.f;
 
-    sf::Vector2f viewSize = window.getView().getSize();
-    sf::Vector2f viewCenter = window.getView().getCenter();
+    sf::Vector2f viewSize = window->getView().getSize();
+    sf::Vector2f viewCenter = window->getView().getCenter();
 
     score.setString("   Score: " + std::to_string(world.getScore().get()));
     lives.setString("   Lives: " + std::to_string(world.getPacmanLives()));
@@ -59,7 +60,6 @@ void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsi
     float preferredHeight = viewSize.y * 0.10f;
     float textHeight = score.getLocalBounds().height;
     float scaleY = preferredHeight / textHeight;
-
     // Controleer breedte (max 80% van view breedte)
     float maxWidth = viewSize.x * 0.80f;
     float textWidth = score.getLocalBounds().width;
@@ -91,8 +91,8 @@ void LevelState::render(sf::RenderWindow& window, unsigned int windowWidth, unsi
     score.setPosition(leftX, scoreY);
     lives.setPosition(leftX, livesY);
 
-    window.draw(score);
-    window.draw(lives);
+    window->draw(score);
+    window->draw(lives);
 }
 
 

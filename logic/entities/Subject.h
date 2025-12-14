@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <memory>
-#include "../renderer/Observer.h"
+#include "../Observer.h"
 #include <algorithm>
 
 class Subject {

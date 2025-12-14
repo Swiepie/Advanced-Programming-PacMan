@@ -4,17 +4,17 @@
 
 #include "MenuState.h"
 
-void MenuState::handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) {
+void MenuState::handleEvent(StateManager& manager,std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         manager.pushState(std::make_unique<LevelState>(factory)); // go to the level
     } else if (event.type == sf::Event::Closed) {
-        window.close();
+        window->close();
     }
 }
-void MenuState::render(sf::RenderWindow& window,unsigned int windowWidth, unsigned int windowHeight) {
+void MenuState::render(std::shared_ptr<sf::RenderWindow> window,unsigned int windowWidth, unsigned int windowHeight) {
 
-    sf::Vector2f viewSize = window.getView().getSize();
-    sf::Vector2f viewCenter = window.getView().getCenter();
+    sf::Vector2f viewSize = window->getView().getSize();
+    sf::Vector2f viewCenter = window->getView().getCenter();
 
     //
     // ───── TITLE ─────────────────────────────────────────────
@@ -36,7 +36,7 @@ void MenuState::render(sf::RenderWindow& window,unsigned int windowWidth, unsign
     );
     title.setPosition(viewCenter.x, viewCenter.y - viewSize.y * 0.15f);
 
-    window.draw(title);
+    window->draw(title);
 
     //
     // ───── HIGHSCORES ───────────────────────────────────────
@@ -50,6 +50,6 @@ void MenuState::render(sf::RenderWindow& window,unsigned int windowWidth, unsign
     );
     highscores.setPosition(viewCenter.x, viewCenter.y + viewSize.y * 0.1f);
 
-    window.draw(highscores);
+    window->draw(highscores);
 
 }

@@ -11,7 +11,6 @@
 #include <vector>
 #include <memory>
 
-#include <SFML/Graphics.hpp>
 #include <fstream>
 #include <iostream>
 

@@ -1,0 +1,38 @@
+//
+// Created by siebe on 14/12/2025.
+//
+
+#ifndef CONCRETEFACTORY_H
+#define CONCRETEFACTORY_H
+
+#include "logic/entities/EntityFactory.h"
+
+#include "renderer/PacmanView.h"
+#include "renderer/GhostView.h"
+#include "renderer/CollectibleView.h"
+#include "renderer/WallView.h"
+#include "logic/Observer.h"
+
+class ConcreteFactory : public EntityFactory {
+private:
+	std::vector<std::unique_ptr<EntityView>> views;
+
+	// Map entities to their views for easy lookup
+	std::unordered_map<Entity*, EntityView*> entityToView;
+	std::shared_ptr<sf::RenderWindow> window;
+	int height = 0;
+	int width = 0;
+
+public:
+	ConcreteFactory(std::shared_ptr<sf::RenderWindow> window, int height, int width);
+	std::unique_ptr<Wall> createWall(float x, float y) override;
+	std::unique_ptr<Coin> createCoin(float x, float y) override;
+	std::unique_ptr<Fruit> createFruit(float x, float y) override;
+	std::unique_ptr<Pacman> createPacman(float x, float y) override;
+	std::unique_ptr<RedGhost> createRedGhost(float x, float y) override;
+	std::unique_ptr<BlueGhost> createBlueGhost(float x, float y, float delay) override;
+	std::unique_ptr<PinkGhost> createPinkGhost(float x, float y, float delay) override;
+};
+
+
+#endif //CONCRETEFACTORY_H

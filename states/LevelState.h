@@ -4,15 +4,16 @@
 #pragma once
 #include "State.h"
 #include "PausedState.h"
-#include "../World.h"
+#include "../logic/World.h"
 #include "StateManager.h"
 #include <SFML/Graphics.hpp>
 #include "../renderer/WorldView.h"
 #include "MenuState.h"
+#include "../renderer/Camera.h"
 #include "FinishState.h"
 #include <SFML/Window/Event.hpp>
-#include "../entities/Pacman.h"
-#include "../Stopwatch.h"
+#include "../logic/entities/Pacman.h"
+#include "../logic/Stopwatch.h"
 #include <iostream>
 #include <utility>
 
@@ -20,6 +21,7 @@ class World;
 class LevelState : public State {
 private:
     std::shared_ptr<EntityFactory> factory;
+    std::shared_ptr<Camera> camera;
     World world;
     WorldView renderer;
 
@@ -28,12 +30,11 @@ private:
     sf::Text score;
 
 public:
-    explicit LevelState(std::shared_ptr<EntityFactory> factory)
+    explicit LevelState(const std::shared_ptr<EntityFactory> &factory)
             : factory(factory), world(factory)
     {
         world.loadMap("../assets/map2.txt");
         world.printMap();
-
         font.loadFromFile("../assets/ARIAL.TTF");
 
         score.setFont(font);
@@ -42,12 +43,13 @@ public:
 
         lives.setFont(font);
         lives.setString("lives: " + std::to_string(world.getPacmanLives()));
+
         lives.setFillColor(sf::Color::Green);
     }
 
-    void handleEvent(StateManager& manager, sf::RenderWindow& window, const sf::Event& event) override;
+    void handleEvent(StateManager& manager, std::shared_ptr<sf::RenderWindow> window, const sf::Event& event) override;
     void update(StateManager& manager, float deltaTime) override;
-    void render(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight) override;
+    void render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) override;
     void onEnter() override;
     void onExit() override;
 };

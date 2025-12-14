@@ -155,7 +155,6 @@ void World::update(float deltaTime) {
 
             // **reset fear status for all ghosts**
             for (auto& g : ghosts) {
-                std::cout <<"ghost speed: " << g->getSpeed() << "\n";
                 g->resetFearState();
                 g->softSnapToTileCenter(*this);
                 g->setHasBeenEaten(false);
@@ -220,7 +219,6 @@ bool World::tryMove(Pacman* pacman, char dir) const {
     float stepH = 2.0f / height;
     float newX = pacman->getPosition().x + dx * stepW;
     float newY = pacman->getPosition().y + dy * stepH;
-    std::cout << 1.f/deltaT << std::endl;
     CollisionDetectionVisitor collisionVisitor(newX, newY, stepW, stepH);
     for (auto& wall : walls) {
         wall->accept(collisionVisitor);
