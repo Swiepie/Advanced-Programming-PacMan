@@ -12,15 +12,15 @@
 
 class Fruit : public Entity {
 private:
-  int worth = 50;
+    int worth = 50;
 
 public:
-  Fruit(float x, float y) : Entity(x, y) {}
+    Fruit(float x, float y) : Entity(x, y) {}
 
-  bool isCollectible() const override;
-  void onCollect(World &world) override;
+    bool isCollectible() const override;
+    void onCollect(World& world) override;
 
-  void accept(Visitor &visitor) override;
+    void accept(Visitor& visitor) override;
 };
 
 #endif // FRUIT_H

@@ -16,26 +16,23 @@
 
 class PausedState : public State {
 private:
-  sf::Font font;
-  sf::Text title;
+    sf::Font font;
+    sf::Text title;
 
 public:
-  PausedState() {
-    font.loadFromFile("../assets/ARIAL.TTF");
-    title.setFont(font);
-    title.setString("PAUSED\nPress SPACE to start");
-    title.setFillColor(sf::Color::Red);
-  }
+    PausedState() {
+        font.loadFromFile("../assets/ARIAL.TTF");
+        title.setFont(font);
+        title.setString("PAUSED\nPress SPACE to start");
+        title.setFillColor(sf::Color::Red);
+    }
 
-  void handleEvent(std::shared_ptr<StateManager> stateManager,
-                   std::shared_ptr<sf::RenderWindow> window,
-                   const sf::Event &event) override;
-  void update(std::shared_ptr<StateManager> stateManager,
-              float deltaTime) override {}
-  void render(std::shared_ptr<sf::RenderWindow> window,
-              unsigned int windowWidth, unsigned int windowHeight) override;
-  void onEnter() override;
-  void onExit() override;
+    void handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window,
+                     const sf::Event& event) override;
+    void update(std::shared_ptr<StateManager> stateManager, float deltaTime) override {}
+    void render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) override;
+    void onEnter() override;
+    void onExit() override;
 };
 
 #endif // PAUSEDSTATE_H

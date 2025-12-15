@@ -15,16 +15,15 @@
 
 class WallView : public EntityView {
 private:
-  Wall *wall;
+    Wall* wall;
 
 public:
-  explicit WallView(Wall *w, std::shared_ptr<sf::RenderWindow> window,
-                    float height, float width)
-      : EntityView(w, std::move(window), height, width), wall(w) {}
+    explicit WallView(Wall* w, std::shared_ptr<sf::RenderWindow> window, float height, float width)
+        : EntityView(w, std::move(window), height, width), wall(w) {}
 
-  void update(float time) override;
-  void render() override;
-  void updateTexture(float time) override;
+    void update(float time) override;
+    void render() override;
+    void updateTexture(float time) override;
 };
 
 #endif // WALLVIEW_H

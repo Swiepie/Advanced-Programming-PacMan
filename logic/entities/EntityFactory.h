@@ -22,16 +22,14 @@ class PacMan;
 
 class EntityFactory {
 public:
-  virtual ~EntityFactory() = default;
-  virtual std::unique_ptr<Wall> createWall(float x, float y) = 0;
-  virtual std::unique_ptr<Coin> createCoin(float x, float y) = 0;
-  virtual std::unique_ptr<Fruit> createFruit(float x, float y) = 0;
-  virtual std::unique_ptr<Pacman> createPacman(float x, float y) = 0;
-  virtual std::unique_ptr<RedGhost> createRedGhost(float x, float y) = 0;
-  virtual std::unique_ptr<BlueGhost> createBlueGhost(float x, float y,
-                                                     float delay) = 0;
-  virtual std::unique_ptr<PinkGhost> createPinkGhost(float x, float y,
-                                                     float delay) = 0;
+    virtual ~EntityFactory() = default;
+    virtual std::unique_ptr<Wall> createWall(float x, float y) = 0;
+    virtual std::unique_ptr<Coin> createCoin(float x, float y) = 0;
+    virtual std::unique_ptr<Fruit> createFruit(float x, float y) = 0;
+    virtual std::unique_ptr<Pacman> createPacman(float x, float y) = 0;
+    virtual std::unique_ptr<RedGhost> createRedGhost(float x, float y) = 0;
+    virtual std::unique_ptr<BlueGhost> createBlueGhost(float x, float y, float delay) = 0;
+    virtual std::unique_ptr<PinkGhost> createPinkGhost(float x, float y, float delay) = 0;
 };
 
 #endif // ENTITYFACTORY_H

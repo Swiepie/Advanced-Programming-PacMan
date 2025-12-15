@@ -12,16 +12,16 @@
 
 class Scoreboard {
 private:
-  std::vector<int> highscores;
-  std::string filename;
+    std::vector<int> highscores;
+    std::string filename;
 
 public:
-  explicit Scoreboard(const std::string &file = "highscores.txt");
+    explicit Scoreboard(const std::string& file = "highscores.txt");
 
-  void load();              // lees bestand
-  void save();              // schrijf bestand
-  void addScore(int score); // nieuwe score toevoegen
-  const std::vector<int> &getTop5() const;
+    void load();              // lees bestand
+    void save();              // schrijf bestand
+    void addScore(int score); // nieuwe score toevoegen
+    const std::vector<int>& getTop5() const;
 };
 
 #endif // SCOREBOARD_H

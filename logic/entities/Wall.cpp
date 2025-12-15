@@ -3,4 +3,4 @@
 //
 
 #include "Wall.h"
-void Wall::accept(Visitor &visitor) { visitor.visit(*this); }
+void Wall::accept(Visitor& visitor) { visitor.visit(*this); }

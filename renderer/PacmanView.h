@@ -13,24 +13,23 @@
 #include <iostream>
 class PacmanView : public EntityView {
 protected:
-  Pacman *pacman;
+    Pacman* pacman;
 
 private:
-  float totalTime = 0.0;
-  bool mouthOpen = true;
-  float frameTimer = 0.0f;
-  double speed = 1;
+    float totalTime = 0.0;
+    bool mouthOpen = true;
+    float frameTimer = 0.0f;
+    double speed = 1;
 
-  int i = 2;
+    int i = 2;
 
 public:
-  explicit PacmanView(Pacman *pacman, std::shared_ptr<sf::RenderWindow> window,
-                      int height, int width);
-  void update(float time) override;
-  void update() override; // Observer pattern
-  void updateTexture(float time) override;
-  void chooseTexture(char direction, float time);
-  void render() override;
+    explicit PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window, int height, int width);
+    void update(float time) override;
+    void update() override; // Observer pattern
+    void updateTexture(float time) override;
+    void chooseTexture(char direction, float time);
+    void render() override;
 };
 
 #endif // PACMANVIEW_H

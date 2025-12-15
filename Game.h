@@ -12,20 +12,20 @@
 #include <iostream>
 #include <memory>
 struct FileDimensions {
-  std::size_t width;
-  std::size_t height;
+    std::size_t width;
+    std::size_t height;
 };
 
 class Game {
 private:
-  std::shared_ptr<sf::RenderWindow> window;
-  std::shared_ptr<StateManager> stateManager;
-  int framerate = 60;
+    std::shared_ptr<sf::RenderWindow> window;
+    std::shared_ptr<StateManager> stateManager;
+    int framerate = 60;
 
 public:
-  static FileDimensions getFileDimensions(const std::string &filename);
-  Game();
-  void run() const;
+    static FileDimensions getFileDimensions(const std::string& filename);
+    Game();
+    void run() const;
 };
 
 #endif // GAME_H

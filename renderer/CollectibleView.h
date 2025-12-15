@@ -15,30 +15,28 @@
 #include <utility>
 class FruitView : public EntityView {
 private:
-  Fruit *fruit;
+    Fruit* fruit;
 
 public:
-  explicit FruitView(Fruit *f, std::shared_ptr<sf::RenderWindow> window,
-                     float height, float width)
-      : EntityView(f, std::move(window), height, width), fruit(f) {}
+    explicit FruitView(Fruit* f, std::shared_ptr<sf::RenderWindow> window, float height, float width)
+        : EntityView(f, std::move(window), height, width), fruit(f) {}
 
-  void update(float time) override;
-  void render() override;
-  void updateTexture(float time) override;
+    void update(float time) override;
+    void render() override;
+    void updateTexture(float time) override;
 };
 
 class CoinView : public EntityView {
 private:
-  Coin *coin;
+    Coin* coin;
 
 public:
-  explicit CoinView(Coin *c, std::shared_ptr<sf::RenderWindow> window,
-                    float height, float width)
-      : EntityView(c, std::move(window), height, width), coin(c) {}
+    explicit CoinView(Coin* c, std::shared_ptr<sf::RenderWindow> window, float height, float width)
+        : EntityView(c, std::move(window), height, width), coin(c) {}
 
-  void update(float time) override;
-  void render() override;
-  void updateTexture(float time) override;
+    void update(float time) override;
+    void render() override;
+    void updateTexture(float time) override;
 };
 
 #endif // COLLECTIBLEVIEW_H

@@ -9,25 +9,25 @@
 
 class Stopwatch {
 private:
-  Stopwatch() : running(false), paused(false) {}
-  bool running;
-  bool paused;
-  std::chrono::steady_clock::time_point startTime;
-  std::chrono::steady_clock::duration elapsed{};
+    Stopwatch() : running(false), paused(false) {}
+    bool running;
+    bool paused;
+    std::chrono::steady_clock::time_point startTime;
+    std::chrono::steady_clock::duration elapsed{};
 
 public:
-  static Stopwatch &getInstance() {
-    static Stopwatch instance; // één instantie in het hele programma
-    return instance;
-  }
-  Stopwatch(const Stopwatch &) = delete;
-  Stopwatch &operator=(const Stopwatch &) = delete;
-  void start();
-  void stop();
-  void pause();
-  void reset();
-  void restart();
-  float GetElapsedTime() const;
+    static Stopwatch& getInstance() {
+        static Stopwatch instance; // één instantie in het hele programma
+        return instance;
+    }
+    Stopwatch(const Stopwatch&) = delete;
+    Stopwatch& operator=(const Stopwatch&) = delete;
+    void start();
+    void stop();
+    void pause();
+    void reset();
+    void restart();
+    float GetElapsedTime() const;
 };
 
 #endif // STOPWATCH_H

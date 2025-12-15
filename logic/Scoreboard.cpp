@@ -6,40 +6,40 @@
 
 #include <iostream>
 
-Scoreboard::Scoreboard(const std::string &file) : filename(file) { load(); }
+Scoreboard::Scoreboard(const std::string& file) : filename(file) { load(); }
 
 void Scoreboard::load() {
-  highscores.clear();
-  std::ifstream file(filename);
+    highscores.clear();
+    std::ifstream file(filename);
 
-  if (!file.is_open())
-    return;
+    if (!file.is_open())
+        return;
 
-  int s;
-  while (file >> s)
-    highscores.push_back(s);
+    int s;
+    while (file >> s)
+        highscores.push_back(s);
 
-  // sorteer grootste eerst
-  std::sort(highscores.begin(), highscores.end(), std::greater<>());
+    // sorteer grootste eerst
+    std::sort(highscores.begin(), highscores.end(), std::greater<>());
 }
 
 void Scoreboard::save() {
-  std::cout << "Scoreboard::save()" << std::endl;
-  std::ofstream file(filename, std::ios::trunc);
-  for (int i = 0; i < highscores.size() && i < 5; i++)
-    file << highscores[i] << "\n";
+    std::cout << "Scoreboard::save()" << std::endl;
+    std::ofstream file(filename, std::ios::trunc);
+    for (int i = 0; i < highscores.size() && i < 5; i++)
+        file << highscores[i] << "\n";
 }
 
 void Scoreboard::addScore(int score) {
-  load();
-  highscores.push_back(score);
+    load();
+    highscores.push_back(score);
 
-  std::sort(highscores.begin(), highscores.end(), std::greater<>());
+    std::sort(highscores.begin(), highscores.end(), std::greater<>());
 
-  if (highscores.size() > 5)
-    highscores.resize(5); // alleen top 5 bijhouden
+    if (highscores.size() > 5)
+        highscores.resize(5); // alleen top 5 bijhouden
 
-  save();
+    save();
 }
 
-const std::vector<int> &Scoreboard::getTop5() const { return highscores; }
+const std::vector<int>& Scoreboard::getTop5() const { return highscores; }
