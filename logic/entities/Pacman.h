@@ -18,7 +18,7 @@ private:
     float lastMoveTime = 0.0f;
 
 public:
-    Pacman(float x, float y) : Entity(x, y), direction(' ') { speed = 4; }
+    Pacman(float x, float y) : Entity(x, y), direction(' '), bufferdirection(0) { speed = 4; }
 
     void update(float deltaTime) override;
     void addMoveTime(float dt);

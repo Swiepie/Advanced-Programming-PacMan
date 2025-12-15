@@ -49,7 +49,6 @@ add_executable(${PROJECT_NAME}
         renderer/CollectibleView.cpp
         renderer/WallView.cpp
 
-        states/State.cpp
         states/StateManager.cpp
         states/MenuState.cpp
         states/LevelState.cpp

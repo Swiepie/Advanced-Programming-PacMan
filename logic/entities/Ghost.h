@@ -42,21 +42,21 @@ public:
 
     void addMoveTime(float dt);
 
-    virtual char getDirection() const { return direction; }
+    virtual char getDirection() const;
 
-    bool getHasBeenEaten() const { return hasBeenEaten; }
-    void setHasBeenEaten(bool val) { hasBeenEaten = val; }
+    bool getHasBeenEaten() const;
+    void setHasBeenEaten(bool eaten);
 
     bool readyToMove(float currentTime) const;
 
     void setDirection(char direct);
     bool readyToMove() const;
 
-    float getChaseDelay() const { return chaseDelay; }
+    float getChaseDelay() const;
 
     void chooseDirectionFear(World& world, const Pacman& pacman);
     void reverseDirection();
-    float getMoveCooldown() const { return moveCooldown; }
+    float getMoveCooldown() const;
     void reset();
 };
 

@@ -3,3 +3,5 @@
 //
 
 #include "EntityView.h"
+sf::Sprite EntityView::getSprite() { return sprite; }
+Entity* EntityView::getEntity() const { return entity; }

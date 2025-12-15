@@ -35,8 +35,8 @@ public:
     // Common functionality
     virtual void updateTexture(float time) = 0;
 
-    sf::Sprite getSprite() { return sprite; }
-    Entity* getEntity() const { return entity; }
+    sf::Sprite getSprite();
+    Entity* getEntity() const;
     virtual void render() {};
 
 protected:

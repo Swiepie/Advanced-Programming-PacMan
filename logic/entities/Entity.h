@@ -28,8 +28,8 @@ protected:
     float respawnTimer;
 
 public:
-    virtual ~Entity() = default;
-    Entity(float x, float y) : position{x, y} {}
+    ~Entity() override;
+    Entity(float x, float y) : moveCooldown(0), position{x, y}, direction(0), spawn(), respawnTimer(0) {}
 
     virtual void accept(Visitor& visitor) = 0;
     coord getPosition() const;

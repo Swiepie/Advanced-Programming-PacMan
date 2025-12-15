@@ -6,7 +6,7 @@
 #include <iostream>
 #include <utility>
 PacmanView::PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window, int height, int width)
-    : EntityView(pacman, std::move(window), height, width), pacman(pacman) {
+    : EntityView(pacman, std::move(window), static_cast<float>(height), static_cast<float>(width)), pacman(pacman) {
     if (!texture.loadFromFile("../sprites/pacman.png")) {
         std::cerr << "Failed to load pacman spritesheet" << std::endl;
     }

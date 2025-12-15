@@ -31,8 +31,8 @@ bool World::loadMap(const std::string& filename) {
     if (numRows == 0 || numCols == 0)
         return false;
 
-    float tileWidth = 2.0f / numCols;
-    float tileHeight = 2.0f / numRows;
+    float tileWidth = 2.0f / static_cast<float>(numCols);
+    float tileHeight = 2.0f / static_cast<float>(numRows);
 
     // Clear all vectors
     walls.clear();
@@ -47,8 +47,8 @@ bool World::loadMap(const std::string& filename) {
         for (int col = 0; col < numCols; ++col) {
             char c = lines[row][col];
 
-            float x = -1.0f + floor(col) * tileWidth;
-            float y = -1.0f + floor(row) * tileHeight;
+            auto x = static_cast<float>(-1.0f + floor(col) * tileWidth);
+            auto y = static_cast<float>(-1.0f + floor(row) * tileHeight);
 
             switch (c) {
             case '#':
@@ -113,6 +113,10 @@ void World::printMap() const {
 void World::update(float deltaTime) {
     totTime += deltaTime;
     deltaT = deltaTime;
+    // update de stapgrootte
+    stepW = 2.0f / static_cast<float>(width);
+    stepH = 2.0f / static_cast<float>(height);
+
     if (dies && totTime < diesTime + respawnTimer) {
         pacman->setDirection('D');
         return;
@@ -207,8 +211,6 @@ bool World::tryMove(const std::shared_ptr<Pacman>& pacman, char dir) const {
         return false;
     }
 
-    float stepW = 2.0f / width;
-    float stepH = 2.0f / height;
     float newX = pacman->getPosition().x + dx * stepW;
     float newY = pacman->getPosition().y + dy * stepH;
     CollisionDetectionVisitor collisionVisitor(newX, newY, stepW, stepH);
@@ -244,10 +246,6 @@ bool World::tryMove(const std::shared_ptr<Pacman>& pacman, char dir) const {
 void World::checkCollisions() {
     if (!pacman)
         return;
-
-    float stepW = 2.0f / width;
-    float stepH = 2.0f / height;
-
     // Check collectibles
     CollectibleVisitor collectibleVisitor(pacman, this, stepW, stepH);
     for (auto& collectible : collectibles) {
@@ -261,7 +259,6 @@ void World::checkCollisions() {
                                           return std::find(toRemove.begin(), toRemove.end(), e.get()) != toRemove.end();
                                       }),
                        collectibles.end());
-
     // Check ghost collisions
     GhostCollisionVisitor ghostVisitor(pacman, this, stepW * 0.9f, stepH * 0.9f);
     for (auto& ghost : ghosts) {
@@ -303,8 +300,6 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
         return false;
     }
 
-    float stepW = 2.0f / width;
-    float stepH = 2.0f / height;
     float currentX = ghost->getPosition().x;
     float currentY = ghost->getPosition().y;
     float newX = currentX + dx * stepW;
@@ -354,9 +349,6 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
 bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     if (!ghost)
         return false;
-    float stepW = 2.0f / width;
-    float stepH = 2.0f / height;
-
     float dx = 0, dy = 0;
     switch (dir) {
     case 'N':
@@ -417,9 +409,6 @@ bool World::isAtIntersection(const Ghost* ghost) const {
     if (!ghost)
         return false;
 
-    float stepW = 2.0f / width;
-    float stepH = 2.0f / height;
-
     float x = ghost->getPosition().x;
     float y = ghost->getPosition().y;
 
@@ -462,8 +451,8 @@ bool World::isAtIntersection(const Ghost* ghost) const {
 }
 
 bool World::isOnTileCenter(const Entity* e) const {
-    float stepW = 2.f / width;
-    float stepH = 2.f / height;
+    float stepW = 2.0f / static_cast<float>(width);
+    float stepH = 2.0f / static_cast<float>(height);
 
     float x = e->getPosition().x;
     float y = e->getPosition().y;

@@ -16,9 +16,7 @@ public:
     Coin(float x, float y) : Entity(x, y) {}
 
     bool isCollectible() const override;
-
     void onCollect(World& world) override;
-
     void accept(Visitor& visitor) override;
 };
 

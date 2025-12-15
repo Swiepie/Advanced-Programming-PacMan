@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include <cmath>
 #include <iostream>
+Entity::~Entity() = default;
 coord Entity::getPosition() const { return position; }
 
 void Entity::setPosition(float x, float y) {

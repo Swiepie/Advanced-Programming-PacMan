@@ -19,8 +19,8 @@ private:
     int round = 0;
 
 public:
-    static void render(std::shared_ptr<World> world, std::shared_ptr<sf::RenderWindow> window, float windowWidth,
-                       float windowHeight);
+    static void render(const std::shared_ptr<World>& world, const std::shared_ptr<sf::RenderWindow>& window,
+                       float windowWidth, float windowHeight);
 };
 
 #endif // WORLDVIEW_H

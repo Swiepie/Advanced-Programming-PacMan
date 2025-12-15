@@ -34,7 +34,7 @@ void Game::run() const {
                 windowHeight = event.size.height;
 
                 // Update de actieve view zodat deze de nieuwe pixelgrootte gebruikt
-                sf::FloatRect visibleArea(0, 0, windowWidth, windowHeight);
+                sf::FloatRect visibleArea(0, 0, static_cast<float>(windowWidth), static_cast<float>(windowHeight));
                 window->setView(sf::View(visibleArea));
             }
         }

@@ -5,9 +5,8 @@
 #include "WorldView.h"
 #include "../logic/entities/Coin.h"
 #include "../logic/entities/Wall.h"
-#include <iostream>
 
-sf::View getWorldView(unsigned int windowWidth, unsigned int windowHeight) {
+sf::View getWorldView(float windowWidth, float windowHeight) {
     sf::View view;
     view.setSize(windowWidth, windowHeight);
 
@@ -30,8 +29,8 @@ sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screen
     }
 }
 
-void WorldView::render(std::shared_ptr<World> world, std::shared_ptr<sf::RenderWindow> window, float windowWidth,
-                       float windowHeight) {
+void WorldView::render(const std::shared_ptr<World>& world, const std::shared_ptr<sf::RenderWindow>& window,
+                       float windowWidth, float windowHeight) {
 
     sf::View view = getWorldView(windowWidth, windowHeight);
     window->setView(view);

@@ -13,8 +13,6 @@ void Pacman::addMoveTime(float dt) { moveTimer += dt; }
 bool Pacman::readyToMove() const { return moveTimer >= moveCooldown; }
 void Pacman::resetMoveTimer() { moveTimer -= moveCooldown; }
 bool Pacman::readyToMove(float currentTime) const { return (currentTime - lastMoveTime) >= moveCooldown; }
-
 void Pacman::recordMoveTime(float currentTime) { lastMoveTime = currentTime; }
-
 float Pacman::getmoveCooldown() const { return moveCooldown; }
 void Pacman::accept(Visitor& visitor) { visitor.visit(*this); }

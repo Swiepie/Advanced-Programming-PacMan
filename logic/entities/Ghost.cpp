@@ -16,8 +16,6 @@ void Ghost::update(float deltaTime, World& world, const Pacman& pacman) {
     // Check if ready to move using the same system as Pacman
     if (!readyToMove(timeAlive))
         return;
-
-    // AANGEPAST: Basis-update logica verplaatst naar de subklassen
 }
 bool Ghost::getFearState() const { return inFearMode; }
 void Ghost::setFearState(bool state) { inFearMode = state; }
@@ -25,9 +23,13 @@ void Ghost::setFearState(bool state) { inFearMode = state; }
 void Ghost::setDirection(char direct) { direction = direct; }
 
 void Ghost::addMoveTime(float dt) { moveTimer += dt; }
+char Ghost::getDirection() const { return direction; }
 
 bool Ghost::readyToMove() const { return moveTimer >= moveCooldown; }
+float Ghost::getChaseDelay() const { return chaseDelay; }
 
+bool Ghost::getHasBeenEaten() const { return hasBeenEaten; }
+void Ghost::setHasBeenEaten(bool eaten) { hasBeenEaten = eaten; }
 bool Ghost::readyToMove(float currentTime) const { return (currentTime - lastMoveTime) >= moveCooldown; }
 
 void Ghost::resetFearState() {
@@ -506,6 +508,7 @@ void Ghost::reverseDirection() {
         break;
     }
 }
+float Ghost::getMoveCooldown() const { return moveCooldown; }
 
 void Ghost::softSnapToTileCenter(World& world) {
     float stepW = 2.f / world.getWidth();

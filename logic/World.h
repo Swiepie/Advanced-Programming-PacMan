@@ -55,6 +55,9 @@ private:
     int rounds = 0;
     Score score;
 
+    float stepW = 2.0f / static_cast<float>(width);
+    float stepH = 2.0f / static_cast<float>(height);
+
     // Fear mode
     bool fearmode = false;
     float fearmodeTimer = 6.0f;

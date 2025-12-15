@@ -4,10 +4,6 @@
 
 #include "PausedState.h"
 
-//
-// Created by Siebe Haché on 15/10/2025.
-//
-
 void PausedState::handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window,
                               const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
