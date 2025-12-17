@@ -16,6 +16,10 @@ Game::Game() {
     stateManager->pushState(std::make_unique<MenuState>(factory));
 }
 
+Game::~Game() {
+    stateManager->popState();
+}
+
 void Game::run() const {
     while (window->isOpen()) {
 

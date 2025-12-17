@@ -44,10 +44,10 @@ private:
     std::shared_ptr<sf::RenderWindow> window;
     std::shared_ptr<StateManager> stateManager;
     int framerate = 60;
-
 public:
     static FileDimensions getFileDimensions(const std::string& filename);
     Game();
+    ~Game();
     void run() const;
 };
 
