@@ -9,8 +9,10 @@
 
 class Camera {
 private:
+
     // world meegeven aan camera
 public:
+    ~Camera() = default;
     sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screenHeight, bool flag, float h,
                                    float w) const {
         float whitespaceH = (screenHeight - h) / 2.0f;

@@ -17,13 +17,12 @@ class ConcreteFactory : public EntityFactory {
 private:
     std::vector<std::unique_ptr<EntityView>> views;
 
-    // Map entities to their views for easy lookup
-    std::unordered_map<Entity*, EntityView*> entityToView;
     std::shared_ptr<sf::RenderWindow> window;
     int height = 0;
     int width = 0;
 
 public:
+    ~ConcreteFactory() override;
     ConcreteFactory(std::shared_ptr<sf::RenderWindow> window, int height, int width);
     std::unique_ptr<Wall> createWall(float x, float y) override;
     std::unique_ptr<Coin> createCoin(float x, float y) override;

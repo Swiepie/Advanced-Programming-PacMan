@@ -7,7 +7,9 @@
 
 #include "../logic/Observer.h"
 #include "../logic/entities/Entity.h"
+
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class EntityView : public Observer {
 protected:
@@ -25,7 +27,7 @@ public:
     EntityView(Entity* e, std::shared_ptr<sf::RenderWindow> w, float h, float wd)
         : entity(e), window(std::move(w)), height(h), width(wd) {}
 
-    virtual ~EntityView() = default;
+    ~EntityView() override = default;
 
     // Observer interface
     void update() override {

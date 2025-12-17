@@ -8,8 +8,9 @@ void PausedState::handleEvent(std::shared_ptr<StateManager> stateManager, std::s
                               const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
         stateManager->popState(); // go to the level
-    } else if (event.type == sf::Event::Closed) {
-        window->close();
+    } else if (event.key.code == sf::Keyboard::Escape) {
+        stateManager->popState();
+        stateManager->popState();
     }
 }
 void PausedState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth,

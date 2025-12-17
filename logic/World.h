@@ -67,6 +67,7 @@ private:
     std::shared_ptr<EntityFactory> factory;
 
 public:
+    ~World() = default;
     explicit World(std::shared_ptr<EntityFactory> entityFactory) : factory(std::move(entityFactory)) {}
 
     bool loadMap(const std::string& filename);

@@ -19,6 +19,7 @@ private:
     int round = 0;
 
 public:
+    ~WorldView() = default;
     static void render(const std::shared_ptr<World>& world, const std::shared_ptr<sf::RenderWindow>& window,
                        float windowWidth, float windowHeight);
 };

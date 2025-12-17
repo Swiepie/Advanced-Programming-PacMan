@@ -17,6 +17,8 @@ Game::Game() {
 }
 
 Game::~Game() {
+    window->close();  // Close the window explicitly
+    window.reset();   // Reset the shared_ptr to free resources
     stateManager->popState();
 }
 
@@ -40,6 +42,9 @@ void Game::run() const {
                 // Update de actieve view zodat deze de nieuwe pixelgrootte gebruikt
                 sf::FloatRect visibleArea(0, 0, static_cast<float>(windowWidth), static_cast<float>(windowHeight));
                 window->setView(sf::View(visibleArea));
+            }
+            if (event.type == sf::Event::Closed) {
+                window->close();
             }
         }
 

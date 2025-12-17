@@ -8,8 +8,6 @@ void MenuState::handleEvent(std::shared_ptr<StateManager> stateManager, std::sha
                             const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         stateManager->pushState(std::make_unique<LevelState>(factory)); // go to the level
-    } else if (event.type == sf::Event::Closed) {
-        window->close();
     }
 }
 void MenuState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) {

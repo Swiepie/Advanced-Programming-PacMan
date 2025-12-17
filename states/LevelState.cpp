@@ -6,10 +6,8 @@
 
 void LevelState::handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window,
                              const sf::Event& event) {
-    if (event.type == sf::Event::Closed)
-        window->close();
 
-    else if (event.type == sf::Event::KeyPressed) {
+     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape) {
             stateManager->pushState(std::make_unique<PausedState>()); // back to menu
         }

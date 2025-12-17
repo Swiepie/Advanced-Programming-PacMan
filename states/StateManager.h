@@ -14,6 +14,8 @@ private:
     bool shouldPop = false;
 
 public:
+    ~StateManager() = default;
+
     void pushState(std::unique_ptr<State> state);
 
     void popState();

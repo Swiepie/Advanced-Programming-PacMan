@@ -7,6 +7,11 @@
 
 #include "renderer/CollectibleView.h"
 
+ConcreteFactory::~ConcreteFactory() {
+    views.clear();
+
+
+}
 ConcreteFactory::ConcreteFactory(std::shared_ptr<sf::RenderWindow> window, int height, int width)
     : window(std::move(window)), height(height), width(width) {}
 
