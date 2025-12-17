@@ -45,7 +45,7 @@ void LevelState::update(std::shared_ptr<StateManager> stateManager, float deltaT
         world->getScore().submit();
     }
     if (world->getCoinCount() == 0) {
-        world->loadMap("../assets/map2.txt");
+        world->loadMap(filename);
         world->resetWorld();
     }
     world->update(deltaTime);

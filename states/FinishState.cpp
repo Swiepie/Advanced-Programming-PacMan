@@ -7,12 +7,7 @@
 void FinishState::handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window,
                               const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-        stateManager->popState(); // go to the level
-
-        // pop met een integer toevoegen zou dat moeten fixen
-        stateManager->popState(); // pop level
-        stateManager->popState(); // pop menu
-        stateManager->pushState(std::make_unique<MenuState>(factory));
+        stateManager->popState(2);
     }
 }
 void FinishState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth,

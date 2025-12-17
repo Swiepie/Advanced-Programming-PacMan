@@ -29,10 +29,12 @@ private:
     sf::Text lives;
     sf::Text score;
 
+    std::string filename = "../assets/map.txt";
+
 public:
     explicit LevelState(const std::shared_ptr<EntityFactory>& factory)
         : factory(factory), world(std::make_shared<World>(factory)) {
-        world->loadMap("../assets/map2.txt");
+        world->loadMap(filename);
         world->printMap();
         font.loadFromFile("../assets/ARIAL.TTF");
 

@@ -12,24 +12,29 @@ void StateManager::pushState(std::unique_ptr<State> state) {
     // Schedule the new state
     nextState = std::move(state);
 }
-void StateManager::popState() {
-    shouldPop = true;
+
+void StateManager::popState(int count) {
+    // Accumulate the number of states to pop
+    popCount += count;
 }
 
-State* StateManager::currentState() { return states.empty() ? nullptr : states.top().get(); }
+State* StateManager::currentState() {
+    return states.empty() ? nullptr : states.top().get();
+}
 
 void StateManager::processStateChanges() {
-    if (shouldPop && !states.empty()) {
+    // Pop the requested number of states
+    while (popCount > 0 && !states.empty()) {
         // Call onExit() before removing
         states.top()->onExit();
         states.pop();
-        shouldPop = false;
-
-        // If there’s now a state underneath, it becomes active again
-        // if (!states.empty())
-        // states.top()->onEnter();
+        popCount--;
     }
 
+    // Reset popCount in case we ran out of states
+    popCount = 0;
+
+    // If there's a pending state to push
     if (nextState) {
         // Actually push the new state now
         states.push(std::move(nextState));
@@ -37,5 +42,16 @@ void StateManager::processStateChanges() {
         // Call onEnter() for the new top state
         states.top()->onEnter();
         nextState.reset(); // clear pending state
+
+        // Reset input buffer when state changes
+        resetInputBuffer();
     }
+}
+
+bool StateManager::canProcessInput() {
+    return inputClock.getElapsedTime().asSeconds() >= inputBuffer;
+}
+
+void StateManager::resetInputBuffer() {
+    inputClock.restart();
 }

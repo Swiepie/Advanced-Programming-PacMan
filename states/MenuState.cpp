@@ -15,9 +15,7 @@ void MenuState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int wi
     sf::Vector2f viewSize = window->getView().getSize();
     sf::Vector2f viewCenter = window->getView().getCenter();
 
-    //
-    // ───── TITLE ─────────────────────────────────────────────
-    //
+
     float preferredHeight = viewSize.y * 0.10f;
     float titleHeight = title.getLocalBounds().height;
     float scaleY = preferredHeight / titleHeight;
@@ -34,10 +32,6 @@ void MenuState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int wi
 
     window->draw(title);
 
-    //
-    // ───── HIGHSCORES ───────────────────────────────────────
-    //
-    // Maak de tekst iets kleiner (75% van title)
     highscores.setScale(scale * 0.75f, scale * 0.75f);
 
     highscores.setOrigin(highscores.getLocalBounds().width / 2.f, highscores.getLocalBounds().height / 2.f);
