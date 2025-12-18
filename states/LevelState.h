@@ -1,6 +1,10 @@
-//
-// Created by Siebe Haché on 15/10/2025.
-//
+/**
+ * @file LevelState.h
+ * @brief Definieert de level state voor actieve gameplay
+ * @author Siebe Haché
+ * @date 15/10/2025
+ */
+
 #pragma once
 #include "../logic/Stopwatch.h"
 #include "../logic/World.h"
@@ -18,20 +22,36 @@
 #include <utility>
 
 class World;
+
+/**
+ * @class LevelState
+ * @brief State klasse voor actieve gameplay tijdens een level
+ *
+ * Beheert de hoofdgameplay loop, inclusief world updates, rendering,
+ * speler input en HUD elementen zoals score en levens. Erft van State
+ * en implementeert het State pattern voor spel flow management.
+ */
 class LevelState : public State {
 private:
-    std::shared_ptr<EntityFactory> factory;
-    std::shared_ptr<Camera> camera;
-    std::shared_ptr<World> world;
-    WorldView renderer;
+    std::shared_ptr<EntityFactory> factory;  ///< Factory voor het creëren van entiteiten
+    std::shared_ptr<Camera> camera;          ///< Camera voor viewport transformaties
+    std::shared_ptr<World> world;            ///< Spelwereld met alle entiteiten en logica
+    WorldView renderer;                      ///< Renderer voor de spelwereld
 
-    sf::Font font;
-    sf::Text lives;
-    sf::Text score;
+    sf::Font font;    ///< SFML font voor HUD tekst rendering
+    sf::Text lives;   ///< Tekst element voor levens weergave
+    sf::Text score;   ///< Tekst element voor score weergave
 
-    std::string filename = "../assets/map.txt";
+    std::string filename = "../assets/map.txt";  ///< Pad naar het te laden map bestand
 
 public:
+    /**
+     * @brief Construeert een LevelState met opgegeven factory
+     * @param factory Gedeelde pointer naar de EntityFactory voor entiteit creatie
+     *
+     * Initialiseert de spelwereld, laadt de map, en stelt HUD elementen in
+     * voor score en levens weergave.
+     */
     explicit LevelState(const std::shared_ptr<EntityFactory>& factory)
         : factory(factory), world(std::make_shared<World>(factory)) {
         world->loadMap(filename);
@@ -44,14 +64,50 @@ public:
 
         lives.setFont(font);
         lives.setString("lives: " + std::to_string(world->getPacmanLives()));
-
         lives.setFillColor(sf::Color::Green);
     }
 
+    /**
+     * @brief Verwerkt invoer events tijdens gameplay
+     * @param stateManager Gedeelde pointer naar de StateManager voor state overgangen
+     * @param window Gedeelde pointer naar het render venster
+     * @param event SFML event die verwerkt moet worden
+     *
+     * Behandelt speler input zoals beweging, pauze en andere gameplay acties.
+     */
     void handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window,
                      const sf::Event& event) override;
+
+    /**
+     * @brief Update de level state logica per frame
+     * @param stateManager Gedeelde pointer naar de StateManager
+     * @param deltaTime Delta tijd sinds vorige frame in seconden
+     *
+     * Update de spelwereld, entiteiten, en controleert win/verlies condities.
+     */
     void update(std::shared_ptr<StateManager> stateManager, float deltaTime) override;
+
+    /**
+     * @brief Rendert het level naar het venster
+     * @param window Gedeelde pointer naar het render venster
+     * @param windowWidth Breedte van het venster in pixels
+     * @param windowHeight Hoogte van het venster in pixels
+     *
+     * Tekent de spelwereld, entiteiten en HUD elementen op het scherm.
+     */
     void render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) override;
+
+    /**
+     * @brief Callback wanneer deze state actief wordt
+     *
+     * Voert initialisatie uit wanneer overgeschakeld wordt naar deze state.
+     */
     void onEnter() override;
+
+    /**
+     * @brief Callback wanneer deze state verlaten wordt
+     *
+     * Voert cleanup uit voordat overgeschakeld wordt naar een andere state.
+     */
     void onExit() override;
 };

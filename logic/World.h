@@ -1,6 +1,9 @@
-//
-// Created by Siebe Haché on 14/10/2025.
-//
+/**
+ * @file World.h
+ * @brief Beheert de spelwereld en alle game logica voor Pac-Man
+ * @author Siebe Haché
+ * @date 14/10/2025
+ */
 
 #ifndef WORLD_H
 #define WORLD_H
@@ -21,95 +24,263 @@
 #include "entities/Ghost.h"
 #include "entities/Pacman.h"
 #include "entities/Wall.h"
+
 class Ghost;
 class EntityFactory;
+
+/**
+ * @class World
+ * @brief Hoofdklasse die de spelwereld en alle game objecten beheert
+ *
+ * Beheert het laden van maps, updates van alle entiteiten, collision detection,
+ * score systeem, levens van Pac-Man, fear mode mechanisme en algemene game state.
+ */
 class World {
 private:
-    int width = 0;
-    int height = 0;
-    std::vector<std::string> mapData;
-    std::vector<coord> ghostSpawnPositions;
-    // Separate vectors for different entity types
-    std::vector<std::unique_ptr<Wall>> walls;
-    std::vector<std::unique_ptr<Entity>> collectibles; // Coins + Fruits
-    std::vector<std::unique_ptr<Ghost>> ghosts;
+    int width = 0;                                      ///< Breedte van de spelwereld in tiles
+    int height = 0;                                     ///< Hoogte van de spelwereld in tiles
+    std::vector<std::string> mapData;                   ///< Ruwe map data gelezen uit bestand
+    std::vector<coord> ghostSpawnPositions;             ///< Spawn posities voor spoken
 
-    std::shared_ptr<Pacman> pacman;
+    // Gescheiden vectors voor verschillende entiteit types
+    std::vector<std::unique_ptr<Wall>> walls;           ///< Alle muren in de wereld
+    std::vector<std::unique_ptr<Entity>> collectibles;  ///< Alle verzamelbare items (munten + fruit)
+    std::vector<std::unique_ptr<Ghost>> ghosts;         ///< Alle spoken in het spel
 
-    int coinCount = 0;
-    int pacmanlives = 3;
+    std::shared_ptr<Pacman> pacman;                     ///< De Pac-Man speler entiteit
 
-    // Time variables
-    float totTime = 0.0f;
-    float deltaT = 0.0f;
+    int coinCount = 0;                                  ///< Aantal resterende munten
+    int pacmanlives = 3;                                ///< Aantal levens van Pac-Man
 
-    // Death/Respawn states
-    bool dies = false;
-    float diesTime = 0.0f;
-    float respawnTimer = 1.3f;
-    bool death = false;
-    float deathTime = 0.0f;
-    bool reset = false;
+    // Tijd variabelen
+    float totTime = 0.0f;                               ///< Totale verstreken speltijd
+    float deltaT = 0.0f;                                ///< Tijd sinds laatste frame
+
+    // Dood/Respawn states
+    bool dies = false;                                  ///< Indicator dat Pac-Man sterft
+    float diesTime = 0.0f;                              ///< Tijdstip van dood
+    float respawnTimer = 1.3f;                          ///< Tijd tot respawn na dood
+    bool death = false;                                 ///< Indicator voor dood state
+    float deathTime = 0.0f;                             ///< temporary die de tijd bijhoudt van de dood
+    bool reset = false;                                 ///< Indicator voor wereld reset
 
     // Score
-    int rounds = 0;
-    Score score;
+    int rounds = 0;                                     ///< Aantal voltooide rondes
+    Score score;                                        ///< Score object voor puntenbeheer
 
-    float stepW = 2.0f / static_cast<float>(width);
-    float stepH = 2.0f / static_cast<float>(height);
+    float stepW = 2.0f / static_cast<float>(width);     ///< Stap grootte voor breedte normalisatie
+    float stepH = 2.0f / static_cast<float>(height);    ///< Stap grootte voor hoogte normalisatie
 
     // Fear mode
-    bool fearmode = false;
-    float fearmodeTimer = 6.0f;
-    float fearmodeStart = 0.0f;
+    bool fearmode = false;                              ///< Indicator of fear mode actief is
+    float fearmodeTimer = 6.0f;                         ///< Duur van fear mode in seconden
+    float fearmodeStart = 0.0f;                         ///< Tijdstip waarop fear mode startte
 
     // FACTORY POINTER
-    std::shared_ptr<EntityFactory> factory;
+    std::shared_ptr<EntityFactory> factory;             ///< Factory voor het creëren van entiteiten
 
 public:
+    /**
+     * @brief Destructor voor de World klasse
+     */
     ~World() = default;
+
+    /**
+     * @brief Construeert een World met opgegeven entity factory
+     * @param entityFactory Shared pointer naar de entity factory
+     */
     explicit World(std::shared_ptr<EntityFactory> entityFactory) : factory(std::move(entityFactory)) {}
 
+    /**
+     * @brief Laadt een map uit een bestand
+     * @param filename Pad naar het map bestand
+     * @return true als laden succesvol was, false anders
+     */
     bool loadMap(const std::string& filename);
-    void printMap() const; // debug
+
+    /**
+     * @brief Print de map naar console voor debug doeleinden
+     */
+    void printMap() const;
+
+    /**
+     * @brief Update alle wereld logica en entiteiten
+     * @param deltaTime Tijd sinds vorige frame in seconden
+     */
     void update(float deltaTime);
 
+    /**
+     * @brief Activeert of deactiveert fear mode
+     * @param fearmode true om fear mode te activeren, false om te deactiveren
+     */
     void setFearMode(bool fearmode);
+
+    /**
+     * @brief Controleert of fear mode actief is
+     * @return true als fear mode actief is, false anders
+     */
     bool getFearMode() const;
+
+    /**
+     * @brief Geeft de resterende fear mode tijd
+     * @return Resterende tijd in seconden
+     */
     float getFearModeTimer() const;
+
+    /**
+     * @brief Geeft alle entiteiten in de wereld
+     * @return Const referentie naar vector met entiteiten (legacy methode)
+     */
     const std::vector<std::unique_ptr<Entity>>& getEntities() const;
+
+    /**
+     * @brief Geeft de breedte van de wereld
+     * @return Breedte in tiles
+     */
     int getWidth() const;
+
+    /**
+     * @brief Geeft de hoogte van de wereld
+     * @return Hoogte in tiles
+     */
     int getHeight() const;
 
+    /**
+     * @brief Controleert of Pac-Man in een richting kan bewegen
+     * @param pacman Shared pointer naar Pac-Man
+     * @param dir Bewegingsrichting karakter
+     * @return true als beweging mogelijk is, false anders
+     */
     bool tryMove(const std::shared_ptr<Pacman>& pacman, char dir) const;
+
+    /**
+     * @brief Geeft alle muren in de wereld
+     * @return Const referentie naar vector met muren
+     */
     const std::vector<std::unique_ptr<Wall>>& getWalls() const;
+
+    /**
+     * @brief Geeft alle verzamelbare items
+     * @return Const referentie naar vector met collectibles
+     */
     const std::vector<std::unique_ptr<Entity>>& getCollectibles() const;
+
+    /**
+     * @brief Geeft alle spoken in de wereld
+     * @return Const referentie naar vector met spoken
+     */
     const std::vector<std::unique_ptr<Ghost>>& getGhosts() const;
+
+    /**
+     * @brief Geeft de Pac-Man speler
+     * @return Shared pointer naar Pac-Man
+     */
     std::shared_ptr<Pacman> getPacman() const;
+
+    /**
+     * @brief Controleert alle collisions tussen entiteiten
+     */
     void checkCollisions();
 
+    /**
+     * @brief Zet de starttijd van fear mode
+     * @param timer Starttijd van fear mode
+     */
     void setFearModeStart(float timer);
+
+    /**
+     * @brief Controleert of een spook in een richting kan bewegen
+     * @param ghost Pointer naar het spook
+     * @param dir Bewegingsrichting karakter
+     * @return true als beweging mogelijk is, false anders
+     */
     bool tryMoveGhost(Ghost* ghost, char dir) const;
+
+    /**
+     * @brief Controleert of beweging in een richting mogelijk is voor een spook
+     * @param ghost Pointer naar de ghost
+     * @param dir Bewegingsrichting karakter
+     * @return true als beweging mogelijk is, false anders
+     */
     bool canMoveInDirection(const Ghost* ghost, char dir) const;
+
+    /**
+     * @brief Controleert of een spook op een kruispunt staat
+    * @param ghost Pointer naar de ghost
+     * @return true als spook op kruispunt staat, false anders
+     */
     bool isAtIntersection(const Ghost* ghost) const;
+
+    /**
+     * @brief Controleert of een spook het centrum van een tile zal kruisen
+     * @param ghost Pointer naar de ghost
+     * @param dir Bewegingsrichting karakter
+     * @return true als tile centrum gekruist wordt, false anders
+     */
     bool willCrossTileCenter(const Ghost* ghost, char dir) const;
+
+    /**
+     * @brief Geeft het aantal resterende levens van Pac-Man
+     * @return Aantal levens
+     */
     int getPacmanLives() const;
 
+    /**
+     * @brief Geeft de huidige score
+     * @return Score als integer
+     */
     int getScore() const;
+
+    /**
+     * @brief Controleert of een entiteit op het centrum van een tile staat
+     * @param e Pointer naar de entiteit
+     * @return true als entiteit op tile centrum staat, false anders
+     */
     bool isOnTileCenter(const Entity* e) const;
 
+    /**
+     * @brief Geeft de huidige speltijd
+     * @return Totale verstreken tijd in seconden
+     */
     float getTime() const;
 
+    /**
+     * @brief Vermindert het aantal resterende munten
+     */
     void decreaseCoins();
+
+    /**
+     * @brief Reset de wereld na de dood van Pac-Man
+     */
     void resetAfterDeath();
 
+    /**
+     * @brief Geeft het aantal resterende munten
+     * @return Aantal munten
+     */
     int getCoinCount() const;
 
+    /**
+     * @brief Reset de gehele wereld naar beginstate
+     */
     void resetWorld();
+
+    /**
+     * @brief Geeft referentie naar het Score object
+     * @return Referentie naar Score
+     */
     Score& getScore();
 
+    /**
+     * @brief Geeft death state indicator
+     * @return Death state als integer
+     */
     int getDeath();
 
+    /**
+     * @brief Geeft het aantal voltooide rondes
+     * @return Aantal rondes
+     */
     int getRounds() const;
 };
 
