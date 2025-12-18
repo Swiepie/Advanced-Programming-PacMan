@@ -10,8 +10,10 @@ Game::Game() {
 
     FileDimensions dimensions = getFileDimensions("../assets/map2.txt");
 
-    auto factory = std::make_shared<ConcreteFactory>(window, static_cast<int>(dimensions.height),
-                                                     static_cast<int>(dimensions.width));
+    Camera::getInstance().initialize(static_cast<float>(dimensions.width),
+                                static_cast<float>(dimensions.height));
+
+    auto factory = std::make_shared<ConcreteFactory>(window);
 
     stateManager->pushState(std::make_unique<MenuState>(factory));
 }

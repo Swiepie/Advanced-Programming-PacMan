@@ -16,7 +16,7 @@ protected:
     Ghost* ghost;
 
 public:
-    explicit GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
+    explicit GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window);
 
     void render() override;
     void update(float time) override;
@@ -27,19 +27,19 @@ public:
 
 class RedGhostView : public GhostView {
 public:
-    explicit RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
+    explicit RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window);
     void chooseTexture(char direction, float time) override;
 };
 
 class BlueGhostView : public GhostView {
 public:
-    explicit BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
+    explicit BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window);
     void chooseTexture(char direction, float time) override;
 };
 
 class PinkGhostView : public GhostView {
 public:
-    explicit PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width);
+    explicit PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window);
     void chooseTexture(char direction, float time) override;
 };
 

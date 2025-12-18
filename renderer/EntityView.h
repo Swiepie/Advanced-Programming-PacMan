@@ -20,12 +20,10 @@ protected:
     float frameCooldown = 0.1f;
     bool mouthOpen = false;
     std::shared_ptr<sf::RenderWindow> window;
-    float height = 0;
-    float width = 0;
 
 public:
-    EntityView(Entity* e, std::shared_ptr<sf::RenderWindow> w, float h, float wd)
-        : entity(e), window(std::move(w)), height(h), width(wd) {}
+    EntityView(Entity* e, std::shared_ptr<sf::RenderWindow> w)
+        : entity(e), window(std::move(w)) {}
 
     ~EntityView() override = default;
 

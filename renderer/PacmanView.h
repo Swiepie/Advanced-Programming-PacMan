@@ -24,7 +24,7 @@ private:
     int i = 2;
 
 public:
-    explicit PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window, int height, int width);
+    explicit PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window);
     void update(float time) override;
     void update() override; // Observer pattern
     void updateTexture(float time) override;

@@ -5,8 +5,8 @@
 #include "GhostView.h"
 #include <iostream>
 
-GhostView::GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width)
-    : EntityView(g, std::move(window), height, width), ghost(g) {
+GhostView::GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window)
+    : EntityView(g, std::move(window)), ghost(g) {
     if (!texture.loadFromFile("../sprites/pacman.png")) {
         std::cerr << "Failed to load ghost spritesheet" << std::endl;
     }
@@ -18,30 +18,16 @@ void GhostView::update(float time) {
     render();
 }
 void GhostView::render() {
-    auto pos = ghost->getPosition();
-    Camera camera;
+    Camera& camera = Camera::getInstance();
     float windowWidth = static_cast<float>(window->getSize().x);
     float windowHeight = static_cast<float>(window->getSize().y);
+    auto info = camera.getScreenInfo(windowWidth, windowHeight);
 
-    float rectSize = std::min(windowWidth / width, windowHeight / height);
-
-    float w, h;
-    bool heightFlag;
-
-    if (width / height <= windowWidth / windowHeight) {
-        h = windowHeight;
-        w = width * windowHeight / height;
-        heightFlag = false;
-    } else {
-        h = (height / width) * windowWidth;
-        w = windowWidth;
-        heightFlag = true;
-    }
-    auto screenPos = camera.normalizeToScreen(pos.x, pos.y, windowWidth, windowHeight, heightFlag, h, w);
+    auto pos = ghost->getPosition();
+    auto screenPos = Camera::worldToScreen(pos.x, pos.y, info, windowWidth, windowHeight);
 
     sprite.setPosition(screenPos);
-    sprite.setScale(rectSize / 16.f, rectSize / 16.f);
-
+    sprite.setScale(info.rectSize / 16.f, info.rectSize / 16.f);
     window->draw(sprite);
 }
 void GhostView::updateTexture(float time) {
@@ -60,16 +46,15 @@ void GhostView::chooseTexture(char direction, float time) {
 void GhostView::chooseFearTexture(float time) {
     if (readyFrame(time)) {
         mouthOpen = !mouthOpen;
-        sf::IntRect rect;
-        rect = mouthOpen ? sf::IntRect(128, 64, 16, 16) : sf::IntRect(144, 64, 16, 16);
+        sf::IntRect rect = mouthOpen ? sf::IntRect(128, 64, 16, 16) : sf::IntRect(144, 64, 16, 16);
 
         sprite.setTextureRect(rect);
         recordFrameTime(time);
     }
 }
 // RedGhostView
-RedGhostView::RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width)
-    : GhostView(g, std::move(window), height, width) {
+RedGhostView::RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window)
+    : GhostView(g, std::move(window)) {
     sprite.setTextureRect(sf::IntRect(64, 64, 16, 16));
 }
 
@@ -90,6 +75,7 @@ void RedGhostView::chooseTexture(char direction, float time) {
         case 'O':
             rect = mouthOpen ? sf::IntRect(0, 64, 16, 16) : sf::IntRect(16, 64, 16, 16);
             break;
+        default:;
         }
         sprite.setTextureRect(rect);
         recordFrameTime(time);
@@ -97,8 +83,8 @@ void RedGhostView::chooseTexture(char direction, float time) {
 }
 
 // BlueGhostView
-BlueGhostView::BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width)
-    : GhostView(g, std::move(window), height, width) {
+BlueGhostView::BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window)
+    : GhostView(g, std::move(window)) {
     sprite.setTextureRect(sf::IntRect(64, 96, 16, 16));
 }
 
@@ -119,6 +105,7 @@ void BlueGhostView::chooseTexture(char direction, float time) {
         case 'O':
             rect = mouthOpen ? sf::IntRect(0, 96, 16, 16) : sf::IntRect(16, 96, 16, 16);
             break;
+        default:;
         }
         sprite.setTextureRect(rect);
         recordFrameTime(time);
@@ -126,8 +113,8 @@ void BlueGhostView::chooseTexture(char direction, float time) {
 }
 
 // PinkGhostView
-PinkGhostView::PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window, int height, int width)
-    : GhostView(g, std::move(window), height, width) {
+PinkGhostView::PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window)
+    : GhostView(g, std::move(window)) {
     sprite.setTextureRect(sf::IntRect(64, 80, 16, 16));
 }
 
@@ -148,6 +135,7 @@ void PinkGhostView::chooseTexture(char direction, float time) {
         case 'O':
             rect = mouthOpen ? sf::IntRect(0, 80, 16, 16) : sf::IntRect(16, 80, 16, 16);
             break;
+        default:;
         }
         sprite.setTextureRect(rect);
         recordFrameTime(time);

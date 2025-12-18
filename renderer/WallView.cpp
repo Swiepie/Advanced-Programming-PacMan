@@ -7,29 +7,21 @@
 void WallView::update(float time) { render(); }
 
 void WallView::render() {
-    auto pos = wall->getPosition();
-    Camera camera;
+    Camera& camera = Camera::getInstance();
+
+    // Step 2: Get window dimensions
     float windowWidth = static_cast<float>(window->getSize().x);
     float windowHeight = static_cast<float>(window->getSize().y);
 
-    float rectSize = std::min(windowWidth / width, windowHeight / height);
+    // Step 3: Get screen info (this calculates everything you need)
+    auto info = camera.getScreenInfo(windowWidth, windowHeight);
+    // info now contains: rectSize, w, h, heightFlag
 
-    float w, h;
-    bool heightFlag;
-
-    if (width / height <= windowWidth / windowHeight) {
-        h = windowHeight;
-        w = width * windowHeight / height;
-        heightFlag = false;
-    } else {
-        h = (height / width) * windowWidth;
-        w = windowWidth;
-        heightFlag = true;
-    }
-
-    auto screenPos = camera.normalizeToScreen(pos.x, pos.y, windowWidth, windowHeight, heightFlag, h, w);
-
-    sf::RectangleShape rect({rectSize, rectSize});
+    // Step 4: Convert your entity's world position to screen position
+    auto worldPos = wall->getPosition();
+    auto screenPos = Camera::worldToScreen(worldPos.x, worldPos.y, info,
+                                         windowWidth, windowHeight);
+    sf::RectangleShape rect({info.rectSize, info.rectSize});
     rect.setFillColor(sf::Color::Blue);
     rect.setPosition(screenPos);
     window->draw(rect);

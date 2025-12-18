@@ -48,6 +48,7 @@ add_executable(${PROJECT_NAME}
         renderer/EntityView.cpp
         renderer/CollectibleView.cpp
         renderer/WallView.cpp
+        renderer/Camera.cpp
 
         states/StateManager.cpp
         states/MenuState.cpp

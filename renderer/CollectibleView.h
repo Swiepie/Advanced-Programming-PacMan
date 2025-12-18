@@ -18,8 +18,8 @@ private:
     Fruit* fruit;
 
 public:
-    explicit FruitView(Fruit* f, std::shared_ptr<sf::RenderWindow> window, float height, float width)
-        : EntityView(f, std::move(window), height, width), fruit(f) {}
+    explicit FruitView(Fruit* f, std::shared_ptr<sf::RenderWindow> window)
+        : EntityView(f, std::move(window)), fruit(f) {}
 
     void update(float time) override;
     void render() override;
@@ -31,8 +31,8 @@ private:
     Coin* coin;
 
 public:
-    explicit CoinView(Coin* c, std::shared_ptr<sf::RenderWindow> window, float height, float width)
-        : EntityView(c, std::move(window), height, width), coin(c) {}
+    explicit CoinView(Coin* c, std::shared_ptr<sf::RenderWindow> window)
+        : EntityView(c, std::move(window)), coin(c) {}
 
     void update(float time) override;
     void render() override;

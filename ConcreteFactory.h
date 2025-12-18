@@ -18,12 +18,11 @@ private:
     std::vector<std::unique_ptr<EntityView>> views;
 
     std::shared_ptr<sf::RenderWindow> window;
-    int height = 0;
-    int width = 0;
+
 
 public:
     ~ConcreteFactory() override;
-    ConcreteFactory(std::shared_ptr<sf::RenderWindow> window, int height, int width);
+    ConcreteFactory(std::shared_ptr<sf::RenderWindow> window);
     std::unique_ptr<Wall> createWall(float x, float y) override;
     std::unique_ptr<Coin> createCoin(float x, float y) override;
     std::unique_ptr<Fruit> createFruit(float x, float y) override;
