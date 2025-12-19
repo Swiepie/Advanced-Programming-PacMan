@@ -1,0 +1,16 @@
+<map id="GhostView" name="GhostView">
+<area shape="rect" id="Node000001" title="Basisklasse voor het renderen van Ghost entiteiten." alt="" coords="52,293,137,320"/>
+<area shape="rect" id="Node000002" href="$class_entity_view.html" title="Abstracte basisklasse voor het renderen van entiteiten." alt="" coords="6,203,90,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,241,90,292,85,293,60,246"/>
+<area shape="rect" id="Node000003" href="$class_observer.html" title="Abstract base class voor observers in het Observer pattern." alt="" coords="5,112,80,139"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="45,152,50,202,44,202,44,157"/>
+<area shape="rect" id="Node000004" href="$class_entity.html" title="Abstracte basisklasse voor alle entiteiten in het spel." alt="" coords="110,112,165,139"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="111,151,100,165,62,204,58,200,97,161,114,147"/>
+<area shape="rect" id="Node000007" href="$class_ghost.html" title="Basisklasse voor alle spoken in het spel." alt="" coords="114,203,171,229"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="140,152,144,203,139,201,138,157"/>
+<area shape="rect" id="Node000005" href="$class_subject.html" title="Klasse die observeerbaar gedrag implementeert voor het Observer pattern." alt="" coords="62,5,127,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="106,43,135,111,129,112,105,49"/>
+<area shape="rect" id="Node000006" href="$structcoord.html" title="Eenvoudige coördinaat structuur voor 2D posities." alt="" coords="152,5,205,32"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="169,44,144,113,140,111,167,49"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="131,242,103,294,99,291,126,244"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="usershape_s" name="usershape_s">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,101,101,128"/>
+<area shape="rect" id="Node000002" href="$struct__dtlink__s.html" title=" " alt="" coords="16,8,90,35"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,49,56,101,50,100,51,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="105,11,116,21,108,31,91,33,89,28,106,26,111,21,105,17"/>
+</map>

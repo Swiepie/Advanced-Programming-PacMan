@@ -1,0 +1,33 @@
+<map id="renderer/EntityView.h" name="renderer/EntityView.h">
+<area shape="rect" id="Node000001" title="Definieert de abstracte EntityView basisklasse voor entity visualisatie." alt="" coords="279,5,424,32"/>
+<area shape="rect" id="Node000002" href="$_collectible_view_8h.html" title="Definieert de view klassen voor verzamelbare objecten (fruit en coinen)" alt="" coords="176,80,349,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="323,44,280,81,276,78,326,40"/>
+<area shape="rect" id="Node000009" href="$_ghost_view_8h.html" title="Definieert de view klassen voor Ghost entiteiten en hun varianten." alt="" coords="5,80,152,107"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="288,39,128,82,125,77,291,34"/>
+<area shape="rect" id="Node000010" href="$_pacman_view_8h.html" title="Definieert de view klasse voor Pacman entity rendering." alt="" coords="534,80,693,107"/>
+<area shape="poly" id="edge16_Node000001_Node000010" title=" " alt="" coords="412,34,570,78,565,80,412,39"/>
+<area shape="rect" id="Node000011" href="$_wall_view_8h.html" title="Definieert de view klasse voor Wall entiteiten." alt="" coords="373,80,509,107"/>
+<area shape="poly" id="edge19_Node000001_Node000011" title=" " alt="" coords="379,39,428,79,423,80,379,45"/>
+<area shape="rect" id="Node000003" href="$_concrete_factory_8h.html" title="Definieert de ConcreteFactory voor het creëren van game entiteiten." alt="" coords="261,155,389,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="284,116,317,154,312,154,283,121"/>
+<area shape="rect" id="Node000004" href="$_world_view_8h.html" title="Definieert de view klasse voor World rendering en coördinatie." alt="" coords="253,229,397,256"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="326,195,328,230,323,228,324,200"/>
+<area shape="rect" id="Node000005" href="$_level_state_8h.html" title="Definieert de level state voor actieve gameplay." alt="" coords="258,304,392,331"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="327,270,328,305,323,302,324,274"/>
+<area shape="rect" id="Node000006" href="$_finish_state_8h.html" title="Definieert de finish state voor het einde van het spel." alt="" coords="139,453,277,480"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="282,337,257,359,235,380,214,419,205,455,201,451,209,417,231,377,253,355,278,340"/>
+<area shape="rect" id="Node000007" href="$_menu_state_8h.html" title="Definieert de menu state voor het hoofdmenu." alt="" coords="258,379,393,405"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="318,344,320,380,316,377,315,348"/>
+<area shape="rect" id="Node000008" href="$_paused_state_8h.html" title="Definieert de pauze state voor het spel." alt="" coords="369,453,516,480"/>
+<area shape="poly" id="edge12_Node000005_Node000008" title=" " alt="" coords="351,337,374,355,395,377,418,417,434,454,429,452,413,419,391,380,371,359,350,342"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="223,438,236,408,255,377,283,349,310,332,315,330,287,353,259,380,241,410,227,441"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="332,362,331,333,334,329,336,364"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="295,413,230,455,227,450,290,414"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="359,411,425,453,419,452,357,416"/>
+<area shape="poly" id="edge11_Node000008_Node000005" title=" " alt="" coords="443,437,432,409,415,380,387,353,357,334,358,328,391,349,419,377,437,407,447,440"/>
+<area shape="poly" id="edge14_Node000009_Node000003" title=" " alt="" coords="135,109,284,152,280,156,136,114"/>
+<area shape="poly" id="edge15_Node000009_Node000004" title=" " alt="" coords="113,112,306,227,302,230,112,117"/>
+<area shape="poly" id="edge17_Node000010_Node000003" title=" " alt="" coords="546,112,377,156,375,152,550,109"/>
+<area shape="poly" id="edge18_Node000010_Node000004" title=" " alt="" coords="573,116,351,231,348,227,577,112"/>
+<area shape="poly" id="edge20_Node000011_Node000003" title=" " alt="" coords="406,117,347,156,344,152,410,114"/>
+</map>

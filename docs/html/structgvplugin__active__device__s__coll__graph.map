@@ -1,0 +1,9 @@
+<map id="gvplugin_active_device_s" name="gvplugin_active_device_s">
+<area shape="rect" id="Node000001" title=" " alt="" coords="22,219,193,245"/>
+<area shape="rect" id="Node000002" href="$structgvdevice__engine__s.html" title=" " alt="" coords="5,128,138,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,167,105,218,100,218,81,171"/>
+<area shape="rect" id="Node000003" href="$structgvdevice__features__t.html" title=" " alt="" coords="162,128,301,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,164,127,220,124,216,199,164"/>
+<area shape="rect" id="Node000004" href="$structpointf__s.html" title=" " alt="" coords="198,5,265,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="233,46,234,128,229,127,230,50"/>
+</map>

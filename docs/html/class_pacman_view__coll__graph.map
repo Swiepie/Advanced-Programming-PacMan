@@ -1,0 +1,16 @@
+<map id="PacmanView" name="PacmanView">
+<area shape="rect" id="Node000001" title="View klasse voor het renderen van de Pacman speler entity." alt="" coords="48,293,146,320"/>
+<area shape="rect" id="Node000002" href="$class_entity_view.html" title="Abstracte basisklasse voor het renderen van entiteiten." alt="" coords="5,203,90,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,241,92,292,87,293,60,245"/>
+<area shape="rect" id="Node000003" href="$class_observer.html" title="Abstract base class voor observers in het Observer pattern." alt="" coords="10,112,85,139"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="48,152,50,202,45,202,47,157"/>
+<area shape="rect" id="Node000004" href="$class_entity.html" title="Abstracte basisklasse voor alle entiteiten in het spel." alt="" coords="114,112,170,139"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="117,152,63,204,59,200,119,147"/>
+<area shape="rect" id="Node000007" href="$class_pacman.html" title="Klasse die de speler&#45;gecontroleerde pacman entiteit representeert." alt="" coords="114,203,184,229"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="146,152,150,203,145,201,143,157"/>
+<area shape="rect" id="Node000005" href="$class_subject.html" title="Klasse die observeerbaar gedrag implementeert voor het Observer pattern." alt="" coords="67,5,132,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="111,43,140,111,134,112,110,49"/>
+<area shape="rect" id="Node000006" href="$structcoord.html" title="Eenvoudige coördinaat structuur voor 2D posities." alt="" coords="157,5,210,32"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="174,44,149,113,145,111,172,49"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="136,242,106,294,102,291,131,244"/>
+</map>

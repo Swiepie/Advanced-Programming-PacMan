@@ -1,0 +1,28 @@
+<map id="xdot" name="xdot">
+<area shape="rect" id="Node000001" title=" " alt="" coords="280,416,326,443"/>
+<area shape="rect" id="Node000002" href="$struct__xdot__op.html" title=" " alt="" coords="266,309,340,336"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="305,349,305,417,301,414,301,353"/>
+<area shape="poly" id="edge14_Node000002_Node000002" title=" " alt="" coords="356,312,364,316,367,323,359,333,341,335,340,330,356,328,362,322,360,320,355,317"/>
+<area shape="rect" id="Node000003" href="$structxdot__rect.html" title=" " alt="" coords="5,96,81,123"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="26,138,15,174,13,194,19,212,41,241,69,264,101,283,136,296,206,313,268,320,263,322,205,318,134,301,99,287,66,269,37,245,14,215,8,194,9,173,27,133"/>
+<area shape="rect" id="Node000007" href="$structxdot__image.html" title=" " alt="" coords="70,187,158,213"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="62,132,106,185,101,187,63,137"/>
+<area shape="rect" id="Node000004" href="$structxdot__polyline.html" title=" " alt="" coords="182,187,280,213"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="239,226,252,256,267,284,290,309,284,309,263,287,247,258,238,231"/>
+<area shape="rect" id="Node000005" href="$structxdot__point.html" title=" " alt="" coords="190,96,272,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="232,136,234,187,228,185,230,141"/>
+<area shape="rect" id="Node000006" href="$structxdot__text.html" title=" " alt="" coords="304,187,379,213"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="335,226,309,310,305,307,331,230"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="133,223,163,255,199,283,232,299,268,313,263,314,230,304,196,288,159,258,132,228"/>
+<area shape="rect" id="Node000008" href="$structxdot__color.html" title=" " alt="" coords="404,187,485,213"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="426,223,397,257,362,287,327,311,324,306,359,283,393,253,422,226"/>
+<area shape="rect" id="Node000009" href="$structxdot__linear__grad.html" title=" " alt="" coords="341,96,457,123"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="413,134,440,187,435,186,412,139"/>
+<area shape="rect" id="Node000010" href="$structxdot__color__stop.html" title=" " alt="" coords="412,5,525,32"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="451,43,411,97,407,94,447,47"/>
+<area shape="rect" id="Node000011" href="$structxdot__radial__grad.html" title=" " alt="" coords="481,96,597,123"/>
+<area shape="poly" id="edge12_Node000011_Node000010" title=" " alt="" coords="488,42,532,96,526,95,487,47"/>
+<area shape="poly" id="edge11_Node000008_Node000011" title=" " alt="" coords="517,132,460,188,456,184,512,135"/>
+<area shape="rect" id="Node000012" href="$structxdot__font.html" title=" " alt="" coords="509,187,585,213"/>
+<area shape="poly" id="edge13_Node000002_Node000012" title=" " alt="" coords="535,225,512,260,480,288,446,304,408,315,341,323,340,318,407,309,444,299,478,283,508,256,531,229"/>
+</map>

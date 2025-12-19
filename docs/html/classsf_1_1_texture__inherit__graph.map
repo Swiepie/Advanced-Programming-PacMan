@@ -1,0 +1,5 @@
+<map id="sf::Texture" name="sf::Texture">
+<area shape="rect" id="Node000001" title="Image living on the graphics card that can be used for drawing." alt="" coords="18,80,102,107"/>
+<area shape="rect" id="Node000002" href="$classsf_1_1_gl_resource.html" title="Base class for classes that require an OpenGL context." alt="" coords="5,5,115,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,46,63,80,57,79,58,50"/>
+</map>

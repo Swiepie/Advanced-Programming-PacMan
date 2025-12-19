@@ -1,0 +1,9 @@
+<map id="RedGhostView" name="RedGhostView">
+<area shape="rect" id="Node000001" title="View klasse voor red ghost." alt="" coords="5,229,115,256"/>
+<area shape="rect" id="Node000002" href="$class_ghost_view.html" title="Basisklasse voor het renderen van Ghost entiteiten." alt="" coords="17,155,103,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,195,63,230,57,228,58,199"/>
+<area shape="rect" id="Node000003" href="$class_entity_view.html" title="Abstracte basisklasse voor het renderen van entiteiten." alt="" coords="18,80,102,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="61,120,63,155,57,154,59,125"/>
+<area shape="rect" id="Node000004" href="$class_observer.html" title="Abstract base class voor observers in het Observer pattern." alt="" coords="23,5,97,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="60,45,63,80,57,79,60,50"/>
+</map>

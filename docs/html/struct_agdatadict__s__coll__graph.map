@@ -1,0 +1,20 @@
+<map id="Agdatadict_s" name="Agdatadict_s">
+<area shape="rect" id="Node000001" title=" " alt="" coords="38,368,135,395"/>
+<area shape="rect" id="Node000002" href="$struct_agrec__s.html" title="implementation of Agrec_t" alt="" coords="5,235,75,261"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="52,274,85,367,80,368,47,278"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="89,237,98,241,101,248,93,258,76,261,74,256,90,254,96,248,94,245,91,242"/>
+<area shape="rect" id="Node000003" href="$struct__dt__s.html" title=" " alt="" coords="152,235,205,261"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="162,272,146,298,97,369,93,366,141,294,158,276"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="221,236,229,241,232,248,224,259,207,261,205,256,221,254,227,248,225,244,221,242"/>
+<area shape="rect" id="Node000007" href="$struct__dtmethod__s.html" title=" " alt="" coords="180,368,276,395"/>
+<area shape="poly" id="edge11_Node000007_Node000003" title=" " alt="" coords="169,274,162,310,163,327,169,343,180,356,195,368,190,367,176,360,164,345,158,328,157,310,165,278"/>
+<area shape="rect" id="Node000004" href="$struct__dtdisc__s.html" title=" " alt="" coords="44,133,121,160"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="106,169,169,234,164,235,105,174"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="136,137,148,147,140,155,123,157,120,153,137,151,143,147,137,142"/>
+<area shape="rect" id="Node000005" href="$struct__dtdata__s.html" title=" " alt="" coords="209,133,287,160"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="232,171,189,236,185,233,229,175"/>
+<area shape="rect" id="Node000006" href="$struct__dtlink__s.html" title=" " alt="" coords="211,8,285,35"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="249,48,251,134,245,132,247,53"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="300,9,308,14,311,22,303,33,287,36,284,31,300,28,306,21,304,17,301,14"/>
+<area shape="poly" id="edge10_Node000003_Node000007" title=" " alt="" coords="227,351,224,325,216,297,205,279,192,264,193,259,209,275,221,295,229,324,231,354"/>
+</map>

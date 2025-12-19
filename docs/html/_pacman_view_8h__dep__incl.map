@@ -1,0 +1,21 @@
+<map id="renderer/PacmanView.h" name="renderer/PacmanView.h">
+<area shape="rect" id="Node000001" title="Definieert de view klasse voor Pacman entity rendering." alt="" coords="112,5,272,32"/>
+<area shape="rect" id="Node000002" href="$_concrete_factory_8h.html" title="Definieert de ConcreteFactory voor het creëren van game entiteiten." alt="" coords="77,80,205,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,47,152,81,148,78,176,42"/>
+<area shape="rect" id="Node000003" href="$_world_view_8h.html" title="Definieert de view klasse voor World rendering en coördinatie." alt="" coords="120,155,264,181"/>
+<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="206,43,220,80,221,101,216,122,202,156,197,153,211,120,215,100,215,80,205,49"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="159,117,186,154,180,155,158,122"/>
+<area shape="rect" id="Node000004" href="$_level_state_8h.html" title="Definieert de level state voor actieve gameplay." alt="" coords="125,229,259,256"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="193,195,194,230,189,228,191,200"/>
+<area shape="rect" id="Node000005" href="$_finish_state_8h.html" title="Definieert de finish state voor het einde van het spel." alt="" coords="5,379,144,405"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="145,266,123,284,102,306,81,344,72,380,67,377,76,342,98,302,120,280,148,262"/>
+<area shape="rect" id="Node000006" href="$_menu_state_8h.html" title="Definieert de menu state voor het hoofdmenu." alt="" coords="124,304,260,331"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="185,269,187,305,182,303,182,274"/>
+<area shape="rect" id="Node000007" href="$_paused_state_8h.html" title="Definieert de pauze state voor het spel." alt="" coords="236,379,383,405"/>
+<area shape="poly" id="edge11_Node000004_Node000007" title=" " alt="" coords="217,262,241,281,262,302,285,342,301,379,296,377,280,344,258,306,237,285,216,268"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="90,363,103,333,122,302,150,275,181,255,177,258,154,279,126,306,108,336,94,366"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="198,287,197,259,200,254,203,289"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="161,339,96,380,94,376,156,339"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="226,336,291,378,286,378,224,341"/>
+<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="309,362,299,335,282,306,254,279,224,259,224,254,257,275,286,302,304,333,314,365"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="sf::GlResource::TransientContextLock" name="sf::GlResource::TransientContextLock">
+<area shape="rect" id="Node000001" title="RAII helper class to temporarily lock an available context for use." alt="" coords="5,80,177,123"/>
+<area shape="rect" id="Node000002" href="$classsf_1_1_non_copyable.html" title="Utility class that makes any derived class non&#45;copyable." alt="" coords="31,5,151,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,46,94,81,88,79,89,50"/>
+</map>

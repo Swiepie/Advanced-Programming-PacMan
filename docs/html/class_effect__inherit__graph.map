@@ -1,0 +1,15 @@
+<map id="Effect" name="Effect">
+<area shape="rect" id="Node000001" title=" " alt="" coords="190,80,245,107"/>
+<area shape="rect" id="Node000003" href="$class_edge.html" title=" " alt="" coords="5,155,57,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,113,58,159,56,154,175,108"/>
+<area shape="rect" id="Node000004" href="$class_geometry.html" title=" " alt="" coords="81,155,160,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,115,138,157,136,152,186,117"/>
+<area shape="rect" id="Node000005" href="$class_pixelate.html" title=" " alt="" coords="184,155,252,181"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="220,121,220,156,215,153,216,124"/>
+<area shape="rect" id="Node000006" href="$class_storm_blink.html" title=" " alt="" coords="276,155,362,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="249,113,304,154,299,154,247,119"/>
+<area shape="rect" id="Node000007" href="$class_wave_blur.html" title=" " alt="" coords="386,155,463,181"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="260,107,391,153,385,155,260,112"/>
+<area shape="rect" id="Node000002" href="$classsf_1_1_drawable.html" title="Abstract base class for objects that can be drawn to a render target." alt="" coords="170,5,265,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,46,220,81,215,78,216,50"/>
+</map>

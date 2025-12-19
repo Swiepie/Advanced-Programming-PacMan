@@ -1,0 +1,11 @@
+<map id="RedGhost" name="RedGhost">
+<area shape="rect" id="Node000001" title="red ghost met vastgezette richting AI" alt="" coords="39,264,120,291"/>
+<area shape="rect" id="Node000002" href="$class_ghost.html" title="Basisklasse voor alle spoken in het spel." alt="" coords="51,188,108,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,228,82,264,77,263,77,232"/>
+<area shape="rect" id="Node000003" href="$class_entity.html" title="Abstracte basisklasse voor alle entiteiten in het spel." alt="" coords="52,112,107,139"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="80,151,82,188,77,187,78,156"/>
+<area shape="rect" id="Node000004" href="$class_subject.html" title="Klasse die observeerbaar gedrag implementeert voor het Observer pattern." alt="" coords="5,5,71,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="49,44,77,111,72,112,48,49"/>
+<area shape="rect" id="Node000005" href="$structcoord.html" title="Eenvoudige coördinaat structuur voor 2D posities." alt="" coords="95,5,149,32"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="112,44,87,113,82,111,110,48"/>
+</map>

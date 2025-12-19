@@ -1,0 +1,7 @@
+<map id="polygon_t" name="polygon_t">
+<area shape="rect" id="Node000001" title=" " alt="" coords="122,96,199,123"/>
+<area shape="rect" id="Node000002" href="$structgraphviz__polygon__style__t.html" title=" " alt="" coords="5,5,174,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,42,153,95,147,96,108,46"/>
+<area shape="rect" id="Node000003" href="$structpointf__s.html" title=" " alt="" coords="197,5,264,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,43,172,97,169,93,209,45"/>
+</map>

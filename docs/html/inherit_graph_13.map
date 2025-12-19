@@ -1,0 +1,21 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$class_subject.html" title="Klasse die observeerbaar gedrag implementeert voor het Observer pattern." alt="" coords="5,107,71,133"/>
+<area shape="rect" id="Node000001" href="$class_entity.html" title="Abstracte basisklasse voor alle entiteiten in het spel." alt="" coords="119,107,174,133"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="85,117,121,119,116,121,87,123"/>
+<area shape="rect" id="Node000002" href="$class_coin.html" title="Klasse die een verzamelbare coin in het spel representeert." alt="" coords="232,5,281,32"/>
+<area shape="poly" id="edge16_Node000001_Node000002" title=" " alt="" coords="168,93,220,42,238,31,234,34,224,46,172,97"/>
+<area shape="rect" id="Node000003" href="$class_fruit.html" title="Klasse die een bonusfruit in het spel representeert." alt="" coords="233,56,280,83"/>
+<area shape="poly" id="edge17_Node000001_Node000003" title=" " alt="" coords="187,99,235,79,230,81,189,103"/>
+<area shape="rect" id="Node000004" href="$class_ghost.html" title="Basisklasse voor alle spoken in het spel." alt="" coords="228,107,285,133"/>
+<area shape="poly" id="edge18_Node000001_Node000004" title=" " alt="" coords="189,117,230,119,225,121,190,123"/>
+<area shape="rect" id="Node000008" href="$class_pacman.html" title="Klasse die de speler&#45;gecontroleerde pacman entiteit representeert." alt="" coords="222,157,291,184"/>
+<area shape="poly" id="edge22_Node000001_Node000008" title=" " alt="" coords="188,136,228,156,223,157,188,142"/>
+<area shape="rect" id="Node000009" href="$class_wall.html" title="Klasse die een wall in de world representeert." alt="" coords="234,208,280,235"/>
+<area shape="poly" id="edge23_Node000001_Node000009" title=" " alt="" coords="171,142,224,194,239,208,234,207,220,198,169,147"/>
+<area shape="rect" id="Node000005" href="$class_blue_ghost.html" title="blue ghost dat een positie voor pacman uit achtervolgt" alt="" coords="339,56,422,83"/>
+<area shape="poly" id="edge19_Node000004_Node000005" title=" " alt="" coords="298,100,348,82,343,84,300,105"/>
+<area shape="rect" id="Node000006" href="$class_pink_ghost.html" title="pink ghost dat pacman direct achtervolgt" alt="" coords="339,107,422,133"/>
+<area shape="poly" id="edge20_Node000004_Node000006" title=" " alt="" coords="300,117,342,119,336,121,301,123"/>
+<area shape="rect" id="Node000007" href="$class_red_ghost.html" title="red ghost met vastgezette richting AI" alt="" coords="340,157,421,184"/>
+<area shape="poly" id="edge21_Node000004_Node000007" title=" " alt="" coords="300,135,348,157,343,157,299,140"/>
+</map>

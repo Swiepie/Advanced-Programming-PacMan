@@ -1,0 +1,7 @@
+<map id="Agdisc_s" name="Agdisc_s">
+<area shape="rect" id="Node000001" title="user&#39;s discipline" alt="" coords="65,96,140,123"/>
+<area shape="rect" id="Node000002" href="$struct_agiddisc__s.html" title="object ID allocator discipline" alt="" coords="5,5,91,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,43,97,95,92,96,62,48"/>
+<area shape="rect" id="Node000003" href="$struct_agiodisc__s.html" title="IO services." alt="" coords="115,5,200,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,45,112,97,109,94,139,47"/>
+</map>

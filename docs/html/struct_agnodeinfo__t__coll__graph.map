@@ -1,0 +1,92 @@
+<map id="Agnodeinfo_t" name="Agnodeinfo_t">
+<area shape="rect" id="Node000001" title=" " alt="" coords="589,1061,686,1088"/>
+<area shape="rect" id="Node000002" href="$struct_agrec__s.html" title="implementation of Agrec_t" alt="" coords="676,133,746,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="711,175,641,1061,636,1060,706,176"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="760,136,769,140,772,147,764,157,747,159,744,154,761,152,767,146,765,143,761,141"/>
+<area shape="rect" id="Node000015" href="$struct_agobj__s.html" title="a generic header of Agraph_s, Agnode_s and Agedge_s" alt="" coords="831,251,900,277"/>
+<area shape="poly" id="edge23_Node000015_Node000002" title=" " alt="" coords="739,167,851,250,846,251,739,172"/>
+<area shape="rect" id="Node000003" href="$structshape__desc.html" title=" " alt="" coords="280,843,371,869"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="326,882,329,920,336,961,352,1002,363,1020,378,1035,392,1044,413,1051,469,1062,591,1073,586,1073,468,1067,412,1057,390,1049,374,1039,359,1023,347,1004,331,962,324,920,323,887"/>
+<area shape="rect" id="Node000004" href="$structshape__functions.html" title=" " alt="" coords="267,688,384,715"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="327,728,328,843,323,841,324,732"/>
+<area shape="rect" id="Node000005" href="$structport.html" title=" " alt="" coords="304,587,347,613"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="326,627,328,689,323,687,325,632"/>
+<area shape="rect" id="Node000006" href="$structpointf__s.html" title=" " alt="" coords="302,251,370,277"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="286,277,250,291,215,314,184,346,164,376,154,410,151,455,151,857,154,894,163,924,178,948,198,968,252,1002,320,1035,370,1049,442,1059,591,1072,586,1072,442,1065,369,1055,318,1040,249,1006,195,972,174,951,159,926,149,895,146,857,146,455,149,409,159,374,180,343,212,310,248,286,289,273"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="334,290,326,432,326,480,328,587,323,586,321,480,321,432,333,295"/>
+<area shape="rect" id="Node000007" href="$structboxf.html" title=" " alt="" coords="346,443,393,469"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="342,290,370,443,365,442,340,295"/>
+<area shape="rect" id="Node000008" href="$structpolygon__t.html" title=" " alt="" coords="186,443,263,469"/>
+<area shape="poly" id="edge11_Node000008_Node000006" title=" " alt="" coords="286,281,264,294,244,314,229,346,223,382,222,416,225,442,219,442,217,416,217,382,224,345,240,310,261,290,290,277"/>
+<area shape="rect" id="Node000010" href="$structtextlabel__t.html" title=" " alt="" coords="504,587,585,613"/>
+<area shape="poly" id="edge15_Node000010_Node000006" title=" " alt="" coords="384,269,431,283,453,295,473,310,499,343,518,381,532,421,541,462,548,536,548,587,543,585,543,536,536,463,527,423,513,383,494,346,469,314,450,299,429,288,386,274"/>
+<area shape="rect" id="Node000011" href="$structtextspan__t.html" title=" " alt="" coords="416,443,499,469"/>
+<area shape="poly" id="edge19_Node000011_Node000006" title=" " alt="" coords="362,285,388,310,411,346,430,382,456,442,450,442,425,385,406,348,383,314,363,290"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="389,479,421,533,432,565,436,598,436,857,441,894,456,927,477,958,503,985,561,1029,613,1061,608,1060,558,1034,500,989,473,961,451,930,436,895,431,858,431,599,427,566,416,535,388,485"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="362,482,332,587,327,585,360,487"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="225,482,233,587,243,651,257,714,271,751,288,787,320,842,315,842,284,790,266,753,252,715,237,652,228,588,224,488"/>
+<area shape="rect" id="Node000009" href="$structgraphviz__polygon__style__t.html" title=" " alt="" coords="5,251,174,277"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="102,289,135,345,177,406,211,441,206,443,172,410,130,348,103,294"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="547,627,555,701,568,803,590,920,621,1036,632,1062,628,1060,616,1038,584,921,563,804,550,702,545,631"/>
+<area shape="poly" id="edge16_Node000010_Node000011" title=" " alt="" coords="466,482,480,517,498,550,531,586,526,586,494,554,475,519,465,487"/>
+<area shape="rect" id="Node000012" href="$structtextfont__t.html" title=" " alt="" coords="490,251,566,277"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="520,289,464,444,460,441,517,294"/>
+<area shape="rect" id="Node000013" href="$struct___postscript_alias.html" title=" " alt="" coords="450,133,566,160"/>
+<area shape="poly" id="edge18_Node000012_Node000013" title=" " alt="" coords="507,173,512,215,524,251,519,250,507,217,506,178"/>
+<area shape="rect" id="Node000014" href="$struct_agnode__s.html" title=" " alt="" coords="828,587,908,613"/>
+<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="863,626,860,648,852,709,852,763,858,859,857,904,849,948,828,992,791,1039,774,1050,748,1059,687,1070,686,1065,747,1053,772,1045,788,1035,823,990,844,946,852,903,853,859,847,764,847,709,855,648,860,631"/>
+<area shape="rect" id="Node000031" href="$struct_agsubnode__s.html" title="This is the node struct allocated per graph (or subgraph)." alt="" coords="885,688,985,715"/>
+<area shape="poly" id="edge50_Node000031_Node000014" title=" " alt="" coords="864,626,865,646,870,663,882,676,898,688,893,687,878,680,866,665,860,647,861,631"/>
+<area shape="rect" id="Node000033" href="$struct_agedge__s.html" title=" " alt="" coords="692,688,772,715"/>
+<area shape="poly" id="edge55_Node000033_Node000014" title=" " alt="" coords="825,619,779,650,759,670,743,690,739,686,755,666,776,646,821,622"/>
+<area shape="poly" id="edge21_Node000014_Node000015" title=" " alt="" coords="867,291,871,587,866,585,864,295"/>
+<area shape="rect" id="Node000017" href="$struct_agraph__s.html" title="graph or subgraph" alt="" coords="1298,443,1374,469"/>
+<area shape="poly" id="edge25_Node000017_Node000015" title=" " alt="" coords="914,270,961,284,984,295,1005,310,1016,322,1022,335,1027,361,1033,384,1039,395,1049,406,1081,414,1149,425,1300,449,1295,450,1148,430,1080,419,1047,410,1035,399,1028,386,1022,362,1017,337,1011,325,1001,314,981,300,959,289,915,275"/>
+<area shape="poly" id="edge53_Node000033_Node000015" title=" " alt="" coords="859,291,738,689,734,686,855,294"/>
+<area shape="rect" id="Node000016" href="$struct_agtag__s.html" title="tag in Agobj_s for graphs, nodes, and edges." alt="" coords="831,133,900,160"/>
+<area shape="poly" id="edge22_Node000015_Node000016" title=" " alt="" coords="867,173,868,251,863,249,864,178"/>
+<area shape="poly" id="edge56_Node000001_Node000017" title=" " alt="" coords="1342,483,1346,551,1340,589,1328,625,1281,711,1235,780,1186,836,1134,882,1075,922,1008,960,843,1040,803,1055,762,1065,687,1075,686,1069,761,1060,802,1050,840,1035,1006,955,1072,918,1130,878,1182,832,1230,777,1277,708,1323,623,1335,588,1340,551,1339,487"/>
+<area shape="poly" id="edge24_Node000014_Node000017" title=" " alt="" coords="1281,475,909,589,907,584,1286,472"/>
+<area shape="poly" id="edge37_Node000017_Node000017" title=" " alt="" coords="1389,442,1398,448,1401,456,1393,468,1375,472,1374,467,1390,464,1396,456,1394,451,1389,447"/>
+<area shape="rect" id="Node000030" href="$struct_agcbdisc__s.html" title="client event callbacks, used in Agcbstack_s" alt="" coords="1434,587,1524,613"/>
+<area shape="poly" id="edge46_Node000030_Node000017" title=" " alt="" coords="1377,475,1415,502,1451,546,1475,587,1470,586,1447,549,1412,506,1376,480"/>
+<area shape="rect" id="Node000018" href="$struct_agdesc__s.html" title="graph descriptor" alt="" coords="1291,251,1370,277"/>
+<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="1333,291,1338,444,1333,441,1330,295"/>
+<area shape="rect" id="Node000019" href="$struct__dtlink__s.html" title=" " alt="" coords="1037,8,1110,35"/>
+<area shape="poly" id="edge27_Node000017_Node000019" title=" " alt="" coords="1125,29,1165,41,1204,59,1267,97,1315,131,1352,175,1385,239,1391,273,1391,321,1385,370,1375,409,1364,428,1351,444,1347,440,1360,425,1370,407,1379,369,1385,321,1386,274,1380,241,1348,178,1311,135,1264,101,1202,64,1163,46,1126,35"/>
+<area shape="poly" id="edge28_Node000019_Node000019" title=" " alt="" coords="1125,9,1134,14,1137,22,1129,33,1112,36,1110,31,1126,28,1132,21,1130,17,1126,14"/>
+<area shape="rect" id="Node000022" href="$struct__dtdata__s.html" title=" " alt="" coords="1156,133,1234,160"/>
+<area shape="poly" id="edge34_Node000022_Node000019" title=" " alt="" coords="1097,43,1185,133,1180,133,1096,49"/>
+<area shape="poly" id="edge49_Node000031_Node000019" title=" " alt="" coords="1049,44,1013,86,996,109,981,134,953,206,938,270,934,327,938,382,959,500,969,568,976,648,977,656,976,665,967,679,955,690,952,685,963,675,971,663,972,656,971,648,964,569,953,501,933,383,929,327,933,269,948,205,976,132,991,106,1009,82,1045,47"/>
+<area shape="poly" id="edge54_Node000033_Node000019" title=" " alt="" coords="1019,27,909,39,778,61,718,76,670,96,637,119,628,132,625,146,625,601,633,629,651,653,676,671,703,687,698,688,673,676,648,656,628,632,620,602,620,145,624,130,633,115,667,91,717,71,777,56,909,34,1024,25"/>
+<area shape="rect" id="Node000020" href="$struct__dt__s.html" title=" " alt="" coords="1136,251,1190,277"/>
+<area shape="poly" id="edge29_Node000017_Node000020" title=" " alt="" coords="1204,282,1242,310,1261,335,1270,357,1279,380,1294,406,1325,442,1320,442,1290,410,1274,383,1265,359,1256,338,1238,314,1203,287"/>
+<area shape="poly" id="edge30_Node000020_Node000020" title=" " alt="" coords="1205,251,1213,256,1216,264,1214,271,1207,276,1191,278,1189,273,1205,271,1209,268,1211,264,1209,259,1205,256"/>
+<area shape="rect" id="Node000023" href="$struct__dtmethod__s.html" title=" " alt="" coords="1059,443,1155,469"/>
+<area shape="poly" id="edge36_Node000023_Node000020" title=" " alt="" coords="1160,290,1150,347,1132,409,1116,444,1112,441,1127,407,1145,346,1157,295"/>
+<area shape="rect" id="Node000024" href="$struct_agclos__s.html" title="shared resources for Agraph_s" alt="" coords="1444,843,1519,869"/>
+<area shape="poly" id="edge43_Node000024_Node000020" title=" " alt="" coords="1191,286,1209,311,1225,356,1230,396,1229,432,1225,466,1217,537,1219,577,1230,623,1251,672,1285,713,1329,754,1377,790,1460,843,1455,842,1374,794,1325,758,1281,716,1246,675,1225,625,1214,578,1212,537,1220,466,1224,432,1225,396,1219,357,1204,313,1190,291"/>
+<area shape="rect" id="Node000021" href="$struct__dtdisc__s.html" title=" " alt="" coords="991,133,1068,160"/>
+<area shape="poly" id="edge31_Node000020_Node000021" title=" " alt="" coords="1055,168,1151,250,1146,250,1055,173"/>
+<area shape="poly" id="edge32_Node000021_Node000021" title=" " alt="" coords="1083,136,1092,140,1095,147,1087,157,1070,159,1068,154,1084,152,1090,146,1088,144,1084,141"/>
+<area shape="poly" id="edge33_Node000020_Node000022" title=" " alt="" coords="1189,173,1169,252,1164,249,1186,177"/>
+<area shape="poly" id="edge35_Node000020_Node000023" title=" " alt="" coords="1094,427,1088,403,1083,373,1085,341,1094,311,1112,289,1138,275,1133,278,1115,293,1099,313,1090,342,1089,372,1093,402,1099,429"/>
+<area shape="poly" id="edge38_Node000017_Node000024" title=" " alt="" coords="1467,827,1419,716,1401,656,1392,609,1381,563,1360,505,1344,472,1345,467,1365,503,1386,561,1397,608,1407,655,1424,714,1471,829"/>
+<area shape="rect" id="Node000025" href="$struct_agdisc__s.html" title="user&#39;s discipline" alt="" coords="1718,688,1794,715"/>
+<area shape="poly" id="edge39_Node000024_Node000025" title=" " alt="" coords="1742,726,1704,777,1678,801,1649,821,1617,836,1583,846,1520,856,1519,850,1581,841,1615,831,1647,816,1675,797,1700,773,1738,729"/>
+<area shape="rect" id="Node000026" href="$struct_agiddisc__s.html" title="object ID allocator discipline" alt="" coords="1768,587,1854,613"/>
+<area shape="poly" id="edge40_Node000025_Node000026" title=" " alt="" coords="1799,625,1765,690,1761,686,1795,628"/>
+<area shape="rect" id="Node000027" href="$struct_agiodisc__s.html" title="IO services." alt="" coords="1659,587,1744,613"/>
+<area shape="poly" id="edge41_Node000025_Node000027" title=" " alt="" coords="1717,624,1752,689,1747,687,1714,629"/>
+<area shape="rect" id="Node000028" href="$struct_agdstate__s.html" title="client state (closures)" alt="" coords="1607,688,1694,715"/>
+<area shape="poly" id="edge42_Node000024_Node000028" title=" " alt="" coords="1628,724,1497,844,1494,840,1624,726"/>
+<area shape="rect" id="Node000029" href="$struct_agcbstack__s.html" title="object event callbacks" alt="" coords="1433,688,1530,715"/>
+<area shape="poly" id="edge44_Node000024_Node000029" title=" " alt="" coords="1483,728,1484,844,1479,840,1480,732"/>
+<area shape="poly" id="edge47_Node000029_Node000029" title=" " alt="" coords="1546,692,1557,701,1549,710,1531,712,1530,707,1546,705,1552,701,1545,697"/>
+<area shape="poly" id="edge45_Node000029_Node000030" title=" " alt="" coords="1481,627,1483,689,1479,686,1478,631"/>
+<area shape="poly" id="edge48_Node000014_Node000031" title=" " alt="" coords="919,674,903,650,879,617,880,611,908,646,924,675"/>
+<area shape="rect" id="Node000032" href="$structelist.html" title=" " alt="" coords="675,843,720,869"/>
+<area shape="poly" id="edge51_Node000001_Node000032" title=" " alt="" coords="695,883,682,955,659,1038,646,1063,643,1059,654,1036,677,954,691,886"/>
+<area shape="poly" id="edge57_Node000001_Node000033" title=" " alt="" coords="747,726,752,738,776,824,793,896,794,930,789,964,776,1000,752,1039,738,1052,722,1062,687,1073,686,1068,720,1057,735,1048,747,1036,771,998,784,963,789,930,787,897,770,826,747,739,745,731"/>
+<area shape="poly" id="edge52_Node000032_Node000033" title=" " alt="" coords="728,728,703,844,698,841,724,732"/>
+</map>

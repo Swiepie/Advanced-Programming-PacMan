@@ -1,0 +1,5 @@
+<map id="LevelState" name="LevelState">
+<area shape="rect" id="Node000001" title="State klasse voor actieve gameplay tijdens een level." alt="" coords="5,80,89,107"/>
+<area shape="rect" id="Node000002" href="$class_state.html" title="Abstracte basis klasse voor het State pattern in het spel." alt="" coords="21,5,73,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,46,50,80,44,79,45,50"/>
+</map>

@@ -1,0 +1,27 @@
+var class_entity =
+[
+    [ "~Entity", "class_entity.html#a8f4f31cddde80cee8f6a455f16a5b79a", null ],
+    [ "Entity", "class_entity.html#ae5a9ed9b94b78f5f89b177a611689e5f", null ],
+    [ "accept", "class_entity.html#a1d3ba320d89e1920558d6021cff83502", null ],
+    [ "collidesWith", "class_entity.html#abe9685f41eefdac4e46c779b82ee9090", null ],
+    [ "getPosition", "class_entity.html#a3cfccb1b58a5a992aead4a963d4cd18f", null ],
+    [ "getSpeed", "class_entity.html#ad577b2c5aeea6d34d6c4e3c28b3cfc47", null ],
+    [ "isCollectible", "class_entity.html#a145b680dc7b43071a77ed93f3c50e8b3", null ],
+    [ "onCollect", "class_entity.html#a8a1b919193b0357da0d1979c6274328b", null ],
+    [ "resetToSpawn", "class_entity.html#a9ad69cc8d776ef858c28f21c26afbf36", null ],
+    [ "setPosition", "class_entity.html#a93306ecdce9446da37560f5f2b5307c0", null ],
+    [ "setSpawn", "class_entity.html#a268e1898461c915baa01b0a862b6fd8e", null ],
+    [ "setSpeed", "class_entity.html#a86227b3f7e03865a506d7824f048b775", null ],
+    [ "update", "class_entity.html#a205443d87b309a074a6088b6e148f2a2", null ],
+    [ "update", "class_entity.html#a3d60e7018b657da3d0dfbdfadabf6e06", null ],
+    [ "direction", "class_entity.html#a3f582387bb73bceb84cd1145fca0f974", null ],
+    [ "fearSpeed", "class_entity.html#a58c9d83c63a65d01057a106931e9134f", null ],
+    [ "fpinkn", "class_entity.html#a056bd6b6e03abc0a02e135a57e01aff6", null ],
+    [ "hasBeenEaten", "class_entity.html#a20c2c64eb9cbe29251b6f73e76a92e83", null ],
+    [ "moveCooldown", "class_entity.html#acba2b399247ddb673e418291a0efcf1e", null ],
+    [ "position", "class_entity.html#af11863377111aaeca1649a6f05f618b1", null ],
+    [ "respawnTimer", "class_entity.html#aeb8d357c5ac1bb8e9c71b83a9b94bbaf", null ],
+    [ "spawn", "class_entity.html#a66de2ece7e53be1be6e1bf578aca2b1d", null ],
+    [ "speed", "class_entity.html#a98572d956beb757675259e55bf79d5fd", null ],
+    [ "speedSave", "class_entity.html#acf3da9eea5f732da8bc80b0dd5b57a63", null ]
+];

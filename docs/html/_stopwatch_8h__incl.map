@@ -1,0 +1,5 @@
+<map id="logic/Stopwatch.h" name="logic/Stopwatch.h">
+<area shape="rect" id="Node000001" title="Implementeert een singleton stopwatch voor tijdmeting in het spel." alt="" coords="5,5,131,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="38,80,98,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,31,71,65,65,64,66,35"/>
+</map>

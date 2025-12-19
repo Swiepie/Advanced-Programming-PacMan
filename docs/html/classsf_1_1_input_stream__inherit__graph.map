@@ -1,0 +1,7 @@
+<map id="sf::InputStream" name="sf::InputStream">
+<area shape="rect" id="Node000001" title="Abstract class for custom file input streams." alt="" coords="100,5,211,32"/>
+<area shape="rect" id="Node000002" href="$classsf_1_1_file_input_stream.html" title="Implementation of input stream based on a file." alt="" coords="5,80,138,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,42,88,82,84,77,127,43"/>
+<area shape="rect" id="Node000003" href="$classsf_1_1_memory_input_stream.html" title="Implementation of input stream based on a memory chunk." alt="" coords="162,80,320,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="183,40,229,80,223,80,181,45"/>
+</map>

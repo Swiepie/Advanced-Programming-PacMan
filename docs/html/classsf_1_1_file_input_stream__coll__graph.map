@@ -1,0 +1,7 @@
+<map id="sf::FileInputStream" name="sf::FileInputStream">
+<area shape="rect" id="Node000001" title="Implementation of input stream based on a file." alt="" coords="64,80,196,107"/>
+<area shape="rect" id="Node000002" href="$classsf_1_1_input_stream.html" title="Abstract class for custom file input streams." alt="" coords="5,5,117,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,41,121,79,116,80,82,46"/>
+<area shape="rect" id="Node000003" href="$classsf_1_1_non_copyable.html" title="Utility class that makes any derived class non&#45;copyable." alt="" coords="141,5,261,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,42,144,82,141,77,176,44"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Coin" name="Coin">
+<area shape="rect" id="Node000001" title="Klasse die een verzamelbare coin in het spel representeert." alt="" coords="14,155,62,181"/>
+<area shape="rect" id="Node000002" href="$class_entity.html" title="Abstracte basisklasse voor alle entiteiten in het spel." alt="" coords="10,80,66,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="40,121,41,155,35,154,36,124"/>
+<area shape="rect" id="Node000003" href="$class_subject.html" title="Klasse die observeerbaar gedrag implementeert voor het Observer pattern." alt="" coords="5,5,71,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="39,45,41,80,35,79,37,50"/>
+</map>

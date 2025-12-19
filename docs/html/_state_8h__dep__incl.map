@@ -1,0 +1,27 @@
+<map id="states/State.h" name="states/State.h">
+<area shape="rect" id="Node000001" title="Definieert de abstracte basis klasse voor alle game states." alt="" coords="197,5,300,32"/>
+<area shape="rect" id="Node000002" href="$_finish_state_8h.html" title="Definieert de finish state voor het einde van het spel." alt="" coords="22,155,160,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,43,162,82,127,121,101,156,97,153,122,118,158,78,215,38"/>
+<area shape="rect" id="Node000003" href="$_level_state_8h.html" title="Definieert de level state voor actieve gameplay." alt="" coords="26,229,161,256"/>
+<area shape="poly" id="edge10_Node000001_Node000003" title=" " alt="" coords="180,39,137,56,89,81,45,114,27,134,12,156,8,166,9,176,21,196,43,213,67,228,63,230,40,217,17,199,4,178,3,166,7,153,23,130,42,110,86,76,135,51,184,35"/>
+<area shape="rect" id="Node000004" href="$_menu_state_8h.html" title="Definieert de menu state voor het hoofdmenu." alt="" coords="143,304,279,331"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="289,37,317,55,340,78,359,104,371,128,375,153,367,182,340,224,305,259,268,286,237,306,234,301,265,282,302,255,336,221,362,180,370,153,366,129,354,107,336,82,313,60,289,43"/>
+<area shape="rect" id="Node000005" href="$_paused_state_8h.html" title="Definieert de pauze state voor het spel." alt="" coords="137,379,285,405"/>
+<area shape="poly" id="edge12_Node000001_Node000005" title=" " alt="" coords="315,28,374,45,431,72,456,90,476,111,489,137,494,166,494,244,488,277,473,305,449,328,420,346,388,361,353,372,286,386,285,381,352,367,386,356,418,342,446,324,468,302,483,275,488,244,488,167,484,139,471,114,452,94,429,76,372,50,316,33"/>
+<area shape="rect" id="Node000006" href="$_state_manager_8h.html" title="Definieert de StateManager klasse voor game state beheer." alt="" coords="172,80,325,107"/>
+<area shape="poly" id="edge13_Node000001_Node000006" title=" " alt="" coords="249,45,251,80,246,79,247,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,195,89,229,83,229,83,200"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="99,213,98,184,99,179,104,214"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="120,262,186,302,181,304,119,268"/>
+<area shape="poly" id="edge9_Node000003_Node000005" title=" " alt="" coords="92,268,104,300,121,329,149,356,181,378,176,378,146,360,117,332,99,302,90,274"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="200,289,188,260,170,231,142,204,114,185,114,179,146,200,174,228,193,258,206,290"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="182,296,121,259,121,254,187,294"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="213,345,213,380,209,377,209,348"/>
+<area shape="poly" id="edge8_Node000005_Node000003" title=" " alt="" coords="183,369,162,354,141,332,118,293,104,259,105,254,123,290,145,329,165,350,189,370"/>
+<area shape="poly" id="edge15_Node000006_Node000002" title=" " alt="" coords="206,116,120,156,117,152,209,111"/>
+<area shape="poly" id="edge16_Node000006_Node000003" title=" " alt="" coords="228,121,174,183,114,231,110,227,170,179,231,117"/>
+<area shape="poly" id="edge17_Node000006_Node000004" title=" " alt="" coords="246,121,216,305,210,303,241,123"/>
+<area shape="poly" id="edge18_Node000006_Node000005" title=" " alt="" coords="312,110,343,128,367,153,370,167,367,182,355,228,341,263,322,295,293,332,264,360,234,381,232,376,261,356,289,329,318,292,337,260,350,226,362,181,365,167,362,156,340,132,312,115"/>
+<area shape="rect" id="Node000007" href="$_game_8h.html" title="Definieert de Game klasse voor het hoofdspel management." alt="" coords="285,155,353,181"/>
+<area shape="poly" id="edge14_Node000006_Node000007" title=" " alt="" coords="271,115,309,154,304,154,271,121"/>
+</map>

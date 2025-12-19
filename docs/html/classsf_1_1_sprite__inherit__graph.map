@@ -1,0 +1,7 @@
+<map id="sf::Sprite" name="sf::Sprite">
+<area shape="rect" id="Node000001" title="Drawable representation of a texture, with its own transformations, color, etc." alt="" coords="82,80,157,107"/>
+<area shape="rect" id="Node000002" href="$classsf_1_1_drawable.html" title="Abstract base class for objects that can be drawn to a render target." alt="" coords="5,5,101,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,41,111,79,106,80,74,46"/>
+<area shape="rect" id="Node000003" href="$classsf_1_1_transformable.html" title="Decomposed transform defined by a position, a rotation and a scale." alt="" coords="125,5,248,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,43,133,82,130,77,162,45"/>
+</map>

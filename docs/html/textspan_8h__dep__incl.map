@@ -1,0 +1,23 @@
+<map id="Graphviz&#45;12.2.1&#45;win64/include/graphviz/textspan.h" name="Graphviz&#45;12.2.1&#45;win64/include/graphviz/textspan.h">
+<area shape="rect" id="Node000001" title="textspan_t, textfont_t, PostscriptAlias" alt="" coords="593,5,777,48"/>
+<area shape="rect" id="Node000002" href="$types_8h.html" title="graphs, nodes and edges info: Agraphinfo_t, Agnodeinfo_t and Agedgeinfo_t" alt="" coords="602,96,768,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="686,61,687,97,683,94,684,66"/>
+<area shape="rect" id="Node000003" href="$gvc_8h.html" title="Graphviz context library." alt="" coords="27,195,183,237"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="584,129,405,152,300,169,196,189,168,196,166,192,195,184,299,164,404,147,589,126"/>
+<area shape="rect" id="Node000006" href="$gvplugin__device_8h.html" title=" " alt="" coords="207,187,379,245"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="584,142,392,189,380,192,378,188,391,184,589,139"/>
+<area shape="rect" id="Node000007" href="$gvplugin__layout_8h.html" title=" " alt="" coords="403,187,575,245"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="632,145,548,189,546,184,627,147"/>
+<area shape="rect" id="Node000008" href="$gvplugin__loadimage_8h.html" title=" " alt="" coords="599,187,771,245"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="687,152,687,188,683,185,683,156"/>
+<area shape="rect" id="Node000009" href="$gvplugin__render_8h.html" title=" " alt="" coords="795,187,967,245"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="741,143,825,186,820,186,740,149"/>
+<area shape="rect" id="Node000010" href="$gvplugin__textlayout_8h.html" title=" " alt="" coords="991,187,1163,245"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="784,138,979,184,994,190,988,190,978,189,784,143"/>
+<area shape="rect" id="Node000011" href="$pack_8h.html" title="support for connected components" alt="" coords="1186,195,1349,237"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="784,125,966,148,1071,164,1175,184,1206,194,1201,194,1174,189,1070,169,966,153,784,131"/>
+<area shape="rect" id="Node000004" href="$_g_v_context_8h_source.html" title=" " alt="" coords="5,293,205,336"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="106,250,108,294,102,292,104,255"/>
+<area shape="rect" id="Node000005" href="$_g_v_layout_8h_source.html" title=" " alt="" coords="9,384,201,427"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="107,350,107,385,103,383,103,354"/>
+</map>

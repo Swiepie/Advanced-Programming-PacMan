@@ -1,0 +1,8 @@
+<map id="Agobj_s" name="Agobj_s">
+<area shape="rect" id="Node000001" title="a generic header of Agraph_s, Agnode_s and Agedge_s" alt="" coords="32,96,101,123"/>
+<area shape="rect" id="Node000002" href="$struct_agtag__s.html" title="tag in Agobj_s for graphs, nodes, and edges." alt="" coords="5,5,75,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="50,45,66,95,60,96,46,49"/>
+<area shape="rect" id="Node000003" href="$struct_agrec__s.html" title="implementation of Agrec_t" alt="" coords="99,5,168,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="117,44,78,97,74,94,112,45"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="184,9,195,19,186,28,169,30,168,25,184,23,189,19,183,14"/>
+</map>

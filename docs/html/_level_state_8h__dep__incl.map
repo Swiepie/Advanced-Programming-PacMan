@@ -1,0 +1,14 @@
+<map id="states/LevelState.h" name="states/LevelState.h">
+<area shape="rect" id="Node000001" title="Definieert de level state voor actieve gameplay." alt="" coords="125,5,259,32"/>
+<area shape="rect" id="Node000002" href="$_finish_state_8h.html" title="Definieert de finish state voor het einde van het spel." alt="" coords="5,155,144,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,42,123,60,102,82,81,120,72,156,67,153,76,118,98,78,120,56,148,38"/>
+<area shape="rect" id="Node000003" href="$_menu_state_8h.html" title="Definieert de menu state voor het hoofdmenu." alt="" coords="124,80,260,107"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="185,45,187,81,182,79,182,50"/>
+<area shape="rect" id="Node000004" href="$_paused_state_8h.html" title="Definieert de pauze state voor het spel." alt="" coords="236,155,383,181"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="217,38,241,57,262,78,285,118,301,155,296,153,280,120,258,82,237,61,216,44"/>
+<area shape="poly" id="edge2_Node000002_Node000001" title=" " alt="" coords="90,139,103,109,122,78,150,51,181,31,177,34,154,55,126,82,108,112,94,142"/>
+<area shape="poly" id="edge5_Node000003_Node000001" title=" " alt="" coords="198,63,197,35,200,30,203,65"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="161,115,96,156,94,152,156,115"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="226,112,291,154,286,154,224,117"/>
+<area shape="poly" id="edge7_Node000004_Node000001" title=" " alt="" coords="309,138,299,111,282,82,254,55,224,35,224,30,257,51,286,78,304,109,314,141"/>
+</map>

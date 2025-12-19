@@ -1,0 +1,5 @@
+<map id="FinishState" name="FinishState">
+<area shape="rect" id="Node000001" title="State klasse voor het einde&#45;scherm van het spel." alt="" coords="5,80,93,107"/>
+<area shape="rect" id="Node000002" href="$class_state.html" title="Abstracte basis klasse voor het State pattern in het spel." alt="" coords="23,5,75,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,46,52,80,46,79,47,50"/>
+</map>
