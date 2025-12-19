@@ -16,33 +16,33 @@
 
 /**
  * @class Pacman
- * @brief Klasse die de speler-gecontroleerde Pac-Man entiteit representeert
+ * @brief Klasse die de speler-gecontroleerde pacman entiteit representeert
  *
- * Beheert beweging, richting, buffering van input en timing voor Pac-Man.
+ * Beheert beweging, richting, buffering van input en timing voor pacman.
  * Ondersteunt directe en gebufferde richtingsveranderingen voor responsieve besturing.
  */
 class Pacman : public Entity {
 private:
-    char direction;             ///< Huidige bewegingsrichting van Pac-Man
-    char bufferdirection;       ///< Gebufferde richting voor volgende beweging
-    float moveTimer = 0.0f;     ///< Timer voor bewegingsinterval
-    float lastMoveTime = 0.0f;  ///< Tijdstip van laatste beweging
+    char direction;            ///< Huidige bewegingsrichting van pacman
+    char bufferdirection;      ///< Gebufferde richting voor volgende beweging
+    float moveTimer = 0.0f;    ///< Timer voor bewegingsinterval
+    float lastMoveTime = 0.0f; ///< Tijdstip van laatste beweging
 
 public:
     /**
      * @brief Construeert een Pacman op opgegeven positie
-     * @param x X-coördinaat van Pac-Man
-     * @param y Y-coördinaat van Pac-Man
+     * @param x X-coördinaat van pacman
+     * @param y Y-coördinaat van pacman
      *
-     * Initialiseert Pac-Man met snelheid 4 en zonder beginrichting.
+     * Initialiseert pacman met snelheid 4 en zonder beginrichting.
      */
     Pacman(float x, float y) : Entity(x, y), direction(' '), bufferdirection(0) { speed = 4; }
 
     /**
-     * @brief Update Pac-Man logica per frame
+     * @brief Update pacman logica per frame
      * @param deltaTime Tijd sinds vorige frame in seconden
      *
-     * Wordt aangeroepen elke frame om Pac-Man's staat bij te werken.
+     * Wordt aangeroepen elke frame om pacman's staat bij te werken.
      */
     void update(float deltaTime) override;
 
@@ -53,7 +53,7 @@ public:
     void addMoveTime(float dt);
 
     /**
-     * @brief Controleert of Pac-Man klaar is om te bewegen
+     * @brief Controleert of pacman klaar is om te bewegen
      * @return true als beweging mogelijk is, false anders
      */
     bool readyToMove() const;
@@ -64,7 +64,7 @@ public:
     void resetMoveTimer();
 
     /**
-     * @brief Controleert of Pac-Man klaar is om te bewegen op een specifiek tijdstip
+     * @brief Controleert of pacman klaar is om te bewegen op een specifiek tijdstip
      * @param currentTime Huidig tijdstip in seconden
      * @return true als beweging mogelijk is, false anders
      */
@@ -115,7 +115,7 @@ public:
 
     /**
      * @brief Accepteert een Visitor voor het Visitor pattern
-     * @param visitor Referentie naar de Visitor die Pac-Man bezoekt
+     * @param visitor Referentie naar de Visitor die pacman bezoekt
      *
      * Implementatie van het Visitor pattern voor operaties zoals rendering.
      */

@@ -1,6 +1,6 @@
 /**
-* @file Fruit.h
- * @brief Definieert de Fruit entiteit voor het Pac-Man spel
+ * @file Fruit.h
+ * @brief Definieert de Fruit entiteit voor het pacman spel
  * @author siebe
  * @date 02/11/2025
  */
@@ -17,12 +17,12 @@
  * @class Fruit
  * @brief Klasse die een bonusfruit in het spel representeert
  *
- * Fruit is een verzamelbaar object dat extra punten oplevert wanneer het door Pac-Man
+ * Fruit is een collectable object dat extra punten oplevert wanneer het door pacman
  * wordt opgegeten. Implementeert het Visitor pattern voor rendering.
  */
 class Fruit : public Entity {
 private:
-    int worth = 50;  ///< Puntwaarde van het fruit (standaard 50 punten)
+    int worth = 50; ///< Puntwaarde van het fruit (standaard 50 punten)
 
 public:
     /**
@@ -33,14 +33,14 @@ public:
     Fruit(float x, float y) : Entity(x, y) {}
 
     /**
-     * @brief Controleert of het fruit verzamelbaar is
+     * @brief Controleert of het fruit collectable is
      * @return true als het fruit opgepakt kan worden, false anders
      */
     bool isCollectible() const override;
 
     /**
      * @brief Verwerkt het verzamelen van het fruit
-     * @param world Referentie naar de spelwereld
+     * @param world Referentie naar de world
      *
      * Voegt bonuspunten toe aan de score wanneer het fruit wordt verzameld.
      */

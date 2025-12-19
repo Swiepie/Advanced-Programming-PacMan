@@ -1,6 +1,6 @@
 /**
  * @file Scoreboard.h
- * @brief Beheert de highscores van het Pac-Man spel
+ * @brief Beheert de highscores van het pacman spel
  * @author siebe
  * @date 30/11/2025
  */
@@ -22,8 +22,8 @@
  */
 class Scoreboard {
 private:
-    std::vector<int> highscores;  ///< Vector die alle highscores bevat
-    std::string filename;         ///< Bestandsnaam voor persistente opslag van scores
+    std::vector<int> highscores; ///< Vector die alle highscores bevat
+    std::string filename;        ///< Bestandsnaam voor persistente opslag van scores
 
 public:
     /**

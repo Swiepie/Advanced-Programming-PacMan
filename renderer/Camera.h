@@ -21,8 +21,8 @@
  */
 class Camera {
 private:
-    float width;   ///< Breedte van de camera viewport
-    float height;  ///< Hoogte van de camera viewport
+    float width;  ///< Breedte van de camera viewport
+    float height; ///< Hoogte van de camera viewport
 
     /**
      * @brief Private constructor voor singleton implementatie
@@ -90,10 +90,10 @@ public:
      * en aspect ratio beheer.
      */
     struct ScreenInfo {
-        float w;              ///< Effectieve breedte na aspect ratio correctie
-        float h;              ///< Effectieve hoogte na aspect ratio correctie
-        bool heightFlag;      ///< Indicator welke dimensie bepalend is voor schaling
-        float rectSize;       ///< Grootte van rechthoek eenheden in scherm pixels
+        float w;         ///< Effectieve breedte na aspect ratio correctie
+        float h;         ///< Effectieve hoogte na aspect ratio correctie
+        bool heightFlag; ///< Indicator welke dimensie bepalend is voor schaling
+        float rectSize;  ///< Grootte van rechthoek eenheden in scherm pixels
     };
 
     /**

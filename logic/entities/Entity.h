@@ -17,7 +17,7 @@
  * @brief Eenvoudige coördinaat structuur voor 2D posities
  */
 struct coord {
-    float x, y;  ///< X en Y coördinaten
+    float x, y; ///< X en Y coördinaten
 };
 
 class Visitor;
@@ -34,16 +34,16 @@ class World;
  */
 class Entity : public Subject {
 protected:
-    double speed = 2.5;         ///< Huidige bewegingssnelheid van de entiteit
-    double speedSave = 1;       ///< Opgeslagen snelheid voor herstel na modificatie
-    double fearSpeed = 1.5;     ///< Snelheid tijdens fear mode (voor spoken)
-    float moveCooldown;         ///< Cooldown tussen bewegingen
-    coord position;             ///< Huidige positie van de entiteit
-    char direction;             ///< Huidige bewegingsrichting
-    bool hasBeenEaten = false;  ///< Indicator of entiteit opgegeten is
-    coord spawn;                ///< Spawn positie voor respawn
-    bool frozen = false;        ///< Indicator of entiteit bevroren is
-    float respawnTimer;         ///< Timer voor respawn mechanisme
+    double speed = 2.5;        ///< Huidige bewegingssnelheid van de entiteit
+    double speedSave = 1;      ///< Opgeslagen snelheid voor herstel na modificatie
+    double fearSpeed = 1.5;    ///< Snelheid tijdens fear mode (voor spoken)
+    float moveCooldown;        ///< Cooldown tussen bewegingen
+    coord position;            ///< Huidige positie van de entiteit
+    char direction;            ///< Huidige bewegingsrichting
+    bool hasBeenEaten = false; ///< Indicator of entiteit opgegeten is
+    coord spawn;               ///< Spawn positie voor respawn
+    bool fpinkn = false;       ///< Indicator of entiteit bevroren is
+    float respawnTimer;        ///< Timer voor respawn mechanisme
 
 public:
     /**
@@ -102,17 +102,17 @@ public:
     bool collidesWith(const Entity& other, float stepW = 0.05f, float stepH = 0.05f) const;
 
     /**
-     * @brief Controleert of de entiteit verzamelbaar is
+     * @brief Controleert of de entiteit collectable is
      * @return true als entiteit opgepakt kan worden, false anders
      *
      * Standaard implementatie retourneert false. Override in afgeleide klassen
-     * voor verzamelbare objecten zoals munten en fruit.
+     * voor verzamelbare objecten zoals coinen en fruit.
      */
     virtual bool isCollectible() const;
 
     /**
      * @brief Verwerkt het verzamelen van de entiteit
-     * @param world Referentie naar de spelwereld
+     * @param world Referentie naar de world
      *
      * Standaard implementatie doet niets. Override in afgeleide klassen
      * voor verzamelbare objecten om effecten toe te passen.
@@ -120,13 +120,13 @@ public:
     virtual void onCollect(World& world);
 
     /**
-     * @brief Update entiteit logica met wereld en Pac-Man context
+     * @brief Update entiteit logica met wereld en pacman context
      * @param deltaTime Tijd sinds vorige frame in seconden
-     * @param world Referentie naar de spelwereld
-     * @param pacman Const referentie naar Pac-Man
+     * @param world Referentie naar de world
+     * @param pacman Const referentie naar pacman
      *
      * Uitgebreide update functie voor entiteiten die interactie met de
-     * wereld en Pac-Man nodig hebben (zoals spoken).
+     * wereld en pacman nodig hebben (zoals spoken).
      */
     virtual void update(float deltaTime, World& world, const Pacman& pacman) {}
 

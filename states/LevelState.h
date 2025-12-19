@@ -33,23 +33,23 @@ class World;
  */
 class LevelState : public State {
 private:
-    std::shared_ptr<EntityFactory> factory;  ///< Factory voor het creëren van entiteiten
-    std::shared_ptr<Camera> camera;          ///< Camera voor viewport transformaties
-    std::shared_ptr<World> world;            ///< Spelwereld met alle entiteiten en logica
-    WorldView renderer;                      ///< Renderer voor de spelwereld
+    std::shared_ptr<EntityFactory> factory; ///< Factory voor het creëren van entiteiten
+    std::shared_ptr<Camera> camera;         ///< Camera voor viewport transformaties
+    std::shared_ptr<World> world;           ///< world met alle entiteiten en logica
+    WorldView renderer;                     ///< Renderer voor de world
 
-    sf::Font font;    ///< SFML font voor HUD tekst rendering
-    sf::Text lives;   ///< Tekst element voor levens weergave
-    sf::Text score;   ///< Tekst element voor score weergave
+    sf::Font font;  ///< SFML font voor HUD tekst rendering
+    sf::Text lives; ///< Tekst element voor levens weergave
+    sf::Text score; ///< Tekst element voor score weergave
 
-    std::string filename = "../assets/map.txt";  ///< Pad naar het te laden map bestand
+    std::string filename = "../assets/map.txt"; ///< Pad naar het te laden map bestand
 
 public:
     /**
      * @brief Construeert een LevelState met opgegeven factory
      * @param factory Gedeelde pointer naar de EntityFactory voor entiteit creatie
      *
-     * Initialiseert de spelwereld, laadt de map, en stelt HUD elementen in
+     * Initialiseert de world, laadt de map, en stelt HUD elementen in
      * voor score en levens weergave.
      */
     explicit LevelState(const std::shared_ptr<EntityFactory>& factory)
@@ -83,7 +83,7 @@ public:
      * @param stateManager Gedeelde pointer naar de StateManager
      * @param deltaTime Delta tijd sinds vorige frame in seconden
      *
-     * Update de spelwereld, entiteiten, en controleert win/verlies condities.
+     * Update de world, entiteiten, en controleert win/verlies condities.
      */
     void update(std::shared_ptr<StateManager> stateManager, float deltaTime) override;
 
@@ -93,7 +93,7 @@ public:
      * @param windowWidth Breedte van het venster in pixels
      * @param windowHeight Hoogte van het venster in pixels
      *
-     * Tekent de spelwereld, entiteiten en HUD elementen op het scherm.
+     * Tekent de world, entiteiten en HUD elementen op het scherm.
      */
     void render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) override;
 

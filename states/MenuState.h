@@ -28,11 +28,11 @@
  */
 class MenuState : public State {
 private:
-    sf::Font font;                            ///< SFML font voor tekst rendering
-    sf::Text title;                           ///< Titel tekst voor het hoofdmenu
-    sf::Text highscores;                      ///< Tekst voor highscores weergave
-    Scoreboard sb;                            ///< Scoreboard voor highscore beheer
-    std::shared_ptr<EntityFactory> factory;   ///< Factory voor het creëren van entiteiten
+    sf::Font font;                          ///< SFML font voor tekst rendering
+    sf::Text title;                         ///< Titel tekst voor het hoofdmenu
+    sf::Text highscores;                    ///< Tekst voor highscores weergave
+    Scoreboard sb;                          ///< Scoreboard voor highscore beheer
+    std::shared_ptr<EntityFactory> factory; ///< Factory voor het creëren van entiteiten
 
 public:
     /**
@@ -49,7 +49,7 @@ public:
         font.loadFromFile("../assets/ARIAL.TTF");
 
         title.setFont(font);
-        title.setString("PAC-MAN PROJECT\nPress any key to play");
+        title.setString("pacman PROJECT\nPress any key to play");
         title.setFillColor(sf::Color::Yellow);
 
         highscores.setFont(font);

@@ -1,6 +1,6 @@
 /**
  * @file Score.h
- * @brief Beheert het scoresysteem van het Pac-Man spel
+ * @brief Beheert het scoresysteem van het pacman spel
  * @author Siebe Haché
  * @date 14/10/2025
  */
@@ -20,11 +20,11 @@
  */
 class Score {
 private:
-    int ghostCombo = 0;           ///< Huidige combo voor opeenvolgende spoken gegeten
-    int currentScore = 0;         ///< Huidige totale score van de speler
-    float lastDecayTime = 0.0f;   ///< Tijdstip van laatste score verval
-    float lastCoinTime = 0.0f;    ///< Tijdstip van laatste verzamelde munt
-    Scoreboard scoreboard;        ///< Scoreboard instantie voor highscore beheer
+    int ghostCombo = 0;         ///< Huidige combo voor opeenvolgende spoken gegeten
+    int currentScore = 0;       ///< Huidige totale score van de speler
+    float lastDecayTime = 0.0f; ///< Tijdstip van laatste score verval
+    float lastCoinTime = 0.0f;  ///< Tijdstip van laatste verzamelde coin
+    Scoreboard scoreboard;      ///< Scoreboard instantie voor highscore beheer
 
 public:
     /**
@@ -35,16 +35,16 @@ public:
     void reset();
 
     /**
-     * @brief Voegt punten toe voor het verzamelen van een munt
+     * @brief Voegt punten toe voor het verzamelen van een coin
      * @param currentTime Huidige speltijd voor tijdgebaseerde berekeningen
      *
-     * Verhoogt de score wanneer een munt verzameld wordt, rekening houdend met timing.
+     * Verhoogt de score wanneer een coin verzameld wordt, rekening houdend met timing.
      */
     void addCoin(float currentTime);
 
     /**
-     * @brief Voegt punten toe voor het eten van een spook
-     * @param basePoints Basispunten voor het spook
+     * @brief Voegt punten toe voor het eten van een ghost
+     * @param basePoints Basispunten voor het ghost
      *
      * Verhoogt de score met combopunten gebaseerd op opeenvolgende spoken gegeten.
      */

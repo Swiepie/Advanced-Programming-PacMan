@@ -14,11 +14,6 @@ PacmanView::PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window)
     sprite.setTextureRect(sf::IntRect(30, 0, 15, 15));
 }
 
-void PacmanView::update() {
-    // Called automatically when entity notifies
-    // Can be used for immediate reactions to state changes
-}
-
 void PacmanView::updateTexture(float time) { chooseTexture(pacman->getDirection(), time); }
 
 void PacmanView::chooseTexture(char direction, float time) {
@@ -68,7 +63,6 @@ void PacmanView::render() {
     sprite.setPosition(screenPos);
     sprite.setScale(info.rectSize / 15.f, info.rectSize / 15.f);
     window->draw(sprite);
-
 }
 
 void PacmanView::update(float time) {

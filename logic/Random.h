@@ -21,7 +21,7 @@
  */
 class Random {
 private:
-    std::mt19937 engine;  ///< Mersenne Twister random number generator
+    std::mt19937 engine; ///< Mersenne Twister random number generator
 
     /**
      * @brief Private constructor voor singleton patroon
@@ -37,8 +37,8 @@ private:
     }
 
 public:
-    Random(const Random&) = delete;              ///< Verwijderd - voorkomt kopiëren
-    Random& operator=(const Random&) = delete;   ///< Verwijderd - voorkomt toewijzing
+    Random(const Random&) = delete;            ///< Verwijderd - voorkomt kopiëren
+    Random& operator=(const Random&) = delete; ///< Verwijderd - voorkomt toewijzing
 
     /**
      * @brief Geeft de singleton instantie van de Random generator
@@ -64,7 +64,7 @@ public:
 
     /**
      * @brief Genereert een willekeurige bewegingsrichting
-     * @return Willekeurig richtingskarakter voor Pac-Man/spoken beweging
+     * @return Willekeurig richtingskarakter voor pacman/spoken beweging
      */
     char getRandomDirection();
 

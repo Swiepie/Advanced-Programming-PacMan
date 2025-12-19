@@ -7,13 +7,8 @@
 
 #include "renderer/CollectibleView.h"
 
-ConcreteFactory::~ConcreteFactory() {
-    views.clear();
-
-
-}
-ConcreteFactory::ConcreteFactory(std::shared_ptr<sf::RenderWindow> window)
-    : window(std::move(window)) {}
+ConcreteFactory::~ConcreteFactory() { views.clear(); }
+ConcreteFactory::ConcreteFactory(std::shared_ptr<sf::RenderWindow> window) : window(std::move(window)) {}
 
 std::unique_ptr<Wall> ConcreteFactory::createWall(float x, float y) {
     auto wall = std::make_unique<Wall>(x, y);

@@ -321,9 +321,7 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
         }
     }
 
-    // ✅ GENTLE SNAP: Only snap perpendicular axis when moving, no forced
-    // intersection snapping
-    const float SNAP_THRESHOLD = 0.05f; // Only snap if within 8% of grid line
+    const float SNAP_THRESHOLD = 0.05f; // Only snap if within 5% of grid line
 
     if (std::fabs(dx) > 0.001f) { // Horizontal movement
         float gridY = std::round((newY + 1.0f) / stepH) * stepH - 1.0f;
@@ -418,7 +416,6 @@ bool World::isAtIntersection(const Ghost* ghost) const {
     float dx = std::fabs(centerX - x);
     float dy = std::fabs(centerY - y);
 
-    // ✅ Ghost must be within 20% of tile center to check for intersection
     float snapMargin = 0.02f;
     bool nearCenter = (dx < stepW * snapMargin && dy < stepH * snapMargin);
 
@@ -463,7 +460,7 @@ bool World::isOnTileCenter(const Entity* e) const {
     float dx = std::fabs(centerX - x);
     float dy = std::fabs(centerY - y);
 
-    float snapMargin = 0.03f; // 8% of a tile
+    float snapMargin = 0.03f; // 3% of a tile
     return (dx < stepW * snapMargin && dy < stepH * snapMargin);
 }
 

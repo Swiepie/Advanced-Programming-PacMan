@@ -1,5 +1,5 @@
 /**
-* @file Observer.h
+ * @file Observer.h
  * @brief Definieert de Observer interface voor het Observer design pattern
  * @author siebe
  * @date 12/12/2025

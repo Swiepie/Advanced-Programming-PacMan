@@ -14,7 +14,6 @@
 #include "Pacman.h"
 #include "Wall.h"
 
-
 class Wall;
 class Coin;
 class Fruit;
@@ -39,18 +38,18 @@ public:
     virtual ~EntityFactory() = default;
 
     /**
-     * @brief Creëert een muur entiteit
-     * @param x X-coördinaat van de muur
-     * @param y Y-coördinaat van de muur
-     * @return Unieke pointer naar de gecreëerde muur
+     * @brief Creëert een wall entiteit
+     * @param x X-coördinaat van de wall
+     * @param y Y-coördinaat van de wall
+     * @return Unieke pointer naar de gecreëerde wall
      */
     virtual std::unique_ptr<Wall> createWall(float x, float y) = 0;
 
     /**
-     * @brief Creëert een munt entiteit
-     * @param x X-coördinaat van de munt
-     * @param y Y-coördinaat van de munt
-     * @return Unieke pointer naar de gecreëerde munt
+     * @brief Creëert een coin entiteit
+     * @param x X-coördinaat van de coin
+     * @param y Y-coördinaat van de coin
+     * @return Unieke pointer naar de gecreëerde coin
      */
     virtual std::unique_ptr<Coin> createCoin(float x, float y) = 0;
 
@@ -63,36 +62,36 @@ public:
     virtual std::unique_ptr<Fruit> createFruit(float x, float y) = 0;
 
     /**
-     * @brief Creëert een Pac-Man entiteit
-     * @param x X-coördinaat van Pac-Man
-     * @param y Y-coördinaat van Pac-Man
-     * @return Unieke pointer naar de gecreëerde Pac-Man
+     * @brief Creëert een pacman entiteit
+     * @param x X-coördinaat van pacman
+     * @param y Y-coördinaat van pacman
+     * @return Unieke pointer naar de gecreëerde pacman
      */
     virtual std::unique_ptr<Pacman> createPacman(float x, float y) = 0;
 
     /**
-     * @brief Creëert een rood spook entiteit
-     * @param x X-coördinaat van het spook
-     * @param y Y-coördinaat van het spook
-     * @return Unieke pointer naar het gecreëerde rode spook
+     * @brief Creëert een red ghost entiteit
+     * @param x X-coördinaat van het ghost
+     * @param y Y-coördinaat van het ghost
+     * @return Unieke pointer naar het gecreëerde red ghost
      */
     virtual std::unique_ptr<RedGhost> createRedGhost(float x, float y) = 0;
 
     /**
-     * @brief Creëert een blauw spook entiteit
-     * @param x X-coördinaat van het spook
-     * @param y Y-coördinaat van het spook
-     * @param delay Chase delay voor het spook in seconden
-     * @return Unieke pointer naar het gecreëerde blauwe spook
+     * @brief Creëert een blue ghost entiteit
+     * @param x X-coördinaat van het ghost
+     * @param y Y-coördinaat van het ghost
+     * @param delay Chase delay voor het ghost in seconden
+     * @return Unieke pointer naar het gecreëerde bluee ghost
      */
     virtual std::unique_ptr<BlueGhost> createBlueGhost(float x, float y, float delay) = 0;
 
     /**
-     * @brief Creëert een roze spook entiteit
-     * @param x X-coördinaat van het spook
-     * @param y Y-coördinaat van het spook
-     * @param delay Chase delay voor het spook in seconden
-     * @return Unieke pointer naar het gecreëerde roze spook
+     * @brief Creëert een pink ghost entiteit
+     * @param x X-coördinaat van het ghost
+     * @param y Y-coördinaat van het ghost
+     * @param delay Chase delay voor het ghost in seconden
+     * @return Unieke pointer naar het gecreëerde pink ghost
      */
     virtual std::unique_ptr<PinkGhost> createPinkGhost(float x, float y, float delay) = 0;
 };

@@ -15,7 +15,6 @@ void MenuState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int wi
     sf::Vector2f viewSize = window->getView().getSize();
     sf::Vector2f viewCenter = window->getView().getCenter();
 
-
     float preferredHeight = viewSize.y * 0.10f;
     float titleHeight = title.getLocalBounds().height;
     float scaleY = preferredHeight / titleHeight;

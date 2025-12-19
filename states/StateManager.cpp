@@ -18,9 +18,7 @@ void StateManager::popState(int count) {
     popCount += count;
 }
 
-State* StateManager::currentState() {
-    return states.empty() ? nullptr : states.top().get();
-}
+State* StateManager::currentState() { return states.empty() ? nullptr : states.top().get(); }
 
 void StateManager::processStateChanges() {
     // Pop the requested number of states
@@ -48,10 +46,6 @@ void StateManager::processStateChanges() {
     }
 }
 
-bool StateManager::canProcessInput() {
-    return inputClock.getElapsedTime().asSeconds() >= inputBuffer;
-}
+bool StateManager::canProcessInput() { return inputClock.getElapsedTime().asSeconds() >= inputBuffer; }
 
-void StateManager::resetInputBuffer() {
-    inputClock.restart();
-}
+void StateManager::resetInputBuffer() { inputClock.restart(); }

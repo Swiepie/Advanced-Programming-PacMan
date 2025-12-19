@@ -26,10 +26,10 @@ private:
      */
     Stopwatch() : running(false), paused(false) {}
 
-    bool running;                                      ///< Geeft aan of de stopwatch actief is
-    bool paused;                                       ///< Geeft aan of de stopwatch gepauzeerd is
-    std::chrono::steady_clock::time_point startTime;  ///< Tijdstip waarop de stopwatch gestart is
-    std::chrono::steady_clock::duration elapsed{};    ///< Verstreken tijd sinds start
+    bool running;                                    ///< Geeft aan of de stopwatch actief is
+    bool paused;                                     ///< Geeft aan of de stopwatch gepauzeerd is
+    std::chrono::steady_clock::time_point startTime; ///< Tijdstip waarop de stopwatch gestart is
+    std::chrono::steady_clock::duration elapsed{};   ///< Verstreken tijd sinds start
 
 public:
     /**
@@ -41,8 +41,8 @@ public:
         return instance;
     }
 
-    Stopwatch(const Stopwatch&) = delete;              ///< Verwijderd - voorkomt kopiëren
-    Stopwatch& operator=(const Stopwatch&) = delete;   ///< Verwijderd - voorkomt toewijzing
+    Stopwatch(const Stopwatch&) = delete;            ///< Verwijderd - voorkomt kopiëren
+    Stopwatch& operator=(const Stopwatch&) = delete; ///< Verwijderd - voorkomt toewijzing
 
     /**
      * @brief Start de stopwatch

@@ -3,15 +3,14 @@
 #include "states/MenuState.h"
 
 Game::Game() {
-    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1300, 800), "Pac-Man");
+    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1300, 800), "pacman");
     stateManager = std::make_shared<StateManager>();
     Stopwatch::getInstance().start();
     window->setFramerateLimit(framerate);
 
     FileDimensions dimensions = getFileDimensions("../assets/map2.txt");
 
-    Camera::getInstance().initialize(static_cast<float>(dimensions.width),
-                                static_cast<float>(dimensions.height));
+    Camera::getInstance().initialize(static_cast<float>(dimensions.width), static_cast<float>(dimensions.height));
 
     auto factory = std::make_shared<ConcreteFactory>(window);
 
@@ -19,8 +18,8 @@ Game::Game() {
 }
 
 Game::~Game() {
-    window->close();  // Close the window explicitly
-    window.reset();   // Reset the shared_ptr to free resources
+    window->close();
+    window.reset();
     stateManager->popState();
 }
 

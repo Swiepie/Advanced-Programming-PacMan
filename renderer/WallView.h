@@ -1,5 +1,5 @@
 /**
-* @file WallView.h
+ * @file WallView.h
  * @brief Definieert de view klasse voor Wall entiteiten
  * @author siebe
  * @date 13/12/2025
@@ -20,22 +20,21 @@
  * @class WallView
  * @brief View klasse voor het renderen van Wall entiteiten
  *
- * Beheert de visuele representatie van muur objecten in het spel.
+ * Beheert de visuele representatie van wall objecten in het spel.
  * Erft van EntityView en implementeert specifieke rendering logica voor muren.
  * Muren zijn statische objecten die het speelveld begrenzen.
  */
 class WallView : public EntityView {
 private:
-    Wall* wall;  ///< Pointer naar de muur entiteit die gerenderd wordt
+    Wall* wall; ///< Pointer naar de wall entity die gerenderd wordt
 
 public:
     /**
-     * @brief Construeert een WallView voor opgegeven muur
-     * @param w Pointer naar de muur entiteit
+     * @brief Construeert een WallView voor opgegeven wall
+     * @param w Pointer naar de wall entity
      * @param window Gedeelde pointer naar het render venster
      */
-    explicit WallView(Wall* w, std::shared_ptr<sf::RenderWindow> window)
-        : EntityView(w, std::move(window)), wall(w) {}
+    explicit WallView(Wall* w, std::shared_ptr<sf::RenderWindow> window) : EntityView(w, std::move(window)), wall(w) {}
 
     /**
      * @brief Update de view logica per frame
@@ -44,14 +43,14 @@ public:
     void update(float time) override;
 
     /**
-     * @brief Rendert de muur naar het venster
+     * @brief Rendert de wall naar het venster
      *
-     * Tekent de visuele representatie van de muur op het scherm.
+     * Tekent de visuele representatie van de wall op het scherm.
      */
     void render() override;
 
     /**
-     * @brief Update de textuur of animatie van de muur
+     * @brief Update de textuur of animatie van de wall
      * @param time Delta tijd voor animatie updates
      */
     void updateTexture(float time) override;

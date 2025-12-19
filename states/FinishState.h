@@ -28,11 +28,11 @@
  */
 class FinishState : public State {
 private:
-    std::shared_ptr<EntityFactory> factory;  ///< Factory voor het creëren van entiteiten
+    std::shared_ptr<EntityFactory> factory; ///< Factory voor het creëren van entiteiten
 
-    sf::Font font;       ///< SFML font voor tekst rendering
-    sf::Text title;      ///< Titel tekst voor het eindscherm
-    int finalScore = 0;  ///< Eindstand van de speler
+    sf::Font font;      ///< SFML font voor tekst rendering
+    sf::Text title;     ///< Titel tekst voor het eindscherm
+    int finalScore = 0; ///< Eindstand van de speler
 
     /**
      * @brief Update de weergegeven tekst met de huidige score

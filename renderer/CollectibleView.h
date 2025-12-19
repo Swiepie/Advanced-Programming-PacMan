@@ -1,6 +1,6 @@
 /**
  * @file CollectibleView.h
- * @brief Definieert de view klassen voor verzamelbare objecten (fruit en munten)
+ * @brief Definieert de view klassen voor verzamelbare objecten (fruit en coinen)
  * @author siebe
  * @date 13/12/2025
  */
@@ -26,12 +26,12 @@
  */
 class FruitView : public EntityView {
 private:
-    Fruit* fruit;  ///< Pointer naar de fruit entiteit die gerenderd wordt
+    Fruit* fruit; ///< Pointer naar de fruit entity die gerenderd wordt
 
 public:
     /**
      * @brief Construeert een FruitView voor opgegeven fruit
-     * @param f Pointer naar de fruit entiteit
+     * @param f Pointer naar de fruit entity
      * @param window Gedeelde pointer naar het render venster
      */
     explicit FruitView(Fruit* f, std::shared_ptr<sf::RenderWindow> window)
@@ -61,21 +61,20 @@ public:
  * @class CoinView
  * @brief View klasse voor het renderen van Coin entiteiten
  *
- * Beheert de visuele representatie van munt objecten in het spel.
- * Erft van EntityView en implementeert specifieke rendering logica voor munten.
+ * Beheert de visuele representatie van coin objecten in het spel.
+ * Erft van EntityView en implementeert specifieke rendering logica voor coinen.
  */
 class CoinView : public EntityView {
 private:
-    Coin* coin;  ///< Pointer naar de munt entiteit die gerenderd wordt
+    Coin* coin; ///< Pointer naar de coin entity die gerenderd wordt
 
 public:
     /**
-     * @brief Construeert een CoinView voor opgegeven munt
-     * @param c Pointer naar de munt entiteit
+     * @brief Construeert een CoinView voor opgegeven coin
+     * @param c Pointer naar de coin entity
      * @param window Gedeelde pointer naar het render venster
      */
-    explicit CoinView(Coin* c, std::shared_ptr<sf::RenderWindow> window)
-        : EntityView(c, std::move(window)), coin(c) {}
+    explicit CoinView(Coin* c, std::shared_ptr<sf::RenderWindow> window) : EntityView(c, std::move(window)), coin(c) {}
 
     /**
      * @brief Update de view logica per frame
@@ -84,14 +83,14 @@ public:
     void update(float time) override;
 
     /**
-     * @brief Rendert de munt naar het venster
+     * @brief Rendert de coin naar het venster
      *
-     * Tekent de visuele representatie van de munt op het scherm.
+     * Tekent de visuele representatie van de coin op het scherm.
      */
     void render() override;
 
     /**
-     * @brief Update de textuur of animatie van de munt
+     * @brief Update de textuur of animatie van de coin
      * @param time Delta tijd voor animatie updates
      */
     void updateTexture(float time) override;

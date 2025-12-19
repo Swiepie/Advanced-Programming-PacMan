@@ -5,8 +5,7 @@
 #include "GhostView.h"
 #include <iostream>
 
-GhostView::GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window)
-    : EntityView(g, std::move(window)), ghost(g) {
+GhostView::GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window) : EntityView(g, std::move(window)), ghost(g) {
     if (!texture.loadFromFile("../sprites/pacman.png")) {
         std::cerr << "Failed to load ghost spritesheet" << std::endl;
     }
@@ -53,8 +52,7 @@ void GhostView::chooseFearTexture(float time) {
     }
 }
 // RedGhostView
-RedGhostView::RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window)
-    : GhostView(g, std::move(window)) {
+RedGhostView::RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window) : GhostView(g, std::move(window)) {
     sprite.setTextureRect(sf::IntRect(64, 64, 16, 16));
 }
 
@@ -83,8 +81,7 @@ void RedGhostView::chooseTexture(char direction, float time) {
 }
 
 // BlueGhostView
-BlueGhostView::BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window)
-    : GhostView(g, std::move(window)) {
+BlueGhostView::BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window) : GhostView(g, std::move(window)) {
     sprite.setTextureRect(sf::IntRect(64, 96, 16, 16));
 }
 
@@ -113,8 +110,7 @@ void BlueGhostView::chooseTexture(char direction, float time) {
 }
 
 // PinkGhostView
-PinkGhostView::PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window)
-    : GhostView(g, std::move(window)) {
+PinkGhostView::PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window) : GhostView(g, std::move(window)) {
     sprite.setTextureRect(sf::IntRect(64, 80, 16, 16));
 }
 
@@ -141,5 +137,3 @@ void PinkGhostView::chooseTexture(char direction, float time) {
         recordFrameTime(time);
     }
 }
-
-// FearGhostView

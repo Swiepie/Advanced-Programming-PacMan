@@ -19,18 +19,18 @@
  * @class GhostView
  * @brief Basisklasse voor het renderen van Ghost entiteiten
  *
- * Beheert de visuele representatie van spoken in het spel. Implementeert
+ * Beheert de visuele representatie van ghostsin het spel. Implementeert
  * animaties voor verschillende richtingen en fear mode. Erft van EntityView
  * en biedt basis functionaliteit die door specifieke ghost views uitgebreid wordt.
  */
 class GhostView : public EntityView {
 protected:
-    Ghost* ghost;  ///< Pointer naar de ghost entiteit die gerenderd wordt
+    Ghost* ghost; ///< Pointer naar de ghost entity die gerenderd wordt
 
 public:
     /**
      * @brief Construeert een GhostView voor opgegeven ghost
-     * @param g Pointer naar de ghost entiteit
+     * @param g Pointer naar de ghost entity
      * @param window Gedeelde pointer naar het render venster
      */
     explicit GhostView(Ghost* g, std::shared_ptr<sf::RenderWindow> window);
@@ -73,28 +73,28 @@ public:
      * @brief Kiest de fear mode textuur
      * @param time Delta tijd voor fear mode animatie
      *
-     * Toont de blauwe "vulnerable" textuur wanneer de ghost in fear mode is.
+     * Toont de bluee "vulnerable" textuur wanneer de ghost in fear mode is.
      */
     void chooseFearTexture(float time);
 };
 
 /**
  * @class RedGhostView
- * @brief View klasse voor rode ghost (Blinky)
+ * @brief View klasse voor red ghost
  *
- * Specialisatie van GhostView met rode sprite textures.
+ * Specialisatie van GhostView met red sprite textures.
  */
 class RedGhostView : public GhostView {
 public:
     /**
-     * @brief Construeert een RedGhostView voor opgegeven rode ghost
-     * @param g Pointer naar de rode ghost entiteit
+     * @brief Construeert een RedGhostView voor opgegeven red ghost
+     * @param g Pointer naar de red ghost entity
      * @param window Gedeelde pointer naar het render venster
      */
     explicit RedGhostView(RedGhost* g, std::shared_ptr<sf::RenderWindow> window);
 
     /**
-     * @brief Kiest de rode ghost textuur op basis van richting
+     * @brief Kiest de red ghost textuur op basis van richting
      * @param direction Huidige bewegingsrichting
      * @param time Delta tijd voor animatie
      */
@@ -103,21 +103,21 @@ public:
 
 /**
  * @class BlueGhostView
- * @brief View klasse voor blauwe ghost (Inky)
+ * @brief View klasse voor bluee ghost
  *
- * Specialisatie van GhostView met blauwe sprite textures.
+ * Specialisatie van GhostView met bluee sprite textures.
  */
 class BlueGhostView : public GhostView {
 public:
     /**
-     * @brief Construeert een BlueGhostView voor opgegeven blauwe ghost
-     * @param g Pointer naar de blauwe ghost entiteit
+     * @brief Construeert een BlueGhostView voor opgegeven bluee ghost
+     * @param g Pointer naar de bluee ghost entity
      * @param window Gedeelde pointer naar het render venster
      */
     explicit BlueGhostView(BlueGhost* g, std::shared_ptr<sf::RenderWindow> window);
 
     /**
-     * @brief Kiest de blauwe ghost textuur op basis van richting
+     * @brief Kiest de bluee ghost textuur op basis van richting
      * @param direction Huidige bewegingsrichting
      * @param time Delta tijd voor animatie
      */
@@ -126,21 +126,21 @@ public:
 
 /**
  * @class PinkGhostView
- * @brief View klasse voor roze ghost (Pinky)
+ * @brief View klasse voor pink ghost
  *
- * Specialisatie van GhostView met roze sprite textures.
+ * Specialisatie van GhostView met pink sprite textures.
  */
 class PinkGhostView : public GhostView {
 public:
     /**
-     * @brief Construeert een PinkGhostView voor opgegeven roze ghost
-     * @param g Pointer naar de roze ghost entiteit
+     * @brief Construeert een PinkGhostView voor opgegeven pink ghost
+     * @param g Pointer naar de pink ghost entity
      * @param window Gedeelde pointer naar het render venster
      */
     explicit PinkGhostView(PinkGhost* g, std::shared_ptr<sf::RenderWindow> window);
 
     /**
-     * @brief Kiest de roze ghost textuur op basis van richting
+     * @brief Kiest de pink ghost textuur op basis van richting
      * @param direction Huidige bewegingsrichting
      * @param time Delta tijd voor animatie
      */

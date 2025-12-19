@@ -21,8 +21,7 @@ void FruitView::render() {
 
     sf::CircleShape circle(radius);
     circle.setFillColor(sf::Color::Magenta);
-    circle.setPosition(screenPos.x + info.rectSize / 2.f - radius,
-                      screenPos.y + info.rectSize / 2.f - radius);
+    circle.setPosition(screenPos.x + info.rectSize / 2.f - radius, screenPos.y + info.rectSize / 2.f - radius);
 
     window->draw(circle);
 }
@@ -48,8 +47,7 @@ void CoinView::render() {
 
     sf::CircleShape circle(radius);
     circle.setFillColor(sf::Color::Yellow);
-    circle.setPosition(screenPos.x + info.rectSize / 2.f - radius,
-                      screenPos.y + info.rectSize / 2.f - radius);
+    circle.setPosition(screenPos.x + info.rectSize / 2.f - radius, screenPos.y + info.rectSize / 2.f - radius);
 
     window->draw(circle);
 }

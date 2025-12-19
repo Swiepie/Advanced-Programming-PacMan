@@ -1,6 +1,6 @@
 /**
  * @file PacmanView.h
- * @brief Definieert de view klasse voor Pacman entiteit rendering
+ * @brief Definieert de view klasse voor Pacman entity rendering
  * @author siebe
  * @date 02/11/2025
  */
@@ -17,7 +17,7 @@
 
 /**
  * @class PacmanView
- * @brief View klasse voor het renderen van de Pacman speler entiteit
+ * @brief View klasse voor het renderen van de Pacman speler entity
  *
  * Beheert de visuele representatie van Pacman in het spel. Implementeert
  * mond animaties die synchroniseren met beweging en richting. Erft van
@@ -25,19 +25,19 @@
  */
 class PacmanView : public EntityView {
 protected:
-    Pacman* pacman;  ///< Pointer naar de Pacman entiteit die gerenderd wordt
+    Pacman* pacman; ///< Pointer naar de Pacman entity die gerenderd wordt
 
 private:
-    float totalTime = 0.0;      ///< Totale verstreken tijd voor animatie tracking
-    bool mouthOpen = true;      ///< Indicator voor mond open/dicht status in animatie
-    float frameTimer = 0.0f;    ///< Timer voor frame switching in animatie cyclus
-    double speed = 1;           ///< Animatie snelheid multiplier
-    int i = 2;                  ///< Frame index voor sprite sheet selectie
+    float totalTime = 0.0;   ///< Totale verstreken tijd voor animatie tracking
+    bool mouthOpen = true;   ///< Indicator voor mond open/dicht status in animatie
+    float frameTimer = 0.0f; ///< Timer voor frame switching in animatie cyclus
+    double speed = 1;        ///< Animatie snelheid multiplier
+    int i = 2;               ///< Frame index voor sprite sheet selectie
 
 public:
     /**
-     * @brief Construeert een PacmanView voor opgegeven Pacman entiteit
-     * @param pacman Pointer naar de Pacman entiteit
+     * @brief Construeert een PacmanView voor opgegeven Pacman entity
+     * @param pacman Pointer naar de Pacman entity
      * @param window Gedeelde pointer naar het render venster
      */
     explicit PacmanView(Pacman* pacman, std::shared_ptr<sf::RenderWindow> window);
@@ -51,13 +51,6 @@ public:
     void update(float time) override;
 
     /**
-     * @brief Observer pattern update zonder tijd parameter
-     *
-     * Alternatieve update methode voor observer notificaties zonder timing info.
-     */
-    void update() override;
-
-    /**
      * @brief Update de textuur of animatie van Pacman
      * @param time Delta tijd voor animatie updates
      *
@@ -67,7 +60,7 @@ public:
 
     /**
      * @brief Kiest de juiste textuur op basis van bewegingsrichting
-     * @param direction Huidige bewegingsrichting ('U', 'D', 'L', 'R')
+     * @param direction Huidige bewegingsrichting ('N', 'Z', 'O', 'W')
      * @param time Delta tijd voor animatie timing
      *
      * Selecteert de correcte sprite uit de sprite sheet voor de opgegeven

@@ -1,5 +1,5 @@
 /**
-* @file Subject.h
+ * @file Subject.h
  * @brief Definieert de Subject klasse voor het Observer design pattern
  * @author siebe
  * @date 12/12/2025
@@ -22,8 +22,8 @@
  */
 class Subject {
 private:
-    std::vector<Observer*> observers;       ///< Lijst van geregistreerde observers
-    Observer* primaryObserver = nullptr;    ///< Primaire observer (meestal de view)
+    std::vector<Observer*> observers;    ///< Lijst van geregistreerde observers
+    Observer* primaryObserver = nullptr; ///< Primaire observer (meestal de view)
 
 public:
     /**
