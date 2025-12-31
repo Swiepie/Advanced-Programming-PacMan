@@ -140,7 +140,10 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     timeAlive = timeAlive + deltaTime;
     if (world.getFearMode() && inFearMode) { // FEAR MODE
         fearTime = world.getFearModeTimer();
-        speed = fearSpeed;
+        if (speed != fearSpeed) {
+            reverseDirection();
+            speed = fearSpeed;
+        }
 
         // Only reconsider direction at intersections or when blocked
         if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
@@ -234,8 +237,10 @@ void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
 
     if (world.getFearMode() && inFearMode) { // FEAR MODE
         fearTime = world.getFearModeTimer();
-        speed = fearSpeed;
-
+        if (speed != fearSpeed) {
+            reverseDirection();
+            speed = fearSpeed;
+        }
         // Only reconsider at intersections or when blocked
         if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
             chooseDirectionFear(world, pacman);
@@ -381,8 +386,10 @@ void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
 
     if (world.getFearMode() && inFearMode) { // FEAR MODE
         fearTime = world.getFearModeTimer();
-        speed = fearSpeed;
-
+        if (speed != fearSpeed) {
+            reverseDirection();
+            speed = fearSpeed;
+        }
         // Only reconsider at intersections or when blocked
         if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
             chooseDirectionFear(world, pacman);

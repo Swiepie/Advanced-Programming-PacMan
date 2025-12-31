@@ -28,6 +28,9 @@
  */
 class MenuState : public State {
 private:
+    sf::RectangleShape playButton;          ///< Rechthoek voor play knop achtergrond
+    sf::Text playButtonText;                ///< Tekst op de play knop
+
     sf::Font font;                          ///< SFML font voor tekst rendering
     sf::Text title;                         ///< Titel tekst voor het hoofdmenu
     sf::Text highscores;                    ///< Tekst voor highscores weergave
@@ -49,21 +52,39 @@ public:
         font.loadFromFile("../assets/ARIAL.TTF");
 
         title.setFont(font);
-        title.setString("pacman PROJECT\nPress any key to play");
+        title.setString("PACMAN PROJECT");
         title.setFillColor(sf::Color::Yellow);
+        title.setCharacterSize(48);
 
         highscores.setFont(font);
         highscores.setFillColor(sf::Color::Green);
+        highscores.setCharacterSize(24);
 
-        // top5 ophalen
+        // Refresh highscores display
+        updateHighscoresDisplay();
+
+        // Setup play button
+        playButton.setSize(sf::Vector2f(200.f, 60.f));
+        playButton.setFillColor(sf::Color(50, 50, 150));
+        playButton.setOutlineColor(sf::Color::Yellow);
+        playButton.setOutlineThickness(3.f);
+
+        playButtonText.setFont(font);
+        playButtonText.setString("PLAY");
+        playButtonText.setFillColor(sf::Color::White);
+        playButtonText.setCharacterSize(32);
+    }
+
+private:
+    void updateHighscoresDisplay() {
         auto top = sb.getTop5();
-
-        std::string hs = "Highscores:\n";
-        for (int s : top) {
-            hs += std::to_string(s) + "\n";
+        std::string hs = "Top 5 Highscores:\n";
+        for (int i = 0; i < top.size(); ++i) {
+            hs += std::to_string(i + 1) + ". " + std::to_string(top[i]) + "\n";
         }
         highscores.setString(hs);
     }
+
 
     /**
      * @brief Verwerkt invoer events in het hoofdmenu

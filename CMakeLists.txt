@@ -17,25 +17,9 @@ endif()
 
 find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
 
-add_library(Logic STATIC
-        logic/entities/Entity.cpp
-        logic/entities/Pacman.cpp
-        logic/entities/Ghost.cpp
-        logic/entities/Fruit.cpp
-        logic/entities/Wall.cpp
-        logic/entities/Coin.cpp
-        logic/entities/Subject.cpp
-        logic/Stopwatch.cpp
-        logic/World.cpp
-        logic/Score.cpp
-        logic/Random.cpp
-        logic/Scoreboard.cpp
-        logic/Visitor.cpp
-)
 
-target_include_directories(Logic PUBLIC
-        ${CMAKE_SOURCE_DIR}/logic
-)
+add_subdirectory(logic)
+
 
 add_executable(${PROJECT_NAME}
         main.cpp
