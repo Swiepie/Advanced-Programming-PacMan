@@ -40,7 +40,7 @@ public:
     PausedState() {
         font.loadFromFile("../assets/ARIAL.TTF");
         title.setFont(font);
-        title.setString("PAUSED\nPress SPACE to start");
+        title.setString("PAUSED\nPress SPACE to start\nor ESC to go back to menu");
         title.setFillColor(sf::Color::Red);
     }
 

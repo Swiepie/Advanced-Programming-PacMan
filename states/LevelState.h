@@ -56,6 +56,9 @@ public:
         : factory(factory), world(std::make_shared<World>(factory)) {
         world->loadMap(filename);
         world->printMap();
+        if (!font.loadFromFile("../assets/ARIAL.TTF")) {
+            throw std::runtime_error("Failed to load font");
+        }
         font.loadFromFile("../assets/ARIAL.TTF");
 
         score.setFont(font);

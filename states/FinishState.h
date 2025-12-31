@@ -52,6 +52,9 @@ public:
      */
     explicit FinishState(int score, std::shared_ptr<EntityFactory> factory)
         : finalScore(score), factory(std::move(factory)) {
+        if (!font.loadFromFile("../assets/ARIAL.TTF")) {
+            throw std::runtime_error("Failed to load font");
+        }
         font.loadFromFile("../assets/ARIAL.TTF");
         title.setFont(font);
         title.setFillColor(sf::Color::Green);

@@ -48,7 +48,9 @@ public:
      */
     explicit MenuState(std::shared_ptr<EntityFactory> factory) : factory(std::move(factory)) {
         sb.load();
-
+        if (!font.loadFromFile("../assets/ARIAL.TTF")) {
+            throw std::runtime_error("Failed to load font");
+        }
         font.loadFromFile("../assets/ARIAL.TTF");
 
         title.setFont(font);
