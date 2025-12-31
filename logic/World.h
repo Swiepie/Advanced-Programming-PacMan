@@ -59,7 +59,7 @@ private:
     // Dood/Respawn states
     bool dies = false;         ///< Indicator dat pacman sterft
     float diesTime = 0.0f;     ///< Tijdstip van dood
-    float respawnTimer = 1.3f; ///< Tijd tot respawn na dood
+    float respawnTimer = 1.32f; ///< Tijd tot respawn na dood
     bool death = false;        ///< Indicator voor dood state
     float deathTime = 0.0f;    ///< temporary die de tijd bijhoudt van de dood
     bool reset = false;        ///< Indicator voor wereld reset

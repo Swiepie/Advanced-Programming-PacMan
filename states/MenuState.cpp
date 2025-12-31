@@ -11,7 +11,14 @@ void MenuState::handleEvent(std::shared_ptr<StateManager> stateManager, std::sha
     }
 }
 void MenuState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int windowWidth, unsigned int windowHeight) {
+    sb.load();
+    auto top = sb.getTop5();
 
+    std::string hs = "Highscores:\n";
+    for (int s : top) {
+        hs += std::to_string(s) + "\n";
+    }
+    highscores.setString(hs);
     sf::Vector2f viewSize = window->getView().getSize();
     sf::Vector2f viewCenter = window->getView().getCenter();
 
