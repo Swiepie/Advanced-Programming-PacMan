@@ -29,7 +29,7 @@ sf::Vector2f normalizeToScreen(float x, float y, float screenWidth, float screen
     }
 }
 
-void WorldView::render(const std::shared_ptr<World>& world, const std::shared_ptr<sf::RenderWindow>& window,
+void WorldView::render(const std::unique_ptr<World>& world, const std::shared_ptr<sf::RenderWindow>& window,
                        float windowWidth, float windowHeight) {
 
     sf::View view = getWorldView(windowWidth, windowHeight);

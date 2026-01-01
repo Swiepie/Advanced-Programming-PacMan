@@ -45,7 +45,7 @@ public:
      * Statische methode die alle entiteiten in de wereld rendert met
      * correcte camera transformatie en viewport instellingen.
      */
-    static void render(const std::shared_ptr<World>& world, const std::shared_ptr<sf::RenderWindow>& window,
+    static void render(const std::unique_ptr<World>& world, const std::shared_ptr<sf::RenderWindow>& window,
                        float windowWidth, float windowHeight);
 };
 

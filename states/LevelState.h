@@ -34,8 +34,7 @@ class World;
 class LevelState : public State {
 private:
     std::shared_ptr<EntityFactory> factory; ///< Factory voor het creëren van entiteiten
-    std::shared_ptr<Camera> camera;         ///< Camera voor viewport transformaties
-    std::shared_ptr<World> world;           ///< world met alle entiteiten en logica
+    std::unique_ptr<World> world;           ///< world met alle entiteiten en logica
     WorldView renderer;                     ///< Renderer voor de world
 
     sf::Font font;  ///< SFML font voor HUD tekst rendering
@@ -53,7 +52,7 @@ public:
      * voor score en levens weergave.
      */
     explicit LevelState(const std::shared_ptr<EntityFactory>& factory)
-        : factory(factory), world(std::make_shared<World>(factory)) {
+        : factory(factory), world(std::make_unique<World>(factory)) {
         world->loadMap(filename);
         world->printMap();
         if (!font.loadFromFile("../assets/ARIAL.TTF")) {
