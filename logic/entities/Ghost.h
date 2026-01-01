@@ -68,7 +68,7 @@ public:
      *
      * Wordt aangeroepen elke frame om het ghost's gedrag bij te werken.
      */
-    void update(float deltaTime, World& world, const Pacman& pacman) override;
+    void update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) override;
 
     /**
      * @brief Zet de fear mode staat van het ghost
@@ -143,7 +143,7 @@ public:
      *
      * Bepaalt een vluchtrichting weg van pacman tijdens fear mode.
      */
-    void chooseDirectionFear(World& world, const Pacman& pacman);
+    void chooseDirectionFear(World& world, const std::shared_ptr<Pacman>& pacman);
 
     /**
      * @brief Keert de huidige bewegingsrichting om
@@ -187,13 +187,13 @@ public:
      * @param world Referentie naar de world
      * @param pacman Const referentie naar pacman
      */
-    void update(float deltaTime, World& world, const Pacman& pacman) override;
+    void update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) override;
 
     /**
      * @brief Kiest een nieuwe richting gebaseerd op pacman's positie
      * @param pacman Const referentie naar pacman
      */
-    void chooseDirection(const Pacman& pacman);
+    void chooseDirection(const std::shared_ptr<Pacman>& pacman);
 
     /**
      * @brief Accepteert een Visitor voor het Visitor pattern
@@ -225,14 +225,14 @@ public:
      * @param world Referentie naar de world
      * @param pacman Const referentie naar pacman
      */
-    void update(float deltaTime, World& world, const Pacman& pacman) override;
+    void update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) override;
 
     /**
      * @brief Kiest een nieuwe richting gebaseerd op voorspelde pacman positie
      * @param world Referentie naar de world
      * @param pacman Const referentie naar pacman
      */
-    void chooseDirection(World& world, const Pacman& pacman);
+    void chooseDirection(World& world, const std::shared_ptr<Pacman>& pacman);
 
     /**
      * @brief Accepteert een Visitor voor het Visitor pattern
@@ -264,14 +264,14 @@ public:
      * @param world Referentie naar de world
      * @param pacman Const referentie naar pacman
      */
-    void update(float deltaTime, World& world, const Pacman& pacman) override;
+    void update(float deltaTime, World& world,const std::shared_ptr<Pacman>& pacman) override;
 
     /**
      * @brief Kiest een nieuwe richting direct naar pacman
      * @param world Referentie naar de world
      * @param pacman Const referentie naar pacman
      */
-    void chooseDirection(World& world, const Pacman& pacman);
+    void chooseDirection(World& world, const std::shared_ptr<Pacman>& pacman);
 
     /**
      * @brief Accepteert een Visitor voor het Visitor pattern

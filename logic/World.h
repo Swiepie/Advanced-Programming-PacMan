@@ -194,7 +194,7 @@ public:
      * @param dir Bewegingsrichting karakter
      * @return true als beweging mogelijk is, false anders
      */
-    bool tryMoveGhost(Ghost* ghost, char dir) const;
+    bool tryMoveGhost(Ghost& ghost, char dir) const;
 
     /**
      * @brief Controleert of beweging in een richting mogelijk is voor een ghost
@@ -202,14 +202,14 @@ public:
      * @param dir Bewegingsrichting karakter
      * @return true als beweging mogelijk is, false anders
      */
-    bool canMoveInDirection(const Ghost* ghost, char dir) const;
+    bool canMoveInDirection(const Ghost& ghost, char dir) const;
 
     /**
      * @brief Controleert of een ghost op een kruispunt staat
      * @param ghost Pointer naar de ghost
      * @return true als ghost op kruispunt staat, false anders
      */
-    bool isAtIntersection(const Ghost* ghost) const;
+    bool isAtIntersection(const Ghost& ghost) const;
 
     /**
      * @brief Controleert of een ghost het centrum van een tile zal kruisen
@@ -217,7 +217,7 @@ public:
      * @param dir Bewegingsrichting karakter
      * @return true als tile centrum gekruist wordt, false anders
      */
-    bool willCrossTileCenter(const Ghost* ghost, char dir) const;
+    bool willCrossTileCenter(const Ghost& ghost, char dir) const;
 
     /**
      * @brief Geeft het aantal resterende levens van pacman
@@ -236,7 +236,7 @@ public:
      * @param e Pointer naar de entiteit
      * @return true als entiteit op tile centrum staat, false anders
      */
-    bool isOnTileCenter(const Entity* e) const;
+    bool isOnTileCenter(const Entity& e) const;
 
     /**
      * @brief Geeft de huidige speltijd

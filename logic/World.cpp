@@ -145,7 +145,7 @@ void World::update(float deltaTime) {
     }
     score.update(totTime);
     for (auto& g : ghosts) {
-        g->update(deltaTime, *this, *pacman);
+        g->update(deltaTime, *this, pacman);
     }
     if (fearmode) {
         if (fearmodeTimer + fearmodeStart <= totTime) {
@@ -275,11 +275,9 @@ void World::checkCollisions() {
         return;
     }
 }
-bool World::tryMoveGhost(Ghost* ghost, char dir) const {
-    if (!ghost)
-        return false;
+bool World::tryMoveGhost(Ghost& ghost, char dir) const {
 
-    float speed = ghost->getSpeed();
+    float speed = ghost.getSpeed();
     float cd = deltaT;
     float dx = 0, dy = 0;
 
@@ -300,8 +298,8 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
         return false;
     }
 
-    float currentX = ghost->getPosition().x;
-    float currentY = ghost->getPosition().y;
+    float currentX = ghost.getPosition().x;
+    float currentY = ghost.getPosition().y;
     float newX = currentX + dx * stepW;
     float newY = currentY + dy * stepH;
 
@@ -338,15 +336,14 @@ bool World::tryMoveGhost(Ghost* ghost, char dir) const {
     }
 
     // Update position and direction
-    ghost->setPosition(newX, newY);
-    ghost->setDirection(dir);
+    ghost.setPosition(newX, newY);
+    ghost.setDirection(dir);
 
     return true;
 }
 
-bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
-    if (!ghost)
-        return false;
+bool World::canMoveInDirection(const Ghost& ghost, char dir) const {
+
     float dx = 0, dy = 0;
     switch (dir) {
     case 'N':
@@ -365,10 +362,10 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
         return false;
     }
 
-    float checkX = ghost->getPosition().x;
-    float checkY = ghost->getPosition().y;
+    float checkX = ghost.getPosition().x;
+    float checkY = ghost.getPosition().y;
 
-    char currentDir = ghost->getDirection();
+    char currentDir = ghost.getDirection();
     bool changingDirection = (currentDir != dir);
 
     if (changingDirection) {
@@ -403,12 +400,11 @@ bool World::canMoveInDirection(const Ghost* ghost, char dir) const {
     return true;
 }
 
-bool World::isAtIntersection(const Ghost* ghost) const {
-    if (!ghost)
-        return false;
+bool World::isAtIntersection(const Ghost& ghost) const {
 
-    float x = ghost->getPosition().x;
-    float y = ghost->getPosition().y;
+
+    float x = ghost.getPosition().x;
+    float y = ghost.getPosition().y;
 
     float centerX = std::round((x + 1.0f) / stepW) * stepW - 1.0f;
     float centerY = std::round((y + 1.0f) / stepH) * stepH - 1.0f;
@@ -423,7 +419,7 @@ bool World::isAtIntersection(const Ghost* ghost) const {
         return false;
     }
 
-    char currentDir = ghost->getDirection();
+    char currentDir = ghost.getDirection();
     int viableMoves = 0;
     int perpendicularMoves = 0;
 
@@ -447,12 +443,12 @@ bool World::isAtIntersection(const Ghost* ghost) const {
     return (viableMoves > 2) || (viableMoves >= 2 && perpendicularMoves > 0);
 }
 
-bool World::isOnTileCenter(const Entity* e) const {
+bool World::isOnTileCenter(const Entity& e) const {
     float stepW = 2.0f / static_cast<float>(width);
     float stepH = 2.0f / static_cast<float>(height);
 
-    float x = e->getPosition().x;
-    float y = e->getPosition().y;
+    float x = e.getPosition().x;
+    float y = e.getPosition().y;
 
     float centerX = std::round((x + 1.0f) / stepW) * stepW - 1.0f;
     float centerY = std::round((y + 1.0f) / stepH) * stepH - 1.0f;

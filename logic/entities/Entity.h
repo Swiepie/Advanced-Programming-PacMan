@@ -123,12 +123,12 @@ public:
      * @brief Update entiteit logica met wereld en pacman context
      * @param deltaTime Tijd sinds vorige frame in seconden
      * @param world Referentie naar de world
-     * @param pacman Const referentie naar pacman
+     * @param pacman referentie naar pacman
      *
      * Uitgebreide update functie voor entiteiten die interactie met de
      * wereld en pacman nodig hebben (zoals spoken).
      */
-    virtual void update(float deltaTime, World& world, const Pacman& pacman) {}
+    virtual void update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) {}
 
     /**
      * @brief Zet de spawn positie van de entiteit

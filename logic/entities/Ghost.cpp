@@ -4,7 +4,7 @@
 #include "Ghost.h"
 #include <iostream>
 
-void Ghost::update(float deltaTime, World& world, const Pacman& pacman) {
+void Ghost::update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) {
     timeAlive = timeAlive + deltaTime;
     // Start chasing after delay
     if (!chasing && timeAlive >= chaseDelay) {
@@ -38,9 +38,9 @@ void Ghost::resetFearState() {
     speed = speedSave;
     reverseDirection();
 }
-void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
-    float targetX = pacman.getPosition().x;
-    float targetY = pacman.getPosition().y;
+void Ghost::chooseDirectionFear(World& world, const std::shared_ptr<Pacman>& pacman) {
+    float targetX = pacman->getPosition().x;
+    float targetY = pacman->getPosition().y;
 
     float stepW = 2.0f / world.getWidth();
     float stepH = 2.0f / world.getHeight();
@@ -69,13 +69,13 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
     for (char d : {'N', 'Z', 'W', 'O'}) {
         if (d == oppositeDir)
             continue;
-        if (world.canMoveInDirection(this, d)) {
+        if (world.canMoveInDirection(*this, d)) {
             viableDirs.push_back(d);
         }
     }
 
     // 2️⃣ If stuck (dead end), allow reversing
-    if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
+    if (viableDirs.empty() && world.canMoveInDirection(*this, oppositeDir)) {
         viableDirs.push_back(oppositeDir);
     }
 
@@ -99,6 +99,8 @@ void Ghost::chooseDirectionFear(World& world, const Pacman& pacman) {
             break;
         case 'O':
             testX += stepW;
+            break;
+        default:
             break;
         }
 
@@ -136,7 +138,7 @@ RedGhost::RedGhost(float x, float y) : Ghost(x, y, 0.0f), lockedDirection('N') {
     setSpeed(speed);
 }
 
-void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
+void RedGhost::update(float deltaTime, World& world,const std::shared_ptr<Pacman>& pacman) {
     timeAlive = timeAlive + deltaTime;
     if (world.getFearMode() && inFearMode) { // FEAR MODE
         fearTime = world.getFearModeTimer();
@@ -146,10 +148,10 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
         }
 
         // Only reconsider direction at intersections or when blocked
-        if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
+        if (world.isAtIntersection(*this) || !world.canMoveInDirection(*this, direction)) {
             chooseDirectionFear(world, pacman);
         }
-        world.tryMoveGhost(this, direction);
+        world.tryMoveGhost(*this, direction);
         return;
     }
 
@@ -162,11 +164,11 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
         return;
 
     // Decision logic - only at intersections or when blocked
-    if (world.isAtIntersection(this)) {
+    if (world.isAtIntersection(*this)) {
         if (Random::getInstance().getInt(0, 1) == 1) {
             std::vector<char> viableDirs;
             for (char d : {'N', 'Z', 'W', 'O'}) {
-                if (world.canMoveInDirection(this, d)) {
+                if (world.canMoveInDirection(*this, d)) {
                     viableDirs.push_back(d);
                 }
             }
@@ -175,7 +177,7 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
                 lockedDirection = viableDirs[idx];
             }
         }
-    } else if (!world.canMoveInDirection(this, lockedDirection)) {
+    } else if (!world.canMoveInDirection(*this, lockedDirection)) {
         // If blocked (not at intersection), find a new direction
         std::vector<char> viableDirs;
 
@@ -201,13 +203,13 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
 
         // Try all directions except opposite first
         for (char d : {'N', 'Z', 'W', 'O'}) {
-            if (d != oppositeDir && world.canMoveInDirection(this, d)) {
+            if (d != oppositeDir && world.canMoveInDirection(*this, d)) {
                 viableDirs.push_back(d);
             }
         }
 
         // If no options, allow reversing (dead end)
-        if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
+        if (viableDirs.empty() && world.canMoveInDirection(*this, oppositeDir)) {
             viableDirs.push_back(oppositeDir);
         }
 
@@ -218,10 +220,10 @@ void RedGhost::update(float deltaTime, World& world, const Pacman& pacman) {
     }
 
     setDirection(lockedDirection);
-    world.tryMoveGhost(this, direction);
+    world.tryMoveGhost(*this, direction);
 }
 
-void RedGhost::chooseDirection(const Pacman& pacman) { direction = lockedDirection; }
+void RedGhost::chooseDirection(const std::shared_ptr<Pacman>& pacman) { direction = lockedDirection; }
 
 // ============================================================================
 // BlueGhost: Moves toward position "in front of" Pacman
@@ -232,7 +234,7 @@ BlueGhost::BlueGhost(float x, float y, float delay) : Ghost(x, y, delay) {
     setSpeed(speed);
 }
 
-void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
+void BlueGhost::update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) {
     timeAlive = timeAlive + deltaTime;
 
     if (world.getFearMode() && inFearMode) { // FEAR MODE
@@ -242,12 +244,12 @@ void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
             speed = fearSpeed;
         }
         // Only reconsider at intersections or when blocked
-        if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
+        if (world.isAtIntersection(*this) || !world.canMoveInDirection(*this, direction)) {
             chooseDirectionFear(world, pacman);
         }
 
         // ✅ Use the direction that was just chosen
-        world.tryMoveGhost(this, direction);
+        world.tryMoveGhost(*this, direction);
         return;
     }
 
@@ -260,25 +262,25 @@ void BlueGhost::update(float deltaTime, World& world, const Pacman& pacman) {
         return;
 
     // ✅ FIX: Reconsider direction when blocked OR at intersection
-    if (!world.canMoveInDirection(this, direction) || world.isAtIntersection(this)) {
+    if (!world.canMoveInDirection(*this, direction) || world.isAtIntersection(*this)) {
         chooseDirection(world, pacman);
     }
 
     // ✅ Move with the CURRENT direction (after potential update)
-    world.tryMoveGhost(this, direction);
+    world.tryMoveGhost(*this, direction);
 }
 
-void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
+void BlueGhost::chooseDirection(World& world, const std::shared_ptr<Pacman>& pacman) {
     // Calculate position "in front of" Pacman
-    coord pPos = pacman.getPosition();
-    char pDir = pacman.getDirection();
+    coord pPos = pacman->getPosition();
+    char pDir = pacman->getDirection();
 
     float targetX = pPos.x;
     float targetY = pPos.y;
 
     // Move target 2 tiles ahead in Pacman's direction
-    float stepW = 2.0f / world.getWidth();
-    float stepH = 2.0f / world.getHeight();
+    float stepW = 2.0f / static_cast<float>(world.getWidth());
+    float stepH = 2.0f / static_cast<float>(world.getHeight());
 
     switch (pDir) {
     case 'N':
@@ -292,6 +294,8 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
         break;
     case 'O':
         targetX += 2 * stepW;
+        break;
+    default:
         break;
     }
 
@@ -319,13 +323,13 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
     for (char d : {'N', 'Z', 'W', 'O'}) {
         if (d == oppositeDir)
             continue; // avoid immediate reversal
-        if (world.canMoveInDirection(this, d)) {
+        if (world.canMoveInDirection(*this, d)) {
             viableDirs.push_back(d);
         }
     }
 
     // If completely stuck (or can only go backward), allow reversing
-    if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
+    if (viableDirs.empty() && world.canMoveInDirection(*this, oppositeDir)) {
         viableDirs.push_back(oppositeDir);
     }
 
@@ -354,6 +358,9 @@ void BlueGhost::chooseDirection(World& world, const Pacman& pacman) {
         case 'O':
             testX += stepW;
             break;
+        default:
+            break;
+
         }
 
         float dist = std::fabs(targetX - testX) + std::fabs(targetY - testY);
@@ -381,7 +388,7 @@ PinkGhost::PinkGhost(float x, float y, float delay) : Ghost(x, y, delay) {
     setSpeed(speed);
 }
 
-void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
+void PinkGhost::update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) {
     timeAlive = timeAlive + deltaTime;
 
     if (world.getFearMode() && inFearMode) { // FEAR MODE
@@ -391,10 +398,10 @@ void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
             speed = fearSpeed;
         }
         // Only reconsider at intersections or when blocked
-        if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
+        if (world.isAtIntersection(*this) || !world.canMoveInDirection(*this, direction)) {
             chooseDirectionFear(world, pacman);
         }
-        world.tryMoveGhost(this, direction);
+        world.tryMoveGhost(*this, direction);
         return;
     }
 
@@ -407,19 +414,19 @@ void PinkGhost::update(float deltaTime, World& world, const Pacman& pacman) {
         return;
 
     // Decision logic - only at intersections or when blocked
-    if (world.isAtIntersection(this) || !world.canMoveInDirection(this, direction)) {
+    if (world.isAtIntersection(*this) || !world.canMoveInDirection(*this, direction)) {
         chooseDirection(world, pacman);
     }
 
-    world.tryMoveGhost(this, direction);
+    world.tryMoveGhost(*this, direction);
 }
 
-void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
-    float targetX = pacman.getPosition().x;
-    float targetY = pacman.getPosition().y;
+void PinkGhost::chooseDirection(World& world, const std::shared_ptr<Pacman>& pacman) {
+    float targetX = pacman->getPosition().x;
+    float targetY = pacman->getPosition().y;
 
-    float stepW = 2.0f / world.getWidth();
-    float stepH = 2.0f / world.getHeight();
+    float stepW = 2.0f / static_cast<float>(world.getWidth());
+    float stepH = 2.0f / static_cast<float>(world.getHeight());;
 
     // Determine opposite direction
     char oppositeDir;
@@ -446,13 +453,13 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
     for (char d : {'N', 'Z', 'W', 'O'}) {
         if (d == oppositeDir)
             continue; // avoid immediate reversal
-        if (world.canMoveInDirection(this, d)) {
+        if (world.canMoveInDirection(*this, d)) {
             viableDirs.push_back(d);
         }
     }
 
     // If completely stuck, allow reversing
-    if (viableDirs.empty() && world.canMoveInDirection(this, oppositeDir)) {
+    if (viableDirs.empty() && world.canMoveInDirection(*this, oppositeDir)) {
         viableDirs.push_back(oppositeDir);
     }
 
@@ -481,6 +488,9 @@ void PinkGhost::chooseDirection(World& world, const Pacman& pacman) {
         case 'O':
             testX += stepW;
             break;
+        default:
+            break;
+
         }
 
         float dist = std::fabs(targetX - testX) + std::fabs(targetY - testY);
@@ -512,6 +522,8 @@ void Ghost::reverseDirection() {
         break;
     case 'O':
         direction = 'W';
+        break;
+    default:
         break;
     }
 }
