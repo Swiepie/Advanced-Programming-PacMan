@@ -42,8 +42,7 @@ const std::vector<Entity*>& CollectibleVisitor::getToRemove() const { return toR
 
 GhostCollisionVisitor::GhostCollisionVisitor(std::shared_ptr<Pacman> pacman, World* w, float tileWidth,
                                              float tileHeight)
-    : pacman(std::move(pacman)), world(std::move(w)), stepW(tileWidth), stepH(tileHeight), pacmanDied(false),
-      ghostEaten(false) {}
+    : pacman(std::move(pacman)), world(w), stepW(tileWidth), stepH(tileHeight), pacmanDied(false), ghostEaten(false) {}
 
 void GhostCollisionVisitor::visit(Wall& wall) {}
 void GhostCollisionVisitor::visit(Coin& coin) {}

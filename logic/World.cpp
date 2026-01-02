@@ -402,7 +402,6 @@ bool World::canMoveInDirection(const Ghost& ghost, char dir) const {
 
 bool World::isAtIntersection(const Ghost& ghost) const {
 
-
     float x = ghost.getPosition().x;
     float y = ghost.getPosition().y;
 

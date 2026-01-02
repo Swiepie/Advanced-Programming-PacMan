@@ -264,7 +264,7 @@ public:
      * @param world Referentie naar de world
      * @param pacman Const referentie naar pacman
      */
-    void update(float deltaTime, World& world,const std::shared_ptr<Pacman>& pacman) override;
+    void update(float deltaTime, World& world, const std::shared_ptr<Pacman>& pacman) override;
 
     /**
      * @brief Kiest een nieuwe richting direct naar pacman

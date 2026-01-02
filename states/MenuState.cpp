@@ -4,18 +4,18 @@
 
 #include "MenuState.h"
 
-void MenuState::handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window,const sf::Event& event) {
+void MenuState::handleEvent(std::shared_ptr<StateManager> stateManager, std::shared_ptr<sf::RenderWindow> window,
+                            const sf::Event& event) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-        sf::Vector2f mousePosF(static_cast<float>(mousePos.x),
-                               static_cast<float>(mousePos.y));
+        sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 
         // Check of play button werd geklikt
         if (playButton.getGlobalBounds().contains(mousePosF)) {
             stateManager->pushState(std::make_unique<LevelState>(factory));
         }
-        }
+    }
 
     // Fallback: ook toetsenbord support
     if (event.type == sf::Event::KeyPressed) {
@@ -38,20 +38,16 @@ void MenuState::render(std::shared_ptr<sf::RenderWindow> window, unsigned int wi
 
     // **Centreer highscores in het midden**
     sf::FloatRect hsBounds = highscores.getGlobalBounds();
-    highscores.setPosition(
-        static_cast<float>(windowWidth) / 2.f - hsBounds.width / 2.f,
-        static_cast<float>(windowHeight) / 2.f - hsBounds.height / 2.f
-    );
+    highscores.setPosition(static_cast<float>(windowWidth) / 2.f - hsBounds.width / 2.f,
+                           static_cast<float>(windowHeight) / 2.f - hsBounds.height / 2.f);
 
     // Centreer play button onderaan
     playButton.setPosition(static_cast<float>(windowWidth) / 2.f - 100.f, static_cast<float>(windowHeight) - 150.f);
 
     // Centreer tekst op button
     sf::FloatRect textBounds = playButtonText.getGlobalBounds();
-    playButtonText.setPosition(
-        playButton.getPosition().x + (playButton.getSize().x - textBounds.width) / 2.f,
-        playButton.getPosition().y + (playButton.getSize().y - textBounds.height) / 2.f - 5.f
-    );
+    playButtonText.setPosition(playButton.getPosition().x + (playButton.getSize().x - textBounds.width) / 2.f,
+                               playButton.getPosition().y + (playButton.getSize().y - textBounds.height) / 2.f - 5.f);
 
     // Hover effect
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);

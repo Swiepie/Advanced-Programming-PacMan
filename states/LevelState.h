@@ -35,7 +35,6 @@ class LevelState : public State {
 private:
     std::shared_ptr<EntityFactory> factory; ///< Factory voor het creëren van entiteiten
     std::unique_ptr<World> world;           ///< world met alle entiteiten en logica
-    WorldView renderer;                     ///< Renderer voor de world
 
     sf::Font font;  ///< SFML font voor HUD tekst rendering
     sf::Text lives; ///< Tekst element voor levens weergave

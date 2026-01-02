@@ -28,8 +28,8 @@
  */
 class MenuState : public State {
 private:
-    sf::RectangleShape playButton;          ///< Rechthoek voor play knop achtergrond
-    sf::Text playButtonText;                ///< Tekst op de play knop
+    sf::RectangleShape playButton; ///< Rechthoek voor play knop achtergrond
+    sf::Text playButtonText;       ///< Tekst op de play knop
 
     sf::Font font;                          ///< SFML font voor tekst rendering
     sf::Text title;                         ///< Titel tekst voor het hoofdmenu
@@ -86,7 +86,6 @@ private:
         }
         highscores.setString(hs);
     }
-
 
     /**
      * @brief Verwerkt invoer events in het hoofdmenu

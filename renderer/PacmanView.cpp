@@ -66,7 +66,6 @@ void PacmanView::render() {
 }
 
 void PacmanView::update(float time) {
-
     updateTexture(time);
     render();
 }
