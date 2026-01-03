@@ -140,25 +140,27 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Subject</b> ()=default</td></tr>
 <tr class="memdesc:af9723476c61afcceeb91bee3211258c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor voor correcte cleanup van afgeleide klassen. <br /></td></tr>
 <tr class="separator:af9723476c61afcceeb91bee3211258c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0884bfe374d352c6488a1e40c84246c8" id="r_a0884bfe374d352c6488a1e40c84246c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0884bfe374d352c6488a1e40c84246c8">attach</a> (<a class="el" href="class_observer.html">Observer</a> *observer)</td></tr>
-<tr class="memdesc:a0884bfe374d352c6488a1e40c84246c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registreert een observer bij dit subject.  <br /></td></tr>
-<tr class="separator:a0884bfe374d352c6488a1e40c84246c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a752a7596d52ab986539232f8377ca92c" id="r_a752a7596d52ab986539232f8377ca92c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a752a7596d52ab986539232f8377ca92c">detach</a> (<a class="el" href="class_observer.html">Observer</a> *observer)</td></tr>
-<tr class="memdesc:a752a7596d52ab986539232f8377ca92c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verwijdert een observer van dit subject.  <br /></td></tr>
-<tr class="separator:a752a7596d52ab986539232f8377ca92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af104c2baf37c7aa63b2ef6d32c2b3a9c" id="r_af104c2baf37c7aa63b2ef6d32c2b3a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af104c2baf37c7aa63b2ef6d32c2b3a9c">notify</a> ()</td></tr>
-<tr class="memdesc:af104c2baf37c7aa63b2ef6d32c2b3a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notificeert alle geregistreerde observers.  <br /></td></tr>
+<tr class="memitem:aec0d2f94b266d79c426b0ac454d823a5" id="r_aec0d2f94b266d79c426b0ac454d823a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec0d2f94b266d79c426b0ac454d823a5">attach</a> (<a class="el" href="class_observer.html">Observer</a> *obs)</td></tr>
+<tr class="memdesc:aec0d2f94b266d79c426b0ac454d823a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registreert een observer bij dit subject.  <br /></td></tr>
+<tr class="separator:aec0d2f94b266d79c426b0ac454d823a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf57e8b52ea783aaedd87056a53e0125" id="r_acf57e8b52ea783aaedd87056a53e0125"><td class="memItemLeft" align="right" valign="top"><a id="acf57e8b52ea783aaedd87056a53e0125" name="acf57e8b52ea783aaedd87056a53e0125"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>detach</b> ()</td></tr>
+<tr class="memdesc:acf57e8b52ea783aaedd87056a53e0125"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verwijdert de observer van dit subject. <br /></td></tr>
+<tr class="separator:acf57e8b52ea783aaedd87056a53e0125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af104c2baf37c7aa63b2ef6d32c2b3a9c" id="r_af104c2baf37c7aa63b2ef6d32c2b3a9c"><td class="memItemLeft" align="right" valign="top"><a id="af104c2baf37c7aa63b2ef6d32c2b3a9c" name="af104c2baf37c7aa63b2ef6d32c2b3a9c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>notify</b> ()</td></tr>
+<tr class="memdesc:af104c2baf37c7aa63b2ef6d32c2b3a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notificeert de geregistreerde observer. <br /></td></tr>
 <tr class="separator:af104c2baf37c7aa63b2ef6d32c2b3a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13b48db9934d0b4fd5a99697ce1cb6b1" id="r_a13b48db9934d0b4fd5a99697ce1cb6b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_observer.html">Observer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13b48db9934d0b4fd5a99697ce1cb6b1">getObserver</a> () const</td></tr>
-<tr class="memdesc:a13b48db9934d0b4fd5a99697ce1cb6b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geeft directe toegang tot de primaire observer.  <br /></td></tr>
+<tr class="memdesc:a13b48db9934d0b4fd5a99697ce1cb6b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geeft directe toegang tot de observer.  <br /></td></tr>
 <tr class="separator:a13b48db9934d0b4fd5a99697ce1cb6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Klasse die observeerbaar gedrag implementeert voor het <a class="el" href="class_observer.html" title="Abstract base class voor observers in het Observer pattern.">Observer</a> pattern. </p>
-<p>Beheert een lijst van observers en notificeert deze wanneer de staat verandert. Ondersteunt een primaire observer (typisch de view) voor directe toegang. </p>
+<p>Beheert een enkele observer en notificeert deze wanneer de staat verandert. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0884bfe374d352c6488a1e40c84246c8" name="a0884bfe374d352c6488a1e40c84246c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0884bfe374d352c6488a1e40c84246c8">&#9670;&#160;</a></span>attach()</h2>
+<a id="aec0d2f94b266d79c426b0ac454d823a5" name="aec0d2f94b266d79c426b0ac454d823a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0d2f94b266d79c426b0ac454d823a5">&#9670;&#160;</a></span>attach()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +168,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Subject</b> ()=de
         <tr>
           <td class="memname">void Subject::attach </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_observer.html">Observer</a> *</td>          <td class="paramname"><span class="paramname"><em>observer</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_observer.html">Observer</a> *</td>          <td class="paramname"><span class="paramname"><em>obs</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -175,37 +177,10 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Subject</b> ()=de
 <p>Registreert een observer bij dit subject. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">observer</td><td>Pointer naar de observer die geregistreerd moet worden</td></tr>
+    <tr><td class="paramname">obs</td><td>Pointer naar de observer die geregistreerd moet worden </td></tr>
   </table>
   </dd>
 </dl>
-<p>Voegt een observer toe aan de lijst van objecten die genotificeerd worden bij veranderingen. </p>
-
-</div>
-</div>
-<a id="a752a7596d52ab986539232f8377ca92c" name="a752a7596d52ab986539232f8377ca92c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a752a7596d52ab986539232f8377ca92c">&#9670;&#160;</a></span>detach()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Subject::detach </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_observer.html">Observer</a> *</td>          <td class="paramname"><span class="paramname"><em>observer</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Verwijdert een observer van dit subject. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">observer</td><td>Pointer naar de observer die verwijderd moet worden</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Verwijdert een observer uit de lijst zodat deze geen notificaties meer ontvangt. </p>
 
 </div>
 </div>
@@ -224,29 +199,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Subject</b> ()=de
       </table>
 </div><div class="memdoc">
 
-<p>Geeft directe toegang tot de primaire observer. </p>
-<dl class="section return"><dt>Returns</dt><dd>Pointer naar de primaire observer (meestal de view)</dd></dl>
-<p>Biedt directe toegang tot de view observer voor efficiënte communicatie. Dit hebben we nodig voor de rendering. </p>
-
-</div>
-</div>
-<a id="af104c2baf37c7aa63b2ef6d32c2b3a9c" name="af104c2baf37c7aa63b2ef6d32c2b3a9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af104c2baf37c7aa63b2ef6d32c2b3a9c">&#9670;&#160;</a></span>notify()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Subject::notify </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Notificeert alle geregistreerde observers. </p>
-<p>Roept de update() methode aan op alle observers om hen op de hoogte te brengen van veranderingen in de staat van dit subject. </p>
+<p>Geeft directe toegang tot de observer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer naar de observer (meestal de view) </dd></dl>
 
 </div>
 </div>

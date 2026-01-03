@@ -13,7 +13,7 @@ var class_entity =
     [ "setSpawn", "class_entity.html#a268e1898461c915baa01b0a862b6fd8e", null ],
     [ "setSpeed", "class_entity.html#a86227b3f7e03865a506d7824f048b775", null ],
     [ "update", "class_entity.html#a205443d87b309a074a6088b6e148f2a2", null ],
-    [ "update", "class_entity.html#a3d60e7018b657da3d0dfbdfadabf6e06", null ],
+    [ "update", "class_entity.html#a5c0f624404181fe0bf93628698483ec3", null ],
     [ "direction", "class_entity.html#a3f582387bb73bceb84cd1145fca0f974", null ],
     [ "fearSpeed", "class_entity.html#a58c9d83c63a65d01057a106931e9134f", null ],
     [ "fpinkn", "class_entity.html#a056bd6b6e03abc0a02e135a57e01aff6", null ],

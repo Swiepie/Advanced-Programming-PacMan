@@ -105,37 +105,33 @@ $(function(){initNavTree('_subject_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define SUBJECT_H</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="_observer_8h.html">../Observer.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
-<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_subject.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="class_subject.html">Subject</a> {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::vector&lt;Observer*&gt; observers;    </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_class" href="class_observer.html">Observer</a>* primaryObserver = <span class="keyword">nullptr</span>; </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_subject.html#af9723476c61afcceeb91bee3211258c7">   32</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_subject.html#af9723476c61afcceeb91bee3211258c7">~Subject</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_subject.html#a0884bfe374d352c6488a1e40c84246c8">attach</a>(<a class="code hl_class" href="class_observer.html">Observer</a>* observer);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_subject.html#a752a7596d52ab986539232f8377ca92c">detach</a>(<a class="code hl_class" href="class_observer.html">Observer</a>* observer);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_subject.html#af104c2baf37c7aa63b2ef6d32c2b3a9c">notify</a>();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_class" href="class_observer.html">Observer</a>* <a class="code hl_function" href="class_subject.html#a13b48db9934d0b4fd5a99697ce1cb6b1">getObserver</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span></div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_subject.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="class_subject.html">Subject</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_class" href="class_observer.html">Observer</a>* observer = <span class="keyword">nullptr</span>; </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_subject.html#af9723476c61afcceeb91bee3211258c7">   27</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_subject.html#af9723476c61afcceeb91bee3211258c7">~Subject</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_subject.html#aec0d2f94b266d79c426b0ac454d823a5">attach</a>(<a class="code hl_class" href="class_observer.html">Observer</a>* obs);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_subject.html#acf57e8b52ea783aaedd87056a53e0125">detach</a>();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_subject.html#af104c2baf37c7aa63b2ef6d32c2b3a9c">notify</a>();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="class_observer.html">Observer</a>* <a class="code hl_function" href="class_subject.html#a13b48db9934d0b4fd5a99697ce1cb6b1">getObserver</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif </span><span class="comment">// SUBJECT_H</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif </span><span class="comment">// SUBJECT_H</span></div>
 <div class="ttc" id="a_observer_8h_html"><div class="ttname"><a href="_observer_8h.html">Observer.h</a></div><div class="ttdoc">Definieert de Observer interface voor het Observer design pattern.</div></div>
 <div class="ttc" id="aclass_observer_html"><div class="ttname"><a href="class_observer.html">Observer</a></div><div class="ttdoc">Abstract base class voor observers in het Observer pattern.</div><div class="ttdef"><b>Definition</b> Observer.h:18</div></div>
-<div class="ttc" id="aclass_subject_html"><div class="ttname"><a href="class_subject.html">Subject</a></div><div class="ttdoc">Klasse die observeerbaar gedrag implementeert voor het Observer pattern.</div><div class="ttdef"><b>Definition</b> Subject.h:23</div></div>
-<div class="ttc" id="aclass_subject_html_a0884bfe374d352c6488a1e40c84246c8"><div class="ttname"><a href="class_subject.html#a0884bfe374d352c6488a1e40c84246c8">Subject::attach</a></div><div class="ttdeci">void attach(Observer *observer)</div><div class="ttdoc">Registreert een observer bij dit subject.</div><div class="ttdef"><b>Definition</b> Subject.cpp:6</div></div>
-<div class="ttc" id="aclass_subject_html_a13b48db9934d0b4fd5a99697ce1cb6b1"><div class="ttname"><a href="class_subject.html#a13b48db9934d0b4fd5a99697ce1cb6b1">Subject::getObserver</a></div><div class="ttdeci">Observer * getObserver() const</div><div class="ttdoc">Geeft directe toegang tot de primaire observer.</div><div class="ttdef"><b>Definition</b> Subject.cpp:26</div></div>
-<div class="ttc" id="aclass_subject_html_a752a7596d52ab986539232f8377ca92c"><div class="ttname"><a href="class_subject.html#a752a7596d52ab986539232f8377ca92c">Subject::detach</a></div><div class="ttdeci">void detach(Observer *observer)</div><div class="ttdoc">Verwijdert een observer van dit subject.</div><div class="ttdef"><b>Definition</b> Subject.cpp:13</div></div>
-<div class="ttc" id="aclass_subject_html_af104c2baf37c7aa63b2ef6d32c2b3a9c"><div class="ttname"><a href="class_subject.html#af104c2baf37c7aa63b2ef6d32c2b3a9c">Subject::notify</a></div><div class="ttdeci">void notify()</div><div class="ttdoc">Notificeert alle geregistreerde observers.</div><div class="ttdef"><b>Definition</b> Subject.cpp:19</div></div>
+<div class="ttc" id="aclass_subject_html"><div class="ttname"><a href="class_subject.html">Subject</a></div><div class="ttdoc">Klasse die observeerbaar gedrag implementeert voor het Observer pattern.</div><div class="ttdef"><b>Definition</b> Subject.h:19</div></div>
+<div class="ttc" id="aclass_subject_html_a13b48db9934d0b4fd5a99697ce1cb6b1"><div class="ttname"><a href="class_subject.html#a13b48db9934d0b4fd5a99697ce1cb6b1">Subject::getObserver</a></div><div class="ttdeci">Observer * getObserver() const</div><div class="ttdoc">Geeft directe toegang tot de observer.</div><div class="ttdef"><b>Definition</b> Subject.cpp:17</div></div>
+<div class="ttc" id="aclass_subject_html_acf57e8b52ea783aaedd87056a53e0125"><div class="ttname"><a href="class_subject.html#acf57e8b52ea783aaedd87056a53e0125">Subject::detach</a></div><div class="ttdeci">void detach()</div><div class="ttdoc">Verwijdert de observer van dit subject.</div><div class="ttdef"><b>Definition</b> Subject.cpp:7</div></div>
+<div class="ttc" id="aclass_subject_html_aec0d2f94b266d79c426b0ac454d823a5"><div class="ttname"><a href="class_subject.html#aec0d2f94b266d79c426b0ac454d823a5">Subject::attach</a></div><div class="ttdeci">void attach(Observer *obs)</div><div class="ttdoc">Registreert een observer bij dit subject.</div><div class="ttdef"><b>Definition</b> Subject.cpp:3</div></div>
+<div class="ttc" id="aclass_subject_html_af104c2baf37c7aa63b2ef6d32c2b3a9c"><div class="ttname"><a href="class_subject.html#af104c2baf37c7aa63b2ef6d32c2b3a9c">Subject::notify</a></div><div class="ttdeci">void notify()</div><div class="ttdoc">Notificeert de geregistreerde observer.</div><div class="ttdef"><b>Definition</b> Subject.cpp:11</div></div>
 <div class="ttc" id="aclass_subject_html_af9723476c61afcceeb91bee3211258c7"><div class="ttname"><a href="class_subject.html#af9723476c61afcceeb91bee3211258c7">Subject::~Subject</a></div><div class="ttdeci">virtual ~Subject()=default</div><div class="ttdoc">Virtual destructor voor correcte cleanup van afgeleide klassen.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

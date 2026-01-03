@@ -2,7 +2,7 @@ var class_ghost =
 [
     [ "Ghost", "class_ghost.html#a91690310fdab1f819de410c503758b13", null ],
     [ "addMoveTime", "class_ghost.html#af3f2ec14a0922f8012fe5511a09a15d4", null ],
-    [ "chooseDirectionFear", "class_ghost.html#a557ba3ef93ac1cb26d639bdb2fa3b80e", null ],
+    [ "chooseDirectionFear", "class_ghost.html#a4b300fc6b1b7018b71e8be62a8859477", null ],
     [ "getChaseDelay", "class_ghost.html#a4eab11f111dc5b76941240b28ea818c4", null ],
     [ "getDirection", "class_ghost.html#a7adbab3f327dbae8994b062c98d75b4d", null ],
     [ "getFearState", "class_ghost.html#a44812517cb827d1db4a61f20bf661f10", null ],
@@ -17,7 +17,7 @@ var class_ghost =
     [ "setFearState", "class_ghost.html#a2bcb2e04d2e144dfb0e887c62ca77dc1", null ],
     [ "setHasBeenEaten", "class_ghost.html#a2f7e11e223e7d758bdcc951e92191cec", null ],
     [ "softSnapToTileCenter", "class_ghost.html#a02b4d58b717a14b2b90d3f414e8a6da8", null ],
-    [ "update", "class_ghost.html#a0b67515dd58a47a2e6379553fe370da0", null ],
+    [ "update", "class_ghost.html#a1627eca7def79a5fcf3d74f46f61c478", null ],
     [ "chaseDelay", "class_ghost.html#a11f9b9f72ef00834640a764b8277cf9c", null ],
     [ "chasing", "class_ghost.html#a3017b59f015c6c5a4773b71ba3584f9f", null ],
     [ "fearStartTime", "class_ghost.html#a9e7877990263b89df811272c3879233f", null ],

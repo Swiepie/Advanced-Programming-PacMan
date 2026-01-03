@@ -2,7 +2,7 @@ var class_world =
 [
     [ "~World", "class_world.html#a3d07ed2f713c3946fbbaa3a1b7b7f8c0", null ],
     [ "World", "class_world.html#a8599311b4d145dcabca9c9407e11faf6", null ],
-    [ "canMoveInDirection", "class_world.html#a5bd9d74053da05495538bef0c33bd006", null ],
+    [ "canMoveInDirection", "class_world.html#a9c371411ce2a3801fcf9a42e9c44c1fe", null ],
     [ "checkCollisions", "class_world.html#a1a97411eb1695686ced14d388faf8a50", null ],
     [ "decreaseCoins", "class_world.html#aca030823cb21972f32422b1dd61bb672", null ],
     [ "getCoinCount", "class_world.html#a3e5c06501421e8366e1b62858cbe0d2b", null ],
@@ -21,8 +21,8 @@ var class_world =
     [ "getTime", "class_world.html#aa1dd0ddb6a314cd322bba8fced842ffc", null ],
     [ "getWalls", "class_world.html#a80b5f23eadcfe08eba9a857a1e890914", null ],
     [ "getWidth", "class_world.html#a2a7614f0f862c86de97e7696406d2693", null ],
-    [ "isAtIntersection", "class_world.html#a0c5c830136b0eb14549b3901c5b29035", null ],
-    [ "isOnTileCenter", "class_world.html#a54740044d78c5d33d49854a46bc35b1b", null ],
+    [ "isAtIntersection", "class_world.html#afb7e63534e0ff96c9915ad12c2f9b107", null ],
+    [ "isOnTileCenter", "class_world.html#ada74681dee06708845271369a166b0ae", null ],
     [ "loadMap", "class_world.html#a40a2e0830a009221b5426c86dd1bff29", null ],
     [ "printMap", "class_world.html#a2c709af01af1edfcb4a36ab33b1ecf65", null ],
     [ "resetAfterDeath", "class_world.html#abe933393671297a08a27f65357ff9f3a", null ],
@@ -30,7 +30,7 @@ var class_world =
     [ "setFearMode", "class_world.html#a336a217dc527c4d04431b6458ad07b19", null ],
     [ "setFearModeStart", "class_world.html#a65665ec076ffb41ae9a4ea6758f4da62", null ],
     [ "tryMove", "class_world.html#abfc8b46c3896be8132116398ba370c49", null ],
-    [ "tryMoveGhost", "class_world.html#aa40e5bca6ae1a8c647d97904183ec247", null ],
+    [ "tryMoveGhost", "class_world.html#a8240b3efd1fe6ad2f7ed68489cba7135", null ],
     [ "update", "class_world.html#a6f861499defce9ddb7f660e4c7f4a194", null ],
-    [ "willCrossTileCenter", "class_world.html#a5a6b5195733e7b40f4884258873d10ea", null ]
+    [ "willCrossTileCenter", "class_world.html#a6a6cefc02eab5dad9e1fa3b907f4b6b6", null ]
 ];

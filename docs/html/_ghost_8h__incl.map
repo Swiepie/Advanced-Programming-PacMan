@@ -4,79 +4,76 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="363,35,185,79,182,75,366,31"/>
 <area shape="rect" id="Node000006" href="$_world_8h.html" title="Beheert de world en alle game logica voor pacman." alt="" coords="688,80,765,107"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="463,30,675,80,670,82,464,35"/>
-<area shape="rect" id="Node000016" href="$_entity_8h.html" title="Definieert de abstracte Entity basisklasse voor alle game objecten." alt="" coords="604,379,716,405"/>
-<area shape="poly" id="edge55_Node000001_Node000016" title=" " alt="" coords="409,30,388,72,365,128,357,160,353,192,355,224,364,255,381,284,404,309,431,329,462,346,527,369,591,384,586,385,526,374,459,351,428,334,400,313,376,287,359,257,350,225,348,192,352,159,360,126,384,70,406,34"/>
-<area shape="rect" id="Node000021" href="$_pacman_8h.html" title="Definieert de Pacman entiteit, de hoofdspeler van het spel." alt="" coords="373,229,453,256"/>
-<area shape="poly" id="edge56_Node000001_Node000021" title=" " alt="" coords="413,30,399,97,395,139,397,181,405,215,400,214,392,182,390,139,394,96,410,35"/>
+<area shape="rect" id="Node000016" href="$_entity_8h.html" title="Definieert de abstracte Entity basisklasse voor alle game objecten." alt="" coords="538,379,649,405"/>
+<area shape="poly" id="edge52_Node000001_Node000016" title=" " alt="" coords="372,34,330,54,284,82,264,99,249,119,238,142,234,167,234,244,238,273,248,293,266,311,290,328,331,346,391,360,525,382,520,384,390,365,330,351,288,333,262,315,244,297,233,274,229,244,229,166,233,140,244,117,261,96,281,78,328,49,376,31"/>
+<area shape="rect" id="Node000021" href="$_pacman_8h.html" title="Definieert de Pacman entiteit, de hoofdspeler van het spel." alt="" coords="334,229,415,256"/>
+<area shape="poly" id="edge53_Node000001_Node000021" title=" " alt="" coords="414,30,401,86,386,155,379,215,374,213,381,154,396,85,411,35"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,155,56,181"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,110,60,147,55,144,107,105"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="87,379,147,405"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="121,104,121,155,120,364,114,363,116,155,120,110"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="203,379,263,405"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="119,105,118,141,121,181,140,235,166,286,217,366,212,367,161,289,135,237,116,182,112,141,118,110"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="130,155,195,181"/>
 <area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="128,105,151,141,145,142,129,110"/>
-<area shape="poly" id="edge52_Node000006_Node000001" title=" " alt="" coords="685,83,492,39,492,33,690,80"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="626,528,694,555"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="685,96,628,101,554,110,473,128,433,141,396,157,339,186,297,214,265,251,236,305,227,333,227,359,234,382,247,404,266,423,290,441,349,471,418,495,488,512,613,535,607,535,487,517,416,500,347,476,287,446,262,427,243,407,229,385,221,360,222,332,231,303,260,247,294,210,337,182,393,152,431,136,472,122,553,104,628,95,690,94"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="998,453,1052,480"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="765,92,848,98,897,106,946,118,990,137,1027,163,1041,179,1052,198,1059,218,1061,241,1061,319,1053,384,1037,441,1033,437,1048,383,1056,319,1056,241,1054,219,1047,200,1037,182,1023,167,988,142,944,124,896,111,848,103,766,97"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="1112,528,1170,555"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="765,94,900,104,985,115,1072,129,1153,148,1221,172,1247,187,1267,203,1281,221,1285,241,1285,393,1282,415,1275,436,1249,472,1216,501,1182,523,1180,518,1213,496,1246,468,1270,433,1277,414,1280,393,1280,242,1276,223,1264,207,1244,191,1218,177,1152,153,1071,134,984,120,899,110,766,99"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="1076,453,1142,480"/>
-<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="765,96,916,116,993,132,1024,142,1046,152,1074,170,1094,188,1107,210,1112,241,1112,319,1111,439,1107,436,1106,319,1107,242,1102,212,1090,191,1071,174,1044,157,1022,147,992,137,915,121,766,101"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="883,304,954,331"/>
-<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="765,99,819,113,880,138,911,155,939,176,964,200,985,228,989,247,983,266,969,283,953,297,950,292,966,279,978,263,984,247,980,230,960,203,936,180,908,160,878,143,817,119,766,104"/>
-<area shape="rect" id="Node000012" href="$_score_8h.html" title="Beheert het scoresysteem van het pacman spel." alt="" coords="1147,229,1213,256"/>
-<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="765,94,851,99,958,110,1059,127,1100,139,1129,152,1144,165,1157,181,1173,216,1168,214,1152,184,1140,169,1126,157,1098,144,1058,132,957,115,851,104,766,99"/>
-<area shape="rect" id="Node000015" href="$_visitor_8h.html" title="Definieert visitor patroon implementaties voor entiteit interacties in het pacman spel." alt="" coords="661,304,730,331"/>
-<area shape="poly" id="edge18_Node000006_Node000015" title=" " alt="" coords="722,105,707,193,696,290,691,287,701,193,719,109"/>
-<area shape="poly" id="edge33_Node000006_Node000016" title=" " alt="" coords="722,105,686,189,666,245,652,304,651,335,655,365,650,362,645,335,647,304,661,244,681,187,718,109"/>
-<area shape="rect" id="Node000019" href="$_coin_8h.html" title="Definieert de Coin entiteit voor het pacman spel." alt="" coords="736,229,842,256"/>
-<area shape="poly" id="edge29_Node000006_Node000019" title=" " alt="" coords="734,105,760,154,783,216,778,214,755,156,733,110"/>
+<area shape="poly" id="edge49_Node000006_Node000001" title=" " alt="" coords="685,83,492,39,492,33,690,80"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="1074,453,1142,480"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="765,95,884,109,1032,136,1101,156,1158,179,1181,192,1198,207,1209,223,1213,241,1213,319,1206,357,1187,392,1163,422,1138,446,1135,441,1159,418,1183,389,1201,355,1208,318,1208,242,1204,226,1194,211,1178,197,1156,184,1099,161,1031,142,883,115,766,101"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="894,453,948,480"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="765,97,873,113,1003,142,1064,161,1115,184,1149,210,1159,225,1162,241,1162,319,1160,367,1153,387,1136,407,1096,436,1050,454,1004,464,963,468,963,462,1003,458,1049,449,1094,431,1133,403,1148,384,1155,366,1157,319,1157,242,1154,227,1145,214,1112,188,1062,166,1002,147,872,118,766,102"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="826,379,883,405"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="765,95,829,106,905,129,943,146,979,168,1010,195,1036,228,1040,243,1035,257,1019,277,1000,287,979,294,956,306,880,370,877,366,953,302,977,289,998,282,1015,273,1031,255,1035,243,1031,231,1006,199,975,172,940,151,903,134,828,111,766,101"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1056,379,1122,405"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="765,93,814,98,873,107,935,125,993,152,1032,182,1055,215,1069,254,1080,303,1089,365,1084,362,1075,305,1064,255,1050,217,1028,186,990,157,933,130,872,113,813,103,766,98"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="754,304,825,331"/>
+<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="732,105,749,154,785,290,780,288,744,155,730,109"/>
+<area shape="rect" id="Node000012" href="$_score_8h.html" title="Beheert het scoresysteem van het pacman spel." alt="" coords="955,229,1021,256"/>
+<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="755,104,852,152,960,220,954,220,849,157,754,110"/>
+<area shape="rect" id="Node000015" href="$_visitor_8h.html" title="Definieert visitor patroon implementaties voor entiteit interacties in het pacman spel." alt="" coords="658,304,728,331"/>
+<area shape="poly" id="edge18_Node000006_Node000015" title=" " alt="" coords="722,105,705,193,693,290,689,287,700,193,718,109"/>
+<area shape="poly" id="edge30_Node000006_Node000016" title=" " alt="" coords="685,99,526,121,442,137,409,146,385,157,363,172,348,187,325,231,300,283,298,305,310,329,323,340,343,350,397,365,461,376,525,385,519,386,460,381,396,370,341,355,320,344,306,332,293,306,295,281,320,228,344,184,359,168,383,152,407,141,441,132,525,115,690,97"/>
+<area shape="rect" id="Node000019" href="$_coin_8h.html" title="Definieert de Coin entiteit voor het pacman spel." alt="" coords="571,229,676,256"/>
+<area shape="poly" id="edge26_Node000006_Node000019" title=" " alt="" coords="720,106,643,218,639,215,716,109"/>
 <area shape="rect" id="Node000020" href="$_entity_factory_8h.html" title="Definieert de abstracte EntityFactory interface voor het Abstract Factory pattern." alt="" coords="421,155,576,181"/>
-<area shape="poly" id="edge34_Node000006_Node000020" title=" " alt="" coords="685,108,554,152,552,147,690,106"/>
-<area shape="poly" id="edge53_Node000006_Node000021" title=" " alt="" coords="685,97,617,103,533,114,457,131,429,142,411,156,404,169,402,184,406,216,401,214,397,184,399,168,407,153,427,138,456,126,532,108,616,98,690,95"/>
-<area shape="rect" id="Node000023" href="$_wall_8h.html" title="Definieert de Wall entiteit voor het pacman spel." alt="" coords="528,229,586,256"/>
-<area shape="poly" id="edge54_Node000006_Node000023" title=" " alt="" coords="710,106,647,157,580,220,577,216,643,153,706,109"/>
-<area shape="rect" id="Node000024" href="$_fruit_8h.html" title="Definieert de Fruit entiteit voor het pacman spel." alt="" coords="866,229,971,256"/>
-<area shape="poly" id="edge47_Node000006_Node000024" title=" " alt="" coords="738,105,887,220,882,221,737,110"/>
-<area shape="poly" id="edge12_Node000012_Node000011" title=" " alt="" coords="1149,253,970,305,968,299,1144,254"/>
-<area shape="rect" id="Node000013" href="$_scoreboard_8h.html" title="Beheert de highscores van het pacman spel." alt="" coords="1147,379,1245,405"/>
-<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="1183,254,1195,365,1191,362,1179,259"/>
-<area shape="poly" id="edge16_Node000013_Node000008" title=" " alt="" coords="1169,405,1067,451,1065,446,1164,406"/>
-<area shape="poly" id="edge17_Node000013_Node000009" title=" " alt="" coords="1201,404,1207,440,1206,461,1201,481,1189,502,1172,520,1169,515,1184,499,1196,479,1201,460,1201,440,1198,408"/>
-<area shape="poly" id="edge15_Node000013_Node000010" title=" " alt="" coords="1183,405,1137,446,1135,441,1178,407"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="963,528,1037,555"/>
-<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="1195,404,1183,443,1171,464,1156,482,1133,500,1106,514,1052,533,1051,528,1104,509,1130,496,1153,478,1167,461,1178,441,1191,407"/>
-<area shape="poly" id="edge27_Node000015_Node000006" title=" " alt="" coords="700,302,716,218,727,124,731,120,721,218,704,305"/>
-<area shape="poly" id="edge28_Node000015_Node000009" title=" " alt="" coords="717,329,831,396,988,478,1100,525,1095,525,985,482,828,400,716,334"/>
-<area shape="poly" id="edge19_Node000015_Node000016" title=" " alt="" coords="692,330,675,367,671,363,687,333"/>
-<area shape="poly" id="edge25_Node000016_Node000007" title=" " alt="" coords="662,404,662,514,658,511,658,408"/>
-<area shape="poly" id="edge26_Node000016_Node000008" title=" " alt="" coords="716,402,986,457,980,457,716,407"/>
-<area shape="rect" id="Node000017" href="$_subject_8h.html" title="Definieert de Subject klasse voor het Observer design pattern." alt="" coords="748,453,825,480"/>
-<area shape="poly" id="edge20_Node000016_Node000017" title=" " alt="" coords="682,403,754,446,749,445,681,408"/>
-<area shape="poly" id="edge23_Node000017_Node000007" title=" " alt="" coords="767,480,696,523,694,517,762,481"/>
-<area shape="poly" id="edge24_Node000017_Node000009" title=" " alt="" coords="825,473,1100,531,1095,531,825,478"/>
-<area shape="poly" id="edge22_Node000017_Node000014" title=" " alt="" coords="824,478,951,523,946,522,823,483"/>
-<area shape="rect" id="Node000018" href="$_observer_8h.html" title="Definieert de Observer interface voor het Observer design pattern." alt="" coords="738,528,835,555"/>
-<area shape="poly" id="edge21_Node000017_Node000018" title=" " alt="" coords="788,479,789,514,784,511,785,482"/>
-<area shape="poly" id="edge32_Node000019_Node000011" title=" " alt="" coords="812,254,885,296,880,296,811,259"/>
-<area shape="poly" id="edge30_Node000019_Node000015" title=" " alt="" coords="775,255,725,297,722,292,771,258"/>
-<area shape="poly" id="edge31_Node000019_Node000016" title=" " alt="" coords="787,255,771,293,745,332,721,354,696,373,694,368,718,350,740,329,766,290,783,258"/>
-<area shape="poly" id="edge37_Node000020_Node000001" title=" " alt="" coords="489,154,430,48,431,43,494,154"/>
-<area shape="poly" id="edge36_Node000020_Node000016" title=" " alt="" coords="500,179,507,216,520,255,542,290,571,321,630,370,625,370,567,325,538,293,515,257,501,217,498,184"/>
-<area shape="poly" id="edge35_Node000020_Node000019" title=" " alt="" coords="549,179,726,224,721,226,550,185"/>
-<area shape="poly" id="edge38_Node000020_Node000021" title=" " alt="" coords="486,180,441,221,438,217,482,184"/>
-<area shape="poly" id="edge44_Node000020_Node000023" title=" " alt="" coords="509,179,540,217,535,217,508,184"/>
-<area shape="poly" id="edge39_Node000021_Node000011" title=" " alt="" coords="454,247,869,307,865,310,454,252"/>
-<area shape="poly" id="edge42_Node000021_Node000015" title=" " alt="" coords="454,252,648,302,643,304,454,257"/>
-<area shape="poly" id="edge43_Node000021_Node000016" title=" " alt="" coords="419,254,441,292,455,312,473,329,501,346,530,359,592,379,586,380,528,364,498,350,470,333,452,315,436,295,418,259"/>
-<area shape="rect" id="Node000022" href="$_stopwatch_8h.html" title="Implementeert een singleton stopwatch voor tijdmeting in het spel." alt="" coords="245,304,352,331"/>
-<area shape="poly" id="edge40_Node000021_Node000022" title=" " alt="" coords="391,258,333,297,330,293,395,255"/>
-<area shape="poly" id="edge41_Node000022_Node000004" title=" " alt="" coords="265,333,163,375,161,371,269,329"/>
-<area shape="poly" id="edge45_Node000023_Node000015" title=" " alt="" coords="582,254,661,296,655,297,581,259"/>
-<area shape="poly" id="edge46_Node000023_Node000016" title=" " alt="" coords="564,254,583,289,607,329,639,368,634,367,603,332,578,292,562,259"/>
-<area shape="poly" id="edge49_Node000024_Node000006" title=" " alt="" coords="905,229,760,118,761,113,910,229"/>
-<area shape="poly" id="edge51_Node000024_Node000011" title=" " alt="" coords="920,254,921,290,916,287,917,259"/>
-<area shape="poly" id="edge48_Node000024_Node000015" title=" " alt="" coords="877,257,746,303,744,298,882,256"/>
-<area shape="poly" id="edge50_Node000024_Node000016" title=" " alt="" coords="900,256,772,333,698,373,696,369,769,328,895,258"/>
+<area shape="poly" id="edge31_Node000006_Node000020" title=" " alt="" coords="685,108,554,152,552,147,690,106"/>
+<area shape="poly" id="edge50_Node000006_Node000021" title=" " alt="" coords="685,98,619,107,537,118,461,135,431,145,411,157,399,169,391,184,381,216,376,213,386,182,395,166,407,153,429,140,459,129,536,113,618,101,690,96"/>
+<area shape="rect" id="Node000023" href="$_wall_8h.html" title="Definieert de Wall entiteit voor het pacman spel." alt="" coords="490,229,547,256"/>
+<area shape="poly" id="edge51_Node000006_Node000023" title=" " alt="" coords="711,106,550,222,547,218,707,109"/>
+<area shape="rect" id="Node000024" href="$_fruit_8h.html" title="Definieert de Fruit entiteit voor het pacman spel." alt="" coords="826,229,931,256"/>
+<area shape="poly" id="edge44_Node000006_Node000024" title=" " alt="" coords="737,105,798,153,854,218,849,217,794,157,736,110"/>
+<area shape="poly" id="edge12_Node000012_Node000011" title=" " alt="" coords="957,255,839,301,837,296,952,257"/>
+<area shape="rect" id="Node000013" href="$_scoreboard_8h.html" title="Beheert de highscores van het pacman spel." alt="" coords="967,304,1065,331"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="994,254,1008,291,1003,288,991,259"/>
+<area shape="poly" id="edge16_Node000013_Node000008" title=" " alt="" coords="998,330,972,353,949,380,935,410,927,441,923,437,930,408,944,377,968,350,994,332"/>
+<area shape="poly" id="edge17_Node000013_Node000009" title=" " alt="" coords="990,330,897,374,896,369,985,332"/>
+<area shape="poly" id="edge15_Node000013_Node000010" title=" " alt="" coords="1029,329,1068,368,1063,367,1028,334"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="959,379,1033,405"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="1014,329,1005,366,1001,362,1010,333"/>
+<area shape="poly" id="edge24_Node000015_Node000006" title=" " alt="" coords="697,302,714,217,727,124,730,120,720,218,702,305"/>
+<area shape="poly" id="edge25_Node000015_Node000009" title=" " alt="" coords="722,329,815,372,810,372,721,334"/>
+<area shape="poly" id="edge19_Node000015_Node000016" title=" " alt="" coords="678,330,624,372,622,367,673,332"/>
+<area shape="poly" id="edge22_Node000016_Node000007" title=" " alt="" coords="649,399,1061,458,1056,459,649,404"/>
+<area shape="poly" id="edge23_Node000016_Node000008" title=" " alt="" coords="649,403,882,456,876,456,649,408"/>
+<area shape="rect" id="Node000017" href="$_subject_8h.html" title="Definieert de Subject klasse voor het Observer design pattern." alt="" coords="555,453,631,480"/>
+<area shape="poly" id="edge20_Node000016_Node000017" title=" " alt="" coords="595,404,595,439,591,436,591,408"/>
+<area shape="rect" id="Node000018" href="$_observer_8h.html" title="Definieert de Observer interface voor het Observer design pattern." alt="" coords="544,528,642,555"/>
+<area shape="poly" id="edge21_Node000017_Node000018" title=" " alt="" coords="595,479,595,514,591,511,591,482"/>
+<area shape="poly" id="edge29_Node000019_Node000011" title=" " alt="" coords="653,254,749,297,743,297,652,259"/>
+<area shape="poly" id="edge27_Node000019_Node000015" title=" " alt="" coords="637,254,673,293,668,292,635,259"/>
+<area shape="poly" id="edge28_Node000019_Node000016" title=" " alt="" coords="623,255,601,365,597,362,619,258"/>
+<area shape="poly" id="edge34_Node000020_Node000001" title=" " alt="" coords="489,154,430,48,431,43,494,154"/>
+<area shape="poly" id="edge33_Node000020_Node000016" title=" " alt="" coords="493,180,480,217,478,236,481,255,498,289,520,319,568,369,563,368,516,323,493,291,476,257,473,236,475,215,489,184"/>
+<area shape="poly" id="edge32_Node000020_Node000019" title=" " alt="" coords="520,179,592,221,586,222,520,185"/>
+<area shape="poly" id="edge35_Node000020_Node000021" title=" " alt="" coords="475,183,410,224,407,219,479,180"/>
+<area shape="poly" id="edge41_Node000020_Node000023" title=" " alt="" coords="503,179,514,215,508,214,501,184"/>
+<area shape="poly" id="edge36_Node000021_Node000011" title=" " alt="" coords="415,247,554,268,741,303,736,305,553,273,416,252"/>
+<area shape="poly" id="edge39_Node000021_Node000015" title=" " alt="" coords="415,250,646,304,641,306,415,256"/>
+<area shape="poly" id="edge40_Node000021_Node000016" title=" " alt="" coords="392,254,497,328,562,371,557,371,494,333,391,259"/>
+<area shape="rect" id="Node000022" href="$_stopwatch_8h.html" title="Implementeert een singleton stopwatch voor tijdmeting in het spel." alt="" coords="320,304,426,331"/>
+<area shape="poly" id="edge37_Node000021_Node000022" title=" " alt="" coords="376,254,376,289,371,287,373,259"/>
+<area shape="poly" id="edge38_Node000022_Node000004" title=" " alt="" coords="347,333,273,373,270,369,351,330"/>
+<area shape="poly" id="edge42_Node000023_Node000015" title=" " alt="" coords="548,253,652,297,646,298,548,259"/>
+<area shape="poly" id="edge43_Node000023_Node000016" title=" " alt="" coords="526,254,583,365,577,364,524,259"/>
+<area shape="poly" id="edge46_Node000024_Node000006" title=" " alt="" coords="875,228,853,196,818,157,769,118,769,113,822,153,857,192,880,229"/>
+<area shape="poly" id="edge48_Node000024_Node000011" title=" " alt="" coords="865,255,818,296,815,292,861,258"/>
+<area shape="poly" id="edge45_Node000024_Node000015" title=" " alt="" coords="849,256,741,300,739,295,844,257"/>
+<area shape="poly" id="edge47_Node000024_Node000016" title=" " alt="" coords="878,254,866,294,855,315,839,333,798,358,753,376,707,386,665,392,664,386,706,381,751,370,796,354,835,329,851,312,862,292,874,258"/>
 </map>

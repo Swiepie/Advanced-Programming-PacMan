@@ -8,5 +8,5 @@ var searchData=
   ['addscore_5',['addScore',['../class_scoreboard.html#a1aed60f0f87b93feadc65e5d428b1651',1,'Scoreboard']]],
   ['advanced_20programming_20pacman_6',['Advanced-Programming-PacMan',['../md__r_e_a_d_m_e.html',1,'']]],
   ['applybufferdirection_7',['applyBufferdirection',['../class_pacman.html#a052ef5d2e81c7094983b4e5c22a045ab',1,'Pacman']]],
-  ['attach_8',['attach',['../class_subject.html#a0884bfe374d352c6488a1e40c84246c8',1,'Subject']]]
+  ['attach_8',['attach',['../class_subject.html#aec0d2f94b266d79c426b0ac454d823a5',1,'Subject']]]
 ];

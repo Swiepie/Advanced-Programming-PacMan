@@ -117,57 +117,77 @@ $(function(){initNavTree('_menu_state_8h_source.html',''); initResizable(true); 
 <div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_menu_state.html">   29</a></span><span class="keyword">class </span><a class="code hl_function" href="class_menu_state.html#af5f273e68f5c9d9ac41c2f991cb47c38">MenuState</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_state.html">State</a> {</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    sf::Font font;                          </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    sf::Text title;                         </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    sf::Text highscores;                    </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_class" href="class_scoreboard.html">Scoreboard</a> sb;                          </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    std::shared_ptr&lt;EntityFactory&gt; factory; </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="class_menu_state.html#af5f273e68f5c9d9ac41c2f991cb47c38">   46</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="class_menu_state.html#af5f273e68f5c9d9ac41c2f991cb47c38">MenuState</a>(std::shared_ptr&lt;EntityFactory&gt; factory) : factory(std::move(factory)) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        sb.load();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        font.loadFromFile(<span class="stringliteral">&quot;../assets/ARIAL.TTF&quot;</span>);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        title.setFont(font);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        title.setString(<span class="stringliteral">&quot;pacman PROJECT\nPress any key to play&quot;</span>);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        title.setFillColor(sf::Color::Yellow);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        highscores.setFont(font);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        highscores.setFillColor(sf::Color::Green);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="comment">// top5 ophalen</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keyword">auto</span> top = sb.getTop5();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    sf::RectangleShape playButton; </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    sf::Text playButtonText;       </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    sf::Font font;                          </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    sf::Text title;                         </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    sf::Text highscores;                    </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="class_scoreboard.html">Scoreboard</a> sb;                          </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    std::shared_ptr&lt;EntityFactory&gt; factory; </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="class_menu_state.html#af5f273e68f5c9d9ac41c2f991cb47c38">   49</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="class_menu_state.html#af5f273e68f5c9d9ac41c2f991cb47c38">MenuState</a>(std::shared_ptr&lt;EntityFactory&gt; factory) : factory(std::move(factory)) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        sb.load();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">if</span> (!font.loadFromFile(<span class="stringliteral">&quot;../assets/ARIAL.TTF&quot;</span>)) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            throw std::runtime_error(<span class="stringliteral">&quot;Failed to load font&quot;</span>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        font.loadFromFile(<span class="stringliteral">&quot;../assets/ARIAL.TTF&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        title.setFont(font);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        title.setString(<span class="stringliteral">&quot;PACMAN PROJECT&quot;</span>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        title.setFillColor(sf::Color::Yellow);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        title.setCharacterSize(48);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        std::string hs = <span class="stringliteral">&quot;Highscores:\n&quot;</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s : top) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            hs += std::to_string(s) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        highscores.setString(hs);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        highscores.setFont(font);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        highscores.setFillColor(sf::Color::Green);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        highscores.setCharacterSize(24);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="comment">// Refresh highscores display</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        updateHighscoresDisplay();</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="comment">// Setup play button</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        playButton.setSize(sf::Vector2f(200.f, 60.f));</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        playButton.setFillColor(sf::Color(50, 50, 150));</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        playButton.setOutlineColor(sf::Color::Yellow);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        playButton.setOutlineThickness(3.f);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        playButtonText.setFont(font);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        playButtonText.setString(<span class="stringliteral">&quot;PLAY&quot;</span>);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        playButtonText.setFillColor(sf::Color::White);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        playButtonText.setCharacterSize(32);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
 </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_menu_state.html#a811601ccdd4650a854cf6bb5f06d6a1a">handleEvent</a>(std::shared_ptr&lt;StateManager&gt; stateManager, std::shared_ptr&lt;sf::RenderWindow&gt; window,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                     <span class="keyword">const</span> sf::Event&amp; event) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="class_menu_state.html#abff715a7e32d0f8b9b9c2d9dc4125349">   87</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_menu_state.html#abff715a7e32d0f8b9b9c2d9dc4125349">update</a>(std::shared_ptr&lt;StateManager&gt; stateManager, <span class="keywordtype">float</span> deltaTime)<span class="keyword"> override </span>{}</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_menu_state.html#a8e113d6ca640e560c6442eb2f8917917">render</a>(std::shared_ptr&lt;sf::RenderWindow&gt; window, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> windowWidth, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> windowHeight) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>};</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> updateHighscoresDisplay() {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keyword">auto</span> top = sb.<a class="code hl_function" href="class_scoreboard.html#a42a883b2a3d053297612066492914019">getTop5</a>();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        std::string hs = <span class="stringliteral">&quot;Top 5 Highscores:\n&quot;</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; top.size(); ++i) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            hs += std::to_string(i + 1) + <span class="stringliteral">&quot;. &quot;</span> + std::to_string(top[i]) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        highscores.setString(hs);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">void</span> handleEvent(std::shared_ptr&lt;StateManager&gt; stateManager, std::shared_ptr&lt;sf::RenderWindow&gt; window,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                     <span class="keyword">const</span> sf::Event&amp; event) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">void</span> update(std::shared_ptr&lt;StateManager&gt; stateManager, <span class="keywordtype">float</span> deltaTime)<span class="keyword"> override </span>{}</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">void</span> render(std::shared_ptr&lt;sf::RenderWindow&gt; window, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> windowWidth, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> windowHeight) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>};</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="a_entity_factory_8h_html"><div class="ttname"><a href="_entity_factory_8h.html">EntityFactory.h</a></div><div class="ttdoc">Definieert de abstracte EntityFactory interface voor het Abstract Factory pattern.</div></div>
 <div class="ttc" id="a_level_state_8h_html"><div class="ttname"><a href="_level_state_8h.html">LevelState.h</a></div><div class="ttdoc">Definieert de level state voor actieve gameplay.</div></div>
 <div class="ttc" id="a_scoreboard_8h_html"><div class="ttname"><a href="_scoreboard_8h.html">Scoreboard.h</a></div><div class="ttdoc">Beheert de highscores van het pacman spel.</div></div>
 <div class="ttc" id="a_state_8h_html"><div class="ttname"><a href="_state_8h.html">State.h</a></div><div class="ttdoc">Definieert de abstracte basis klasse voor alle game states.</div></div>
 <div class="ttc" id="a_state_manager_8h_html"><div class="ttname"><a href="_state_manager_8h.html">StateManager.h</a></div><div class="ttdoc">Definieert de StateManager klasse voor game state beheer.</div></div>
-<div class="ttc" id="aclass_menu_state_html_a811601ccdd4650a854cf6bb5f06d6a1a"><div class="ttname"><a href="class_menu_state.html#a811601ccdd4650a854cf6bb5f06d6a1a">MenuState::handleEvent</a></div><div class="ttdeci">void handleEvent(std::shared_ptr&lt; StateManager &gt; stateManager, std::shared_ptr&lt; sf::RenderWindow &gt; window, const sf::Event &amp;event) override</div><div class="ttdoc">Verwerkt invoer events in het hoofdmenu.</div><div class="ttdef"><b>Definition</b> MenuState.cpp:7</div></div>
-<div class="ttc" id="aclass_menu_state_html_a8e113d6ca640e560c6442eb2f8917917"><div class="ttname"><a href="class_menu_state.html#a8e113d6ca640e560c6442eb2f8917917">MenuState::render</a></div><div class="ttdeci">void render(std::shared_ptr&lt; sf::RenderWindow &gt; window, unsigned int windowWidth, unsigned int windowHeight) override</div><div class="ttdoc">Rendert het hoofdmenu naar het venster.</div><div class="ttdef"><b>Definition</b> MenuState.cpp:13</div></div>
-<div class="ttc" id="aclass_menu_state_html_abff715a7e32d0f8b9b9c2d9dc4125349"><div class="ttname"><a href="class_menu_state.html#abff715a7e32d0f8b9b9c2d9dc4125349">MenuState::update</a></div><div class="ttdeci">void update(std::shared_ptr&lt; StateManager &gt; stateManager, float deltaTime) override</div><div class="ttdoc">Update de menu state logica per frame.</div><div class="ttdef"><b>Definition</b> MenuState.h:87</div></div>
-<div class="ttc" id="aclass_menu_state_html_af5f273e68f5c9d9ac41c2f991cb47c38"><div class="ttname"><a href="class_menu_state.html#af5f273e68f5c9d9ac41c2f991cb47c38">MenuState::MenuState</a></div><div class="ttdeci">MenuState(std::shared_ptr&lt; EntityFactory &gt; factory)</div><div class="ttdoc">Construeert een MenuState met opgegeven factory.</div><div class="ttdef"><b>Definition</b> MenuState.h:46</div></div>
+<div class="ttc" id="aclass_menu_state_html_af5f273e68f5c9d9ac41c2f991cb47c38"><div class="ttname"><a href="class_menu_state.html#af5f273e68f5c9d9ac41c2f991cb47c38">MenuState::MenuState</a></div><div class="ttdeci">MenuState(std::shared_ptr&lt; EntityFactory &gt; factory)</div><div class="ttdoc">Construeert een MenuState met opgegeven factory.</div><div class="ttdef"><b>Definition</b> MenuState.h:49</div></div>
 <div class="ttc" id="aclass_scoreboard_html"><div class="ttname"><a href="class_scoreboard.html">Scoreboard</a></div><div class="ttdoc">Klasse voor het beheren van highscores.</div><div class="ttdef"><b>Definition</b> Scoreboard.h:23</div></div>
+<div class="ttc" id="aclass_scoreboard_html_a42a883b2a3d053297612066492914019"><div class="ttname"><a href="class_scoreboard.html#a42a883b2a3d053297612066492914019">Scoreboard::getTop5</a></div><div class="ttdeci">const std::vector&lt; int &gt; &amp; getTop5() const</div><div class="ttdoc">Geeft de top 5 hoogste scores.</div><div class="ttdef"><b>Definition</b> Scoreboard.cpp:45</div></div>
 <div class="ttc" id="aclass_state_html"><div class="ttname"><a href="class_state.html">State</a></div><div class="ttdoc">Abstracte basis klasse voor het State pattern in het spel.</div><div class="ttdef"><b>Definition</b> State.h:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

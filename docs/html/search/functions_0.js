@@ -7,5 +7,5 @@ var searchData=
   ['addmovetime_4',['addMoveTime',['../class_ghost.html#af3f2ec14a0922f8012fe5511a09a15d4',1,'Ghost::addMoveTime()'],['../class_pacman.html#a49587487c5f205b15b3a12e9a0426456',1,'Pacman::addMoveTime()']]],
   ['addscore_5',['addScore',['../class_scoreboard.html#a1aed60f0f87b93feadc65e5d428b1651',1,'Scoreboard']]],
   ['applybufferdirection_6',['applyBufferdirection',['../class_pacman.html#a052ef5d2e81c7094983b4e5c22a045ab',1,'Pacman']]],
-  ['attach_7',['attach',['../class_subject.html#a0884bfe374d352c6488a1e40c84246c8',1,'Subject']]]
+  ['attach_7',['attach',['../class_subject.html#aec0d2f94b266d79c426b0ac454d823a5',1,'Subject']]]
 ];

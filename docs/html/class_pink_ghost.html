@@ -143,12 +143,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acb130fd5841d0bbd2a42c2e9e3e7ef86" id="r_acb130fd5841d0bbd2a42c2e9e3e7ef86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb130fd5841d0bbd2a42c2e9e3e7ef86">PinkGhost</a> (float x, float y, float delay)</td></tr>
 <tr class="memdesc:acb130fd5841d0bbd2a42c2e9e3e7ef86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construeert een <a class="el" href="class_pink_ghost.html" title="pink ghost dat pacman direct achtervolgt">PinkGhost</a> op opgegeven positie met delay.  <br /></td></tr>
 <tr class="separator:acb130fd5841d0bbd2a42c2e9e3e7ef86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5199a170c3d6d9b19436d7e6293ef3ad" id="r_a5199a170c3d6d9b19436d7e6293ef3ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5199a170c3d6d9b19436d7e6293ef3ad">update</a> (float deltaTime, <a class="el" href="class_world.html">World</a> &amp;world, const <a class="el" href="class_pacman.html">Pacman</a> &amp;pacman) override</td></tr>
-<tr class="memdesc:a5199a170c3d6d9b19436d7e6293ef3ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update <a class="el" href="class_pink_ghost.html" title="pink ghost dat pacman direct achtervolgt">PinkGhost</a> logica per frame.  <br /></td></tr>
-<tr class="separator:a5199a170c3d6d9b19436d7e6293ef3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab54bee9ac0e6bd451c3aad19507d8442" id="r_ab54bee9ac0e6bd451c3aad19507d8442"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab54bee9ac0e6bd451c3aad19507d8442">chooseDirection</a> (<a class="el" href="class_world.html">World</a> &amp;world, const <a class="el" href="class_pacman.html">Pacman</a> &amp;pacman)</td></tr>
-<tr class="memdesc:ab54bee9ac0e6bd451c3aad19507d8442"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kiest een nieuwe richting direct naar pacman.  <br /></td></tr>
-<tr class="separator:ab54bee9ac0e6bd451c3aad19507d8442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f68e8892f8fb655498b2958bb8cbf9a" id="r_a8f68e8892f8fb655498b2958bb8cbf9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f68e8892f8fb655498b2958bb8cbf9a">update</a> (float deltaTime, <a class="el" href="class_world.html">World</a> &amp;world, const std::shared_ptr&lt; <a class="el" href="class_pacman.html">Pacman</a> &gt; &amp;pacman) override</td></tr>
+<tr class="memdesc:a8f68e8892f8fb655498b2958bb8cbf9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update <a class="el" href="class_pink_ghost.html" title="pink ghost dat pacman direct achtervolgt">PinkGhost</a> logica per frame.  <br /></td></tr>
+<tr class="separator:a8f68e8892f8fb655498b2958bb8cbf9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a4b452d1b9616eeef8bbe3f1bab1c1" id="r_ab9a4b452d1b9616eeef8bbe3f1bab1c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9a4b452d1b9616eeef8bbe3f1bab1c1">chooseDirection</a> (<a class="el" href="class_world.html">World</a> &amp;world, const std::shared_ptr&lt; <a class="el" href="class_pacman.html">Pacman</a> &gt; &amp;pacman)</td></tr>
+<tr class="memdesc:ab9a4b452d1b9616eeef8bbe3f1bab1c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kiest een nieuwe richting direct naar pacman.  <br /></td></tr>
+<tr class="separator:ab9a4b452d1b9616eeef8bbe3f1bab1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a242ec3264af4b920dd94a01237c3b966" id="r_a242ec3264af4b920dd94a01237c3b966"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a242ec3264af4b920dd94a01237c3b966">accept</a> (<a class="el" href="class_visitor.html">Visitor</a> &amp;visitor) override</td></tr>
 <tr class="memdesc:a242ec3264af4b920dd94a01237c3b966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accepteert een <a class="el" href="class_visitor.html" title="Abstracte basisklasse voor visitor patroon implementatie.">Visitor</a> voor het <a class="el" href="class_visitor.html" title="Abstracte basisklasse voor visitor patroon implementatie.">Visitor</a> pattern.  <br /></td></tr>
 <tr class="separator:a242ec3264af4b920dd94a01237c3b966"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,9 +193,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>resetFearState</b> ()
 <tr class="memitem:a4eab11f111dc5b76941240b28ea818c4 inherit pub_methods_class_ghost" id="r_a4eab11f111dc5b76941240b28ea818c4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ghost.html#a4eab11f111dc5b76941240b28ea818c4">getChaseDelay</a> () const</td></tr>
 <tr class="memdesc:a4eab11f111dc5b76941240b28ea818c4 inherit pub_methods_class_ghost"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geeft de chase delay van het ghost.  <br /></td></tr>
 <tr class="separator:a4eab11f111dc5b76941240b28ea818c4 inherit pub_methods_class_ghost"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a557ba3ef93ac1cb26d639bdb2fa3b80e inherit pub_methods_class_ghost" id="r_a557ba3ef93ac1cb26d639bdb2fa3b80e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ghost.html#a557ba3ef93ac1cb26d639bdb2fa3b80e">chooseDirectionFear</a> (<a class="el" href="class_world.html">World</a> &amp;world, const <a class="el" href="class_pacman.html">Pacman</a> &amp;pacman)</td></tr>
-<tr class="memdesc:a557ba3ef93ac1cb26d639bdb2fa3b80e inherit pub_methods_class_ghost"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kiest een richting tijdens fear mode.  <br /></td></tr>
-<tr class="separator:a557ba3ef93ac1cb26d639bdb2fa3b80e inherit pub_methods_class_ghost"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b300fc6b1b7018b71e8be62a8859477 inherit pub_methods_class_ghost" id="r_a4b300fc6b1b7018b71e8be62a8859477"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ghost.html#a4b300fc6b1b7018b71e8be62a8859477">chooseDirectionFear</a> (<a class="el" href="class_world.html">World</a> &amp;world, const std::shared_ptr&lt; <a class="el" href="class_pacman.html">Pacman</a> &gt; &amp;pacman)</td></tr>
+<tr class="memdesc:a4b300fc6b1b7018b71e8be62a8859477 inherit pub_methods_class_ghost"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kiest een richting tijdens fear mode.  <br /></td></tr>
+<tr class="separator:a4b300fc6b1b7018b71e8be62a8859477 inherit pub_methods_class_ghost"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea663d057631b7857e05b26205cb2c4b inherit pub_methods_class_ghost" id="r_aea663d057631b7857e05b26205cb2c4b"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reverseDirection</b> ()</td></tr>
 <tr class="memdesc:aea663d057631b7857e05b26205cb2c4b inherit pub_methods_class_ghost"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keert de huidige bewegingsrichting om. <br /></td></tr>
@@ -250,17 +250,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Subject</b> ()=default</td></tr>
 <tr class="memdesc:af9723476c61afcceeb91bee3211258c7 inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor voor correcte cleanup van afgeleide klassen. <br /></td></tr>
 <tr class="separator:af9723476c61afcceeb91bee3211258c7 inherit pub_methods_class_subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0884bfe374d352c6488a1e40c84246c8 inherit pub_methods_class_subject" id="r_a0884bfe374d352c6488a1e40c84246c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_subject.html#a0884bfe374d352c6488a1e40c84246c8">attach</a> (<a class="el" href="class_observer.html">Observer</a> *observer)</td></tr>
-<tr class="memdesc:a0884bfe374d352c6488a1e40c84246c8 inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registreert een observer bij dit subject.  <br /></td></tr>
-<tr class="separator:a0884bfe374d352c6488a1e40c84246c8 inherit pub_methods_class_subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a752a7596d52ab986539232f8377ca92c inherit pub_methods_class_subject" id="r_a752a7596d52ab986539232f8377ca92c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_subject.html#a752a7596d52ab986539232f8377ca92c">detach</a> (<a class="el" href="class_observer.html">Observer</a> *observer)</td></tr>
-<tr class="memdesc:a752a7596d52ab986539232f8377ca92c inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verwijdert een observer van dit subject.  <br /></td></tr>
-<tr class="separator:a752a7596d52ab986539232f8377ca92c inherit pub_methods_class_subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af104c2baf37c7aa63b2ef6d32c2b3a9c inherit pub_methods_class_subject" id="r_af104c2baf37c7aa63b2ef6d32c2b3a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_subject.html#af104c2baf37c7aa63b2ef6d32c2b3a9c">notify</a> ()</td></tr>
-<tr class="memdesc:af104c2baf37c7aa63b2ef6d32c2b3a9c inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notificeert alle geregistreerde observers.  <br /></td></tr>
+<tr class="memitem:aec0d2f94b266d79c426b0ac454d823a5 inherit pub_methods_class_subject" id="r_aec0d2f94b266d79c426b0ac454d823a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_subject.html#aec0d2f94b266d79c426b0ac454d823a5">attach</a> (<a class="el" href="class_observer.html">Observer</a> *obs)</td></tr>
+<tr class="memdesc:aec0d2f94b266d79c426b0ac454d823a5 inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registreert een observer bij dit subject.  <br /></td></tr>
+<tr class="separator:aec0d2f94b266d79c426b0ac454d823a5 inherit pub_methods_class_subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf57e8b52ea783aaedd87056a53e0125 inherit pub_methods_class_subject" id="r_acf57e8b52ea783aaedd87056a53e0125"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>detach</b> ()</td></tr>
+<tr class="memdesc:acf57e8b52ea783aaedd87056a53e0125 inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verwijdert de observer van dit subject. <br /></td></tr>
+<tr class="separator:acf57e8b52ea783aaedd87056a53e0125 inherit pub_methods_class_subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af104c2baf37c7aa63b2ef6d32c2b3a9c inherit pub_methods_class_subject" id="r_af104c2baf37c7aa63b2ef6d32c2b3a9c"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>notify</b> ()</td></tr>
+<tr class="memdesc:af104c2baf37c7aa63b2ef6d32c2b3a9c inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notificeert de geregistreerde observer. <br /></td></tr>
 <tr class="separator:af104c2baf37c7aa63b2ef6d32c2b3a9c inherit pub_methods_class_subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13b48db9934d0b4fd5a99697ce1cb6b1 inherit pub_methods_class_subject" id="r_a13b48db9934d0b4fd5a99697ce1cb6b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_observer.html">Observer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_subject.html#a13b48db9934d0b4fd5a99697ce1cb6b1">getObserver</a> () const</td></tr>
-<tr class="memdesc:a13b48db9934d0b4fd5a99697ce1cb6b1 inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geeft directe toegang tot de primaire observer.  <br /></td></tr>
+<tr class="memdesc:a13b48db9934d0b4fd5a99697ce1cb6b1 inherit pub_methods_class_subject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geeft directe toegang tot de observer.  <br /></td></tr>
 <tr class="separator:a13b48db9934d0b4fd5a99697ce1cb6b1 inherit pub_methods_class_subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -420,8 +422,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>respawnTimer</b></td
 
 </div>
 </div>
-<a id="ab54bee9ac0e6bd451c3aad19507d8442" name="ab54bee9ac0e6bd451c3aad19507d8442"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab54bee9ac0e6bd451c3aad19507d8442">&#9670;&#160;</a></span>chooseDirection()</h2>
+<a id="ab9a4b452d1b9616eeef8bbe3f1bab1c1" name="ab9a4b452d1b9616eeef8bbe3f1bab1c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a4b452d1b9616eeef8bbe3f1bab1c1">&#9670;&#160;</a></span>chooseDirection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -434,7 +436,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>respawnTimer</b></td
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_pacman.html">Pacman</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>pacman</em></span>&#160;)</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="class_pacman.html">Pacman</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>pacman</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -450,8 +452,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>respawnTimer</b></td
 
 </div>
 </div>
-<a id="a5199a170c3d6d9b19436d7e6293ef3ad" name="a5199a170c3d6d9b19436d7e6293ef3ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5199a170c3d6d9b19436d7e6293ef3ad">&#9670;&#160;</a></span>update()</h2>
+<a id="a8f68e8892f8fb655498b2958bb8cbf9a" name="a8f68e8892f8fb655498b2958bb8cbf9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f68e8892f8fb655498b2958bb8cbf9a">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -472,7 +474,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>respawnTimer</b></td
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_pacman.html">Pacman</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>pacman</em></span>&#160;)</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="class_pacman.html">Pacman</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>pacman</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -492,7 +494,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>respawnTimer</b></td
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_ghost.html#a0b67515dd58a47a2e6379553fe370da0">Ghost</a>.</p>
+<p>Reimplemented from <a class="el" href="class_ghost.html#a1627eca7def79a5fcf3d74f46f61c478">Ghost</a>.</p>
 
 </div>
 </div>

@@ -1,11 +1,11 @@
 var searchData=
 [
   ['camera_0',['Camera',['../class_camera.html#a18cea16e830732cc106c27c7a840c3ac',1,'Camera']]],
-  ['canmoveindirection_1',['canMoveInDirection',['../class_world.html#a5bd9d74053da05495538bef0c33bd006',1,'World']]],
+  ['canmoveindirection_1',['canMoveInDirection',['../class_world.html#a9c371411ce2a3801fcf9a42e9c44c1fe',1,'World']]],
   ['canprocessinput_2',['canProcessInput',['../class_state_manager.html#a8a04d68a23be73efee80252ede128b7f',1,'StateManager']]],
   ['checkcollisions_3',['checkCollisions',['../class_world.html#a1a97411eb1695686ced14d388faf8a50',1,'World']]],
-  ['choosedirection_4',['chooseDirection',['../class_red_ghost.html#a6f916d5eba25f3d5fb656e4ab72918a5',1,'RedGhost::chooseDirection()'],['../class_blue_ghost.html#ab778ae357195064680f2aedb6e7fb767',1,'BlueGhost::chooseDirection()'],['../class_pink_ghost.html#ab54bee9ac0e6bd451c3aad19507d8442',1,'PinkGhost::chooseDirection()']]],
-  ['choosedirectionfear_5',['chooseDirectionFear',['../class_ghost.html#a557ba3ef93ac1cb26d639bdb2fa3b80e',1,'Ghost']]],
+  ['choosedirection_4',['chooseDirection',['../class_red_ghost.html#a26c8770c0908b1cdcb32d59784b48a76',1,'RedGhost::chooseDirection()'],['../class_blue_ghost.html#a50fe28d9bc396fe9fe172a11bc7ae373',1,'BlueGhost::chooseDirection()'],['../class_pink_ghost.html#ab9a4b452d1b9616eeef8bbe3f1bab1c1',1,'PinkGhost::chooseDirection()']]],
+  ['choosedirectionfear_5',['chooseDirectionFear',['../class_ghost.html#a4b300fc6b1b7018b71e8be62a8859477',1,'Ghost']]],
   ['choosefeartexture_6',['chooseFearTexture',['../class_ghost_view.html#aee9d6ccc7d6beeb11d6a8a88f2e07fcf',1,'GhostView']]],
   ['choosetexture_7',['chooseTexture',['../class_ghost_view.html#a3fd312e7060fefa7654fbaaaf27dab3b',1,'GhostView::chooseTexture()'],['../class_red_ghost_view.html#ab1e51fa691e3312da7c864b08c10b529',1,'RedGhostView::chooseTexture()'],['../class_blue_ghost_view.html#a33032dcc5885464bac667e95e90f8e3f',1,'BlueGhostView::chooseTexture()'],['../class_pink_ghost_view.html#a128ca0cfbed0be90c4f2da5d89615a7c',1,'PinkGhostView::chooseTexture()'],['../class_pacman_view.html#a9ae7f858c9b886df72036e48261c655f',1,'PacmanView::chooseTexture()']]],
   ['coin_8',['Coin',['../class_coin.html#a2344510ef8f72e68c70966b06ec0f2f8',1,'Coin']]],
